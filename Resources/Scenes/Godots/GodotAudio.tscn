@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwnfcarlhuxa1"]
+
+[ext_resource type="Script" uid="uid://bbgiwrng66wyu" path="res://Core/Services/Godots/Audios/ServiceGodotAudio.cs" id="1_gg7pa"]
+[ext_resource type="AudioStream" uid="uid://bq2c5l44ohvy5" path="res://Resources/Audios/SoundAlerts/Applause.mp3" id="2_x2giy"]
+[ext_resource type="AudioStream" uid="uid://dqm53h7kkvc2v" path="res://Resources/Audios/SoundAlerts/ChatNotification.mp3" id="3_x2giy"]
+[ext_resource type="AudioStream" uid="uid://di8qeo050a165" path="res://Resources/Audios/SoundAlerts/Godlike.mp3" id="3_x7scy"]
+[ext_resource type="AudioStream" uid="uid://b1v5pafwbhgii" path="res://Resources/Audios/SoundAlerts/Heartbeats.mp3" id="4_r55xi"]
+[ext_resource type="AudioStream" uid="uid://dj5jecf5j4qjt" path="res://Resources/Audios/SoundAlerts/HolyShit.mp3" id="5_k2m3n"]
+[ext_resource type="AudioStream" uid="uid://cve3y8ern01qg" path="res://Resources/Audios/SoundAlerts/Howdy.mp3" id="6_ahg8j"]
+[ext_resource type="AudioStream" uid="uid://dccd71se7fjj4" path="res://Resources/Audios/SoundAlerts/Nice.mp3" id="7_7w5h6"]
+
+[node name="GodotAudio" type="Node"]
+script = ExtResource("1_gg7pa")
+
+[node name="AudioStreamPlayer_Applause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x2giy")
+
+[node name="AudioStreamPlayer_ChatNotification" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x2giy")
+
+[node name="AudioStreamPlayer_Godlike" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x7scy")
+
+[node name="AudioStreamPlayer_Heartbeats" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r55xi")
+
+[node name="AudioStreamPlayer_HolyShit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_k2m3n")
+
+[node name="AudioStreamPlayer_Howdy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ahg8j")
+
+[node name="AudioStreamPlayer_Nice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7w5h6")

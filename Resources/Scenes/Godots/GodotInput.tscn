@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chyy5ahmbobki"]
+
+[ext_resource type="Script" uid="uid://bbilpitcccxbi" path="res://Core/Services/Godots/Inputs/ServiceGodotInput.cs" id="1_baqkr"]
+
+[node name="GodotInput" type="Node"]
+script = ExtResource("1_baqkr")

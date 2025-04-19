@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Twitch": {
+      "commandName": "Executable",
+      "executablePath": "E:\\Programs\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
+      "commandLineArgs": "--path . --verbose",
+      "workingDirectory": "."
+    }
+  }
+}

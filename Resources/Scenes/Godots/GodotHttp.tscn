@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://daxaaw4p6j7x7"]
+
+[ext_resource type="Script" uid="uid://ot0rf5b13r12" path="res://Core/Services/Godots/Https/ServiceGodotHttp.cs" id="1_pthht"]
+
+[node name="GodotHttp" type="Node"]
+script = ExtResource("1_pthht")

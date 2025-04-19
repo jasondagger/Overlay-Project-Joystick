@@ -1,0 +1,24 @@
+# Godot 4+ specific ignores
+.godot/
+.vs/
+/Server/Server/bin/Debug/net8.0/Server.deps.json
+/Server/Server/bin/Debug/net8.0/Server.dll
+/Server/Server/bin/Debug/net8.0/Server.exe
+/Server/Server/bin/Debug/net8.0/Server.pdb
+/Server/Server/bin/Debug/net8.0/Server.runtimeconfig.json
+/Server/Server/obj/Debug/net8.0/Server.csproj.BuildWithSkipAnalyzers
+/Server/Server/obj/Debug/net8.0/Server.dll
+/Server/Server/obj/Debug/net8.0/Server.genruntimeconfig.cache
+/Server/Server/obj/Debug/net8.0/Server.pdb
+/Server/Server/obj/Debug/net8.0/Server.sourcelink.json
+/Server/Server/obj/Debug/net8.0/apphost.exe
+/Server/Server/obj/Debug/net8.0/ref/Server.dll
+/Server/Server/obj/Debug/net8.0/refint/Server.dll
+/Server/Server/obj/Debug/net8.0/*.cache
+/Server/Server/obj/Debug/net8.0/*.Up2Date
+/Server/Server/bin/Debug/net8.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Server/Server/bin/Debug/net8.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Server/Server/bin/Debug/net8.0/runtimes/win-arm64/native/sni.dll
+/Server/Server/bin/Debug/net8.0/runtimes/win-x64/native/sni.dll
+/Server/Server/bin/Debug/net8.0/runtimes/win-x86/native/sni.dll
+/Server/Server/bin/Debug/net8.0/System.Data.SqlClient.dll

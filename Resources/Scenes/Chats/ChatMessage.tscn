@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c2trsakuyscam"]
+
+[node name="ChatMessage" type="RichTextLabel"]
+offset_right = 1100.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#00FFFFFF]SMOOTHDAGGER[/color][/font]  [font=res://Resources/Fonts/Roboto-Bold.ttf][color=#F2F2F2FF]Hello there, how are you doing?[/color][/font]
+"
+scroll_active = false

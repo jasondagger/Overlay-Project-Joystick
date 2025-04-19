@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2ofi35mnyf2c"
+path="res://.godot/imported/AsteroidImpactShield.obj-da45a24818cc25cba9fe8743909693fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/AsteroidImpactShield.obj-da45a24818cc25cba9fe8743909693fd.mesh"]
+
+source_file="res://Resources/Models/AsteroidImpactShield.obj"
+dest_files=["res://.godot/imported/AsteroidImpactShield.obj-da45a24818cc25cba9fe8743909693fd.mesh", "res://.godot/imported/AsteroidImpactShield.obj-da45a24818cc25cba9fe8743909693fd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

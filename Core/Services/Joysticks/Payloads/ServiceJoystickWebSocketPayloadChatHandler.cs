@@ -21,22 +21,35 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var author        = _ = payloadMessage.Author;
-        var message       = _ = payloadMessage.Text;
-
-        var username      = _ = author.Username;
-        var usernameColor = _ = author.UsernameColor;
-        var isModerator   = _ = author.IsModerator;
-        var isStreamer    = _ = author.IsStreamer;
-        var isSubscriber  = _ = author.IsSubscriber;
+        var author            = _ = payloadMessage.Author;
+        var message           = _ = payloadMessage.Text;
+        
+        var username          = _ = author.Username;
+        var usernameColor     = _ = author.UsernameColor;
+        var isModerator       = _ = author.IsModerator;
+        var isStreamer        = _ = author.IsStreamer;
+        var isSubscriber      = _ = author.IsSubscriber;
+        
+        var emotes            = _ = payloadMessage.EmotesUsed;
+        var numberOfEmotes    = _ = emotes.Length;
+        var chatMessageEmotes = _ = new ChatMessageEmote[_ = numberOfEmotes];
+        for (var i = 0U; i < numberOfEmotes; i++)
+        {
+            var emote                = _ = emotes[i];
+            _ = chatMessageEmotes[i] = _ = new ChatMessageEmote(
+                code: _ = emote.Code,
+                url:  _ = emote.SignedUrl
+            );
+        }
         
         Chat.Instance.AddChatMessage(
-            username:      _ = username,
-            usernameColor: _ = usernameColor,
-            message:       _ = message,
-            isModerator:   _ = isModerator,
-            isStreamer:    _ = isStreamer,
-            isSubscriber:  _ = isSubscriber
+            username:          _ = username,
+            usernameColor:     _ = usernameColor,
+            message:           _ = message,
+            chatMessageEmotes: _ = chatMessageEmotes,
+            isModerator:       _ = isModerator,
+            isStreamer:        _ = isStreamer,
+            isSubscriber:      _ = isSubscriber
         );
     }
     

@@ -37,16 +37,17 @@ namespace Overlay.Core.Contents.Chats;
          }
      }
 	 
+     internal Action              Destroyed = null;
 	 internal Action<ChatMessage> Generated = null;
-	 internal Action              Destroyed = null;
 	 
      internal void Generate(
-         string username,
-         string usernameColor,
-         string message,
-         bool   isModerator,
-         bool   isStreamer,
-         bool   isSubscriber
+         string             username,
+         string             usernameColor,
+         string             message,
+         ChatMessageEmote[] chatMessageEmotes,
+         bool               isModerator,
+         bool               isStreamer,
+         bool               isSubscriber
      )
      {
 	     // TODO: REPLACE WITH sub with sub
@@ -102,28 +103,28 @@ namespace Overlay.Core.Contents.Chats;
         Visible,
     }
 
-    private const string c_labelPastelInterpolatorColor = $"00000000";
-    private const string c_labelFontSize        = $"[font_size=28]";
-	private const string c_labelNameFont        = $"[font=res://Resources/Fonts/Roboto-Black.ttf]";
-	private const string c_labelMessageFont     = $"[font=res://Resources/Fonts/Roboto-Bold.ttf]";
-	private const string c_labelMessageColor    = $"[color=#F2F2F2FF]";
-    private const uint   c_labelWidth           = 1100u;
+    private const string                                        c_labelPastelInterpolatorColor = $"00000000";
+    private const string                                        c_labelFontSize                = $"[font_size=28]";
+	private const string                                        c_labelNameFont                = $"[font=res://Resources/Fonts/Roboto-Black.ttf]";
+	private const string                                        c_labelMessageFont             = $"[font=res://Resources/Fonts/Roboto-Bold.ttf]";
+	private const string                                        c_labelMessageColor            = $"[color=#F2F2F2FF]";
+    private const uint                                          c_labelWidth                   = 1100u;
     
-    private static readonly Dictionary<VisibleStateType, float> c_fadeDelays = new()
+    private static readonly Dictionary<VisibleStateType, float> c_fadeDelays                   = new()
     {
 	    { _ = VisibleStateType.Visible, _ = 32f },
 	    { _ = VisibleStateType.Fade,    _ = 2f },
     };
 
-    private ServiceGodotHttp          m_serviceGodotHttp          = null;
-    private ServicePastelInterpolator m_servicePastelInterpolator = null;
-	private RichTextLabel             m_richTextLabel             = new();
-	private GenerateStateType         m_generateState             = GenerateStateType.Inactive;
-	private VisibleStateType          m_visibleState              = VisibleStateType.Visible;
-	private float                     m_fadeElapsed               = 0f;
-	private bool                      m_isStreamer                = false;
-    private bool                      m_isSubscriber              = false;
-	private string                    m_text                      = string.Empty;
+    private ServiceGodotHttp                                    m_serviceGodotHttp             = null;
+    private ServicePastelInterpolator                           m_servicePastelInterpolator    = null;
+	private RichTextLabel                                       m_richTextLabel                = new();
+	private GenerateStateType                                   m_generateState                = GenerateStateType.Inactive;
+	private VisibleStateType                                    m_visibleState                 = VisibleStateType.Visible;
+	private float                                               m_fadeElapsed                  = 0f;
+	private bool                                                m_isStreamer                   = false;
+    private bool                                                m_isSubscriber                 = false;
+	private string                                              m_text                         = string.Empty;
 
     private void GenerateRichTextLabel()
 	{

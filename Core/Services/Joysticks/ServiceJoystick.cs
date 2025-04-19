@@ -73,7 +73,6 @@ public sealed class ServiceJoystick() :
 					message: _ = $"{_ = nameof(ServiceJoystick)}.{_ = nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
 				);
 #endif
-
 				while (_ = this.m_shutdownRequested is false)
 				{
 					try
@@ -84,7 +83,7 @@ public sealed class ServiceJoystick() :
 							continue;
 						}
 					
-						var bytes  = _ = new byte[4096u];
+						var bytes  = _ = new byte[16384u];
 						var result = _ = await this.m_clientWebSocket.ReceiveAsync(
 							buffer:            _ = bytes,
 							cancellationToken: _ = CancellationToken.None

@@ -1,11 +1,11 @@
 
 namespace Overlay.Core.Contents.Chats;
 
-internal readonly struct ChatMessageEmote(
+internal sealed class ChatMessageEmote(
     string code,
     string url
 )
 {
-    internal string Code { get; } = _ = code;
-    internal string Url  { get; } = _ = url;
+    internal string Code { get; set; } = _ = code;
+    internal string Url  { get; set; } = _ = url;
 }

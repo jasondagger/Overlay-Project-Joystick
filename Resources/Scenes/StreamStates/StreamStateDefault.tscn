@@ -289,6 +289,92 @@ offset_right = 3232.0
 offset_bottom = 16.0
 rotation = 1.5708
 
+[node name="RainbowExtender2" type="Control" parent="RootControl/Background" node_paths=PackedStringArray("ColorRectBorders", "ColorRectRainbows")]
+anchors_preset = 0
+offset_left = 4001.0
+offset_top = 387.0
+offset_right = 4001.0
+offset_bottom = 387.0
+rotation = 0.785398
+script = ExtResource("3_pkstr")
+ColorRectBorders = [NodePath("Stripe_White_Top"), NodePath("Stripe_White_Bottom")]
+ColorRectRainbows = [NodePath("Stripe_Red"), NodePath("Stripe_Yellow"), NodePath("Stripe_Green"), NodePath("Stripe_Cyan"), NodePath("Stripe_Blue"), NodePath("Stripe_Magenta")]
+
+[node name="Stripe_White_Top" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_7jueq")
+layout_mode = 0
+offset_left = 16.0
+offset_right = 2832.0
+offset_bottom = 16.0
+rotation = 1.5708
+
+[node name="Stripe_Red" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_ibhqp")
+layout_mode = 0
+offset_left = 80.0
+offset_right = 2896.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("5_4r38b")
+
+[node name="Stripe_Yellow" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_1126b")
+layout_mode = 0
+offset_left = 144.0
+offset_right = 2960.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("5_4r38b")
+RainbowColorIndex = 1
+
+[node name="Stripe_Green" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_3baif")
+layout_mode = 0
+offset_left = 208.0
+offset_right = 3024.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("5_4r38b")
+RainbowColorIndex = 2
+
+[node name="Stripe_Cyan" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_v51mv")
+layout_mode = 0
+offset_left = 272.0
+offset_right = 3088.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("5_4r38b")
+RainbowColorIndex = 3
+
+[node name="Stripe_Blue" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_c5uns")
+layout_mode = 0
+offset_left = 336.0
+offset_right = 3152.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("5_4r38b")
+RainbowColorIndex = 4
+
+[node name="Stripe_Magenta" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_6oauf")
+layout_mode = 0
+offset_left = 400.0
+offset_right = 3216.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("5_4r38b")
+RainbowColorIndex = 5
+
+[node name="Stripe_White_Bottom" type="ColorRect" parent="RootControl/Background/RainbowExtender2"]
+material = SubResource("ShaderMaterial_mvpnp")
+layout_mode = 0
+offset_left = 416.0
+offset_right = 3232.0
+offset_bottom = 16.0
+rotation = 1.5708
+
 [node name="LayoutDefault" type="Control" parent="RootControl"]
 anchors_preset = 0
 offset_right = 40.0

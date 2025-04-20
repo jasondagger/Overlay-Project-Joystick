@@ -145,8 +145,6 @@ namespace Overlay.Core.Contents.Chats;
     private const string                                        c_labelMessageFont                           = $"[font=res://Resources/Fonts/Roboto-Bold.ttf]";
     private const string                                        c_chatMessageEmoteDirectoryAnimated          = $"user://Emotes/Animated";
     private const string                                        c_chatMessageEmoteDirectoryStatic            = $"user://Emotes/Static";
-    private const string                                        c_chatMessageEmoteRelativeDirectoryAnimated  = $"Overlay/Emotes/Animated";
-    private const string                                        c_chatMessageEmoteRelativeDirectoryStatic    = $"Overlay/Emotes/Static";
     private const string                                        c_labelMessageColor                          = $"[color=#F2F2F2FF]";
     private const uint                                          c_labelWidth                                 = 1100u;
 
@@ -192,10 +190,10 @@ namespace Overlay.Core.Contents.Chats;
 	private uint                                                m_chatMessageEmotesToLoad                    = _ = 0u;
 
 	private void GenerateStaticImageFromStaticChatMessageEmote(
-		byte[] body,
-		string chatMessageEmoteCodeLookUp,
-		string chatMessageEmoteCode,
-		string chatMessageEmoteStaticPathGlobal,
+		byte[]                body,
+		string                chatMessageEmoteCodeLookUp,
+		string                chatMessageEmoteCode,
+		string                chatMessageEmoteStaticPathGlobal,
 		StaticImageFormatType staticImageFormat
 	)
 	{
@@ -293,19 +291,20 @@ namespace Overlay.Core.Contents.Chats;
 		var frames = _ = imageSixLabors.Frames;
 		for (var i = 0; i < frames.Count; i++)
 		{
-			var imageFrame = _ = frames.CloneFrame(
+			var pngFilePath = _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_{_ = i}.png";
+			var imageFrame  = _ = frames.CloneFrame(
 				index: _ = i
 			);
 			await imageFrame.SaveAsPngAsync(
-				path: _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_{_ = i}.png"
+				path: _ = pngFilePath
 			);
 
 			var bytes = _ = await File.ReadAllBytesAsync(
-				path: _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_{_ = i}.png"
+				path: _ = pngFilePath
 			);
 			
 			File.Delete(
-				path: _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_{_ = i}.png"		
+				path: _ = pngFilePath	
 			);
 
 			var image = _ = Godot.Image.CreateEmpty(
@@ -340,7 +339,7 @@ namespace Overlay.Core.Contents.Chats;
 				ChatMessage.c_defaultEmoteFramesPerSecondInMilliseconds :
 				frameDelay / 100f;
 		var frameDelayText = _ = $"{_ = normalizedFrameDelay}";
-		var frameDelayFile = _ = $"{chatMessageEmoteAnimatedPathGlobal}/frame_rate.txt";
+		var frameDelayFile = _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/frame_rate.txt";
 		await File.WriteAllTextAsync(
 			path:     _ = frameDelayFile,
 			contents: _ = frameDelayText
@@ -402,7 +401,7 @@ namespace Overlay.Core.Contents.Chats;
 		{
 			foreach (var animatedChatMessageEmote in _ = this.m_animatedChatMessageEmotes)
 			{
-				this.m_animatedChatMessageEmoteCurrentFrameRates[key: _ = animatedChatMessageEmote] += _ = delta;
+				_ = this.m_animatedChatMessageEmoteCurrentFrameRates[key: _ = animatedChatMessageEmote] += _ = delta;
 
 				if (
 					_ = this.m_animatedChatMessageEmoteCurrentFrameRates[key: _ = animatedChatMessageEmote] <
@@ -545,15 +544,15 @@ namespace Overlay.Core.Contents.Chats;
 				);
 
 				this.m_animatedChatMessageEmotes.Add(
-					item: chatMessageEmoteCodeLookUp
+					item: _ = chatMessageEmoteCodeLookUp
 				);
 				this.m_animatedChatMessageEmoteCurrentFrameCounts.Add(
-					key: chatMessageEmoteCodeLookUp,
-					value: 0
+					key:   _ = chatMessageEmoteCodeLookUp,
+					value: _ = 0
 				);
 				this.m_animatedChatMessageEmoteCurrentFrameRates.Add(
-					key: chatMessageEmoteCodeLookUp,
-					value: 0f
+					key:   _ = chatMessageEmoteCodeLookUp,
+					value: _ = 0f
 				);
 
 				var files = _ = Directory.GetFiles(

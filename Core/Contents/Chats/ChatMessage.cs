@@ -559,7 +559,7 @@ namespace Overlay.Core.Contents.Chats;
 				var files = _ = Directory.GetFiles(
 					path: _ = chatMessageEmoteAnimatedPathGlobal
 				);
-				var frameCount = _ = files.Length - 3;
+				var frameCount = _ = files.Length - 2;
 				this.m_animatedChatMessageEmoteMaxFrameCounts.Add(
 					key:   _ = chatMessageEmoteCodeLookUp,
 					value: _ = frameCount

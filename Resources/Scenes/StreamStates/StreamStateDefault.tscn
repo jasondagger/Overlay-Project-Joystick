@@ -199,8 +199,9 @@ script = ExtResource("12_4r38b")
 [node name="BackgroundSnow" type="ColorRect" parent="RootControl/Background"]
 material = SubResource("ShaderMaterial_p0f6j")
 layout_mode = 0
+offset_top = -7.0
 offset_right = 3840.0
-offset_bottom = 2160.0
+offset_bottom = 2153.0
 script = ExtResource("10_pkstr")
 
 [node name="RainbowExtender" type="Control" parent="RootControl/Background" node_paths=PackedStringArray("ColorRectBorders", "ColorRectRainbows")]
@@ -955,7 +956,7 @@ offset_left = 2988.0
 offset_top = 1520.0
 offset_right = 3840.0
 offset_bottom = 2160.0
-color = Color(0, 0, 0, 1)
+color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutLarge/OBS/MockUp/Webcam0"]
 layout_mode = 0

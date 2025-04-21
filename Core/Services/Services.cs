@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.OBS;
 
 namespace Overlay.Core.Services;
@@ -78,6 +79,7 @@ internal static class Services
 		{ _ = typeof(ServiceDatabase),           _ = new ServiceDatabase()           },
         { _ = typeof(ServiceGodots),             _ = new ServiceGodots()             },
         { _ = typeof(ServiceJoystick),           _ = new ServiceJoystick()           },
+        { _ = typeof(ServiceJoystickBot),        _ = new ServiceJoystickBot()        },
         { _ = typeof(ServiceOBS),                _ = new ServiceOBS()                },
         { _ = typeof(ServicePastelInterpolator), _ = new ServicePastelInterpolator() },
         { _ = typeof(ServiceStreamStates),       _ = new ServiceStreamStates()       },

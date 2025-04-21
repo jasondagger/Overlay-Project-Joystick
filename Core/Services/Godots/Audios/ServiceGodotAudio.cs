@@ -21,16 +21,15 @@ internal sealed partial class ServiceGodotAudio() :
 	{
 		Applause = 0u,
 		ChatNotification,
+		DropinStream,
+		Followed,
 		Godlike,
 		Heartbeats,
 		HolyShit,
-		Howdy,
+		Knocking,
 		Nice,
-	}
-
-	internal bool IsSoundAlertPlaying()
-	{
-		return _ = this.m_isSoundAlertPlaying is true;
+		Pan,
+		Tip,
 	}
 	
 	internal void PlaySoundAlert(

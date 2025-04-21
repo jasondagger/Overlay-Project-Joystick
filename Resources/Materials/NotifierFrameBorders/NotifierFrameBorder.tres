@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://yuhx7wc1kxpg"]
+
+[ext_resource type="Shader" uid="uid://1jyvu32ik8jl" path="res://Resources/Shaders/OBSFrameBorder.gdshader" id="1_mbho8"]
+[ext_resource type="Texture2D" uid="uid://dioakg8xpx00o" path="res://Resources/Textures/Cutouts/Notifiers/NotifierBackground.png" id="2_wfdrd"]
+
+[resource]
+shader = ExtResource("1_mbho8")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/background = ExtResource("2_wfdrd")

@@ -1,7 +1,9 @@
 
+using Overlay.Core.Services.Godots;
+using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Tools;
 
-namespace Overlay.Core.Contents;
+namespace Overlay.Core.Contents.StreamEvents;
 
 internal static class StreamEventsTipMenuToys
 {
@@ -58,6 +60,13 @@ internal static class StreamEventsTipMenuToys
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 1:
@@ -73,6 +82,13 @@ internal static class StreamEventsTipMenuToys
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 1:

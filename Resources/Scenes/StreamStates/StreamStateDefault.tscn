@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=58 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
@@ -15,20 +15,29 @@
 [ext_resource type="Shader" uid="uid://b7jba6jfpcvcj" path="res://Resources/Shaders/BackgroundVaporwave.gdshader" id="6_fvku6"]
 [ext_resource type="Script" uid="uid://bekm460xcq2yv" path="res://Core/Contents/Effects/EffectBackgroundVaporwave.cs" id="6_lhe6f"]
 [ext_resource type="Script" uid="uid://dm6galdixwbw4" path="res://Core/Contents/OBS/OBSBorderFrame.cs" id="7_mjhir"]
-[ext_resource type="Shader" uid="uid://6nndgfy5y6h4" path="res://Resources/Shaders/OBSFrameBorderEdge.gdshader" id="8_5uidy"]
-[ext_resource type="Material" uid="uid://633bex560c3n" path="res://Resources/Materials/OBSFrameBorderEdgeDown.tres" id="8_62sso"]
-[ext_resource type="Material" uid="uid://bmnsb3f12a5fo" path="res://Resources/Materials/OBSFrameBorderEdgeLeft.tres" id="9_niean"]
+[ext_resource type="Material" uid="uid://633bex560c3n" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeDown.tres" id="8_62sso"]
+[ext_resource type="Material" uid="uid://bmnsb3f12a5fo" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeLeft.tres" id="9_niean"]
 [ext_resource type="Script" uid="uid://dfkmnqhk68848" path="res://Core/Contents/Effects/EffectBackgroundSnow.cs" id="10_pkstr"]
-[ext_resource type="Material" uid="uid://dxa0382d04i5u" path="res://Resources/Materials/OBSFrameBorderEdgeRight.tres" id="10_tjdmb"]
+[ext_resource type="Material" uid="uid://dxa0382d04i5u" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeRight.tres" id="10_tjdmb"]
 [ext_resource type="Texture2D" uid="uid://g0kd4egbwxli" path="res://Resources/Textures/Effects/Particles/Penis.png" id="11_4r38b"]
-[ext_resource type="Material" uid="uid://dv6vkntylsjdw" path="res://Resources/Materials/OBSFrameBorderEdgeUp.tres" id="11_xepxj"]
+[ext_resource type="Material" uid="uid://dv6vkntylsjdw" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeUp.tres" id="11_xepxj"]
 [ext_resource type="Script" uid="uid://wuk8mxl2a36v" path="res://Core/Contents/Effects/EffectBackgroundGodRays.cs" id="12_4r38b"]
+[ext_resource type="Material" uid="uid://fvk0eaupd4pn" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorder.tres" id="18_v74uj"]
+[ext_resource type="Material" uid="uid://crqia762w5lnx" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeDown.tres" id="20_f2fsi"]
+[ext_resource type="Material" uid="uid://cyphwemtqgx2s" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeLeft.tres" id="21_v74uj"]
+[ext_resource type="Material" uid="uid://bba1vjrq7sfs5" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeRight.tres" id="22_3gobe"]
 [ext_resource type="Script" uid="uid://rlr0mj1kglx5" path="res://Core/Contents/Chats/Chat.cs" id="23_mjhir"]
+[ext_resource type="Material" uid="uid://bhl08lsjbm8ci" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeUp.tres" id="23_tfyti"]
 [ext_resource type="PackedScene" uid="uid://c2trsakuyscam" path="res://Resources/Scenes/Chats/ChatMessage.tscn" id="24_5uidy"]
-[ext_resource type="Script" uid="uid://cfh8q6l3bqlok" path="res://Core/Contents/Nameplate.cs" id="26_525sr"]
+[ext_resource type="Material" uid="uid://yuhx7wc1kxpg" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorder.tres" id="25_0b5xl"]
+[ext_resource type="Material" uid="uid://rx531s7xleur" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeDown.tres" id="25_2xh08"]
+[ext_resource type="Material" uid="uid://hva41a0mx3kd" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" id="26_0b5xl"]
+[ext_resource type="Script" uid="uid://cfh8q6l3bqlok" path="res://Core/Contents/Nameplates/Nameplate.cs" id="26_525sr"]
 [ext_resource type="Texture2D" uid="uid://b3d2v6vahq11i" path="res://Resources/Textures/Icons/Icon_Tip.png" id="27_2gewe"]
+[ext_resource type="Material" uid="uid://d1tusttxkuk2w" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" id="27_qm20r"]
 [ext_resource type="Texture2D" uid="uid://e5rh54733tig" path="res://Resources/Textures/Icons/Icon_Follower.png" id="28_syr4n"]
 [ext_resource type="Texture2D" uid="uid://iu2un37vk08f" path="res://Resources/Textures/Icons/Icon_Subscriber.png" id="29_5x875"]
+[ext_resource type="Script" uid="uid://iut46abd5ufa" path="res://Core/Contents/Nameplates/NameplateLatest.cs" id="31_3gobe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
@@ -113,26 +122,9 @@ shader_parameter/color = Color(1, 0.776471, 1, 1)
 shader = ExtResource("4_7ex8q")
 shader_parameter/color = Color(0.94902, 0.94902, 0.94902, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_stv8b"]
-shader = ExtResource("6_28isn")
-shader_parameter/color = Color(1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1126b"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jboht"]
-width = 1024
-height = 1024
-seamless = true
-noise = SubResource("FastNoiseLite_1126b")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_28isn"]
-shader = ExtResource("8_5uidy")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/textureNoise = SubResource("NoiseTexture2D_jboht")
-shader_parameter/radius = 0.425
-shader_parameter/effectControl = 0.35
-shader_parameter/burnSpeed = Vector2(0, 0.02)
-shader_parameter/shape = 1.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gewe"]
+shader = ExtResource("4_7ex8q")
+shader_parameter/color = Color(0.101961, 0.101961, 0.101961, 0.815686)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qaq0q"]
 shader = ExtResource("6_28isn")
@@ -486,8 +478,8 @@ offset_right = 2304.0
 offset_bottom = 480.0
 script = ExtResource("23_mjhir")
 
-[node name="BorderLogo" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat"]
-material = SubResource("ShaderMaterial_stv8b")
+[node name="BorderChat" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat"]
+material = ExtResource("18_v74uj")
 layout_mode = 0
 offset_left = -16.0
 offset_top = -16.0
@@ -495,43 +487,40 @@ offset_right = 1200.0
 offset_bottom = 496.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderLogoBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderLogo"]
-material = ExtResource("8_62sso")
+[node name="BorderChatBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat"]
+material = ExtResource("20_f2fsi")
 layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 1200.0
-offset_bottom = 528.0
+offset_top = 15.0
+offset_right = 1216.0
+offset_bottom = 527.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderLogoBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderLogo"]
-material = ExtResource("9_niean")
+[node name="BorderChatBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat"]
+material = ExtResource("21_v74uj")
 layout_mode = 0
-offset_left = -16.0
-offset_top = 16.0
-offset_right = 1200.0
-offset_bottom = 496.0
+offset_left = -31.0
+offset_right = 1201.0
+offset_bottom = 512.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderLogoBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderLogo"]
-material = ExtResource("10_tjdmb")
+[node name="BorderChatBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat"]
+material = ExtResource("22_3gobe")
 layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 1232.0
-offset_bottom = 496.0
+offset_left = 15.0
+offset_right = 1247.0
+offset_bottom = 512.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderLogoBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderLogo"]
-material = SubResource("ShaderMaterial_28isn")
+[node name="BorderChatBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat"]
+material = ExtResource("23_tfyti")
 layout_mode = 0
-offset_left = 16.0
-offset_top = -16.0
-offset_right = 1200.0
-offset_bottom = 496.0
+offset_top = -15.0
+offset_right = 1216.0
+offset_bottom = 497.0
 script = ExtResource("7_mjhir")
 
 [node name="Background" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat"]
+material = SubResource("ShaderMaterial_2gewe")
 layout_mode = 0
 offset_right = 1184.0
 offset_bottom = 480.0
@@ -552,7 +541,7 @@ layout_mode = 0
 anchors_preset = 0
 
 [node name="BorderNotifier" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier"]
-material = SubResource("ShaderMaterial_stv8b")
+material = ExtResource("25_0b5xl")
 layout_mode = 0
 offset_left = -16.0
 offset_top = -16.0
@@ -561,14 +550,14 @@ offset_bottom = 496.0
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier"]
-material = ExtResource("8_62sso")
+material = ExtResource("25_2xh08")
 layout_mode = 0
 offset_right = 1024.0
 offset_bottom = 528.0
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier"]
-material = ExtResource("9_niean")
+material = ExtResource("26_0b5xl")
 layout_mode = 0
 offset_left = -32.0
 offset_right = 1008.0
@@ -576,7 +565,7 @@ offset_bottom = 512.0
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier"]
-material = ExtResource("10_tjdmb")
+material = ExtResource("27_qm20r")
 layout_mode = 0
 offset_right = 1056.0
 offset_bottom = 512.0
@@ -591,6 +580,7 @@ offset_bottom = 512.0
 script = ExtResource("7_mjhir")
 
 [node name="Background" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier"]
+material = SubResource("ShaderMaterial_2gewe")
 layout_mode = 0
 offset_right = 992.0
 offset_bottom = 480.0
@@ -725,98 +715,91 @@ text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resou
 "
 fit_content = true
 
-[node name="Nameplate2" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier"]
+[node name="NameplateLatest" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier" node_paths=PackedStringArray("RichTextLabels")]
 anchors_preset = 0
 offset_left = 42.0
 offset_top = 124.0
 offset_right = 950.0
 offset_bottom = 440.0
-script = ExtResource("26_525sr")
+script = ExtResource("31_3gobe")
+RichTextLabels = [NodePath("IconTip3/Follower"), NodePath("IconTip2/Subscriber"), NodePath("IconTip/Tip")]
 
-[node name="IconTip3" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2"]
+[node name="IconTip3" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 64.0
+offset_top = 37.0
 offset_right = 96.0
-offset_bottom = 128.0
+offset_bottom = 101.0
 texture = ExtResource("28_syr4n")
 expand_mode = 1
 
-[node name="S4" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2/IconTip3"]
+[node name="Follower" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/IconTip3"]
 clip_contents = false
 layout_mode = 0
-offset_left = 64.0
-offset_top = 11.0
-offset_right = 294.0
-offset_bottom = 96.0
+offset_left = 72.0
+offset_top = 12.0
+offset_right = 740.0
+offset_bottom = 97.0
 bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]SmoothDagger
-"
+text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Follower"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2"]
+[node name="IconTip2" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 layout_mode = 0
-offset_left = 498.0
-offset_top = 64.0
-offset_right = 562.0
-offset_bottom = 128.0
+offset_left = 32.0
+offset_top = 116.0
+offset_right = 96.0
+offset_bottom = 180.0
 texture = ExtResource("29_5x875")
 expand_mode = 1
 
-[node name="S" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2/IconTip"]
+[node name="Subscriber" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/IconTip2"]
 clip_contents = false
 layout_mode = 0
-offset_left = 64.0
-offset_top = 11.0
-offset_right = 294.0
-offset_bottom = 96.0
+offset_left = 72.0
+offset_top = 12.0
+offset_right = 302.0
+offset_bottom = 97.0
 bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]SmoothDagger
-"
+text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Subscriber"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip2" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2"]
+[node name="IconTip" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 223.0
+offset_top = 200.0
 offset_right = 96.0
-offset_bottom = 287.0
+offset_bottom = 264.0
 texture = ExtResource("27_2gewe")
 expand_mode = 1
 
-[node name="S3" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2/IconTip2"]
+[node name="Tip" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/IconTip"]
 clip_contents = false
 layout_mode = 0
-offset_left = 64.0
-offset_top = 13.0
-offset_right = 294.0
-offset_bottom = 98.0
+offset_left = 72.0
+offset_top = 12.0
+offset_right = 302.0
+offset_bottom = 97.0
 bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]SmoothDagger
-"
+text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Tipper"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip4" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2"]
-layout_mode = 0
-offset_left = 498.0
-offset_top = 223.0
-offset_right = 562.0
-offset_bottom = 287.0
-texture = ExtResource("27_2gewe")
-expand_mode = 1
-
-[node name="S2" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/Nameplate2/IconTip4"]
+[node name="S3" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+visible = false
 clip_contents = false
 layout_mode = 0
-offset_left = 64.0
-offset_top = 13.0
-offset_right = 294.0
-offset_bottom = 98.0
+offset_left = 449.0
+offset_top = 37.0
+offset_right = 1480.0
+offset_bottom = 122.0
 bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]SmoothDagger
+text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]This is a notification that will be displayed at the bottom & scroll across
 "
 fit_content = true
 autowrap_mode = 0

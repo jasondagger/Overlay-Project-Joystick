@@ -1,10 +1,12 @@
 
 using Godot;
+using Overlay.Core.Services.Godots;
+using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Joysticks.Payloads;
 using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
 using Overlay.Core.Tools;
 
-namespace Overlay.Core.Contents;
+namespace Overlay.Core.Contents.StreamEvents;
 
 internal static class StreamEventsTipMenuIRL
 {
@@ -59,51 +61,101 @@ internal static class StreamEventsTipMenuIRL
     
     private static void HandleOhai()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleNiceSmile()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleThankYou()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleYouLookGreat()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleHeadpats()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleBellyRub()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleHydrate()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleTokeUp()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleDoOneMore()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleStreeeetch()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 }

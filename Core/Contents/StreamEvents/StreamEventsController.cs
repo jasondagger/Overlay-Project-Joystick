@@ -6,7 +6,7 @@ using Overlay.Core.Services.Joysticks.Payloads;
 using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
 using Overlay.Core.Tools;
 
-namespace Overlay.Core.Contents;
+namespace Overlay.Core.Contents.StreamEvents;
 
 internal sealed partial class StreamEventsController() :
     Node()
@@ -14,6 +14,20 @@ internal sealed partial class StreamEventsController() :
     public override void _Ready()
     {
         this.SubscribeToStreamEvents();
+    }
+    
+    private void HandleWebSocketPayloadStreamEventDropinStream(
+        ServiceJoystickWebSocketPayloadMessageMetadataDropinStream messageMetadata
+    )
+    {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.DropinStream
+        );
+        
+        // todo: notify ui
     }
 
     private void HandleWebSocketPayloadStreamEventFollowed(
@@ -24,7 +38,7 @@ internal sealed partial class StreamEventsController() :
         var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
 
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Howdy
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Followed
         );
         
         // todo: notify ui
@@ -38,6 +52,7 @@ internal sealed partial class StreamEventsController() :
         switch (_ = tipMenuItem)
         {
             case "":
+                StreamEventsController.PlayTipSoundEffect();
                 return;
                 
             case "Ohai":
@@ -60,7 +75,9 @@ internal sealed partial class StreamEventsController() :
             case "SFX: Godlike":
             case "SFX: Heartbeats":
             case "SFX: Holy Shit":
+            case "SFX: Knocking":
             case "SFX: Nice":
+            case "SFX: Pan":
             case "TF2: Explode":
             case "TF2: Kill":
                 StreamEventsTipMenuGaming.HandleTipMenuItem(
@@ -116,9 +133,20 @@ internal sealed partial class StreamEventsController() :
         }
     }
 
+    private static void PlayTipSoundEffect()
+    {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+    }
+
     private void SubscribeToStreamEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed += this.HandleWebSocketPayloadStreamEventFollowed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped   += this.HandleWebSocketPayloadStreamEventTipped;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.DropinStream += this.HandleWebSocketPayloadStreamEventDropinStream;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed     += this.HandleWebSocketPayloadStreamEventFollowed;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped       += this.HandleWebSocketPayloadStreamEventTipped;
     }
 }

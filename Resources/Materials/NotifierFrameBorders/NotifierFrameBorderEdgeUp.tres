@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dv6vkntylsjdw"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bv7un7etiqy3"]
 
-[ext_resource type="Shader" uid="uid://6nndgfy5y6h4" path="res://Resources/Shaders/OBSFrameBorderEdge.gdshader" id="1_dg2g2"]
+[ext_resource type="Shader" uid="uid://6nndgfy5y6h4" path="res://Resources/Shaders/OBSFrameBorderEdge.gdshader" id="1_wooo5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1126b"]
 
@@ -11,7 +11,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_1126b")
 
 [resource]
-shader = ExtResource("1_dg2g2")
+shader = ExtResource("1_wooo5")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/textureNoise = SubResource("NoiseTexture2D_jboht")
 shader_parameter/radius = 0.425

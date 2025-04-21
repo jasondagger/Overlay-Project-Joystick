@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform vec4 color: source_color = vec4(1.0);
 uniform sampler2D textureNoise: repeat_enable;
+uniform sampler2D textureBackground;
 uniform float radius: hint_range(0.0, 1.0) = 0.459;
 uniform float effectControl: hint_range(0.0, 1.0) = 0.309;
 uniform vec2 burnSpeed = vec2(0.0);
@@ -20,5 +21,5 @@ void fragment() {
 
     float opacity = step(radius, mix(gradient, noiseValue, effectControl) - distToEdge);
 
-    COLOR = texture(TEXTURE, UV) * vec4(color.rgb, opacity);
+    COLOR = texture(TEXTURE, UV) * texture(textureBackground, UV) * vec4(color.rgb, opacity);
 }

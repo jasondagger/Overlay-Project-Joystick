@@ -3,7 +3,7 @@ using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Tools;
 
-namespace Overlay.Core.Contents;
+namespace Overlay.Core.Contents.StreamEvents;
 
 internal static class StreamEventsTipMenuGaming
 {
@@ -16,18 +16,23 @@ internal static class StreamEventsTipMenuGaming
             case "MTG: Concede":
                 StreamEventsTipMenuGaming.HandleMTGConcede();
                 break;
+            
             case "SFX: Applause":
             case "SFX: Godlike":
             case "SFX: Heartbeats":
             case "SFX: Holy Shit":
+            case "SFX: Knocking":
             case "SFX: Nice":
+            case "SFX: Pan":
                 StreamEventsTipMenuGaming.HandleSFX(
                     tipMenuItem: _ = tipMenuItem
                 );
                 break;
+            
             case "TF2: Explode":
                 StreamEventsTipMenuGaming.HandleTF2Explode();
                 break;
+            
             case "TF2: Kill":
                 StreamEventsTipMenuGaming.HandleTF2Kill();
                 break;
@@ -46,7 +51,12 @@ internal static class StreamEventsTipMenuGaming
 
     private static void HandleMTGConcede()
     {
-
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleSFX(
@@ -72,8 +82,16 @@ internal static class StreamEventsTipMenuGaming
                 soundAlertType = _ = ServiceGodotAudio.SoundAlertType.HolyShit;
                 break;
             
+            case "SFX: Knocking":
+                soundAlertType = _ = ServiceGodotAudio.SoundAlertType.Knocking;
+                break;
+            
             case "SFX: Nice":
                 soundAlertType = _ = ServiceGodotAudio.SoundAlertType.Nice;
+                break;
+            
+            case "SFX: Pan":
+                soundAlertType = _ = ServiceGodotAudio.SoundAlertType.Pan;
                 break;
             
             default:
@@ -97,11 +115,21 @@ internal static class StreamEventsTipMenuGaming
     
     private static void HandleTF2Explode()
     {
-
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
     
     private static void HandleTF2Kill()
     {
-
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 }

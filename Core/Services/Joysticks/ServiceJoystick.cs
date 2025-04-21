@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Overlay.Core.Services.Godots.Audios;
+using Overlay.Core.Services.Joysticks.Requests;
 
 namespace Overlay.Core.Services.Joysticks;
 
@@ -33,6 +34,23 @@ public sealed class ServiceJoystick() :
 	{
 		this.Shutdown();
 		return _ = Task.CompletedTask;
+	}
+
+	internal void SendRequest(
+		ServiceJoystickRequest serviceJoystickRequest
+	)
+	{
+		Task.Run(
+			function: async () =>
+			{
+				var json = _ = JsonHelper.Serialize(
+					@object: _ = serviceJoystickRequest
+				);
+				await this.SendWebSocketMessage(
+					message: _ = json
+				);
+			}
+		);
 	}
 	
 	private const string         c_joystickWebSocketAddress  = "wss://joystick.tv/cable";
@@ -271,8 +289,42 @@ public sealed class ServiceJoystick() :
 				_ = this.m_joystickToken = _ = JsonHelper.Deserialize<ServiceJoystickToken>(
 					json: _ = bodyAsString
 				);
-				
+
 				// todo: if joystick adds rest calls, implement refresh token loop
+			}
+		);
+	}
+	
+	internal void SendRequestTest()
+	{
+		// https://support.joystick.tv/developer_support/#testing-your-bot
+		
+		var serviceGodots    = _ = Services.GetService<ServiceGodots>();
+		var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+		
+		serviceGodotHttp.SendHttpRequest(
+			url: _ =
+				$"https://joystick.tv/echo",
+			headers: [
+				$"Authorization: Basic {_ = this.GetClientDataAsBase64String()}",
+				$"Content-Type: application/json"
+			],
+			method: _ = HttpClient.Method.Post,
+			json:   _ = "{\n  \"sample\": {\n    \"event\": \"StreamEvent\",\n    \"data\": \"Tipped\"\n  }\n}",
+			requestCompletedHandler: (
+				long     result,
+				long     responseCode,
+				string[] headers,
+				byte[]   body
+			) =>
+			{
+				Task.Run(
+					function: async () =>
+					{
+						await Task.Delay(3000);
+						SendRequestTest();
+					}
+				);
 			}
 		);
 	}

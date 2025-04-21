@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Overlay.Core.Contents;
+namespace Overlay.Core.Contents.Nameplates;
 
 internal sealed partial class Nameplate() :
     Control()
@@ -90,7 +90,7 @@ internal sealed partial class Nameplate() :
                     );
 
                     _ = this.m_isRichTextLabelNameAnimating = _ = true;
-                    for (var i = 0; i < this.m_nameLetters.Count; i++)
+                    for (var i = _ = 0; _ = i < this.m_nameLetters.Count; _ = i++)
                     {
                         var nameLetter            = _ = this.m_nameLetters[i];
                         _ = nameLetter.State      = _ = NameRichTextLabelFontSizeState.IncreaseFontSize;
@@ -116,7 +116,7 @@ internal sealed partial class Nameplate() :
         float elapsed
     )
     {
-        for (var i = 0; i < this.m_nameLetters.Count; i++)
+        for (var i = _ = 0; _ = i < this.m_nameLetters.Count; _ = i++)
         {
             var nameLetter = _ = this.m_nameLetters[i];
             switch (_ = nameLetter.State)
@@ -194,7 +194,7 @@ internal sealed partial class Nameplate() :
     private void RetrieveResources()
     {
         var nodeLetters = this.GetChildren();
-        for (var i = 0; i < nodeLetters.Count; i++)
+        for (var i = _ = 0; _ = i < nodeLetters.Count; _ = i++)
         {
             this.m_nameLetters.Add(
                 key:   _ = i,

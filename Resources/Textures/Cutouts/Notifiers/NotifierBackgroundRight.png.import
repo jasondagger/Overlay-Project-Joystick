@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csox5dtor62ko"
-path="res://.godot/imported/Icon_Follower.svg-a361903a2dc66d86fffb3b4a73a75799.ctex"
+uid="uid://fpg1r1gdbcw1"
+path="res://.godot/imported/NotifierBackgroundRight.png-ad0959a142e6872d87ac03c5b5a83494.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Icons/Icon_Follower.svg"
-dest_files=["res://.godot/imported/Icon_Follower.svg-a361903a2dc66d86fffb3b4a73a75799.ctex"]
+source_file="res://Resources/Textures/Cutouts/Notifiers/NotifierBackgroundRight.png"
+dest_files=["res://.godot/imported/NotifierBackgroundRight.png-ad0959a142e6872d87ac03c5b5a83494.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

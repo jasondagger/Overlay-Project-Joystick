@@ -1,7 +1,9 @@
 
+using Overlay.Core.Services.Godots;
+using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Tools;
 
-namespace Overlay.Core.Contents;
+namespace Overlay.Core.Contents.StreamEvents;
 
 internal static class StreamEventsTipMenuSpice
 {
@@ -78,24 +80,24 @@ internal static class StreamEventsTipMenuSpice
                 StreamEventsTipMenuSpice.HandleCumTaste();             
                 break;
             case "Nipple Pinch":
-                StreamEventsTipMenuSpice.NipplePinch();          
+                StreamEventsTipMenuSpice.HandleNipplePinch();          
                 break;
             case "Show Butthole":
-                StreamEventsTipMenuSpice.ShowButthole();              
+                StreamEventsTipMenuSpice.HandleShowButthole();              
                 break;
             case "Show Feet":
-                StreamEventsTipMenuSpice.ShowFeet();
+                StreamEventsTipMenuSpice.HandleShowFeet();
                 break;
             case "Titty Jiggle":
-                StreamEventsTipMenuSpice.TittyJiggle();
+                StreamEventsTipMenuSpice.HandleTittyJiggle();
                 break;
             case "Toy In - 5 Minute(s)":
-                StreamEventsTipMenuSpice.ToyIn(
+                StreamEventsTipMenuSpice.HandleToyIn(
                     lengthInMinutes: _ = 5
                 );
                 break;
             case "Toy In - 10 Minute(s)":
-                StreamEventsTipMenuSpice.ToyIn(
+                StreamEventsTipMenuSpice.HandleToyIn(
                     lengthInMinutes: _ = 10
                 );
                 break;
@@ -116,6 +118,13 @@ internal static class StreamEventsTipMenuSpice
         int count
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = count)
         {
             case 1:
@@ -129,6 +138,13 @@ internal static class StreamEventsTipMenuSpice
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 1:
@@ -141,6 +157,13 @@ internal static class StreamEventsTipMenuSpice
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 1:
@@ -153,6 +176,13 @@ internal static class StreamEventsTipMenuSpice
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 1:
@@ -166,6 +196,13 @@ internal static class StreamEventsTipMenuSpice
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 1:
@@ -176,38 +213,75 @@ internal static class StreamEventsTipMenuSpice
 
     private static void HandleCum()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 
     private static void HandleCumTaste()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 
-    private static void NipplePinch()
+    private static void HandleNipplePinch()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 
-    private static void ShowButthole()
+    private static void HandleShowButthole()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 
-    private static void ShowFeet()
+    private static void HandleShowFeet()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 
-    private static void TittyJiggle()
+    private static void HandleTittyJiggle()
     {
-        
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 
-    private static void ToyIn(
+    private static void HandleToyIn(
         int lengthInMinutes
     )
     {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+        
         switch (_ = lengthInMinutes)
         {
             case 5:

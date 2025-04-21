@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://fvk0eaupd4pn"]
+
+[ext_resource type="Shader" uid="uid://1jyvu32ik8jl" path="res://Resources/Shaders/OBSFrameBorder.gdshader" id="1_1qgao"]
+[ext_resource type="Texture2D" uid="uid://cq0auxq8ffnv5" path="res://Resources/Textures/Cutouts/Chats/ChatBackground.png" id="2_5jd5c"]
+
+[resource]
+shader = ExtResource("1_1qgao")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/background = ExtResource("2_5jd5c")

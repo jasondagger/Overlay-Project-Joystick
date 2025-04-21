@@ -65,7 +65,7 @@ public sealed class ServiceJoystickBot() :
     {
         var result = _ = retrievedJoystickData.Result;
         
-        _ = this.m_joystickChannelId = _ = result.JoystickData_ChannelId;
+        _ = this.m_joystickChannelId = _ = result.JoystickData_Channel_Id;
 
         Task.Run(
             function: async () =>

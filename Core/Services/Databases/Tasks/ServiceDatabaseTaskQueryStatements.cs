@@ -8,6 +8,7 @@ internal static class ServiceDatabaseTaskQueryStatements
 		
 	}
 
-	internal const string RetrieveJoystickData      = $"SELECT * FROM JoystickData LIMIT 1";
-	internal const string RetrieveListJoystickUsers = $"SELECT * FROM JoystickUsers";
+	internal const string RetrieveJoystickData       = $"SELECT * FROM JoystickData LIMIT 1";
+	internal const string RetrieveJoystickLatest = $"SELECT * FROM JoystickLatest LIMIT 1";
+	internal const string RetrieveListJoystickUsers  = $"SELECT * FROM JoystickUsers";
 }

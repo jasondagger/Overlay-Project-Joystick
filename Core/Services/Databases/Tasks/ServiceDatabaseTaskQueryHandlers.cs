@@ -37,6 +37,33 @@ internal static class ServiceDatabaseTaskQueryHandlers
         return _ = Task.CompletedTask;
     }
     
+    internal static Task HandleExecuteQueryAsyncRetrievedJoystickLatest(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedJoystickLatest?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedJoystickLatest(
+                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseJoystickLatest>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+        
+        return _ = Task.CompletedTask;
+    }
+    
     internal static async Task HandleExecuteQueryAsyncRetrievedListJoystickUsers(
         NpgsqlDataReader npgsqlDataReader
     )

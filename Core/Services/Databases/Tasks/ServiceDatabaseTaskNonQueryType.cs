@@ -5,5 +5,8 @@ internal enum ServiceDatabaseTaskNonQueryType :
     uint
 {
     AddJoystickUser = 0U,
-    UpdateJoystickUsernameColor = 1U,
+    UpdateJoystickLatestFollower,
+    UpdateJoystickLatestSubscriber,
+    UpdateJoystickLatestTipper,
+    UpdateJoystickUsernameColor,
 }

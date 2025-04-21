@@ -31,6 +31,18 @@ internal static class ServiceDatabaseTaskNonQueries
             _ = ServiceDatabaseTaskNonQueryType.AddJoystickUser, 
             ServiceDatabaseTaskNonQueries.AddAsyncJoystickUser
         },
+        {
+            _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestFollower, 
+            ServiceDatabaseTaskNonQueries.UpdateJoystickLatestFollower
+        },
+        {
+            _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestSubscriber, 
+            ServiceDatabaseTaskNonQueries.UpdateJoystickLatestSubscriber
+        },
+        {
+            _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestTipper, 
+            ServiceDatabaseTaskNonQueries.UpdateJoystickLatestTipper
+        },
 	};
 
     private static async Task AddAsyncJoystickUser(
@@ -39,10 +51,10 @@ internal static class ServiceDatabaseTaskNonQueries
 	{
 		var npgsqlStatement = _ = 
             $"INSERT INTO JoystickUsers (" +
-            $"{_ = nameof(ServiceDatabaseJoystickUser.JoystickUser_CustomChatTextColor)}, " +
+            $"{_ = nameof(ServiceDatabaseJoystickUser.JoystickUser_Custom_Chat_Text_Color)}, " +
             $"{_ = nameof(ServiceDatabaseJoystickUser.JoystickUser_Username)}" +
             $") VALUES (" +
-            $"@{_ = nameof(ServiceDatabaseJoystickUser.JoystickUser_CustomChatTextColor)}, " +
+            $"@{_ = nameof(ServiceDatabaseJoystickUser.JoystickUser_Custom_Chat_Text_Color)}, " +
             $"@{_ = nameof(ServiceDatabaseJoystickUser.JoystickUser_Username)}" +
             $")";
         
@@ -50,5 +62,41 @@ internal static class ServiceDatabaseTaskNonQueries
             npgsqlStatement:                     _ = npgsqlStatement,
             serviceDatabaseTaskNpgsqlParameters: _ = serviceDatabaseTaskNpgsqlParameters
 		);
+    }
+    
+    private static async Task UpdateJoystickLatestFollower(
+        List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters
+    )
+    {
+        var npgsqlStatement = _ = $"UPDATE JoystickLatest SET {serviceDatabaseTaskNpgsqlParameters[0].ParameterName} = '{serviceDatabaseTaskNpgsqlParameters[0].Value}'";
+        
+        await ServiceDatabaseTaskLogic.ExecuteNonQueryAsync(
+            npgsqlStatement:                     _ = npgsqlStatement,
+            serviceDatabaseTaskNpgsqlParameters: []
+        );
+    }
+    
+    private static async Task UpdateJoystickLatestSubscriber(
+        List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters
+    )
+    {
+        var npgsqlStatement = _ = $"UPDATE JoystickLatest SET {serviceDatabaseTaskNpgsqlParameters[0].ParameterName} = '{serviceDatabaseTaskNpgsqlParameters[0].Value}'";
+        
+        await ServiceDatabaseTaskLogic.ExecuteNonQueryAsync(
+            npgsqlStatement:                     _ = npgsqlStatement,
+            serviceDatabaseTaskNpgsqlParameters: []
+        );
+    }
+    
+    private static async Task UpdateJoystickLatestTipper(
+        List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters
+    )
+    {
+        var npgsqlStatement = _ = $"UPDATE JoystickLatest SET {serviceDatabaseTaskNpgsqlParameters[0].ParameterName} = '{serviceDatabaseTaskNpgsqlParameters[0].Value}'";
+        
+        await ServiceDatabaseTaskLogic.ExecuteNonQueryAsync(
+            npgsqlStatement:                     _ = npgsqlStatement,
+            serviceDatabaseTaskNpgsqlParameters: []
+        );
     }
 }

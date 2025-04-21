@@ -29,7 +29,7 @@ internal sealed class ServiceDatabase() :
 	}
 
 	internal static void ExecuteTaskNonQuery(
-		ServiceDatabaseTaskNonQueryType       serviceDatabaseTaskNonQueryType,
+		ServiceDatabaseTaskNonQueryType          serviceDatabaseTaskNonQueryType,
 		List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskSqlParameters
 	)
 	{

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Overlay.Core.Services.PastelInterpolators;
 
 namespace Overlay.Core.Contents.Nameplates;
 
@@ -25,6 +26,8 @@ internal sealed partial class Nameplate() :
                 elapsed: _ = (float)elapsed
             );
         }
+
+        this.AnimateNameColor();
     }
 
     public override void _Ready()
@@ -44,24 +47,28 @@ internal sealed partial class Nameplate() :
     private struct NameLetter
     {
         public readonly RichTextLabel         RichTextLabel = null;
+        public readonly string                Text          = _ = string.Empty;
         public NameRichTextLabelFontSizeState State         = _ = NameRichTextLabelFontSizeState.Idle;
         public float                          Max           = _ = 0f;
         public float                          Min           = _ = 0f;
 
         public NameLetter(
             RichTextLabel                  richTextLabel,
+            string                         text,
             NameRichTextLabelFontSizeState state,
             float                          max,
             float                          min
         )
         {
             _ = this.RichTextLabel = _ = richTextLabel;
+            _ = this.Text          = _ = text;
             _ = this.State         = _ = state;
             _ = this.Max           = _ = max;
             _ = this.Min           = _ = min;
         }
     }
-    
+
+    private const string                         c_labelPastelInterpolatorColor                         = "F2F2F2FF";
     private const int                            c_richTextLabelNameDelayTimeInMilliseconds             = 50;
     private const int                            c_richTextLabelNameAnimationDelayTimeInMillisecondsMin = 5000;
     private const int                            c_richTextLabelNameAnimationDelayTimeInMillisecondsMax = 9000;
@@ -71,6 +78,7 @@ internal sealed partial class Nameplate() :
     private const int                            c_taskAwaitDelayTimeInMilliseconds                     = 20;
 
     private readonly Dictionary<int, NameLetter> m_nameLetters                                          = new();
+    private ServicePastelInterpolator            m_servicePastelInterpolator                            = null;
     private bool                                 m_isRichTextLabelNameAnimating                         = _ = false;
     private bool                                 m_isRunning                                            = _ = true;
     
@@ -110,6 +118,25 @@ internal sealed partial class Nameplate() :
                 }
             }
         );
+    }
+
+    private void AnimateNameColor()
+    {
+        var color = _ = this.m_servicePastelInterpolator.GetColorAsHex(
+            rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0    
+        );
+        
+        for (var i = _ = 0; _ = i < this.m_nameLetters.Count; _ = i++)
+        {
+            var nameLetter    = _ = this.m_nameLetters[i];
+            var richTextLabel = _ = nameLetter.RichTextLabel;
+            var text          = _ = nameLetter.Text;
+            
+            _ = richTextLabel.Text = _ = text.Replace(
+                oldValue: _ = Nameplate.c_labelPastelInterpolatorColor,
+                newValue: _ = color
+            );
+        }
     }
 
     private void AnimateNameScale(
@@ -193,13 +220,22 @@ internal sealed partial class Nameplate() :
     
     private void RetrieveResources()
     {
+        _ = this.m_servicePastelInterpolator = _ = Services.Services.GetService<ServicePastelInterpolator>();
+        
         var nodeLetters = this.GetChildren();
         for (var i = _ = 0; _ = i < nodeLetters.Count; _ = i++)
         {
+            var richTextLabel = _ = nodeLetters[i] as RichTextLabel;
+            if (richTextLabel is null)
+            {
+                continue;
+            }
+            
             this.m_nameLetters.Add(
                 key:   _ = i,
                 value: _ = new NameLetter(
-                    richTextLabel: _ = nodeLetters[i] as RichTextLabel,
+                    richTextLabel: _ = richTextLabel,
+                    text:          _ = richTextLabel.Text,
                     state:         _ = NameRichTextLabelFontSizeState.Idle,
                     max:           _ = Nameplate.c_richTextLabelNameScaleMin,
                     min:           _ = Nameplate.c_richTextLabelNameScaleMax

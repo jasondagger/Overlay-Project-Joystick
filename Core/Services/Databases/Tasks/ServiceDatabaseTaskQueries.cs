@@ -31,6 +31,10 @@ internal static class ServiceDatabaseTaskQueries
 			_ = ServiceDatabaseTaskQueryType.RetrieveJoystickData,
 			ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData
 		},
+		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveJoystickLatest,
+			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatest
+		},
         {
 			_ = ServiceDatabaseTaskQueryType.RetrieveListJoystickUsers,
 			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers
@@ -43,6 +47,15 @@ internal static class ServiceDatabaseTaskQueries
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  _ = npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickData
+	    );
+    }
+    
+    private static async Task RetrieveAsyncListJoystickLatest()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveJoystickLatest;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickLatest
 	    );
     }
 
@@ -58,6 +71,7 @@ internal static class ServiceDatabaseTaskQueries
 	private static async Task Start()
     {
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData();
+	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatest();
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers();
 	}
 };

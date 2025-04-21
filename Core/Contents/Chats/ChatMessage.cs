@@ -1,18 +1,15 @@
 
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.PastelInterpolators;
 using Overlay.Core.Tools;
 using SixLabors.ImageSharp;
-using Point = System.Drawing.Point;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Overlay.Core.Contents.Chats;
 
@@ -70,7 +67,7 @@ namespace Overlay.Core.Contents.Chats;
              $"{_ = ChatMessage.c_labelFontSize}" +
              $"{_ = ChatMessage.c_labelNameFont}" +
              $"[color=#{(_ = this.m_isSubscriber is true || this.m_isStreamer is true ? ChatMessage.c_labelPastelInterpolatorColor : usernameColor)}]" +
-             $"{_ = username.ToUpper()}" +
+             $"{_ = username}" +
              $"  " +
              $"{_ = ChatMessage.c_labelMessageFont}" +
 	         $"{_ = ChatMessage.c_labelMessageColor}" +

@@ -156,9 +156,9 @@ public sealed class ServiceJoystick() :
 	{
 		var result = _ = retrievedJoystickData.Result;
 
-		_ = this.m_joystickAuthorizationCode = _ = result.JoystickData_AuthorizationCode;
-		_ = this.m_joystickClientId          = _ = result.JoystickData_ClientId;
-		_ = this.m_joystickClientSecret      = _ = result.JoystickData_ClientSecret;
+		_ = this.m_joystickAuthorizationCode = _ = result.JoystickData_Authorization_Code;
+		_ = this.m_joystickClientId          = _ = result.JoystickData_Client_Id;
+		_ = this.m_joystickClientSecret      = _ = result.JoystickData_Client_Secret;
 		
 		this.ConnectWebSocket();
 		this.RetrieveJoystickToken();

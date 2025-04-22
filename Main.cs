@@ -42,11 +42,13 @@ internal sealed partial class Main() :
 		
 		await Services.Start();
 		
-		//ServiceJoystickWebSocketPayloadStreamEvents.ChatTimerStarted += T;
+		// ServiceJoystickWebSocketPayloadStreamEvents.ChatTimerStarted += T;
 		// ServiceDatabaseTaskEvents.RetrievedListJoystickUsers += TestDatabaseRead;
 		// ServiceDatabaseTaskEvents.RetrievedJoystickData += TestDatabaseRead;
 		// TestHttp();
 		// TestDatabaseWrite();
+		
+		// each letter & symbol as a .res file
 	}
 
 	public override void _Process(

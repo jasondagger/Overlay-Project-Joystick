@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dysr2cw5b6euw"]
+
+[ext_resource type="Shader" uid="uid://b48wjopki15ok" path="res://Resources/Shaders/Texture.gdshader" id="1_u4b3l"]
+[ext_resource type="Texture2D" uid="uid://e5rh54733tig" path="res://Resources/Textures/Icons/Icon_Follower.png" id="2_u4b3l"]
+
+[resource]
+shader = ExtResource("1_u4b3l")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/textureImage = ExtResource("2_u4b3l")

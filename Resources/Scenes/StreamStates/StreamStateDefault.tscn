@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=60 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
@@ -33,11 +33,13 @@
 [ext_resource type="Material" uid="uid://rx531s7xleur" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeDown.tres" id="25_2xh08"]
 [ext_resource type="Material" uid="uid://hva41a0mx3kd" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" id="26_0b5xl"]
 [ext_resource type="Script" uid="uid://cfh8q6l3bqlok" path="res://Core/Contents/Nameplates/Nameplate.cs" id="26_525sr"]
-[ext_resource type="Texture2D" uid="uid://b3d2v6vahq11i" path="res://Resources/Textures/Icons/Icon_Tip.png" id="27_2gewe"]
 [ext_resource type="Material" uid="uid://d1tusttxkuk2w" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" id="27_qm20r"]
-[ext_resource type="Texture2D" uid="uid://e5rh54733tig" path="res://Resources/Textures/Icons/Icon_Follower.png" id="28_syr4n"]
-[ext_resource type="Texture2D" uid="uid://iu2un37vk08f" path="res://Resources/Textures/Icons/Icon_Subscriber.png" id="29_5x875"]
 [ext_resource type="Script" uid="uid://iut46abd5ufa" path="res://Core/Contents/Nameplates/NameplateLatest.cs" id="31_3gobe"]
+[ext_resource type="Material" uid="uid://dysr2cw5b6euw" path="res://Resources/Materials/Nameplate/NameplateIconLatestFollower.tres" id="32_ifwfs"]
+[ext_resource type="Script" uid="uid://bow27e5qkelmw" path="res://Core/Contents/Nameplates/NameplateIcon.cs" id="33_tfyti"]
+[ext_resource type="Material" uid="uid://crqyfncl5io65" path="res://Resources/Materials/Nameplate/NameplateIconLatestSubscriber.tres" id="34_usuop"]
+[ext_resource type="Material" uid="uid://ljjack0wpijs" path="res://Resources/Materials/Nameplate/NameplateIconLatestTipper.tres" id="35_rd3ou"]
+[ext_resource type="Material" uid="uid://cr65qckluf24p" path="res://Resources/Materials/Nameplate/NameplateIconLatestMessage.tres" id="36_64mo1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
@@ -734,197 +736,95 @@ offset_top = 124.0
 offset_right = 950.0
 offset_bottom = 440.0
 script = ExtResource("31_3gobe")
-RichTextLabels = [NodePath("IconTip3/Follower"), NodePath("IconTip2/Subscriber"), NodePath("IconTip/Tip")]
+RichTextLabels = [NodePath("Follower"), NodePath("TextSubscriber"), NodePath("TextTip")]
 
-[node name="IconTip3" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 37.0
-offset_right = 96.0
-offset_bottom = 101.0
-texture = ExtResource("28_syr4n")
-expand_mode = 1
-
-[node name="Follower" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/IconTip3"]
-clip_contents = false
-layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 740.0
-offset_bottom = 97.0
-bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]test"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="IconTip2" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 116.0
-offset_right = 96.0
-offset_bottom = 180.0
-texture = ExtResource("29_5x875")
-expand_mode = 1
-
-[node name="Subscriber" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/IconTip2"]
-clip_contents = false
-layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 302.0
-offset_bottom = 97.0
-bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Subscriber"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="IconTip" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 200.0
-offset_right = 96.0
-offset_bottom = 264.0
-texture = ExtResource("27_2gewe")
-expand_mode = 1
-
-[node name="Tip" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/IconTip"]
-clip_contents = false
-layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 302.0
-offset_bottom = 97.0
-bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Tipper"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="S3" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
-visible = false
-clip_contents = false
-layout_mode = 0
-offset_left = 449.0
-offset_top = 37.0
-offset_right = 1480.0
-offset_bottom = 122.0
-bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]This is a notification that will be displayed at the bottom & scroll across
-"
-fit_content = true
-autowrap_mode = 0
-
-[node name="NameplateLatest2" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier"]
-visible = false
-anchors_preset = 0
-offset_left = 42.0
-offset_top = 124.0
-offset_right = 950.0
-offset_bottom = 440.0
-
-[node name="IconTip3" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2"]
+[node name="IconFollower" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+material = ExtResource("32_ifwfs")
 layout_mode = 0
 offset_left = 32.0
 offset_top = 32.0
 offset_right = 80.0
 offset_bottom = 80.0
-texture = ExtResource("28_syr4n")
-expand_mode = 1
+script = ExtResource("33_tfyti")
 
-[node name="Follower" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2/IconTip3"]
+[node name="Follower" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 clip_contents = false
 layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 740.0
-offset_bottom = 97.0
+offset_left = 104.0
+offset_top = 40.0
+offset_right = 772.0
+offset_bottom = 74.0
 bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Follower"
+text = "[outline_size=2][outline_color=#202020FF][font_size=28
+][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Follower"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip2" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2"]
+[node name="IconSubscriber" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+material = ExtResource("34_usuop")
 layout_mode = 0
 offset_left = 32.0
 offset_top = 80.0
 offset_right = 80.0
 offset_bottom = 128.0
-texture = ExtResource("29_5x875")
-expand_mode = 1
+script = ExtResource("33_tfyti")
 
-[node name="Subscriber" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2/IconTip2"]
+[node name="TextSubscriber" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 clip_contents = false
 layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 302.0
-offset_bottom = 97.0
+offset_left = 104.0
+offset_top = 88.0
+offset_right = 334.0
+offset_bottom = 122.0
 bbcode_enabled = true
 text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Subscriber"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2"]
+[node name="IconTip" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+material = ExtResource("35_rd3ou")
 layout_mode = 0
 offset_left = 32.0
 offset_top = 128.0
 offset_right = 80.0
 offset_bottom = 176.0
-texture = ExtResource("27_2gewe")
-expand_mode = 1
+script = ExtResource("33_tfyti")
 
-[node name="Tip" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2/IconTip"]
+[node name="TextTip" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 clip_contents = false
 layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 302.0
-offset_bottom = 97.0
+offset_left = 104.0
+offset_top = 136.0
+offset_right = 334.0
+offset_bottom = 170.0
 bbcode_enabled = true
 text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Tipper"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip4" type="TextureRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2"]
-visible = false
+[node name="IconMessage" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+material = ExtResource("36_64mo1")
 layout_mode = 0
 offset_left = 32.0
-offset_top = 176.0
+offset_top = 232.0
 offset_right = 80.0
-offset_bottom = 224.0
-texture = ExtResource("27_2gewe")
-expand_mode = 1
+offset_bottom = 280.0
+script = ExtResource("33_tfyti")
 
-[node name="Tip" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2/IconTip4"]
+[node name="TextMessage" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
 clip_contents = false
 layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 302.0
-offset_bottom = 97.0
+offset_left = 104.0
+offset_top = 240.0
+offset_right = 536.0
+offset_bottom = 274.0
 bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Tipper"
+text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Thank you for hanging out here 😊"
 fit_content = true
 scroll_active = false
-autowrap_mode = 0
-
-[node name="S3" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest2"]
-visible = false
-clip_contents = false
-layout_mode = 0
-offset_left = 449.0
-offset_top = 37.0
-offset_right = 1480.0
-offset_bottom = 122.0
-bbcode_enabled = true
-text = "[outline_size=2][outline_color=#202020FF][font_size=32][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]This is a notification that will be displayed at the bottom & scroll across
-"
-fit_content = true
 autowrap_mode = 0
 
 [node name="OBS" type="Control" parent="RootControl/LayoutDefault"]

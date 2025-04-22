@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cr65qckluf24p"]
+
+[ext_resource type="Shader" uid="uid://b48wjopki15ok" path="res://Resources/Shaders/Texture.gdshader" id="1_d6jin"]
+[ext_resource type="Texture2D" uid="uid://m5w35m42mb8s" path="res://Resources/Textures/Icons/Icon_Message.png" id="2_d6jin"]
+
+[resource]
+shader = ExtResource("1_d6jin")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/textureImage = ExtResource("2_d6jin")

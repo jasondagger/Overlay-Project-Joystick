@@ -2,45 +2,50 @@
 using Godot;
 using System.Collections.Generic;
 using System.IO;
+using Overlay.Core.Tools;
 
 namespace Overlay.Core.Contents.Effects;
 
 internal sealed partial class RichTextLabelSampler() :
     Control()
 {
+    [Export] public PackedScene[] Letters = null;
+    
     internal void LoadRichTextLabelsAndAttachToParentNode(
         Node parent
     )
     {
-        foreach (var path in _ = RichTextLabelSampler.s_paths)
-        {
-            this.LoadRichTextLabelsAtPathAndAttachToParent(
-                _ = path,
-                _ = parent
-            );
-        }
+        this.LoadRichTextLabelsAtPathAndAttachToParent(
+            _ = parent
+        );
     }
 
     internal RichTextLabel DequeueRichTextLabel(
         char letter
     )
     {
-        var textLetter = _ = m_richTextLabelCache[letter].Dequeue();
-        this.m_richTextLabelsInUse[letter].Enqueue(
-            item: _ = textLetter
-        );
+        lock (_ = this.m_lock)
+        {
+            var textLetter = _ = this.m_richTextLabelCache[letter].Dequeue();
+            this.m_richTextLabelsInUse[letter].Enqueue(
+                item: _ = textLetter
+            );
 
-        return textLetter;
+            return textLetter;
+        }
     }
 
     internal void RequeueRichTextLabel(
         char letter
     )
     {
-        var textLetter = _ = this.m_richTextLabelsInUse[letter].Dequeue();
-        this.m_richTextLabelCache[letter].Enqueue(
-            item: _ = textLetter
-        );
+        lock (_ = this.m_lock)
+        {
+            var textLetter = _ = this.m_richTextLabelsInUse[letter].Dequeue();
+            this.m_richTextLabelCache[letter].Enqueue(
+                item: _ = textLetter
+            );
+        }
     }
     
     private const uint                               c_maxNameLength       = 24u;
@@ -51,57 +56,49 @@ internal sealed partial class RichTextLabelSampler() :
         { "Period",       '.' },
         { "Space",        ' ' }
     };
-    private static readonly string[]                 s_paths               =
-    [
-        $"Resources/Scenes/Nameplates/Letters/LowerCase",
-        $"Resources/Scenes/Nameplates/Letters/Numeric",
-        $"Resources/Scenes/Nameplates/Letters/Special",
-        $"Resources/Scenes/Nameplates/Letters/UpperCase"
-    ];
 
     private Dictionary<char, Queue<RichTextLabel>>   m_richTextLabelCache  = new();
     private Dictionary<char, Queue<RichTextLabel>>   m_richTextLabelsInUse = new();
+    private object                                   m_lock                = new();
 
     private void LoadRichTextLabelsAtPathAndAttachToParent(
-        string path,
         Node parent
     )
     {
-        var filePaths = _ = Directory.GetFiles(
-            path: _ = path
-        );
-        foreach (var filePath in _ = filePaths)
+        foreach (var packedScene in _ = this.Letters)
         {
             var fileName = _ = Path.GetFileNameWithoutExtension(
-                path: _ = filePath
+                path: _ = packedScene.ResourcePath
             );
-            var key = RichTextLabelSampler.s_specialNames.TryGetValue(
+            if (fileName is null)
+            {
+                continue;
+            }
+            
+            var key = _ = RichTextLabelSampler.s_specialNames.TryGetValue(
                 key:    _ = fileName, 
                 out var value
             ) ? value : fileName[0];
-
+            
             this.m_richTextLabelCache.Add(
-                key: _ = key,
-                new Queue<RichTextLabel>()
+                key:   _ = key,
+                value: _ = new Queue<RichTextLabel>()
             );
             this.m_richTextLabelsInUse.Add(
-                key: _ = key,
-                new Queue<RichTextLabel>()
+                key:   _ = key,
+                value: _ = new Queue<RichTextLabel>()
             );
-
-            var sceneObject = _ = GD.Load<PackedScene>(
-                path: _ = filePath
-            );
+            
             for (var i = _ = 0u; _ = i < RichTextLabelSampler.c_maxNameLength; _ = i++)
             {
-                var richTextLabel = _ = sceneObject.Instantiate<RichTextLabel>();
+                var richTextLabel = _ = packedScene.Instantiate<RichTextLabel>();
                 _ = richTextLabel.Visible = _ = false;
 
                 parent.AddChild(
                     node: _ = richTextLabel
                 );
                 richTextLabel.SetPosition(
-                     position: _ = Vector2.Zero
+                    position: _ = Vector2.Zero
                 );
 
                 this.m_richTextLabelCache[key].Enqueue(

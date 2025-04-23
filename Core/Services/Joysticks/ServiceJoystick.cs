@@ -69,31 +69,31 @@ public sealed class ServiceJoystick() :
 		Task.Run(
 			function: async () =>
 			{
-				var uri = _ = new Uri(
-					uriString: _ = $"{_ = ServiceJoystick.c_joystickWebSocketAddress}?token={_ = this.GetClientDataAsBase64String()}"
-				);
+				try
+				{
+					var uri = _ = new Uri(
+						uriString: _ = $"{_ = ServiceJoystick.c_joystickWebSocketAddress}?token={_ = this.GetClientDataAsBase64String()}"
+					);
 
-				_ = this.m_clientWebSocket = _ = new ClientWebSocket();
-				this.m_clientWebSocket.Options.AddSubProtocol(
-					 subProtocol: _ = $"actioncable-v1-json"
-				);
-				await this.m_clientWebSocket.ConnectAsync(
-					uri:               _ = uri,
-					cancellationToken: _ = CancellationToken.None
-				);
+					_ = this.m_clientWebSocket = _ = new ClientWebSocket();
+					this.m_clientWebSocket.Options.AddSubProtocol(
+						subProtocol: _ = $"actioncable-v1-json"
+					);
+					await this.m_clientWebSocket.ConnectAsync(
+						uri:               _ = uri,
+						cancellationToken: _ = CancellationToken.None
+					);
 				
-				await this.SendWebSocketMessage(
-					message: _ = ServiceJoystick.c_joystickSubscribeMessage
-				);
+					await this.SendWebSocketMessage(
+						message: _ = ServiceJoystick.c_joystickSubscribeMessage
+					);
 
 #if DEBUG
-				ConsoleLogger.LogMessage(
-					message: _ = $"{_ = nameof(ServiceJoystick)}.{_ = nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
-				);
+					ConsoleLogger.LogMessage(
+						message: _ = $"{_ = nameof(ServiceJoystick)}.{_ = nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
+					);
 #endif
-				while (_ = this.m_shutdownRequested is false)
-				{
-					try
+					while (_ = this.m_shutdownRequested is false)
 					{
 						var isWebSocketOpen = _ = this.m_clientWebSocket.State is WebSocketState.Open;
 						if (_ = isWebSocketOpen is false)
@@ -115,25 +115,24 @@ public sealed class ServiceJoystick() :
 							payloadMessage: _ = webSocketPayloadMessage
 						);
 					}
-					catch (Exception exception)
-					{
-						ConsoleLogger.LogMessageError(
-							messageError: _ = 
-								$"EXCEPTION: " +
-								$"{_ = nameof(ServiceJoystick)}." +
-								$"{_ = nameof(ServiceJoystick.ConnectWebSocket)}() - " +
-								$"{_ = exception.Message}"
-						);
+				}
+				catch (Exception exception)
+				{
+					ConsoleLogger.LogMessageError(
+						messageError: _ = 
+							$"EXCEPTION: " +
+							$"{_ = nameof(ServiceJoystick)}." +
+							$"{_ = nameof(ServiceJoystick.ConnectWebSocket)}() - " +
+							$"{_ = exception.Message}"
+					);
 
-						await this.m_clientWebSocket.CloseAsync(
-							closeStatus:       _ = WebSocketCloseStatus.NormalClosure,
-							statusDescription: _ = string.Empty,
-							cancellationToken: _ = CancellationToken.None
-						);
-						
-						this.ConnectWebSocket();
-						break;
-					}
+					await this.m_clientWebSocket.CloseAsync(
+						closeStatus:       _ = WebSocketCloseStatus.NormalClosure,
+						statusDescription: _ = string.Empty,
+						cancellationToken: _ = CancellationToken.None
+					);
+					
+					this.ConnectWebSocket();
 				}
 			}
 		);
@@ -240,7 +239,7 @@ public sealed class ServiceJoystick() :
 		
 		if (
 			_ = payloadType.Equals(
-				string.Empty
+				obj: _ = string.Empty
 			) is false
 		)
 		{

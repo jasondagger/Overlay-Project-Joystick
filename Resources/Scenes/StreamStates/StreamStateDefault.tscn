@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=132 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
@@ -34,15 +34,84 @@
 [ext_resource type="Material" uid="uid://hva41a0mx3kd" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" id="26_0b5xl"]
 [ext_resource type="Script" uid="uid://cfh8q6l3bqlok" path="res://Core/Contents/Nameplates/Nameplate.cs" id="26_525sr"]
 [ext_resource type="Material" uid="uid://d1tusttxkuk2w" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" id="27_qm20r"]
+[ext_resource type="Script" uid="uid://iut46abd5ufa" path="res://Core/Contents/Nameplates/NameplateLatest.cs" id="31_rfl27"]
 [ext_resource type="Script" uid="uid://buf34m426ag05" path="res://Core/Contents/Effects/RichTextLabelSampler.cs" id="32_00c1p"]
+[ext_resource type="Material" uid="uid://odl7gr2nko0e" path="res://Resources/Materials/Nameplate/NameplateIcon.tres" id="32_b3hb5"]
 [ext_resource type="Material" uid="uid://dysr2cw5b6euw" path="res://Resources/Materials/Nameplate/NameplateIconLatestFollower.tres" id="32_ifwfs"]
 [ext_resource type="Script" uid="uid://todo8lidet12" path="res://Core/Contents/Nameplates/NameplateLatestFollower.cs" id="32_usuop"]
+[ext_resource type="PackedScene" uid="uid://dwwiuj8uw6ak3" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/A.tscn" id="33_jlwvh"]
 [ext_resource type="Script" uid="uid://bow27e5qkelmw" path="res://Core/Contents/Nameplates/NameplateIcon.cs" id="33_tfyti"]
+[ext_resource type="PackedScene" uid="uid://0dfumbr2ei43" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/B.tscn" id="34_rfl27"]
 [ext_resource type="Material" uid="uid://crqyfncl5io65" path="res://Resources/Materials/Nameplate/NameplateIconLatestSubscriber.tres" id="34_usuop"]
+[ext_resource type="PackedScene" uid="uid://clc00k8evbvgg" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/C.tscn" id="35_b3hb5"]
 [ext_resource type="Script" uid="uid://dglc5re2jcwvb" path="res://Core/Contents/Nameplates/NameplateLatestSubscriber.cs" id="35_ifwfs"]
 [ext_resource type="Material" uid="uid://ljjack0wpijs" path="res://Resources/Materials/Nameplate/NameplateIconLatestTipper.tres" id="35_rd3ou"]
+[ext_resource type="PackedScene" uid="uid://dntomxubjr7vx" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/D.tscn" id="36_24xeb"]
 [ext_resource type="Material" uid="uid://cr65qckluf24p" path="res://Resources/Materials/Nameplate/NameplateIconLatestMessage.tres" id="36_64mo1"]
+[ext_resource type="PackedScene" uid="uid://bof21hufvbodm" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/E.tscn" id="37_2ta7e"]
 [ext_resource type="Script" uid="uid://df00f8f6oqyir" path="res://Core/Contents/Nameplates/NameplateLatestTipper.cs" id="37_usuop"]
+[ext_resource type="PackedScene" uid="uid://slyt5wtrey8f" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/F.tscn" id="38_vnub1"]
+[ext_resource type="PackedScene" uid="uid://cd45dlwxrxdvt" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/G.tscn" id="39_c8jl6"]
+[ext_resource type="PackedScene" uid="uid://d3huacqas7oaw" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/H.tscn" id="40_iwrga"]
+[ext_resource type="PackedScene" uid="uid://dial6vns5eh8r" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/I.tscn" id="41_d836i"]
+[ext_resource type="PackedScene" uid="uid://bltiq5cgab6t1" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/J.tscn" id="42_lutk6"]
+[ext_resource type="PackedScene" uid="uid://ja0ssn1yr380" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/K.tscn" id="43_uwk53"]
+[ext_resource type="PackedScene" uid="uid://c1g82wvlbamhp" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/L.tscn" id="44_jcb5f"]
+[ext_resource type="PackedScene" uid="uid://dkh3py2sgoo0w" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/M.tscn" id="45_6q0ck"]
+[ext_resource type="PackedScene" uid="uid://d0prfc16cxdld" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/N.tscn" id="46_b1cm5"]
+[ext_resource type="PackedScene" uid="uid://bs7qucp574k08" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/O.tscn" id="47_l7qxh"]
+[ext_resource type="PackedScene" uid="uid://c438uogidtmxr" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/P.tscn" id="48_6fqfh"]
+[ext_resource type="PackedScene" uid="uid://bf143kmyyv72i" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/Q.tscn" id="49_j60v6"]
+[ext_resource type="PackedScene" uid="uid://dg5b57t2dwqfx" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/R.tscn" id="50_8gud7"]
+[ext_resource type="PackedScene" uid="uid://2r6dspmel7o8" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/S.tscn" id="51_fayw6"]
+[ext_resource type="PackedScene" uid="uid://bb5r02pf2m07w" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/T.tscn" id="52_774et"]
+[ext_resource type="PackedScene" uid="uid://1wnrbyessf80" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/U.tscn" id="53_x002a"]
+[ext_resource type="PackedScene" uid="uid://fthhfi825vlj" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/V.tscn" id="54_3x5dk"]
+[ext_resource type="PackedScene" uid="uid://df7vbrb4s57hi" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/W.tscn" id="55_mw7u5"]
+[ext_resource type="PackedScene" uid="uid://dpmrtm22semy1" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/X.tscn" id="56_n3fnb"]
+[ext_resource type="PackedScene" uid="uid://cjiyfqoo4wvex" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/Y.tscn" id="57_lex1t"]
+[ext_resource type="PackedScene" uid="uid://dwhcyxvpuuqnj" path="res://Resources/Scenes/Nameplates/Letters/UpperCase/Z.tscn" id="58_h21eh"]
+[ext_resource type="PackedScene" uid="uid://c50v63bmdepn3" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/a.tscn" id="59_3d1os"]
+[ext_resource type="PackedScene" uid="uid://bmjdes1gamt7q" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/b.tscn" id="60_wy6a4"]
+[ext_resource type="PackedScene" uid="uid://b7mv6x0ssy8c1" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/c.tscn" id="61_8kq02"]
+[ext_resource type="PackedScene" uid="uid://bya2l84qqj3uc" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/d.tscn" id="62_k7hlt"]
+[ext_resource type="PackedScene" uid="uid://ktjwa3ogwyuv" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/e.tscn" id="63_03yed"]
+[ext_resource type="PackedScene" uid="uid://frv878k21u4d" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/f.tscn" id="64_jxmwp"]
+[ext_resource type="PackedScene" uid="uid://bl144c0myof5a" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/g.tscn" id="65_7e4xp"]
+[ext_resource type="PackedScene" uid="uid://bdngugcpx8hfr" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/h.tscn" id="66_8vg18"]
+[ext_resource type="PackedScene" uid="uid://d22udgg3i5utp" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/i.tscn" id="67_qpxcl"]
+[ext_resource type="PackedScene" uid="uid://clssygkg2majj" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/j.tscn" id="68_x7gex"]
+[ext_resource type="PackedScene" uid="uid://ciedejdujfjp1" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/k.tscn" id="69_ja342"]
+[ext_resource type="PackedScene" uid="uid://dbu3eegl1h0eq" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/l.tscn" id="70_5iaad"]
+[ext_resource type="PackedScene" uid="uid://cy3m2pw42fk4r" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/m.tscn" id="71_oktss"]
+[ext_resource type="PackedScene" uid="uid://3lu5mo603awf" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/n.tscn" id="72_mjpwu"]
+[ext_resource type="PackedScene" uid="uid://612uxmhcd1fw" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/o.tscn" id="73_w5agf"]
+[ext_resource type="PackedScene" uid="uid://v62186ml231n" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/p.tscn" id="74_28rll"]
+[ext_resource type="PackedScene" uid="uid://ujrgestevdvg" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/q.tscn" id="75_5erhm"]
+[ext_resource type="PackedScene" uid="uid://hmw4gcn34yf4" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/r.tscn" id="76_kdko4"]
+[ext_resource type="PackedScene" uid="uid://lyby7s6o4534" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/s.tscn" id="77_r4jpo"]
+[ext_resource type="PackedScene" uid="uid://5pegb1jwj4eg" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/t.tscn" id="78_lhoom"]
+[ext_resource type="PackedScene" uid="uid://bx53jwbkq7h7q" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/u.tscn" id="79_5kfpy"]
+[ext_resource type="PackedScene" uid="uid://bj16bxsoxkw1h" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/v.tscn" id="80_sd5cl"]
+[ext_resource type="PackedScene" uid="uid://dxspqhmaqg5ql" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/w.tscn" id="81_0klbf"]
+[ext_resource type="PackedScene" uid="uid://qnode4cjmcba" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/x.tscn" id="82_jyrlk"]
+[ext_resource type="PackedScene" uid="uid://3tdv7hhf1lar" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/y.tscn" id="83_drqvu"]
+[ext_resource type="PackedScene" uid="uid://dmt6mnncq6flo" path="res://Resources/Scenes/Nameplates/Letters/LowerCase/z.tscn" id="84_dbowr"]
+[ext_resource type="PackedScene" uid="uid://q5u3qvrw2t6y" path="res://Resources/Scenes/Nameplates/Letters/Numeric/0.tscn" id="85_7yjvp"]
+[ext_resource type="PackedScene" uid="uid://bmiugh4xqpxd1" path="res://Resources/Scenes/Nameplates/Letters/Numeric/1.tscn" id="86_uapsn"]
+[ext_resource type="PackedScene" uid="uid://btrb7o1bo4y0t" path="res://Resources/Scenes/Nameplates/Letters/Numeric/2.tscn" id="87_86mdl"]
+[ext_resource type="PackedScene" uid="uid://cqsp1k1kga6op" path="res://Resources/Scenes/Nameplates/Letters/Numeric/3.tscn" id="88_8pwbw"]
+[ext_resource type="PackedScene" uid="uid://b61syeqbixjmn" path="res://Resources/Scenes/Nameplates/Letters/Numeric/4.tscn" id="89_uupol"]
+[ext_resource type="PackedScene" uid="uid://clxgqbso0rv12" path="res://Resources/Scenes/Nameplates/Letters/Numeric/5.tscn" id="90_a71v7"]
+[ext_resource type="PackedScene" uid="uid://coh56afvrmkxa" path="res://Resources/Scenes/Nameplates/Letters/Numeric/6.tscn" id="91_uotug"]
+[ext_resource type="PackedScene" uid="uid://bv75jp4m44kis" path="res://Resources/Scenes/Nameplates/Letters/Numeric/7.tscn" id="92_kgp6b"]
+[ext_resource type="PackedScene" uid="uid://dtw1imgsrednt" path="res://Resources/Scenes/Nameplates/Letters/Numeric/8.tscn" id="93_mmwii"]
+[ext_resource type="PackedScene" uid="uid://bkoqlq1edtwqc" path="res://Resources/Scenes/Nameplates/Letters/Numeric/9.tscn" id="94_3l75k"]
+[ext_resource type="PackedScene" uid="uid://djwrqxia0xwns" path="res://Resources/Scenes/Nameplates/Letters/Special/!.tscn" id="95_bifa8"]
+[ext_resource type="PackedScene" uid="uid://dshpqnnwjs2ob" path="res://Resources/Scenes/Nameplates/Letters/Special/-.tscn" id="96_lciu5"]
+[ext_resource type="PackedScene" uid="uid://b0bilh7jhbqfj" path="res://Resources/Scenes/Nameplates/Letters/Special/@.tscn" id="97_7p5cp"]
+[ext_resource type="PackedScene" uid="uid://b4bkss46ppyrc" path="res://Resources/Scenes/Nameplates/Letters/Special/Space.tscn" id="98_x2qkd"]
+[ext_resource type="PackedScene" uid="uid://d3yxi2thcvqmr" path="res://Resources/Scenes/Nameplates/Letters/Special/_.tscn" id="99_wctlf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
@@ -736,8 +805,9 @@ fit_content = true
 anchors_preset = 0
 offset_left = 42.0
 offset_top = 124.0
-offset_right = 950.0
+offset_right = 628.0
 offset_bottom = 440.0
+script = ExtResource("31_rfl27")
 
 [node name="NameplateLatestFollower" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest" node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
 anchors_preset = 0
@@ -753,15 +823,16 @@ ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 [node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
 anchors_preset = 0
 script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
+visible = false
 material = ExtResource("32_ifwfs")
 layout_mode = 0
 offset_left = -64.0
 offset_top = -8.0
 offset_right = -16.0
 offset_bottom = 40.0
-scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
@@ -772,7 +843,9 @@ offset_bottom = 34.0
 
 [node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower/SubViewportContainer"]
 transparent_bg = true
+handle_input_locally = false
 size = Vector2i(480, 34)
+render_target_update_mode = 4
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower/SubViewportContainer/SubViewport"]
 layout_mode = 3
@@ -807,19 +880,21 @@ ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber"]
+visible = false
 material = ExtResource("34_usuop")
 layout_mode = 0
 offset_left = -64.0
 offset_top = -8.0
 offset_right = -16.0
 offset_bottom = 40.0
-scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber"]
+layout_mode = 0
 offset_right = 480.0
 offset_bottom = 34.0
 
@@ -861,19 +936,21 @@ ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper"]
+visible = false
 material = ExtResource("35_rd3ou")
 layout_mode = 0
 offset_left = -64.0
 offset_top = -8.0
 offset_right = -16.0
 offset_bottom = 40.0
-scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper"]
+layout_mode = 0
 offset_right = 480.0
 offset_bottom = 34.0
 
@@ -923,6 +1000,7 @@ pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage"]
+layout_mode = 0
 offset_right = 480.0
 offset_bottom = 34.0
 
@@ -941,6 +1019,15 @@ text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resou
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier"]
+material = ExtResource("32_b3hb5")
+layout_mode = 0
+offset_left = 628.0
+offset_top = 40.0
+offset_right = 990.0
+offset_bottom = 440.0
+script = ExtResource("33_tfyti")
 
 [node name="OBS" type="Control" parent="RootControl/LayoutDefault"]
 anchors_preset = 0

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://odl7gr2nko0e"]
+
+[ext_resource type="Shader" uid="uid://b48wjopki15ok" path="res://Resources/Shaders/Texture.gdshader" id="1_sfwcs"]
+[ext_resource type="Texture2D" uid="uid://cgqdpti3qp7uw" path="res://Resources/Textures/Icons/Icon_Dagger.png" id="2_sfwcs"]
+
+[resource]
+shader = ExtResource("1_sfwcs")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/textureImage = ExtResource("2_sfwcs")

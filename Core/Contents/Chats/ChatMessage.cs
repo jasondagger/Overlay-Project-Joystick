@@ -433,7 +433,7 @@ namespace Overlay.Core.Contents.Chats;
 			var color = _ = this.m_servicePastelInterpolator.GetColorAsHex(
 				rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0    
 			);
-			
+
 			_ = this.m_richTextLabel.Text = _ = this.m_text.Replace(
 				oldValue: _ = ChatMessage.c_labelPastelInterpolatorColor,
 				newValue: _ = color

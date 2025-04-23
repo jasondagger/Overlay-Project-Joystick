@@ -8,6 +8,13 @@ namespace Overlay.Core.Contents.Chats;
 internal sealed partial class Chat() :
     Control()
 {
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		
+		this.RetrieveResources();
+	}
+	
 	public override void _Process(
 		double delta
 	)
@@ -24,7 +31,6 @@ internal sealed partial class Chat() :
     {
 	    base._Ready();
 	    
-	    this.RetrieveResources();
 	    this.PopulateChatMessageCache();
     }
 
@@ -48,6 +54,27 @@ internal sealed partial class Chat() :
 		    isModerator:       _ = isModerator,
 		    isStreamer:        _ = isStreamer,
 			isSubscriber:      _ = isSubscriber
+	    );
+	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    {
+		    this.m_pendingChatMessageDatas.Enqueue(
+			    item: _ = chatMessageData
+		    );
+	    }
+    }
+
+    internal void AddDebugMessage(
+	    string message
+	)
+    {
+	    var chatMessageData = _ = new ChatMessageData(
+		    username:          _ = "SmoothBot",
+		    usernameColor:     _ = string.Empty,
+		    message:           _ = message,
+		    chatMessageEmotes: null,
+		    isModerator:       _ = true,
+		    isStreamer:        _ = false,
+		    isSubscriber:      _ = true
 	    );
 	    lock (_ = this.m_pendingChatMessageDatasLock)
 	    {

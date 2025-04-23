@@ -1,4 +1,6 @@
 
+using Overlay.Core.Contents.Chats;
+
 namespace Overlay.Core.Tools;
 
 using Godot;
@@ -10,12 +12,21 @@ internal static class ConsoleLogger
         string message    
     )
     {
+        var timeStampSystem = _ = ConsoleLogger.GetTimeStampSystem();
+        var fullMessage     = _ = $"{_ = timeStampSystem} {_ = message}";
+        
         lock (_ = ConsoleLogger.s_lock)
         {
-            var timeStampSystem = _ = ConsoleLogger.GetTimeStampSystem();
             GD.Print(
-                what: _ = $"{_ = timeStampSystem} {_ = message}"
+                what: _ = fullMessage
             );
+            
+            if (Chat.Instance is not null)
+            {
+                Chat.Instance.AddDebugMessage(
+                    message: _ = fullMessage
+                );
+            }
         }
     }
 
@@ -23,12 +34,20 @@ internal static class ConsoleLogger
         string messageError    
     )
     {
+        var timeStampSystem = _ = ConsoleLogger.GetTimeStampSystem();
+        var fullMessage     = _ = $"{_ = timeStampSystem} {_ = messageError}";
         lock (_ = ConsoleLogger.s_lock)
         {
-            var timeStampSystem = _ = ConsoleLogger.GetTimeStampSystem();
             GD.PrintErr(
-                what: _ = $"{_ = timeStampSystem} {_ = messageError}"
+                what: _ = fullMessage
             );
+
+            if (Chat.Instance is not null)
+            {
+                Chat.Instance.AddDebugMessage(
+                    message: _ = fullMessage
+                );
+            }
         }
     }
 

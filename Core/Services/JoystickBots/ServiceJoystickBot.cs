@@ -74,7 +74,7 @@ public sealed class ServiceJoystickBot() :
                     millisecondsDelay: _ = 3000
                 );
                 this.SendChatMessage(
-                    message:   _ = $"{_ = ServiceJoystickBot.c_username} has arrived!"
+                    message:   _ = $"SmoothDagger is now live!"
                 );
             }
         );

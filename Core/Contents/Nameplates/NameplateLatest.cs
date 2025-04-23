@@ -125,7 +125,15 @@ internal sealed partial class NameplateLatest() :
         string name
     )
     {
-
+        ServiceDatabase.ExecuteTaskNonQuery(
+            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestSubscriber,
+            serviceDatabaseTaskSqlParameters: [
+                new ServiceDatabaseTaskNpgsqlParameter(
+                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatest.JoystickLatest_Latest_Subscriber)}",
+                    value:         _ = name
+                )
+            ]
+        );
         
         this.CallDeferred(
             method: _ = $"{_ = nameof(NameplateLatest.SetLatestSubscriberName)}", 

@@ -10,7 +10,7 @@ using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
 
 namespace Overlay.Core.Contents.Nameplates;
 
-public partial class NameplateLatest() :
+internal sealed partial class NameplateLatest() :
     Control()
 {
     [Export] public Array<RichTextLabel> RichTextLabels { get; set; } = null;
@@ -125,15 +125,7 @@ public partial class NameplateLatest() :
         string name
     )
     {
-        ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestSubscriber,
-            serviceDatabaseTaskSqlParameters: [
-                new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatest.JoystickLatest_Latest_Subscriber)}",
-                    value:         _ = name
-                )
-            ]
-        );
+
         
         this.CallDeferred(
             method: _ = $"{_ = nameof(NameplateLatest.SetLatestSubscriberName)}", 

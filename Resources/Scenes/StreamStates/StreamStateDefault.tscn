@@ -1,27 +1,27 @@
-[gd_scene load_steps=60 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=63 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
 [ext_resource type="Shader" uid="uid://clfc8riu2t8va" path="res://Resources/Shaders/BackgroundStars.gdshader" id="2_p0f6j"]
 [ext_resource type="Script" uid="uid://iop6g11sympj" path="res://Core/Contents/StreamEvents/StreamEventsController.cs" id="3_28isn"]
-[ext_resource type="Script" uid="uid://cnxwer3ek0lf" path="res://Core/Contents/Effects/EffectRainbowExtender.cs" id="3_pkstr"]
+[ext_resource type="Script" uid="uid://cnxwer3ek0lf" path="res://Core/Contents/Effects/Rainbows/EffectRainbowExtender.cs" id="3_pkstr"]
 [ext_resource type="Shader" uid="uid://dcw54kutra1pe" path="res://Resources/Shaders/BackgroundGodRays.gdshader" id="4_4r38b"]
 [ext_resource type="Shader" uid="uid://drvgwjqxdolsi" path="res://Resources/Shaders/Color.gdshader" id="4_7ex8q"]
 [ext_resource type="Shader" uid="uid://d2uk3qwib3f7" path="res://Resources/Shaders/BackgroundSnow.gdshader" id="4_o72j2"]
 [ext_resource type="Shader" uid="uid://brjfr2to16lyk" path="res://Resources/Shaders/BackgroundKaleidoscope.gdshader" id="4_tjdmb"]
-[ext_resource type="Script" uid="uid://v86sw1r3mp7q" path="res://Core/Contents/Effects/EffectRainbowStripe.cs" id="5_4r38b"]
-[ext_resource type="Script" uid="uid://b0qf050fqx7o" path="res://Core/Contents/Effects/EffectBackgroundKaleidoscope.cs" id="5_xepxj"]
+[ext_resource type="Script" uid="uid://v86sw1r3mp7q" path="res://Core/Contents/Effects/Rainbows/EffectRainbowStripe.cs" id="5_4r38b"]
+[ext_resource type="Script" uid="uid://b0qf050fqx7o" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundKaleidoscope.cs" id="5_xepxj"]
 [ext_resource type="Shader" uid="uid://1jyvu32ik8jl" path="res://Resources/Shaders/OBSFrameBorder.gdshader" id="6_28isn"]
 [ext_resource type="Shader" uid="uid://b7jba6jfpcvcj" path="res://Resources/Shaders/BackgroundVaporwave.gdshader" id="6_fvku6"]
-[ext_resource type="Script" uid="uid://bekm460xcq2yv" path="res://Core/Contents/Effects/EffectBackgroundVaporwave.cs" id="6_lhe6f"]
+[ext_resource type="Script" uid="uid://bekm460xcq2yv" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundVaporwave.cs" id="6_lhe6f"]
 [ext_resource type="Script" uid="uid://dm6galdixwbw4" path="res://Core/Contents/OBS/OBSBorderFrame.cs" id="7_mjhir"]
 [ext_resource type="Material" uid="uid://633bex560c3n" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeDown.tres" id="8_62sso"]
 [ext_resource type="Material" uid="uid://bmnsb3f12a5fo" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeLeft.tres" id="9_niean"]
-[ext_resource type="Script" uid="uid://dfkmnqhk68848" path="res://Core/Contents/Effects/EffectBackgroundSnow.cs" id="10_pkstr"]
+[ext_resource type="Script" uid="uid://dfkmnqhk68848" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundSnow.cs" id="10_pkstr"]
 [ext_resource type="Material" uid="uid://dxa0382d04i5u" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeRight.tres" id="10_tjdmb"]
 [ext_resource type="Texture2D" uid="uid://g0kd4egbwxli" path="res://Resources/Textures/Effects/Particles/Penis.png" id="11_4r38b"]
 [ext_resource type="Material" uid="uid://dv6vkntylsjdw" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeUp.tres" id="11_xepxj"]
-[ext_resource type="Script" uid="uid://wuk8mxl2a36v" path="res://Core/Contents/Effects/EffectBackgroundGodRays.cs" id="12_4r38b"]
+[ext_resource type="Script" uid="uid://wuk8mxl2a36v" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundGodRays.cs" id="12_4r38b"]
 [ext_resource type="Material" uid="uid://fvk0eaupd4pn" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorder.tres" id="18_v74uj"]
 [ext_resource type="Material" uid="uid://crqia762w5lnx" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeDown.tres" id="20_f2fsi"]
 [ext_resource type="Material" uid="uid://cyphwemtqgx2s" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeLeft.tres" id="21_v74uj"]
@@ -34,12 +34,15 @@
 [ext_resource type="Material" uid="uid://hva41a0mx3kd" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" id="26_0b5xl"]
 [ext_resource type="Script" uid="uid://cfh8q6l3bqlok" path="res://Core/Contents/Nameplates/Nameplate.cs" id="26_525sr"]
 [ext_resource type="Material" uid="uid://d1tusttxkuk2w" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" id="27_qm20r"]
-[ext_resource type="Script" uid="uid://iut46abd5ufa" path="res://Core/Contents/Nameplates/NameplateLatest.cs" id="31_3gobe"]
+[ext_resource type="Script" uid="uid://buf34m426ag05" path="res://Core/Contents/Effects/RichTextLabelSampler.cs" id="32_00c1p"]
 [ext_resource type="Material" uid="uid://dysr2cw5b6euw" path="res://Resources/Materials/Nameplate/NameplateIconLatestFollower.tres" id="32_ifwfs"]
+[ext_resource type="Script" uid="uid://todo8lidet12" path="res://Core/Contents/Nameplates/NameplateLatestFollower.cs" id="32_usuop"]
 [ext_resource type="Script" uid="uid://bow27e5qkelmw" path="res://Core/Contents/Nameplates/NameplateIcon.cs" id="33_tfyti"]
 [ext_resource type="Material" uid="uid://crqyfncl5io65" path="res://Resources/Materials/Nameplate/NameplateIconLatestSubscriber.tres" id="34_usuop"]
+[ext_resource type="Script" uid="uid://dglc5re2jcwvb" path="res://Core/Contents/Nameplates/NameplateLatestSubscriber.cs" id="35_ifwfs"]
 [ext_resource type="Material" uid="uid://ljjack0wpijs" path="res://Resources/Materials/Nameplate/NameplateIconLatestTipper.tres" id="35_rd3ou"]
 [ext_resource type="Material" uid="uid://cr65qckluf24p" path="res://Resources/Materials/Nameplate/NameplateIconLatestMessage.tres" id="36_64mo1"]
+[ext_resource type="Script" uid="uid://df00f8f6oqyir" path="res://Core/Contents/Nameplates/NameplateLatestTipper.cs" id="37_usuop"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
@@ -729,31 +732,59 @@ text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resou
 "
 fit_content = true
 
-[node name="NameplateLatest" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier" node_paths=PackedStringArray("RichTextLabels")]
+[node name="NameplateLatest" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier"]
 anchors_preset = 0
 offset_left = 42.0
 offset_top = 124.0
 offset_right = 950.0
 offset_bottom = 440.0
-script = ExtResource("31_3gobe")
-RichTextLabels = [NodePath("Follower"), NodePath("TextSubscriber"), NodePath("TextTip")]
 
-[node name="IconFollower" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="NameplateLatestFollower" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest" node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 40.0
+script = ExtResource("32_usuop")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
 material = ExtResource("32_ifwfs")
 layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 80.0
-offset_bottom = 80.0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
-[node name="Follower" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
-clip_contents = false
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
 layout_mode = 0
-offset_left = 104.0
-offset_top = 40.0
-offset_right = 772.0
-offset_bottom = 74.0
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower/SubViewportContainer"]
+transparent_bg = true
+size = Vector2i(480, 34)
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower/SubViewportContainer/SubViewport"]
+visible = false
+clip_contents = false
+offset_right = 480.0
+offset_bottom = 34.0
 bbcode_enabled = true
 text = "[outline_size=2][outline_color=#202020FF][font_size=28
 ][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Follower"
@@ -761,66 +792,150 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="IconSubscriber" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="NameplateLatestSubscriber" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest" node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 88.0
+offset_right = 96.0
+offset_bottom = 88.0
+script = ExtResource("35_ifwfs")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber"]
 material = ExtResource("34_usuop")
 layout_mode = 0
-offset_left = 32.0
-offset_top = 80.0
-offset_right = 80.0
-offset_bottom = 128.0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
-[node name="TextSubscriber" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber"]
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(480, 34)
+render_target_update_mode = 4
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber/SubViewportContainer/SubViewport"]
+visible = false
 clip_contents = false
-layout_mode = 0
-offset_left = 104.0
-offset_top = 88.0
-offset_right = 334.0
-offset_bottom = 122.0
+offset_right = 480.0
+offset_bottom = 34.0
 bbcode_enabled = true
 text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Subscriber"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="IconTip" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="NameplateLatestTipper" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest" node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 136.0
+offset_right = 96.0
+offset_bottom = 136.0
+script = ExtResource("37_usuop")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper"]
 material = ExtResource("35_rd3ou")
 layout_mode = 0
-offset_left = 32.0
-offset_top = 128.0
-offset_right = 80.0
-offset_bottom = 176.0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
-[node name="TextTip" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper"]
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(480, 34)
+render_target_update_mode = 4
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper/SubViewportContainer/SubViewport"]
+visible = false
 clip_contents = false
-layout_mode = 0
-offset_left = 104.0
-offset_top = 136.0
-offset_right = 334.0
-offset_bottom = 170.0
+offset_right = 480.0
+offset_bottom = 34.0
 bbcode_enabled = true
 text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Tipper"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="IconMessage" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="NameplateLatestMessage" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 240.0
+offset_right = 96.0
+offset_bottom = 240.0
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage"]
 material = ExtResource("36_64mo1")
 layout_mode = 0
-offset_left = 32.0
-offset_top = 232.0
-offset_right = 80.0
-offset_bottom = 280.0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
-[node name="TextMessage" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage"]
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(480, 34)
+render_target_update_mode = 4
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage/SubViewportContainer/SubViewport"]
 clip_contents = false
-layout_mode = 0
-offset_left = 104.0
-offset_top = 240.0
-offset_right = 536.0
-offset_bottom = 274.0
+offset_right = 480.0
+offset_bottom = 34.0
 bbcode_enabled = true
 text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Thank you for hanging out here 😊"
 fit_content = true

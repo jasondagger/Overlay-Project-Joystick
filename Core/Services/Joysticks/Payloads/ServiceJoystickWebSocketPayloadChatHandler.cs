@@ -83,7 +83,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         }
         
         var random      = _ = new Random();
-        var randomValue = _ = random.Next() % (value + 1);
+        var randomValue = _ = random.Next() % value + 1;
         
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(

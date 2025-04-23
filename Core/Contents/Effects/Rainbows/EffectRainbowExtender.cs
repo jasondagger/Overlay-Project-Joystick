@@ -4,7 +4,7 @@ using Overlay.Core.Tools;
 using System;
 using System.Collections.Generic;
 
-namespace Overlay.Core.Contents.Effects;
+namespace Overlay.Core.Contents.Effects.Rainbows;
 
 public sealed partial class EffectRainbowExtender() : 
     Control()

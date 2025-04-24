@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Overlay.Core.Services.Govee;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.OBS;
 
@@ -78,6 +79,7 @@ internal static class Services
     {
 		{ _ = typeof(ServiceDatabase),           _ = new ServiceDatabase()           },
         { _ = typeof(ServiceGodots),             _ = new ServiceGodots()             },
+        { _ = typeof(ServiceGovee),              _ = new ServiceGovee()              },
         { _ = typeof(ServiceJoystick),           _ = new ServiceJoystick()           },
         { _ = typeof(ServiceJoystickBot),        _ = new ServiceJoystickBot()        },
         { _ = typeof(ServiceOBS),                _ = new ServiceOBS()                },

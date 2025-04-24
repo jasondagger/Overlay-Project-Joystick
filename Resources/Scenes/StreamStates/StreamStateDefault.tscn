@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=135 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
@@ -112,6 +112,9 @@
 [ext_resource type="PackedScene" uid="uid://b0bilh7jhbqfj" path="res://Resources/Scenes/Nameplates/Letters/Special/@.tscn" id="97_7p5cp"]
 [ext_resource type="PackedScene" uid="uid://b4bkss46ppyrc" path="res://Resources/Scenes/Nameplates/Letters/Special/Space.tscn" id="98_x2qkd"]
 [ext_resource type="PackedScene" uid="uid://d3yxi2thcvqmr" path="res://Resources/Scenes/Nameplates/Letters/Special/_.tscn" id="99_wctlf"]
+[ext_resource type="PackedScene" uid="uid://jp7w38t5jirg" path="res://Resources/Scenes/Nameplates/Letters/Special/Period.tscn" id="101_2ta7e"]
+[ext_resource type="PackedScene" uid="uid://bteinal3psgag" path="res://Resources/Scenes/Nameplates/Letters/Special/'.tscn" id="102_vnub1"]
+[ext_resource type="Script" uid="uid://dvys5d6aj6hmr" path="res://Core/Contents/Nameplates/NameplateLatestMessage.cs" id="107_24xeb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
@@ -823,7 +826,7 @@ ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 [node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
 anchors_preset = 0
 script = ExtResource("32_00c1p")
-Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh")])
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower"]
 visible = false
@@ -880,7 +883,7 @@ ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("32_00c1p")
-Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh")])
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber"]
 visible = false
@@ -936,7 +939,7 @@ ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("32_00c1p")
-Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh")])
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper"]
 visible = false
@@ -977,17 +980,22 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="NameplateLatestMessage" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest"]
+[node name="NameplateLatestMessage" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest" node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
 anchors_preset = 0
 offset_left = 96.0
 offset_top = 240.0
 offset_right = 96.0
 offset_bottom = 240.0
+script = ExtResource("107_24xeb")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 
 [node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
 
 [node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage"]
 material = ExtResource("36_64mo1")
@@ -1010,7 +1018,14 @@ handle_input_locally = false
 size = Vector2i(480, 34)
 render_target_update_mode = 4
 
+[node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 34.0
+
 [node name="Text" type="RichTextLabel" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage/SubViewportContainer/SubViewport"]
+visible = false
 clip_contents = false
 offset_right = 480.0
 offset_bottom = 34.0

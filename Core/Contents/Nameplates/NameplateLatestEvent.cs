@@ -47,7 +47,7 @@ internal abstract partial class NameplateLatestEvent() :
 
         if (_ = this.m_reset)
         {
-            this.ResetFooterToInitialPosition();
+            this.ResetToInitialPosition();
         }
     }
     
@@ -64,8 +64,6 @@ internal abstract partial class NameplateLatestEvent() :
     protected Queue<string>          m_names        = new();
     protected readonly Queue<string> m_pendingNames = new();
 
-    private int iteration = 0;
-    
     protected void PlayNotification() 
     {
         Task.Run(
@@ -387,7 +385,7 @@ internal abstract partial class NameplateLatestEvent() :
         );
     }
     
-    private void ResetFooterToInitialPosition()
+    private void ResetToInitialPosition()
     {
         ControlPivot.Position = m_initialPosition;
         m_reset = false;

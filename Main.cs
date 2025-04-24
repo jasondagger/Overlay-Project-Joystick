@@ -13,6 +13,7 @@ using System.Text;
 using Overlay.Core.Contents.Effects;
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Godots.Inputs;
+using Overlay.Core.Services.Govee.Payloads;
 using Overlay.Core.Services.Joysticks;
 using Overlay.Core.Services.Joysticks.Payloads;
 using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
@@ -142,13 +143,13 @@ internal sealed partial class Main() :
 		var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 		
 		serviceGodotHttp.SendHttpRequest(
-			url: "https://openapi.api.govee.com/router/api/v1/user/devices",
+			url: "https://openapi.api.govee.com/router/api/v1/device/control",
 			headers: [
 				$"Govee-API-Key: 8ac3d53e-b861-4b94-a59b-461918168427",
 				$"Content-Type: application/json",
 			],
-			method: HttpClient.Method.Get,
-			json: "",
+			method: HttpClient.Method.Post,
+			json: "{\n  \"requestId\": \"10000000000000000000\",\n  \"payload\": {\n    \"sku\": \"H607C\",\n    \"device\": \"2A:A8:D8:7C:B4:47:41:D6\",\n    \"capability\": {\n      \"type\": \"devices.capabilities.segment_color_setting\",\n      \"instance\": \"segmentedColorRgb\",\n      \"value\": {\n      \t\"segment\":[0,1,2,3,4,5,6,7,8],\n        \"rgb\":0x00FF00\n      }\n    }\n  }\n}",
 			requestCompletedHandler: (
 				long     result,
 				long     responseCode,
@@ -160,8 +161,15 @@ internal sealed partial class Main() :
 					body
 				);
 				
+				// H607C
+				// 2A:A8:D8:7C:B4:47:41:D6
+				// 2A:E6:FA:FB:20:2E:71:B1
+				//var json = JsonHelper.Deserialize<ServiceGoveePayload>(bodyAsString);
+				
 				int i = 0;
 				i++;
+				
+				//
 
 			}
 		);

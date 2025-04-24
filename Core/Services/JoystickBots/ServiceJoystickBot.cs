@@ -92,7 +92,7 @@ public sealed class ServiceJoystickBot() :
         ];
         var index = _ = this.m_random.RandiRange(
             0, 
-            messages.Length
+            messages.Length - 1
         );
 
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
@@ -111,7 +111,7 @@ public sealed class ServiceJoystickBot() :
         ];
         var index = _ = this.m_random.RandiRange(
             0, 
-            messages.Length
+            messages.Length - 1
         );
 
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
@@ -130,7 +130,7 @@ public sealed class ServiceJoystickBot() :
         ];
         var index = _ = this.m_random.RandiRange(
             0, 
-            messages.Length
+            messages.Length - 1
         );
 
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
@@ -150,7 +150,7 @@ public sealed class ServiceJoystickBot() :
         ];
         var index = _ = m_random.RandiRange(
             0, 
-            messages.Length
+            messages.Length - 1
         );
 
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();

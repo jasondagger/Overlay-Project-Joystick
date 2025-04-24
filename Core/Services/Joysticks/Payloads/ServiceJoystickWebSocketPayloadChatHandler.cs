@@ -71,11 +71,21 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
         
         var commandSplit = _ = parameters.Split(
-            separator: _ = ' ',
-            count:     _ = 2
+            separator: _ = ' '
         );
+        
+        if (
+            commandSplit.Length > 1
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !rtd parameter - !rtd must be in the following format: !rtd 69."
+            );
+            return;
+        }
+        
         var hasValue = _ = long.TryParse(
-            s:      _ = commandSplit[0], 
+            s:      _ = commandSplit[0],
             result: out var value
         );
         var hasParameters = _ = string.IsNullOrEmpty(
@@ -83,23 +93,16 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         ) is false;
         
         if (
-            _ = hasParameters is true &&
-            hasValue is false
+            _ = 
+            hasParameters is true &&
+            (
+                hasValue is false ||
+                value <= 0
+            )
         )
         {
             serviceJoystickBot.SendChatMessage(
                 message: _ = $"Invalid !rtd parameter - !rtd parameter must be empty or a whole number greater than 0."
-            );
-            return;
-        }
-
-        if (
-            _ = hasParameters is true && 
-            value <= 0
-        )
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !rtd parameter - value cannot be less than 0."
             );
             return;
         }
@@ -114,7 +117,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         }
         
         var random      = _ = new Random();
-        var randomValue = _ = random.Next() % value + 1;
+        var randomValue = _ = random.NextInt64() % value + 1;
 
         serviceJoystickBot.SendChatMessage(
             message: _ = $"🎲 {_ = username} rolled a {_ = randomValue} out of {_ = value}! 🎲"

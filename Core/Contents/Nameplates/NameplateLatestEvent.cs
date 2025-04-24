@@ -79,7 +79,7 @@ internal abstract partial class NameplateLatestEvent() :
                     );
                     
                     this.CallDeferred(
-                        method: _ = "CreateTextLetters"
+                        method: _ = $"{_ = nameof(NameplateLatestEvent.CreateTextLetters)}"
                     );
 
                     await Task.Delay(

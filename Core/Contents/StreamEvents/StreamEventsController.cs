@@ -16,8 +16,8 @@ internal sealed partial class StreamEventsController() :
         this.SubscribeToStreamEvents();
     }
     
-    private void HandleWebSocketPayloadStreamEventDropinStream(
-        ServiceJoystickWebSocketPayloadMessageMetadataDropinStream messageMetadata
+    private void HandleWebSocketPayloadStreamEventStreamDroppedIn(
+        ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn messageMetadata
     )
     {
         var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
@@ -100,11 +100,13 @@ internal sealed partial class StreamEventsController() :
             case "Cum":
             case "Cum Taste":
             case "Nipple Pinch":
+            case "No Underwear & Pants - 10 Minute(s)":
             case "Show Butthole":
             case "Show Feet":
             case "Titty Jiggle":
             case "Toy In - 5 Minute(s)":
             case "Toy In - 10 Minute(s)":
+            case "Turn On Light":
                 StreamEventsTipMenuSpice.HandleTipMenuItem(
                     tipMenuItem: _ = tipMenuItem
                 );
@@ -145,8 +147,8 @@ internal sealed partial class StreamEventsController() :
 
     private void SubscribeToStreamEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.DropinStream += this.HandleWebSocketPayloadStreamEventDropinStream;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed     += this.HandleWebSocketPayloadStreamEventFollowed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped       += this.HandleWebSocketPayloadStreamEventTipped;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn += this.HandleWebSocketPayloadStreamEventStreamDroppedIn;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed        += this.HandleWebSocketPayloadStreamEventFollowed;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped          += this.HandleWebSocketPayloadStreamEventTipped;
     }
 }

@@ -45,7 +45,7 @@ internal sealed partial class Main() :
 		// ServiceJoystickWebSocketPayloadStreamEvents.ChatTimerStarted += T;
 		// ServiceDatabaseTaskEvents.RetrievedListJoystickUsers += TestDatabaseRead;
 		// ServiceDatabaseTaskEvents.RetrievedJoystickData += TestDatabaseRead;
-		// TestHttp();
+		TestHttp();
 		// TestDatabaseWrite();
 		
 		// each letter & symbol as a .res file
@@ -142,8 +142,11 @@ internal sealed partial class Main() :
 		var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 		
 		serviceGodotHttp.SendHttpRequest(
-			url: "https://joystick.tv/api/oauth/authorize?response_type=code&client_id=ecd8c4b6-6331-4ec4-b912-5b5a72f0a59a",
-			headers: [],
+			url: "https://openapi.api.govee.com/router/api/v1/user/devices",
+			headers: [
+				$"Govee-API-Key: 8ac3d53e-b861-4b94-a59b-461918168427",
+				$"Content-Type: application/json",
+			],
 			method: HttpClient.Method.Get,
 			json: "",
 			requestCompletedHandler: (

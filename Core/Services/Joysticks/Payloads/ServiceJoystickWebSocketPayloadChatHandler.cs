@@ -68,12 +68,43 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var hasValue = _ = int.TryParse(
-            s:      _ = parameters, 
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        
+        var commandSplit = _ = parameters.Split(
+            separator: _ = ' ',
+            count:     _ = 2
+        );
+        var hasValue = _ = long.TryParse(
+            s:      _ = commandSplit[0], 
             result: out var value
         );
+        var hasParameters = _ = string.IsNullOrEmpty(
+            value: _ = parameters
+        ) is false;
+        
         if (
-            _ = hasValue is false ||
+            _ = hasParameters is true &&
+            hasValue is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !rtd parameter - !rtd parameter must be empty or a whole number greater than 0."
+            );
+            return;
+        }
+
+        if (
+            _ = hasParameters is true && 
+            value <= 0
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !rtd parameter - value cannot be less than 0."
+            );
+            return;
+        }
+        
+        if (
             string.IsNullOrEmpty(
                 value: _ = parameters
             ) is true
@@ -84,8 +115,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         
         var random      = _ = new Random();
         var randomValue = _ = random.Next() % value + 1;
-        
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+
         serviceJoystickBot.SendChatMessage(
             message: _ = $"🎲 {_ = username} rolled a {_ = randomValue} out of {_ = value}! 🎲"
         );

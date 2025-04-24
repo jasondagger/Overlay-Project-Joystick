@@ -1,5 +1,6 @@
 
 using System.Threading.Tasks;
+using Godot;
 using Overlay.Core.Contents.Chats;
 using Overlay.Core.Services.Databases.Tasks;
 using Overlay.Core.Services.Databases.Tasks.Retrieves;
@@ -55,9 +56,10 @@ public sealed class ServiceJoystickBot() :
         );
     }
 
-    private const string c_username = "SmoothBot";
-    
-    private string m_joystickChannelId = _ = string.Empty;
+    private const string          c_username          = "SmoothBot";
+
+    private RandomNumberGenerator m_random            = new();
+    private string                m_joystickChannelId = _ = string.Empty;
     
     private void HandleRetrievedJoystickData(
         ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData
@@ -80,13 +82,22 @@ public sealed class ServiceJoystickBot() :
         );
     }
 
-    private void HandleStreamEventDropinStream(
-        ServiceJoystickWebSocketPayloadMessageMetadataDropinStream metadataDropinStream
+    private void HandleStreamEventStreamDroppedIn(
+        ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn metadataDropinStream
     )
     {
+        string[] messages =
+        [
+            $"Welcome in, {_ = metadataDropinStream.Who} & friends! Feel free to lurk or chat :)",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length
+        );
+
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message:   _ = $"Welcome in, {_ = metadataDropinStream.Origin} & friends! Feel free to chat or lurk :)"
+            message: _ = messages[index]
         );
     }
     
@@ -94,9 +105,18 @@ public sealed class ServiceJoystickBot() :
         ServiceJoystickWebSocketPayloadMessageMetadataFollowed metadataFollowed
     )
     {
+        string[] messages =
+        [
+            $"Thank you for following, {_ = metadataFollowed.Who}!",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length
+        );
+
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message:   _ = $"Thank you for following, {_ = metadataFollowed.Who}!"
+            message: _ = messages[index]
         );
     }
     
@@ -104,22 +124,47 @@ public sealed class ServiceJoystickBot() :
         ServiceJoystickWebSocketPayloadMessageMetadataSubscribed metadataSubscribed
     )
     {
-        
+        string[] messages =
+        [
+            $"Thank you for subscribing, {_ = metadataSubscribed.Who}!",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length
+        );
+
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
     }
     
     private void HandleStreamEventTipped(
         ServiceJoystickWebSocketPayloadMessageMetadataTipped metadataTipped
     )
     {
-        
+        string[] messages =
+        [
+            $"Cha-CHING! Thank you!",
+            $"Thank you for keeping my circuits running, {_ = metadataTipped.Who}!",
+        ];
+        var index = _ = m_random.RandiRange(
+            0, 
+            messages.Length
+        );
+
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
     }
 
     private void RegisterForJoystickStreamEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.DropinStream += this.HandleStreamEventDropinStream;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed     += this.HandleStreamEventFollowed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed   += this.HandleStreamEventSubscribed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped       += this.HandleStreamEventTipped;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn += this.HandleStreamEventStreamDroppedIn;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed        += this.HandleStreamEventFollowed;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed      += this.HandleStreamEventSubscribed;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped          += this.HandleStreamEventTipped;
     }
     
     private void RegisterForRetrievedJoystickData()

@@ -82,6 +82,9 @@ internal static class StreamEventsTipMenuSpice
             case "Nipple Pinch":
                 StreamEventsTipMenuSpice.HandleNipplePinch();          
                 break;
+            case "No Underwear & Pants - 10 Minute(s)":
+                StreamEventsTipMenuSpice.HandleNoUnderwearAndPants();
+                break;
             case "Show Butthole":
                 StreamEventsTipMenuSpice.HandleShowButthole();              
                 break;
@@ -100,6 +103,9 @@ internal static class StreamEventsTipMenuSpice
                 StreamEventsTipMenuSpice.HandleToyIn(
                     lengthInMinutes: _ = 10
                 );
+                break;
+            case "Turn On Light":
+                StreamEventsTipMenuSpice.HandleTurnOnLight();
                 break;
             
             default:
@@ -261,6 +267,16 @@ internal static class StreamEventsTipMenuSpice
         );
     }
 
+    private static void HandleNoUnderwearAndPants()
+    {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
+    }
+
     private static void HandleTittyJiggle()
     {
         var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
@@ -288,5 +304,15 @@ internal static class StreamEventsTipMenuSpice
             case 10:
                 break;
         }
+    }
+
+    private static void HandleTurnOnLight()
+    {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+        );
     }
 }

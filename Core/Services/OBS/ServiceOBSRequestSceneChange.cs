@@ -16,7 +16,7 @@ public sealed class ServiceOBSRequestSceneChange(
     public string             RequestType { get; set; } = _ = requestType;
     
     [JsonPropertyName(
-        name: $"sceneName"
+        name: $"scene-name"
     )]
     public string             SceneName   { get; set; } = _ = sceneName;
 }

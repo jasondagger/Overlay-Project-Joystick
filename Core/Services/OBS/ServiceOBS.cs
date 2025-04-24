@@ -39,10 +39,9 @@ internal sealed partial class ServiceOBS() :
 			    {
 				    return;
 			    }
-
-			    _ = this.m_requestId = _ = Guid.NewGuid().ToString();
+			    
 			    var request = new ServiceOBSRequestSceneChange(
-				    requestType: _ = "SetCurrentSceneCollection",
+				    requestType: _ = "SetCurrentScene",
 				    sceneName:   _ = sceneName
 			    );
 
@@ -84,7 +83,6 @@ internal sealed partial class ServiceOBS() :
     
     private ClientWebSocket m_clientWebSocket     = null;
     private bool            m_shutdownRequested   = _ = false;
-    private string          m_requestId           = _ = string.Empty;
 
     private void ConnectWebSocket()
 	{
@@ -107,6 +105,8 @@ internal sealed partial class ServiceOBS() :
 					message: _ = $"{_ = nameof(ServiceOBS)}.{_ = nameof(this.ConnectWebSocket)}() - OBS web socket connect successful."
 				);
 #endif
+				
+				ChangeScene("Default");
 
 				while (_ = this.m_shutdownRequested is false)
 				{
@@ -163,5 +163,8 @@ internal sealed partial class ServiceOBS() :
 			index: _ = 0,
 			count: _ = result.Count
 		);
+
+		int i = 0;
+		i++;
 	}
 }

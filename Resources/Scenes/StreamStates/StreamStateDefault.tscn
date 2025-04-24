@@ -1004,6 +1004,7 @@ offset_left = -64.0
 offset_top = -8.0
 offset_right = -16.0
 offset_bottom = 40.0
+scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(24, 24)
 script = ExtResource("33_tfyti")
 
@@ -1035,13 +1036,22 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier"]
-material = ExtResource("32_b3hb5")
-layout_mode = 0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier"]
 offset_left = 628.0
 offset_top = 40.0
 offset_right = 990.0
 offset_bottom = 440.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(362, 400)
+render_target_update_mode = 4
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/SubViewportContainer/SubViewport"]
+material = ExtResource("32_b3hb5")
+offset_right = 362.0
+offset_bottom = 400.0
 script = ExtResource("33_tfyti")
 
 [node name="OBS" type="Control" parent="RootControl/LayoutDefault"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=136 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
@@ -115,6 +115,7 @@
 [ext_resource type="PackedScene" uid="uid://jp7w38t5jirg" path="res://Resources/Scenes/Nameplates/Letters/Special/Period.tscn" id="101_2ta7e"]
 [ext_resource type="PackedScene" uid="uid://bteinal3psgag" path="res://Resources/Scenes/Nameplates/Letters/Special/'.tscn" id="102_vnub1"]
 [ext_resource type="Script" uid="uid://dvys5d6aj6hmr" path="res://Core/Contents/Nameplates/NameplateLatestMessage.cs" id="107_24xeb"]
+[ext_resource type="Script" uid="uid://bdyri6bp704iy" path="res://Core/Contents/Nameplates/NameplateLogo.cs" id="111_c8jl6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
@@ -1036,22 +1037,35 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier"]
+[node name="NameplateLogo" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier" node_paths=PackedStringArray("Pivot")]
+layout_mode = 2
+anchors_preset = 0
 offset_left = 628.0
 offset_top = 40.0
-offset_right = 990.0
-offset_bottom = 440.0
+offset_right = 628.0
+offset_bottom = 40.0
+script = ExtResource("111_c8jl6")
+Pivot = NodePath("SubViewportContainer/SubViewport/Pivot")
 
-[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/SubViewportContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLogo"]
+offset_right = 362.0
+offset_bottom = 400.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLogo/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(362, 400)
 render_target_update_mode = 4
 
-[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/SubViewportContainer/SubViewport"]
+[node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLogo/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLogo/SubViewportContainer/SubViewport/Pivot"]
 material = ExtResource("32_b3hb5")
+offset_top = -2.0
 offset_right = 362.0
-offset_bottom = 400.0
+offset_bottom = 398.0
 script = ExtResource("33_tfyti")
 
 [node name="OBS" type="Control" parent="RootControl/LayoutDefault"]

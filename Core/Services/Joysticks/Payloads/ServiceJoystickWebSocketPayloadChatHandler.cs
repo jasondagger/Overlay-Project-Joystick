@@ -193,6 +193,34 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         {
             return;
         }
+
+        // todo: uncomment region when new joystick is rolled out with the value
+        //var isSiteStreamer = _ = author.IsSiteStreamer;
+        //if (isSiteStreamer is false)
+        //{
+        //    return;
+        //}
+        //
+        //ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
+        //    item: _ = username
+        //);
+        //        
+        //string[] messages =
+        //[
+        //    $"Oh shit, it's {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+        //    $"Holy fuck, a wild {_ = username} appeared! Go catch their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+        //    $"Shoutout to {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+        //];
+        //var random = _ = new RandomNumberGenerator();
+        //var index  = _ = random.RandiRange(
+        //    from: _ = 0,
+        //    to:   _ = messages.Length - 1
+        //);
+//
+        //var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        //serviceJoystickBot.SendChatMessage(
+        //    message: _ = messages[index]
+        //);
         
         var serviceGodots    = _ = Services.GetService<ServiceGodots>();
         var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();

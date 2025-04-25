@@ -17,6 +17,11 @@ public sealed class ServiceJoystickWebSocketPayloadMessageAuthor()
     public bool                       IsModerator          { get; set; } = _ = false;
     
     [JsonPropertyName(
+        name: $"isSiteStreamer"
+    )]
+    public bool                       IsSiteStreamer       { get; set; } = _ = false;
+    
+    [JsonPropertyName(
         name: $"isStreamer"
     )]
     public bool                       IsStreamer           { get; set; } = _ = false;

@@ -308,7 +308,7 @@ public sealed class ServiceJoystick() :
 		);
 	}
 	
-	internal void SendRequestTest()
+	private void SendRequestTest()
 	{
 		// https://support.joystick.tv/developer_support/#testing-your-bot
 		

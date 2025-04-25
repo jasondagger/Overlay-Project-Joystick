@@ -1,9 +1,12 @@
 
 using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using Overlay.Core.Contents.Chats;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.JoystickBots;
+using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
 
@@ -19,14 +22,20 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         ServiceJoystickWebSocketPayloadChatHandler.PlayChatNotificationSoundEffect(
             payloadMessage: _ = payloadMessage
         );
+        ServiceJoystickWebSocketPayloadChatHandler.HandleStreamerShoutout(
+            payloadMessage: _ = payloadMessage
+        );
         ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommands(
             payloadMessage: _ = payloadMessage
         );
     }
     
-    private const string c_tipCommand                         = $"!tip";
-    private const int    c_commandRollTheDiceDefaultParameter = 100;
+    private const string                          c_streamerUsername                   = $"smoothdagger";
+    private const string                          c_tipCommand                         = $"!tip";
+    private const int                             c_commandRollTheDiceDefaultParameter = 100;
 
+    private static readonly HashSet<string>       m_streamersShoutedOut                = [];
+    
     private static void AddChatMessage(
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
@@ -162,6 +171,46 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             default:
                 return;
         }
+    }
+
+    private static void HandleStreamerShoutout(
+        ServiceJoystickWebSocketPayloadMessage payloadMessage
+    )
+    {
+        var author   = _ = payloadMessage.Author;
+        var username = _ = author.Username;
+        if (
+            _ = string.Compare(
+                strA:           _ = username,
+                strB:           _ = ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername,
+                comparisonType: _ = StringComparison.InvariantCultureIgnoreCase
+            ) is 0
+        )
+        {
+            return;
+        }
+        
+        // todo: can we get if someone is a streamer?
+        var isStreamer = _ = author.IsStreamer;
+        if (_ = isStreamer is false)
+        {
+            return;
+        }
+        
+        string[] messages =
+        [
+            $"Thank you for subscribing, {_ = username}!",
+        ];
+        var random = _ = new RandomNumberGenerator();
+        var index  = _ = random.RandiRange(
+            from: _ = 0,
+            to:   _ = messages.Length - 1
+        );
+
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
     }
     
     private static void PlayChatNotificationSoundEffect(

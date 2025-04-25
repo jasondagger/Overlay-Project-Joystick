@@ -24,7 +24,7 @@ internal sealed partial class StreamEventsController() :
         var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
 
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.DropinStream
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.StreamDroppedIn
         );
         
         // todo: notify ui

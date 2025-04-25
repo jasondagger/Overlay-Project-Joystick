@@ -21,7 +21,6 @@ internal sealed partial class ServiceGodotAudio() :
 	{
 		Applause = 0u,
 		ChatNotification,
-		DropinStream,
 		Followed,
 		Godlike,
 		Heartbeats,
@@ -29,6 +28,7 @@ internal sealed partial class ServiceGodotAudio() :
 		Knocking,
 		Nice,
 		Pan,
+		StreamDroppedIn,
 		Tip,
 	}
 	

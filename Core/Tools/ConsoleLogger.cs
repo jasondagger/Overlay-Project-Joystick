@@ -21,12 +21,14 @@ internal static class ConsoleLogger
                 what: _ = fullMessage
             );
             
+            #if DEBUG
             if (_ = Chat.Instance is not null)
             {
                 Chat.Instance.AddDebugMessage(
                     message: _ = fullMessage
                 );
             }
+            #endif
         }
     }
 
@@ -42,12 +44,14 @@ internal static class ConsoleLogger
                 what: _ = fullMessage
             );
 
+            #if DEBUG
             if (_ = Chat.Instance is not null)
             {
                 Chat.Instance.AddDebugMessage(
                     message: _ = fullMessage
                 );
             }
+            #endif
         }
     }
 

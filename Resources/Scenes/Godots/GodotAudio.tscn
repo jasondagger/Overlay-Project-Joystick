@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dqm53h7kkvc2v" path="res://Resources/Audios/SoundAlerts/ChatNotification.mp3" id="3_x2giy"]
 [ext_resource type="AudioStream" uid="uid://di8qeo050a165" path="res://Resources/Audios/SoundAlerts/Godlike.mp3" id="3_x7scy"]
 [ext_resource type="AudioStream" uid="uid://b1v5pafwbhgii" path="res://Resources/Audios/SoundAlerts/Heartbeats.mp3" id="4_r55xi"]
-[ext_resource type="AudioStream" uid="uid://cexotrd2ahqyy" path="res://Resources/Audios/SoundAlerts/DropinStream.mp3" id="4_x7scy"]
+[ext_resource type="AudioStream" uid="uid://cexotrd2ahqyy" path="res://Resources/Audios/SoundAlerts/StreamDroppedIn.mp3" id="4_x7scy"]
 [ext_resource type="AudioStream" uid="uid://dj5jecf5j4qjt" path="res://Resources/Audios/SoundAlerts/HolyShit.mp3" id="5_k2m3n"]
 [ext_resource type="AudioStream" uid="uid://1lpvd75shclq" path="res://Resources/Audios/SoundAlerts/Followed.mp3" id="6_ahg8j"]
 [ext_resource type="AudioStream" uid="uid://dccd71se7fjj4" path="res://Resources/Audios/SoundAlerts/Nice.mp3" id="7_7w5h6"]
@@ -22,10 +22,6 @@ volume_db = 3.0
 
 [node name="AudioStreamPlayer_ChatNotification" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_x2giy")
-
-[node name="AudioStreamPlayer_DropinStream" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_x7scy")
-volume_db = 2.0
 
 [node name="AudioStreamPlayer_Followed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ahg8j")
@@ -52,6 +48,10 @@ volume_db = 2.0
 
 [node name="AudioStreamPlayer_Pan" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_r55xi")
+volume_db = 2.0
+
+[node name="AudioStreamPlayer_StreamDroppedIn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_x7scy")
 volume_db = 2.0
 
 [node name="AudioStreamPlayer_Tip" type="AudioStreamPlayer" parent="."]

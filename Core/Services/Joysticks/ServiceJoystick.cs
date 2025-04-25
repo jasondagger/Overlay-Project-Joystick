@@ -55,7 +55,7 @@ public sealed class ServiceJoystick() :
 	
 	private const string         c_joystickWebSocketAddress     = "wss://joystick.tv/cable";
 	private const string         c_joystickSubscribeMessage     = "{\n  \"command\": \"subscribe\",\n  \"identifier\": \"{\\\"channel\\\":\\\"GatewayChannel\\\"}\"\n}";
-	private const int            c_reconnectDelayInMilliseconds = 10000;
+	private const int            c_reconnectDelayInMilliseconds = 100;
 	
 	private ServiceJoystickToken m_joystickToken                = null;
 	private ClientWebSocket      m_clientWebSocket              = null;
@@ -108,7 +108,7 @@ public sealed class ServiceJoystick() :
 							buffer:            _ = bytes,
 							cancellationToken: _ = CancellationToken.None
 						);
-
+						
 						var webSocketPayloadMessage = _ = ServiceJoystick.ParseWebSocketPayload(
 							bytes:  _ = bytes,
 							result: _ = result
@@ -127,13 +127,7 @@ public sealed class ServiceJoystick() :
 							$"{_ = nameof(ServiceJoystick.ConnectWebSocket)}() - " +
 							$"{_ = exception.Message}"
 					);
-
-					await this.m_clientWebSocket.CloseAsync(
-						closeStatus:       _ = WebSocketCloseStatus.NormalClosure,
-						statusDescription: _ = string.Empty,
-						cancellationToken: _ = CancellationToken.None
-					);
-
+					
 					_ = Task.Run(
 						function:
 						async () =>

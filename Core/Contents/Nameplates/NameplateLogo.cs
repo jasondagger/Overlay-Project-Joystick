@@ -34,23 +34,24 @@ public sealed partial class NameplateLogo() :
     private enum ScaleState :
         uint
     {
-        ScaleUp,
-        ScaleWaiting,
         ScaleDown,
+        ScaleUp,
+        ScaleLingering,
+        ScaleWaiting,
     }
     
-    private const int             c_entryLengthInMillisecondsMax          = 1000;
-    private const int             c_entryLengthInMillisecondsMin          = 2000;   
-    private const int             c_middleDurationInMillisecondsMax       = 5000;
-    private const int             c_middleDurationInMillisecondsMin       = 9000;
+    private const int             c_entryLengthInMillisecondsMax          = 2000;
+    private const int             c_entryLengthInMillisecondsMin          = 1000;   
+    private const int             c_middleDurationInMillisecondsMax       = 12000;
+    private const int             c_middleDurationInMillisecondsMin       = 8000;
     private const float           c_moveVelocity                          = 1500f;
     private const float           c_scaleVelocity                         = 0.1f;
-    private const int             c_scaleWaitingDurationInMillisecondsMax = 8000;
-    private const int             c_scaleWaitingDurationInMillisecondsMin = 14000;
+    private const int             c_scaleWaitingDurationInMillisecondsMax = 9000;
+    private const int             c_scaleWaitingDurationInMillisecondsMin = 3000;
     private const float           c_targetMoveToBottomY                   = 400f;
     private const float           c_targetMoveToIdleStartY                = -400f;
     private const float           c_targetMoveToIdleY                     = 0f;
-    private const float           c_targetScaleMaxY                       = 1.04f;
+    private const float           c_targetScaleMaxY                       = 1.03f;
     private const float           c_targetScaleMinY                       = 1f;
 
     private RandomNumberGenerator m_random                                = new();
@@ -58,8 +59,8 @@ public sealed partial class NameplateLogo() :
     private float                 m_moveMiddleDurationInSeconds           = _ = 8f;
     private MoveState             m_moveState                             = _ = MoveState.MoveWaitingAtMiddle;
     private float                 m_scaleElapsed                          = _ = 0f;
-    private ScaleState            m_scaleState                            = _ = ScaleState.ScaleWaiting;
-    private float                 m_scaleWaitingDurationInSeconds         = _ = 8f;
+    private ScaleState            m_scaleState                            = _ = ScaleState.ScaleLingering;
+    private float                 m_scaleWaitingDurationInSeconds         = _ = 4f;
 
 
     private void HandleMove(
@@ -150,11 +151,24 @@ public sealed partial class NameplateLogo() :
         {
             _ = position.Y       = _ = NameplateLogo.c_targetMoveToIdleY;
             _ = this.m_moveState = _ = MoveState.MoveWaitingAtMiddle;
-            
-            _ = this.m_moveMiddleDurationInSeconds = _ = this.m_random.RandiRange(
+
+            var durationInMilliseconds = _ = this.m_random.RandiRange(
                 from: _ = NameplateLogo.c_middleDurationInMillisecondsMin,
                 to:   _ = NameplateLogo.c_middleDurationInMillisecondsMax
-            ) / 1000f;
+            );
+            _ = this.m_moveMiddleDurationInSeconds = _ =  durationInMilliseconds / 1000f;
+
+            _ = Task.Run(
+                function:
+                async () =>
+                {
+                    await Task.Delay(
+                        millisecondsDelay: _ = durationInMilliseconds
+                    );
+                    
+                    this.m_scaleState = _ = ScaleState.ScaleWaiting;
+                }
+            );
         }
         
         _ = this.Pivot.Position = _ = position;
@@ -184,6 +198,7 @@ public sealed partial class NameplateLogo() :
                 );
                 break;
             
+            case ScaleState.ScaleLingering:
             default:
                 return;
         }
@@ -199,10 +214,10 @@ public sealed partial class NameplateLogo() :
         if (_ = scale.Y <= NameplateLogo.c_targetScaleMinY)
         {
             _ = scale.Y           = _ = NameplateLogo.c_targetScaleMinY;
-            _ = this.m_scaleState = _ = ScaleState.ScaleWaiting;
+            _ = this.m_scaleState = _ = ScaleState.ScaleLingering;
         }
 
-        _ = scale.X          = _ = scale.Y;
+        _ = scale.X         = _ = scale.Y;
         _ = this.Icon.Scale = _ = scale;
     }
 
@@ -219,7 +234,7 @@ public sealed partial class NameplateLogo() :
             _ = this.m_scaleState = _ = ScaleState.ScaleDown;
         }
 
-        _ = scale.X          = _ = scale.Y;
+        _ = scale.X         = _ = scale.Y;
         _ = this.Icon.Scale = _ = scale;
     }
 
@@ -239,6 +254,6 @@ public sealed partial class NameplateLogo() :
         _ = this.m_scaleWaitingDurationInSeconds = _ = this.m_random.RandiRange(
             from: _ = NameplateLogo.c_scaleWaitingDurationInMillisecondsMin,
             to:   _ = NameplateLogo.c_scaleWaitingDurationInMillisecondsMax
-        ) / 1000f;;
+        ) / 1000f;
     }
 }

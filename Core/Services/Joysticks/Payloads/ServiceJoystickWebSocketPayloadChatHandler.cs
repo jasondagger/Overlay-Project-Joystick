@@ -228,7 +228,9 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 
                 string[] messages =
                 [
-                    $"Oh shit, it's {_ = username}! Check out their stream: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+                    $"Oh shit, it's {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+                    $"Holy fuck, a wild {_ = username} appeared! Go catch their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+                    $"Shoutout to {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
                 ];
                 var random = _ = new RandomNumberGenerator();
                 var index  = _ = random.RandiRange(

@@ -1037,7 +1037,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="NameplateLogo" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier" node_paths=PackedStringArray("Pivot")]
+[node name="NameplateLogo" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier" node_paths=PackedStringArray("Pivot", "Icon")]
 layout_mode = 2
 anchors_preset = 0
 offset_left = 628.0
@@ -1046,6 +1046,7 @@ offset_right = 628.0
 offset_bottom = 40.0
 script = ExtResource("111_c8jl6")
 Pivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+Icon = NodePath("SubViewportContainer/SubViewport/Pivot/Icon")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLogo"]
 layout_mode = 0
@@ -1068,6 +1069,7 @@ layout_mode = 0
 offset_top = -2.0
 offset_right = 362.0
 offset_bottom = 398.0
+pivot_offset = Vector2(181, 200)
 script = ExtResource("33_tfyti")
 
 [node name="OBS" type="Control" parent="RootControl/LayoutDefault"]

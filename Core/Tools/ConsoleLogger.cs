@@ -21,7 +21,7 @@ internal static class ConsoleLogger
                 what: _ = fullMessage
             );
             
-            if (Chat.Instance is not null)
+            if (_ = Chat.Instance is not null)
             {
                 Chat.Instance.AddDebugMessage(
                     message: _ = fullMessage
@@ -42,7 +42,7 @@ internal static class ConsoleLogger
                 what: _ = fullMessage
             );
 
-            if (Chat.Instance is not null)
+            if (_ = Chat.Instance is not null)
             {
                 Chat.Instance.AddDebugMessage(
                     message: _ = fullMessage

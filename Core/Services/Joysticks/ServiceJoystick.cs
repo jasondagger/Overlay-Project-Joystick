@@ -232,7 +232,9 @@ public sealed class ServiceJoystick() :
 		ServiceJoystickWebSocketPayloadMessage payloadMessage
 	)
 	{
-		// todo: handle user presence, user service?
+		ServiceJoystickWebSocketPayloadUserPresenceHandler.HandleWebSocketPayloadUserPresence(
+			payloadMessage: _ = payloadMessage
+		);
 	}
 
 	private static ServiceJoystickWebSocketPayloadMessage ParseWebSocketPayload(

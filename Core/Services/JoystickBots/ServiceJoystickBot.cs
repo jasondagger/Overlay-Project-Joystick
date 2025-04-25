@@ -56,10 +56,10 @@ public sealed class ServiceJoystickBot() :
         );
     }
 
-    private const string          c_username          = "SmoothBot";
+    private const string                   c_username          = "SmoothBot";
 
-    private RandomNumberGenerator m_random            = new();
-    private string                m_joystickChannelId = _ = string.Empty;
+    private readonly RandomNumberGenerator m_random            = new();
+    private string                         m_joystickChannelId = _ = string.Empty;
     
     private void HandleRetrievedJoystickData(
         ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData

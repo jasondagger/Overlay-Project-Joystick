@@ -53,21 +53,23 @@ public sealed class ServiceJoystick() :
 		);
 	}
 	
-	private const string         c_joystickWebSocketAddress  = "wss://joystick.tv/cable";
-	private const string         c_joystickSubscribeMessage  = "{\n  \"command\": \"subscribe\",\n  \"identifier\": \"{\\\"channel\\\":\\\"GatewayChannel\\\"}\"\n}";
+	private const string         c_joystickWebSocketAddress     = "wss://joystick.tv/cable";
+	private const string         c_joystickSubscribeMessage     = "{\n  \"command\": \"subscribe\",\n  \"identifier\": \"{\\\"channel\\\":\\\"GatewayChannel\\\"}\"\n}";
+	private const int            c_reconnectDelayInMilliseconds = 10000;
 	
-	private ServiceJoystickToken m_joystickToken             = null;
-	private ClientWebSocket      m_clientWebSocket           = null;
+	private ServiceJoystickToken m_joystickToken                = null;
+	private ClientWebSocket      m_clientWebSocket              = null;
 	
-	private string               m_joystickAuthorizationCode = _ = string.Empty;
-	private string               m_joystickClientId          = _ = string.Empty;
-	private string               m_joystickClientSecret      = _ = string.Empty;
-	private bool                 m_shutdownRequested         = _ = false;
+	private string               m_joystickAuthorizationCode    = _ = string.Empty;
+	private string               m_joystickClientId             = _ = string.Empty;
+	private string               m_joystickClientSecret         = _ = string.Empty;
+	private bool                 m_shutdownRequested            = _ = false;
 	
 	private void ConnectWebSocket()
 	{
 		Task.Run(
-			function: async () =>
+			function:
+			async () =>
 			{
 				try
 				{
@@ -131,8 +133,18 @@ public sealed class ServiceJoystick() :
 						statusDescription: _ = string.Empty,
 						cancellationToken: _ = CancellationToken.None
 					);
-					
-					this.ConnectWebSocket();
+
+					_ = Task.Run(
+						function:
+						async () =>
+						{
+							await Task.Delay(
+								millisecondsDelay: _ = ServiceJoystick.c_reconnectDelayInMilliseconds
+							);
+							
+							this.ConnectWebSocket();
+						}
+					);
 				}
 			}
 		);

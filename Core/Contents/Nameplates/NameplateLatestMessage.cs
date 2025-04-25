@@ -134,25 +134,31 @@ internal sealed partial class NameplateLatestMessage() :
     {
         for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
         {
-            var textLetter = _ = this.m_textLetters[i];
-            switch (_ = textLetter.TextLetterScrollState)
+            var hasValue = _ = this.m_textLetters.TryGetValue(
+                key:   _ = i, 
+                value: out var textLetter
+            );
+            if (_ = hasValue)
             {
-                case TextLetterScrollState.ScrollCenterToEnd:
-                    this.ScrollCenterToEnd(
-                        index:   _ = i,
-                        elapsed: _ = elapsed
-                    );
-                    break;
-                case TextLetterScrollState.ScrollStartToCenter:
-                    this.ScrollStartToCenter(
-                        index:   _ = i,
-                        elapsed: _ = elapsed
-                    );
-                    break;
+                switch (_ = textLetter.TextLetterScrollState)
+                {
+                    case TextLetterScrollState.ScrollCenterToEnd:
+                        this.ScrollCenterToEnd(
+                            index:   _ = i,
+                            elapsed: _ = elapsed
+                        );
+                        break;
+                    case TextLetterScrollState.ScrollStartToCenter:
+                        this.ScrollStartToCenter(
+                            index:   _ = i,
+                            elapsed: _ = elapsed
+                        );
+                        break;
 
-                case TextLetterScrollState.Idle:
-                default:
-                    break;
+                    case TextLetterScrollState.Idle:
+                    default:
+                        break;
+                }
             }
         }
 

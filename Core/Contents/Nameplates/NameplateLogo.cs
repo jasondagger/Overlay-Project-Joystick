@@ -1,4 +1,5 @@
 
+using System.Threading.Tasks;
 using Godot;
 
 namespace Overlay.Core.Contents.Nameplates;
@@ -20,21 +21,25 @@ public sealed partial class NameplateLogo() :
     private enum MoveState :
         uint
     {
+        Waiting,
         Idle,
-        MoveToEndDown,
-        MoveToIdleDown,
+        MoveToBottom,
+        MoveToIdle,
     }
     
-    private const int                 c_movePixelBufferSize       = 16;
-    private const float               c_idleLengthInSeconds       = 8f;
-    private const float               c_velocityMoveControl       = 1250f;
-    private const float               c_targetMoveToEndUpY        = -NameplateLogo.c_movePixelBufferSize;
-    private const float               c_targetMoveToEndDownY      = 400f;
-    private const float               c_targetMoveToIdleDownY     = 0f;
-    private const float               c_targetMoveToIdleStartY    = -400f;
+    private const int             c_idleLengthInMillisecondsMax  = 8000;
+    private const int             c_idleLengthInMillisecondsMin  = 14000;
+    private const int             c_entryLengthInMillisecondsMax = 1000;
+    private const int             c_entryLengthInMillisecondsMin = 2000;
+    private const float           c_velocityMoveControl          = 1500f;
+    private const float           c_targetMoveToBottomY          = 400f;
+    private const float           c_targetMoveToIdleY            = 0f;
+    private const float           c_targetMoveToIdleStartY       = -400f;
     
-    private MoveState                 m_moveState                 = _ = MoveState.Idle;
-    private float                     m_elapsed                   = _ = 0f;
+    private RandomNumberGenerator m_random                       = new();
+    private MoveState             m_moveState                    = _ = MoveState.Idle;
+    private float                 m_elapsed                      = _ = 0f;
+    private float                 m_idleLength                   = _ = 8f;
 
     private void HandleMove(
         float delta
@@ -48,65 +53,87 @@ public sealed partial class NameplateLogo() :
                 );
                 break;
             
-            case MoveState.MoveToEndDown:
-                this.HandleMoveToEndDown(
+            case MoveState.MoveToBottom:
+                this.HandleMoveToBottom(
                     delta: _ = delta
                 );
                 break;
             
-            case MoveState.MoveToIdleDown:
-                this.HandleMoveToIdleDown(
+            case MoveState.MoveToIdle:
+                this.HandleMoveToIdle(
                     delta: _ = delta
                 );
                 break;
             
+            case MoveState.Waiting:
             default:
                 return;
         }
     }
-
+    
     private void HandleMoveIdle(
         float delta
     )
     {
         _ = this.m_elapsed += _ = delta;
         
-        if (_ = this.m_elapsed < NameplateLogo.c_idleLengthInSeconds)
+        if (_ = this.m_elapsed < this.m_idleLength)
         {
             return;
         }
         
-        _ = this.m_moveState = _ = MoveState.MoveToEndDown;
-        _ = this.m_elapsed = _ = 0f;
+        _ = this.m_moveState = _ = MoveState.MoveToBottom;
+        _ = this.m_elapsed   = _ = 0f;
     }
     
-    private void HandleMoveToEndDown(
+    private void HandleMoveToBottom(
         float delta
     )
     {
         var position    = _ = this.Pivot.Position;
         _ = position.Y += _ = NameplateLogo.c_velocityMoveControl * delta;
 
-        if (_ = position.Y >= NameplateLogo.c_targetMoveToEndDownY)
+        if (_ = position.Y >= NameplateLogo.c_targetMoveToBottomY)
         {
             _ = position.Y       = _ = NameplateLogo.c_targetMoveToIdleStartY;
-            _ = this.m_moveState = _ = MoveState.MoveToIdleDown;
+            _ = this.m_moveState = _ = MoveState.Waiting;
+
+            Task.Run(
+                function:
+                async () =>
+                {
+                    var delay = _ = this.m_random.RandiRange(
+                        from: _ = NameplateLogo.c_entryLengthInMillisecondsMin,
+                        to:   _ = NameplateLogo.c_entryLengthInMillisecondsMax
+                    );
+                    await Task.Delay(
+                        millisecondsDelay: _ = delay
+                    );
+                    
+                    _ = this.m_moveState = _ = MoveState.MoveToIdle;
+                }
+            );
         }
         
         _ = this.Pivot.Position = _ = position;
     }
     
-    private void HandleMoveToIdleDown(
+    private void HandleMoveToIdle(
         float delta
     )
     {
         var position    = _ = this.Pivot.Position;
         _ = position.Y += _ = NameplateLogo.c_velocityMoveControl * delta;
 
-        if (_ = position.Y >= NameplateLogo.c_targetMoveToIdleDownY)
+        if (_ = position.Y >= NameplateLogo.c_targetMoveToIdleY)
         {
-            _ = position.Y       = _ = NameplateLogo.c_targetMoveToIdleDownY;
+            _ = position.Y       = _ = NameplateLogo.c_targetMoveToIdleY;
             _ = this.m_moveState = _ = MoveState.Idle;
+            
+            _ = this.m_idleLength = _ = this.m_random.RandiRange(
+                from: _ = NameplateLogo.c_idleLengthInMillisecondsMin,
+                to:   _ = NameplateLogo.c_idleLengthInMillisecondsMax
+            ) / 1000f;
         }
         
         _ = this.Pivot.Position = _ = position;

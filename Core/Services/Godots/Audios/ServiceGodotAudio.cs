@@ -15,6 +15,7 @@ internal sealed partial class ServiceGodotAudio() :
 		Applause = 0u,
 		ChatNotification,
 		Followed,
+		GiftedSubscriptions,
 		Godlike,
 		Heartbeats,
 		HolyShit,

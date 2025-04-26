@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwnfcarlhuxa1"]
+[gd_scene load_steps=15 format=3 uid="uid://cwnfcarlhuxa1"]
 
 [ext_resource type="Script" uid="uid://bbgiwrng66wyu" path="res://Core/Services/Godots/Audios/ServiceGodotAudio.cs" id="1_gg7pa"]
 [ext_resource type="AudioStream" uid="uid://bq2c5l44ohvy5" path="res://Resources/Audios/SoundAlerts/Applause.mp3" id="2_x2giy"]
@@ -12,7 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://bw8bliasndjok" path="res://Resources/Audios/SoundAlerts/Knocking.mp3" id="9_ahg8j"]
 [ext_resource type="AudioStream" uid="uid://cp1ryd1ijei33" path="res://Resources/Audios/SoundAlerts/Pan.mp3" id="10_r55xi"]
 [ext_resource type="AudioStream" uid="uid://jqstvochxam3" path="res://Resources/Audios/SoundAlerts/Tip.mp3" id="11_k2m3n"]
-[ext_resource type="AudioStream" uid="uid://xhqpo1w2hbtk" path="res://Resources/Audios/SoundAlerts/Subscribed.mp3" id="12_7w5h6"]
+[ext_resource type="AudioStream" uid="uid://xhqpo1w2hbtk" path="res://Resources/Audios/SoundAlerts/GiftedSubscriptions.mp3" id="12_7w5h6"]
+[ext_resource type="AudioStream" uid="uid://d8o57r6tmu88" path="res://Resources/Audios/SoundAlerts/Subscribed.mp3" id="13_61max"]
 
 [node name="GodotAudio" type="Node"]
 script = ExtResource("1_gg7pa")
@@ -26,6 +27,10 @@ stream = ExtResource("3_x2giy")
 
 [node name="AudioStreamPlayer_Followed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ahg8j")
+volume_db = 2.0
+
+[node name="AudioStreamPlayer_GiftedSubscriptions" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_7w5h6")
 volume_db = 2.0
 
 [node name="AudioStreamPlayer_Godlike" type="AudioStreamPlayer" parent="."]
@@ -56,7 +61,7 @@ stream = ExtResource("4_x7scy")
 volume_db = 2.0
 
 [node name="AudioStreamPlayer_Subscribed" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_7w5h6")
+stream = ExtResource("13_61max")
 volume_db = 2.0
 
 [node name="AudioStreamPlayer_Tip" type="AudioStreamPlayer" parent="."]

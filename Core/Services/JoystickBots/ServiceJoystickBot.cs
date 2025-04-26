@@ -17,7 +17,6 @@ public sealed class ServiceJoystickBot() :
     Task IService.Setup()
     {
         this.RegisterForRetrievedJoystickData();
-        this.RegisterForJoystickStreamEvents();
         return _ = Task.CompletedTask;
     }
 
@@ -58,7 +57,6 @@ public sealed class ServiceJoystickBot() :
 
     private const string                   c_username          = "SmoothBot";
 
-    private readonly RandomNumberGenerator m_random            = new();
     private string                         m_joystickChannelId = _ = string.Empty;
     
     private void HandleRetrievedJoystickData(
@@ -76,98 +74,10 @@ public sealed class ServiceJoystickBot() :
                     millisecondsDelay: _ = 3000
                 );
                 this.SendChatMessage(
-                    message:   _ = $"SmoothDagger is now LIVE!"
+                    message:   _ = $"SmoothDagger is now live!"
                 );
             }
         );
-    }
-
-    private void HandleStreamEventStreamDroppedIn(
-        ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn metadataDropinStream
-    )
-    {
-        string[] messages =
-        [
-            $"Welcome in, {_ = metadataDropinStream.Who} & friends! Feel free to lurk or chat :)",
-            $"{_ = metadataDropinStream.Who} DROP IN DETECTED! TRIGGERING ALARMS!",
-        ];
-        var index = _ = this.m_random.RandiRange(
-            0, 
-            messages.Length - 1
-        );
-
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-        serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
-        );
-    }
-    
-    private void HandleStreamEventFollowed(
-        ServiceJoystickWebSocketPayloadMessageMetadataFollowed metadataFollowed
-    )
-    {
-        string[] messages =
-        [
-            $"Thank you for following, {_ = metadataFollowed.Who}!",
-            $"A new follower has appeared! Welcome, {_ = metadataFollowed.Who}!",
-        ];
-        var index = _ = this.m_random.RandiRange(
-            0, 
-            messages.Length - 1
-        );
-
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-        serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
-        );
-    }
-    
-    private void HandleStreamEventSubscribed(
-        ServiceJoystickWebSocketPayloadMessageMetadataSubscribed metadataSubscribed
-    )
-    {
-        string[] messages =
-        [
-            $"Thank you for subscribing, {_ = metadataSubscribed.Who}!",
-            $"The MYTH, the LEGEND! {_ = metadataSubscribed.Who} just subscribed!",
-        ];
-        var index = _ = this.m_random.RandiRange(
-            0, 
-            messages.Length - 1
-        );
-
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-        serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
-        );
-    }
-    
-    private void HandleStreamEventTipped(
-        ServiceJoystickWebSocketPayloadMessageMetadataTipped metadataTipped
-    )
-    {
-        string[] messages =
-        [
-            $"Cha-CHING! Thank you!",
-            $"Thank you for keeping my circuits running, {_ = metadataTipped.Who}!",
-        ];
-        var index = _ = m_random.RandiRange(
-            0, 
-            messages.Length - 1
-        );
-
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-        serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
-        );
-    }
-
-    private void RegisterForJoystickStreamEvents()
-    {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn += this.HandleStreamEventStreamDroppedIn;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed        += this.HandleStreamEventFollowed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed      += this.HandleStreamEventSubscribed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped          += this.HandleStreamEventTipped;
     }
     
     private void RegisterForRetrievedJoystickData()

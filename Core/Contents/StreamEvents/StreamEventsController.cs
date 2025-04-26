@@ -2,6 +2,7 @@
 using Godot;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
+using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.Joysticks.Payloads;
 using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
 using Overlay.Core.Tools;
@@ -16,6 +17,8 @@ internal sealed partial class StreamEventsController() :
         this.SubscribeToStreamEvents();
     }
     
+    private readonly RandomNumberGenerator m_random = new();
+
     private void HandleWebSocketPayloadStreamEventStreamDroppedIn(
         ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn messageMetadata
     )
@@ -27,7 +30,20 @@ internal sealed partial class StreamEventsController() :
             soundAlertType: _ = ServiceGodotAudio.SoundAlertType.StreamDroppedIn
         );
         
-        // todo: notify ui
+        string[] messages =
+        [
+            $"Welcome in, {_ = messageMetadata.Who} & friends! Feel free to lurk or chat :)",
+            $"Hello there, {_ = messageMetadata.Who} & friends! Feel free to lurk or chat :)",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length - 1
+        );
+
+        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
     }
 
     private void HandleWebSocketPayloadStreamEventFollowed(
@@ -41,7 +57,45 @@ internal sealed partial class StreamEventsController() :
             soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Followed
         );
         
-        // todo: notify ui
+        string[] messages =
+        [
+            $"A new follower has appeared! Welcome, {_ = messageMetadata.Who}!",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length - 1
+        );
+
+        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
+    }
+    
+    private void HandleWebSocketPayloadStreamEventSubscribed(
+        ServiceJoystickWebSocketPayloadMessageMetadataSubscribed messageMetadata
+    )
+    {
+        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Subscribed
+        );
+        
+        string[] messages =
+        [
+            $"The MYTH, the LEGEND! {_ = messageMetadata.Who} just subscribed!",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length - 1
+        );
+
+        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
     }
 
     private void HandleWebSocketPayloadStreamEventTipped(
@@ -133,6 +187,21 @@ internal sealed partial class StreamEventsController() :
                 );
                 return;
         }
+        
+        string[] messages =
+        [
+            $"Cha-CHING! Thank you!",
+            $"Thank you for keeping my circuits running, {_ = messageMetadata.Who}!",
+        ];
+        var index = _ = this.m_random.RandiRange(
+            0, 
+            messages.Length - 1
+        );
+
+        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
+        );
     }
 
     private static void PlayTipSoundEffect()
@@ -149,6 +218,7 @@ internal sealed partial class StreamEventsController() :
     {
         _ = ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn += this.HandleWebSocketPayloadStreamEventStreamDroppedIn;
         _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed        += this.HandleWebSocketPayloadStreamEventFollowed;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed      += this.HandleWebSocketPayloadStreamEventSubscribed;
         _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped          += this.HandleWebSocketPayloadStreamEventTipped;
     }
 }

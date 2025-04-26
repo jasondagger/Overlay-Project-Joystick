@@ -22,6 +22,7 @@ internal sealed partial class ServiceGodotAudio() :
 		Nice,
 		Pan,
 		StreamDroppedIn,
+		Subscribed,
 		Tip,
 	}
 	

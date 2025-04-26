@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene load_steps=137 format=3 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cnxwer3ek0lf" path="res://Core/Contents/Effects/Rainbows/EffectRainbowExtender.cs" id="3_pkstr"]
 [ext_resource type="Shader" uid="uid://dcw54kutra1pe" path="res://Resources/Shaders/BackgroundGodRays.gdshader" id="4_4r38b"]
 [ext_resource type="Shader" uid="uid://drvgwjqxdolsi" path="res://Resources/Shaders/Color.gdshader" id="4_7ex8q"]
+[ext_resource type="Script" uid="uid://ebdkqy1p5gpt" path="res://Core/Contents/GoveeLightController.cs" id="4_iwrga"]
 [ext_resource type="Shader" uid="uid://d2uk3qwib3f7" path="res://Resources/Shaders/BackgroundSnow.gdshader" id="4_o72j2"]
 [ext_resource type="Shader" uid="uid://brjfr2to16lyk" path="res://Resources/Shaders/BackgroundKaleidoscope.gdshader" id="4_tjdmb"]
 [ext_resource type="Script" uid="uid://v86sw1r3mp7q" path="res://Core/Contents/Effects/Rainbows/EffectRainbowStripe.cs" id="5_4r38b"]
@@ -239,6 +240,9 @@ Layouts = [NodePath("../../LayoutDefault"), NodePath("../../LayoutLarge")]
 
 [node name="StreamEventsController" type="Node" parent="RootControl/Controllers"]
 script = ExtResource("3_28isn")
+
+[node name="GoveeLightController" type="Node" parent="RootControl/Controllers"]
+script = ExtResource("4_iwrga")
 
 [node name="Background" type="Control" parent="RootControl"]
 anchors_preset = 0

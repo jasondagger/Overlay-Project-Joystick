@@ -8,17 +8,12 @@ namespace Overlay.Core.Services.Govee.Payloads;
 public sealed class ServiceGoveePayload()
 {
     [JsonPropertyName(
-        name: $"code"
+        name: $"requestId"
     )]
-    public string                    Code    { get; set; } = _ = string.Empty;
-    
-    [JsonPropertyName(
-        name: $"message"
-    )]
-    public string                    Message { get; set; } = _ = string.Empty;
+    public string                  RequestId { get; set; } = _ = "uuid";
 
     [JsonPropertyName(
-        name: $"data"
+        name: $"payload"
     )]
-    public ServiceGoveePayloadData[] Data    { get; set; } = null;
+    public ServiceGoveePayloadData Payload   { get; set; } = new();
 }

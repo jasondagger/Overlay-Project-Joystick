@@ -82,7 +82,6 @@ internal sealed partial class ServiceOBS() :
     private const string    c_obsWebSocketPort    = "4455";
     
     private ClientWebSocket m_clientWebSocket     = null;
-    private bool            m_shutdownRequested   = _ = false;
 
     private void ConnectWebSocket()
 	{
@@ -108,7 +107,7 @@ internal sealed partial class ServiceOBS() :
 				
 				ChangeScene("Default");
 
-				while (_ = this.m_shutdownRequested is false)
+				while (true)
 				{
 					try
 					{
@@ -163,8 +162,5 @@ internal sealed partial class ServiceOBS() :
 			index: _ = 0,
 			count: _ = result.Count
 		);
-
-		int i = 0;
-		i++;
 	}
 }

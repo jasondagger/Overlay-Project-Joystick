@@ -78,6 +78,69 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         );
     }
 
+    private static void HandleBotCommandRockPaperScissors(
+        string command,
+        string parameters
+    )
+    {
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        
+        if (
+            string.IsNullOrEmpty(
+                value: _ = parameters
+            ) is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid {_ = command} parameter - {_ = command} has no parameters."
+            );
+            return;
+        }
+        
+        string[] choices =
+        [
+            "!paper",
+            "!rock",
+            "!scissors",
+        ];
+        string[] icons =
+        [
+            "📄",
+            "🪨",
+            "✂️"
+        ];
+        
+        var random = _ = new RandomNumberGenerator();
+        var index  = _ = random.RandiRange(
+            from: _ = 0,
+            to:   _ = choices.Length - 1
+        );
+        
+        var choice = _ = choices[index];
+        if (choice == command)
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"{_ = icons[index]}"
+            );
+        }
+        else if (
+            (choice == "!paper"    && command == "!rock")     ||
+            (choice == "!rock"     && command == "!scissors") ||
+            (choice == "!scissors" && command == "!paper")
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"{_ = icons[index]}"
+            );
+        }
+        else
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"{_ = icons[index]}"
+            );
+        }
+    }
+    
     private static void HandleBotCommandRollTheDice(
         string username,
         string parameters
@@ -164,6 +227,15 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var parameters = _ = commandSplit.Length > 1 ? commandSplit[1].ToLower() : string.Empty;
         switch (_ = command)
         {
+            case "!paper":
+            case "!rock":
+            case "!scissors":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandRockPaperScissors(
+                    command:    _ = command,
+                    parameters: _ = parameters
+                );
+                break;
+            
             case "!dice":
             case "!roll":
             case "!rollthedice":

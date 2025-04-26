@@ -9,7 +9,7 @@ public sealed class ServiceGoveePayloadData()
     [JsonPropertyName(
         name: $"sku"
     )]
-    public string                              Sku          { get; set; } = _ = string.Empty;
+    public string                              Sku          { get; set; } = _ = "H607C";
     
     [JsonPropertyName(
         name: $"device"
@@ -17,12 +17,7 @@ public sealed class ServiceGoveePayloadData()
     public string                              Device       { get; set; } = _ = string.Empty;
     
     [JsonPropertyName(
-        name: $"deviceName"
+        name: $"capability"
     )]
-    public string                              DeviceName   { get; set; } = _ = string.Empty;
-    
-    [JsonPropertyName(
-        name: $"capabilities"
-    )]
-    public ServiceGoveePayloadDataCapability[] Capabilities { get; set; } = null;
+    public ServiceGoveePayloadDataCapability Capability { get; set; } = new();
 }

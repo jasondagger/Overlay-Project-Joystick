@@ -76,7 +76,7 @@ public sealed class ServiceJoystickBot() :
                     millisecondsDelay: _ = 3000
                 );
                 this.SendChatMessage(
-                    message:   _ = $"SmoothDagger is now live!"
+                    message:   _ = $"SmoothDagger is now LIVE!"
                 );
             }
         );
@@ -89,6 +89,7 @@ public sealed class ServiceJoystickBot() :
         string[] messages =
         [
             $"Welcome in, {_ = metadataDropinStream.Who} & friends! Feel free to lurk or chat :)",
+            $"{_ = metadataDropinStream.Who} DROP IN DETECTED! TRIGGERING ALARMS!",
         ];
         var index = _ = this.m_random.RandiRange(
             0, 
@@ -108,6 +109,7 @@ public sealed class ServiceJoystickBot() :
         string[] messages =
         [
             $"Thank you for following, {_ = metadataFollowed.Who}!",
+            $"A new follower has appeared! Welcome, {_ = metadataFollowed.Who}!",
         ];
         var index = _ = this.m_random.RandiRange(
             0, 
@@ -127,6 +129,7 @@ public sealed class ServiceJoystickBot() :
         string[] messages =
         [
             $"Thank you for subscribing, {_ = metadataSubscribed.Who}!",
+            $"The MYTH, the LEGEND! {_ = metadataSubscribed.Who} just subscribed!",
         ];
         var index = _ = this.m_random.RandiRange(
             0, 

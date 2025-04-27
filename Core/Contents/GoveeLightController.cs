@@ -59,6 +59,9 @@ public sealed partial class GoveeLightController() :
 
     internal void TurnOffLights()
     {
+        _ = this.m_lightColorElapsed = _ = 0f;
+        _ = this.m_currentColorType  = _ = ServicePastelInterpolator.ColorType.White;
+
         this.m_serviceGovee.TurnOffLights();
     }
     

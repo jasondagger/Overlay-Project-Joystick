@@ -42,7 +42,8 @@ public sealed partial class ServicePastelInterpolator() :
         Purple,
         Magenta,
         Pink,
-        White
+        White,
+        Pastel
     }
 
     public enum RainbowColorIndexType :
@@ -79,6 +80,13 @@ public sealed partial class ServicePastelInterpolator() :
         return _ = ServicePastelInterpolator.c_colorHexes[key: _ = colorType];
     }
     
+    public static Color GetColorByColorType(
+        ColorType colorType
+    )
+    {
+        return _ = ServicePastelInterpolator.c_colorCodes[key: _ = colorType];
+    }
+    
     private enum ColorInterpolationType :
         uint
     {
@@ -92,8 +100,8 @@ public sealed partial class ServicePastelInterpolator() :
 
     private sealed class RainbowColorIndexData
     {
-        public Color                  Current           { get; set; } = _ = c_colorCodes[key: ColorType.White];
-        public Color                  Previous          { get; set; } = _ = c_colorCodes[key: ColorType.White];
+        public Color                  Current           { get; set; } = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.White];
+        public Color                  Previous          { get; set; } = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.White];
         public float                  Interpolation     { get; set; } = _ = 0f;
         public ColorInterpolationType InterpolationType { get; set; } = _ = ColorInterpolationType.RedToYellow;
 

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using Godot;
+using Overlay.Core.Contents;
 using Overlay.Core.Contents.Chats;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.JoystickBots;
+using Overlay.Core.Services.PastelInterpolators;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
@@ -78,6 +80,154 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         );
     }
 
+    private static void HandleBotCommandLights(
+        string parameters,
+        bool   isStreamer,
+        bool   isSubscriber
+    )
+    {
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+
+        if (
+            _ = isStreamer is false &&
+            isSubscriber is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !lights user - only subscribers & SmoothDagger have access to this command."
+            );
+            return;
+        }
+        
+        if (
+            string.IsNullOrEmpty(
+                value: _ = parameters
+            ) is true
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !lights parameter - the following parameters are valid: on/off or a color."
+            );
+            return;
+        }
+        
+        var commandSplit = _ = parameters.Split(
+            separator: _ = ' '
+        );
+        
+        if (
+            commandSplit.Length > 1
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !lights parameter - !lights must be in the following format: !lights on."
+            );
+            return;
+        }
+
+        var command = _ = commandSplit[0].ToLower();
+        switch (_ = command)
+        {
+            case "on":
+                GoveeLightController.Instance.TurnOnLights();
+                break;
+                
+            case "off":
+                GoveeLightController.Instance.TurnOffLights();
+                break;
+            
+            case "pastel":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Pastel
+                );
+                break;
+            
+            case "red":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Red
+                );
+                break;
+
+            case "orange":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Orange
+                );
+                break;
+
+            case "yellow":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Yellow
+                );
+                break;
+
+            case "lime":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Lime
+                );
+                break;
+
+            case "green":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Green
+                );
+                break;
+
+            case "turquoise":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Turquoise
+                );
+                break;
+
+            case "cyan":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Cyan
+                );
+                break;
+
+            case "teal":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Teal
+                );
+                break;
+
+            case "blue":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Blue
+                );
+                break;
+
+            case "purple":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Purple
+                );
+                break;
+
+            case "magenta":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Magenta
+                );
+                break;
+
+            case "pink":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.Pink
+                );
+                break;
+                
+            case "white":
+                GoveeLightController.Instance.SetLightColor(
+                    ServicePastelInterpolator.ColorType.White
+                );
+                break;
+                
+            default:
+                serviceJoystickBot.SendChatMessage(
+                    message: _ = $"Invalid !lights parameter - the parameter is invalid."
+                );
+                break;
+        }
+    }
+    
     private static void HandleBotCommandRockPaperScissors(
         string command,
         string parameters
@@ -216,8 +366,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
         
-        var author   = _ =  payloadMessage.Author;
-        var username = _ =  author.Username;
+        var author       = _ = payloadMessage.Author;
+        var username     = _ = author.Username;
+        var isSubscriber = _ = author.IsSubscriber;
+        var isStreamer   = _ = author.IsStreamer;
 
         var commandSplit = _ = message.Split(
             separator: _ = ' ',
@@ -227,6 +379,14 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var parameters = _ = commandSplit.Length > 1 ? commandSplit[1].ToLower() : string.Empty;
         switch (_ = command)
         {
+            case "!lights":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLights(
+                    parameters:   _ = parameters,
+                    isStreamer:   _ = isStreamer,
+                    isSubscriber: _ = isSubscriber
+                );
+                break;
+            
             case "!paper":
             case "!rock":
             case "!scissors":

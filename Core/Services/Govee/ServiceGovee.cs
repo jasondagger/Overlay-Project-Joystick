@@ -39,9 +39,33 @@ internal sealed class ServiceGovee() :
             color: _ = color
         );
         var serviceGoveePayload = _ = new ServiceGoveePayload();
-        _ = serviceGoveePayload.Payload.Capability.Value = rgbValue;
+        _ = serviceGoveePayload.Payload.Capability.Value = _ = rgbValue;
         this.SendPayloads(
-            serviceGoveePayload
+            payload: _ = serviceGoveePayload
+        );
+    }
+    
+    internal void TurnOffLights()
+    {
+        var serviceGoveePayload = _ = new ServiceGoveePayload();
+        _ = serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.on_off";
+        _ = serviceGoveePayload.Payload.Capability.Instance = $"powerSwitch";
+        _ = serviceGoveePayload.Payload.Capability.Value    = _ = 0;
+        
+        this.SendPayloads(
+            payload: _ = serviceGoveePayload
+        );
+    }
+    
+    internal void TurnOnLights()
+    {
+        var serviceGoveePayload = _ = new ServiceGoveePayload();
+        _ = serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.on_off";
+        _ = serviceGoveePayload.Payload.Capability.Instance = $"powerSwitch";
+        _ = serviceGoveePayload.Payload.Capability.Value    = _ = 1;
+        
+        this.SendPayloads(
+            payload: _ = serviceGoveePayload
         );
     }
     

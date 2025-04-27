@@ -6,7 +6,9 @@ internal enum ServiceDatabaseTaskQueryType :
 {
     Start                     = 0U,
 
+    RetrieveGoveeData,
     RetrieveJoystickData,
     RetrieveJoystickLatest,
+    RetrieveListGoveeLights,
     RetrieveListJoystickUsers,
 }

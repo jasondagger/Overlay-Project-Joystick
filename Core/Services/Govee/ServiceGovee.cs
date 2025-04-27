@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using System.Text;
 using Godot;
 using Overlay.Core.Services.Godots;
@@ -6,6 +7,8 @@ using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.Govee.Payloads;
 using Overlay.Core.Tools;
 using System.Threading.Tasks;
+using Overlay.Core.Services.Databases.Tasks;
+using Overlay.Core.Services.Databases.Tasks.Retrieves;
 
 namespace Overlay.Core.Services.Govee;
 
@@ -14,6 +17,7 @@ internal sealed class ServiceGovee() :
 {
     Task IService.Setup()
     {
+        this.SubscribeToServiceDatabaseEvents();
         this.RetrieveResources();
         return _ = Task.CompletedTask;
     }
@@ -42,22 +46,39 @@ internal sealed class ServiceGovee() :
         );
     }
     
-    private const string             c_goveeAddress     = "https://openapi.api.govee.com/";
-    private const string             c_sku              = "H607C";
-    private const string             c_apiKey           = "8ac3d53e-b861-4b94-a59b-461918168427";
-    private static readonly string[] s_hardwareIds      =
-    [
-        "2A:A8:D8:7C:B4:47:41:D6",
-        "2A:E6:FA:FB:20:2E:71:B1",
-    ];
+    private const string          c_goveeAddress = "https://openapi.api.govee.com/";
+    private string                m_apiKey       = string.Empty;
+    private readonly List<string> m_hardwareIds  = [];
     
-    private ServiceGodotHttp         m_serviceGodotHttp = null;
+    private ServiceGodotHttp m_serviceGodotHttp = null;
 
     private static int ConvertColorToInt(
         Color color
     )
     {
         return ((color.R8 & 0xFF) << 16) | ((color.G8 & 0xFF) << 8) | ((color.B8 & 0xFF) << 0);
+    }
+
+    private void HandleServiceDatabaseRetrievedListGoveeLights(
+        ServiceDatabaseTaskRetrievedListGoveeLights lights    
+    )
+    {
+        var result = _ = lights.Result;
+        
+        foreach (var light in _ = result)
+        {
+            this.m_hardwareIds.Add(
+                item: _ = light.GoveeLight_Hardware_Id
+            );
+        }
+    }
+    
+    private void HandleServiceDatabaseRetrievedGoveeData(
+        ServiceDatabaseTaskRetrievedGoveeData goveeData    
+    )
+    {
+        var result        = _ = goveeData.Result;
+        _ = this.m_apiKey = _ = result.GoveeData_Api_Key;
     }
 
     private void RetrieveResources()
@@ -70,7 +91,7 @@ internal sealed class ServiceGovee() :
         ServiceGoveePayload payload
     )
     {
-        foreach (var hardwareId in _ = ServiceGovee.s_hardwareIds)
+        foreach (var hardwareId in _ = this.m_hardwareIds)
         {
             _ = payload.Payload.Device = _ = hardwareId;
             
@@ -81,7 +102,7 @@ internal sealed class ServiceGovee() :
             this.m_serviceGodotHttp.SendHttpRequest(
                 url:                     _ = $"{_ = ServiceGovee.c_goveeAddress}router/api/v1/device/control",
                 headers:                 [
-                    $"Govee-API-Key: {_ = ServiceGovee.c_apiKey}",
+                    $"Govee-API-Key: {_ = this.m_apiKey}",
                     $"Content-Type: application/json",
                 ],
                 method:                  _ = HttpClient.Method.Post,
@@ -97,5 +118,11 @@ internal sealed class ServiceGovee() :
                 }
             );
         }
+    }
+
+    private void SubscribeToServiceDatabaseEvents()
+    {
+        _ = ServiceDatabaseTaskEvents.RetrievedGoveeData       += this.HandleServiceDatabaseRetrievedGoveeData;
+        _ = ServiceDatabaseTaskEvents.RetrievedListGoveeLights += this.HandleServiceDatabaseRetrievedListGoveeLights;
     }
 }

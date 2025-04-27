@@ -28,6 +28,14 @@ internal static class ServiceDatabaseTaskQueries
 			ServiceDatabaseTaskQueries.Start
 		},
 		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveGoveeData,
+			ServiceDatabaseTaskQueries.RetrieveAsyncGoveeData
+		},
+		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveListGoveeLights,
+			ServiceDatabaseTaskQueries.RetrieveAsyncListGoveeLights
+		},
+		{
 			_ = ServiceDatabaseTaskQueryType.RetrieveJoystickData,
 			ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData
 		},
@@ -40,6 +48,24 @@ internal static class ServiceDatabaseTaskQueries
 			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers
 		},
 	};
+    
+    private static async Task RetrieveAsyncGoveeData()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveGoveeData;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData
+	    );
+    }
+    
+    private static async Task RetrieveAsyncListGoveeLights()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveListGoveeLights;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights
+	    );
+    }
     
     private static async Task RetrieveAsyncJoystickData()
     {
@@ -69,7 +95,10 @@ internal static class ServiceDatabaseTaskQueries
 	}
 
 	private static async Task Start()
-    {
+	{
+		await ServiceDatabaseTaskQueries.RetrieveAsyncGoveeData();
+		await ServiceDatabaseTaskQueries.RetrieveAsyncListGoveeLights();
+		
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData();
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatest();
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers();

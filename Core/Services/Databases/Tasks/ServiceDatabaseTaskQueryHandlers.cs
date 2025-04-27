@@ -10,6 +10,58 @@ namespace Overlay.Core.Services.Databases.Tasks;
 
 internal static class ServiceDatabaseTaskQueryHandlers
 {
+    internal static Task HandleExecuteQueryAsyncRetrievedGoveeData(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedGoveeData?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedGoveeData(
+                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseGoveeData>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+        
+        return _ = Task.CompletedTask;
+    }
+    
+    internal static async Task HandleExecuteQueryAsyncRetrievedListGoveeLights(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedListGoveeLights?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedListGoveeLights(
+                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseGoveeLight>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+    }
+    
     internal static Task HandleExecuteQueryAsyncRetrievedJoystickData(
         NpgsqlDataReader npgsqlDataReader
     )

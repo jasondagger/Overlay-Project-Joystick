@@ -13,18 +13,22 @@ internal sealed partial class NameplateLatestFollower() :
 {
     protected override void RegisterForJoystickEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed += this.HandleWebSocketPayloadStreamEventFollowed;
-        _ = ServiceDatabaseTaskEvents.RetrievedJoystickLatest    += this.HandleRetrievedJoystickLatest;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed           += this.HandleWebSocketPayloadStreamEventFollowed;
+        _ = ServiceDatabaseTaskEvents.RetrievedListJoystickLatestFollowers += this.HandleRetrievedJoystickLatestFollowers;
     }
     
-    private void HandleRetrievedJoystickLatest(
-        ServiceDatabaseTaskRetrievedJoystickLatest retrievedJoystickLatest
+    private void HandleRetrievedJoystickLatestFollowers(
+        ServiceDatabaseTaskRetrievedListJoystickLatestFollowers retrievedListJoystickLatestFollowers
     )
     {
-        var result = _ = retrievedJoystickLatest.Result;
-        this.m_names.Enqueue(
-            item: _ = result.JoystickLatest_Latest_Follower
-        );
+        var result = _ = retrievedListJoystickLatestFollowers.Result;
+
+        foreach (var joystickLatestFollower in _ = result)
+        {
+            this.m_names.Enqueue(
+                item: _ = joystickLatestFollower.JoystickLatest_Latest_Follower
+            );
+        }
         
         this.PlayNotification();
     }
@@ -36,11 +40,11 @@ internal sealed partial class NameplateLatestFollower() :
         var name = _ = messageMetadata.Who;
         
         ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestFollower,
+            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestFollower,
             serviceDatabaseTaskSqlParameters: 
             [
                 new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatest.JoystickLatest_Latest_Follower)}",
+                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatestFollower.JoystickLatest_Latest_Follower)}",
                     value:         _ = name
                 )
             ]

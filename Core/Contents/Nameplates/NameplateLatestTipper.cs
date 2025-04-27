@@ -13,18 +13,22 @@ internal sealed partial class NameplateLatestTipper() :
 {
     protected override void RegisterForJoystickEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped += this.HandleWebSocketPayloadStreamEventTipped;
-        _ = ServiceDatabaseTaskEvents.RetrievedJoystickLatest  += this.HandleRetrievedJoystickLatest;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped           += this.HandleWebSocketPayloadStreamEventTipped;
+        _ = ServiceDatabaseTaskEvents.RetrievedListJoystickLatestTippers += this.HandleRetrievedJoystickLatestTippers;
     }
     
-    private void HandleRetrievedJoystickLatest(
-        ServiceDatabaseTaskRetrievedJoystickLatest retrievedJoystickLatest
+    private void HandleRetrievedJoystickLatestTippers(
+        ServiceDatabaseTaskRetrievedListJoystickLatestTippers retrievedListJoystickLatestTippers
     )
     {
-        var result = _ = retrievedJoystickLatest.Result;
-        this.m_names.Enqueue(
-            item: _ = result.JoystickLatest_Latest_Tipper
-        );
+        var result = _ = retrievedListJoystickLatestTippers.Result;
+        
+        foreach (var joystickLatestTipper in _ = result)
+        {
+            this.m_names.Enqueue(
+                item: _ = joystickLatestTipper.JoystickLatest_Latest_Tipper
+            );
+        }
         
         this.PlayNotification();
     }
@@ -36,11 +40,11 @@ internal sealed partial class NameplateLatestTipper() :
         var name = _ = messageMetadata.Who;
         
         ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestTipper,
+            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestTipper,
             serviceDatabaseTaskSqlParameters: 
             [
                 new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatest.JoystickLatest_Latest_Tipper)}",
+                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatestTipper.JoystickLatest_Latest_Tipper)}",
                     value:         _ = name
                 )
             ]

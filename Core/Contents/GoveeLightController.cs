@@ -22,7 +22,7 @@ public sealed partial class GoveeLightController() :
         this.RetrieveResources();
     }
     
-    private const float               c_lightColorCooldownInSeconds = 1f;
+    private const float               c_lightColorCooldownInSeconds = 10f;
 
     private ServiceGovee              m_serviceGovee                = null;
     private ServicePastelInterpolator m_servicePastelInterpolator   = null;

@@ -89,15 +89,15 @@ internal static class ServiceDatabaseTaskQueryHandlers
         return _ = Task.CompletedTask;
     }
     
-    internal static Task HandleExecuteQueryAsyncRetrievedJoystickLatest(
+    internal static async Task HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers(
         NpgsqlDataReader npgsqlDataReader
     )
     {
         try
         {
-            ServiceDatabaseTaskEvents.RetrievedJoystickLatest?.Invoke(
-                obj: new ServiceDatabaseTaskRetrievedJoystickLatest(
-                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseJoystickLatest>(
+            ServiceDatabaseTaskEvents.RetrievedListJoystickLatestFollowers?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedListJoystickLatestFollowers(
+                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestFollower>(
                         npgsqlDataReader: _ = npgsqlDataReader
                     )
                 )
@@ -108,12 +108,60 @@ internal static class ServiceDatabaseTaskQueryHandlers
             ConsoleLogger.LogMessageError(
                 messageError: _ =
                     $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers)}() " +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers)}() " +
                     $"EXCEPTION: {_ = exception.Message}"
             );
         }
-        
-        return _ = Task.CompletedTask;
+    }
+    
+    internal static async Task HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedListJoystickLatestSubscribers?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedListJoystickLatestSubscribers(
+                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestSubscriber>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+    }
+    
+    internal static async Task HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedListJoystickLatestTippers?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedListJoystickLatestTippers(
+                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestTipper>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
     }
     
     internal static async Task HandleExecuteQueryAsyncRetrievedListJoystickUsers(

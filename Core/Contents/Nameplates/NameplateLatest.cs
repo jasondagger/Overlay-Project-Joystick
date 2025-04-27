@@ -11,7 +11,13 @@ internal sealed partial class NameplateLatest() :
     public override void _Ready()
     {
         ServiceDatabase.ExecuteTaskQuery(
-            serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.RetrieveJoystickLatest
+            serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.RetrieveListJoystickLatestFollowers
+        );
+        ServiceDatabase.ExecuteTaskQuery(
+            serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.RetrieveListJoystickLatestSubscribers
+        );
+        ServiceDatabase.ExecuteTaskQuery(
+            serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.RetrieveListJoystickLatestTippers
         );
     }
 }

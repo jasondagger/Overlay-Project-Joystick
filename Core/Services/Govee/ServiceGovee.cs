@@ -8,7 +8,6 @@ using Overlay.Core.Services.Govee.Payloads;
 using Overlay.Core.Tools;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Overlay.Core.Services.Govee;
 
@@ -21,17 +20,17 @@ internal sealed class ServiceGovee() :
         this.RetrieveResources();
         return _ = Task.CompletedTask;
     }
-
+    
     Task IService.Start()
     {
         return _ = Task.CompletedTask;
     }
-
+    
     Task IService.Stop()
     {
         return _ = Task.CompletedTask;
     }
-
+    
     internal void SetLightColor(
         Color color
     )
@@ -51,14 +50,14 @@ internal sealed class ServiceGovee() :
     private string                m_apiKey           = string.Empty;
     private readonly List<string> m_hardwareIds      = [];
     private ServiceGodotHttp      m_serviceGodotHttp = null;
-
+    
     private static int ConvertColorToInt(
         Color color
     )
     {
         return ((color.R8 & 0xFF) << 16) | ((color.G8 & 0xFF) << 8) | ((color.B8 & 0xFF) << 0);
     }
-
+    
     private void HandleServiceDatabaseRetrievedListGoveeLights(
         ServiceDatabaseTaskRetrievedListGoveeLights lights    
     )
@@ -80,13 +79,13 @@ internal sealed class ServiceGovee() :
         var result        = _ = goveeData.Result;
         _ = this.m_apiKey = _ = result.GoveeData_Api_Key;
     }
-
+    
     private void RetrieveResources()
     {
         var serviceGodots           = _ = Services.GetService<ServiceGodots>();
         _ = this.m_serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
     }
-
+    
     private void SendPayloads(
         ServiceGoveePayload payload
     )
@@ -114,12 +113,20 @@ internal sealed class ServiceGovee() :
                     byte[]   body
                 ) =>
                 {
-                    json = _ = Encoding.UTF8.GetString(body);
+                    if (responseCode >= 300)
+                    {
+                        ConsoleLogger.LogMessageError(
+                            messageError: _ =
+                                $"{_ = nameof(ServiceGovee)}." +
+                                $"{_ = nameof(ServiceGovee.SendPayloads)}() " +
+                                $"EXCEPTION: {_ = responseCode} error."
+                        );
+                    }
                 }
             );
         }
     }
-
+    
     private void SubscribeToServiceDatabaseEvents()
     {
         _ = ServiceDatabaseTaskEvents.RetrievedGoveeData       += this.HandleServiceDatabaseRetrievedGoveeData;

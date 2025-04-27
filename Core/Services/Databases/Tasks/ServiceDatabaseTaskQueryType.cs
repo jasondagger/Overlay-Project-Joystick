@@ -8,7 +8,9 @@ internal enum ServiceDatabaseTaskQueryType :
 
     RetrieveGoveeData,
     RetrieveJoystickData,
-    RetrieveJoystickLatest,
     RetrieveListGoveeLights,
+    RetrieveListJoystickLatestFollowers,
+    RetrieveListJoystickLatestSubscribers,
+    RetrieveListJoystickLatestTippers,
     RetrieveListJoystickUsers,
 }

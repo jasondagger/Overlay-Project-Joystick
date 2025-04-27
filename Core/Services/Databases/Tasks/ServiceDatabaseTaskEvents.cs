@@ -6,9 +6,11 @@ namespace Overlay.Core.Services.Databases.Tasks;
 
 internal static class ServiceDatabaseTaskEvents
 {
-    internal static Action<ServiceDatabaseTaskRetrievedGoveeData>         RetrievedGoveeData         { get; set; } = null;
-    internal static Action<ServiceDatabaseTaskRetrievedListGoveeLights>   RetrievedListGoveeLights   { get; set; } = null;
-    internal static Action<ServiceDatabaseTaskRetrievedListJoystickUsers> RetrievedListJoystickUsers { get; set; } = null;
-    internal static Action<ServiceDatabaseTaskRetrievedJoystickLatest>    RetrievedJoystickLatest    { get; set; } = null;
-    internal static Action<ServiceDatabaseTaskRetrievedJoystickData>      RetrievedJoystickData      { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedGoveeData>                     RetrievedGoveeData                     { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedJoystickData>                  RetrievedJoystickData                  { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedListGoveeLights>               RetrievedListGoveeLights               { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedListJoystickUsers>             RetrievedListJoystickUsers             { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedListJoystickLatestFollowers>   RetrievedListJoystickLatestFollowers   { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedListJoystickLatestSubscribers> RetrievedListJoystickLatestSubscribers { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedListJoystickLatestTippers>     RetrievedListJoystickLatestTippers     { get; set; } = null;
 }

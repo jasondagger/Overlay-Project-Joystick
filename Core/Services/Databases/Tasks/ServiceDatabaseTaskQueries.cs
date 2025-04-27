@@ -9,7 +9,7 @@ internal static class ServiceDatabaseTaskQueries
 {
     static ServiceDatabaseTaskQueries()
     {
-
+		
     }
 
     internal static async Task ExecuteAsyncQuery(
@@ -40,8 +40,16 @@ internal static class ServiceDatabaseTaskQueries
 			ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData
 		},
 		{
-			_ = ServiceDatabaseTaskQueryType.RetrieveJoystickLatest,
-			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatest
+			_ = ServiceDatabaseTaskQueryType.RetrieveListJoystickLatestFollowers,
+			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestFollowers
+		},
+		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveListJoystickLatestSubscribers,
+			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestSubscribers
+		},
+		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveListJoystickLatestTippers,
+			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestTippers
 		},
         {
 			_ = ServiceDatabaseTaskQueryType.RetrieveListJoystickUsers,
@@ -58,15 +66,6 @@ internal static class ServiceDatabaseTaskQueries
 	    );
     }
     
-    private static async Task RetrieveAsyncListGoveeLights()
-    {
-	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveListGoveeLights;
-	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
-		    npgsqlStatement:		  _ = npgsqlStatement,
-		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights
-	    );
-    }
-    
     private static async Task RetrieveAsyncJoystickData()
     {
 	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveJoystickData;
@@ -76,12 +75,39 @@ internal static class ServiceDatabaseTaskQueries
 	    );
     }
     
-    private static async Task RetrieveAsyncListJoystickLatest()
+    private static async Task RetrieveAsyncListGoveeLights()
     {
-	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveJoystickLatest;
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveListGoveeLights;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  _ = npgsqlStatement,
-		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickLatest
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights
+	    );
+    }
+    
+    private static async Task RetrieveAsyncListJoystickLatestFollowers()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestFollowers;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers
+	    );
+    }
+    
+    private static async Task RetrieveAsyncListJoystickLatestSubscribers()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestSubscribers;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers
+	    );
+    }
+    
+    private static async Task RetrieveAsyncListJoystickLatestTippers()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestTippers;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers
 	    );
     }
 
@@ -100,7 +126,9 @@ internal static class ServiceDatabaseTaskQueries
 		await ServiceDatabaseTaskQueries.RetrieveAsyncListGoveeLights();
 		
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData();
-	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatest();
+	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestFollowers();
+	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestSubscribers();
+	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestTippers();
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers();
 	}
 };

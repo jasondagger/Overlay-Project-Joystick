@@ -13,18 +13,22 @@ internal sealed partial class NameplateLatestSubscriber() :
 {
     protected override void RegisterForJoystickEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed += this.HandleWebSocketPayloadStreamEventSubscribed;
-        _ = ServiceDatabaseTaskEvents.RetrievedJoystickLatest      += this.HandleRetrievedJoystickLatest;
+        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed           += this.HandleWebSocketPayloadStreamEventSubscribed;
+        _ = ServiceDatabaseTaskEvents.RetrievedListJoystickLatestSubscribers += this.HandleRetrievedJoystickLatestSubscribers;
     }
     
-    private void HandleRetrievedJoystickLatest(
-        ServiceDatabaseTaskRetrievedJoystickLatest retrievedJoystickLatest
+    private void HandleRetrievedJoystickLatestSubscribers(
+        ServiceDatabaseTaskRetrievedListJoystickLatestSubscribers retrievedListJoystickLatestSubscribers
     )
     {
-        var result = _ = retrievedJoystickLatest.Result;
-        this.m_names.Enqueue(
-            item: _ = result.JoystickLatest_Latest_Subscriber
-        );
+        var result = _ = retrievedListJoystickLatestSubscribers.Result;
+
+        foreach (var joystickLatestSubscriber in _ = result)
+        {
+            this.m_names.Enqueue(
+                item: _ = joystickLatestSubscriber.JoystickLatest_Latest_Subscriber
+            );
+        }
         
         this.PlayNotification();
     }
@@ -36,11 +40,11 @@ internal sealed partial class NameplateLatestSubscriber() :
         var name = _ = messageMetadata.Who;
         
         ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestSubscriber,
+            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestSubscriber,
             serviceDatabaseTaskSqlParameters: 
             [
                 new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatest.JoystickLatest_Latest_Subscriber)}",
+                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}",
                     value:         _ = name
                 )
             ]

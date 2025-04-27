@@ -32,16 +32,16 @@ internal static class ServiceDatabaseTaskNonQueries
             ServiceDatabaseTaskNonQueries.AddAsyncJoystickUser
         },
         {
-            _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestFollower, 
-            ServiceDatabaseTaskNonQueries.UpdateJoystickLatestFollower
+            _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestFollower, 
+            ServiceDatabaseTaskNonQueries.AddJoystickLatestFollowerAsync
         },
         {
-            _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestSubscriber, 
-            ServiceDatabaseTaskNonQueries.UpdateJoystickLatestSubscriber
+            _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestSubscriber, 
+            ServiceDatabaseTaskNonQueries.AddJoystickLatestSubscriberAsync
         },
         {
-            _ = ServiceDatabaseTaskNonQueryType.UpdateJoystickLatestTipper, 
-            ServiceDatabaseTaskNonQueries.UpdateJoystickLatestTipper
+            _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestTipper, 
+            ServiceDatabaseTaskNonQueries.AddJoystickLatestTipperAsync
         },
 	};
 
@@ -64,39 +64,54 @@ internal static class ServiceDatabaseTaskNonQueries
 		);
     }
     
-    private static async Task UpdateJoystickLatestFollower(
+    private static async Task AddJoystickLatestFollowerAsync(
         List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters
     )
     {
-        var npgsqlStatement = _ = $"UPDATE JoystickLatest SET {serviceDatabaseTaskNpgsqlParameters[0].ParameterName} = '{serviceDatabaseTaskNpgsqlParameters[0].Value}'";
+        var npgsqlStatement = _ = 
+            $"INSERT INTO JoystickLatestFollower (" +
+            $"{_ = nameof(ServiceDatabaseJoystickLatestFollower.JoystickLatest_Latest_Follower)}" +
+            $") VALUES (" +
+            $"@{_ = nameof(ServiceDatabaseJoystickLatestFollower.JoystickLatest_Latest_Follower)}" +
+            $")";
         
         await ServiceDatabaseTaskLogic.ExecuteNonQueryAsync(
             npgsqlStatement:                     _ = npgsqlStatement,
-            serviceDatabaseTaskNpgsqlParameters: []
+            serviceDatabaseTaskNpgsqlParameters: _ = serviceDatabaseTaskNpgsqlParameters
         );
     }
     
-    private static async Task UpdateJoystickLatestSubscriber(
+    private static async Task AddJoystickLatestSubscriberAsync(
         List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters
     )
     {
-        var npgsqlStatement = _ = $"UPDATE JoystickLatest SET {serviceDatabaseTaskNpgsqlParameters[0].ParameterName} = '{serviceDatabaseTaskNpgsqlParameters[0].Value}'";
+        var npgsqlStatement = _ = 
+            $"INSERT INTO JoystickLatestSubscriber (" +
+            $"{_ = nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}" +
+            $") VALUES (" +
+            $"@{_ = nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}" +
+            $")";
         
         await ServiceDatabaseTaskLogic.ExecuteNonQueryAsync(
             npgsqlStatement:                     _ = npgsqlStatement,
-            serviceDatabaseTaskNpgsqlParameters: []
+            serviceDatabaseTaskNpgsqlParameters: _ = serviceDatabaseTaskNpgsqlParameters
         );
     }
     
-    private static async Task UpdateJoystickLatestTipper(
+    private static async Task AddJoystickLatestTipperAsync(
         List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters
     )
     {
-        var npgsqlStatement = _ = $"UPDATE JoystickLatest SET {serviceDatabaseTaskNpgsqlParameters[0].ParameterName} = '{serviceDatabaseTaskNpgsqlParameters[0].Value}'";
+        var npgsqlStatement = _ = 
+            $"INSERT INTO JoystickLatestTipper (" +
+            $"{_ = nameof(ServiceDatabaseJoystickLatestTipper.JoystickLatest_Latest_Tipper)}" +
+            $") VALUES (" +
+            $"@{_ = nameof(ServiceDatabaseJoystickLatestTipper.JoystickLatest_Latest_Tipper)}" +
+            $")";
         
         await ServiceDatabaseTaskLogic.ExecuteNonQueryAsync(
             npgsqlStatement:                     _ = npgsqlStatement,
-            serviceDatabaseTaskNpgsqlParameters: []
+            serviceDatabaseTaskNpgsqlParameters: _ = serviceDatabaseTaskNpgsqlParameters
         );
     }
 }

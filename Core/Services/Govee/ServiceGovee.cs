@@ -1,14 +1,14 @@
 
-using System.Collections.Generic;
-using System.Text;
 using Godot;
+using Overlay.Core.Services.Databases.Tasks;
+using Overlay.Core.Services.Databases.Tasks.Retrieves;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.Govee.Payloads;
 using Overlay.Core.Tools;
 using System.Threading.Tasks;
-using Overlay.Core.Services.Databases.Tasks;
-using Overlay.Core.Services.Databases.Tasks.Retrieves;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Overlay.Core.Services.Govee;
 
@@ -46,11 +46,11 @@ internal sealed class ServiceGovee() :
         );
     }
     
-    private const string          c_goveeAddress = "https://openapi.api.govee.com/";
-    private string                m_apiKey       = string.Empty;
-    private readonly List<string> m_hardwareIds  = [];
+    private const string          c_goveeAddress     = "https://openapi.api.govee.com/";
     
-    private ServiceGodotHttp m_serviceGodotHttp = null;
+    private string                m_apiKey           = string.Empty;
+    private readonly List<string> m_hardwareIds      = [];
+    private ServiceGodotHttp      m_serviceGodotHttp = null;
 
     private static int ConvertColorToInt(
         Color color

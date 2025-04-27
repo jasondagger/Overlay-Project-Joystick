@@ -3,9 +3,6 @@
 
 shader_type canvas_item;
 
-// Uncomment the following line if you are using a version of Godot before 4:
-//	const float PI = 3.14159;
-
 // Comment out the following line if you are not applying the shader to a ColorRect:
 uniform vec2 dimensions = vec2(1152.0, 648.0); // Resolution of ColorRect in pixels
 
@@ -21,7 +18,6 @@ uniform float wave_speed : hint_range(0.0, 2.0, 0.1) = 0.5;
 uniform float wave_rotation : hint_range(-1.0, 1.0, 0.1) = 1.0;
 uniform vec4 color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 
-// Remove the below reference to ': source_color, filter_nearest_mipmap' if you are using a version of Godot before 4.0:
 uniform sampler2D particle_texture : source_color, filter_nearest_mipmap;
 
 float greater_than(float x, float y) {

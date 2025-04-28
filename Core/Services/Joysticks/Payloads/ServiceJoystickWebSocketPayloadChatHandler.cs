@@ -1,8 +1,4 @@
 
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using Godot;
 using Overlay.Core.Contents;
 using Overlay.Core.Contents.Chats;
@@ -11,6 +7,9 @@ using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.PastelInterpolators;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
@@ -40,6 +39,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     private const string                    c_tipCommand                         = $"!tip";
     private const int                       c_commandRollTheDiceDefaultParameter = 100;
 
+    private static readonly HashSet<string> s_subscribersWhoUsedLightCommand     = [];
     private static readonly HashSet<string> s_streamersShoutedOut                = [
         _ = ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername
     ];
@@ -81,6 +81,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     }
 
     private static void HandleBotCommandLights(
+        string username,
         string parameters,
         bool   isStreamer,
         bool   isSubscriber
@@ -98,6 +99,19 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             );
             return;
         }
+
+        if (
+            _ = isStreamer is false &&
+            ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedLightCommand.Contains(
+                item: _ = username
+            )
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !lights usage - subscribers can use this only once per stream."
+            );
+            return;
+        }
         
         if (
             string.IsNullOrEmpty(
@@ -106,7 +120,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !lights parameter - the following parameters are valid: on/off or a color."
+                message: _ = $"Invalid !lights parameter - the following parameters are valid: color/off."
             );
             return;
         }
@@ -114,7 +128,6 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var commandSplit = _ = parameters.Split(
             separator: _ = ' '
         );
-        
         if (
             commandSplit.Length > 1
         )
@@ -128,10 +141,6 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var command = _ = commandSplit[0].ToLower();
         switch (_ = command)
         {
-            case "on":
-                GoveeLightController.Instance.TurnOnLights();
-                break;
-                
             case "off":
                 GoveeLightController.Instance.TurnOffLights();
                 break;
@@ -226,6 +235,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 );
                 break;
         }
+
+        ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedLightCommand.Add(
+            item: _ = username
+        );
     }
     
     private static void HandleBotCommandRockPaperScissors(
@@ -247,12 +260,6 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
         
-        string[] choices =
-        [
-            "!paper",
-            "!rock",
-            "!scissors",
-        ];
         string[] icons =
         [
             "📄",
@@ -263,32 +270,12 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var random = _ = new RandomNumberGenerator();
         var index  = _ = random.RandiRange(
             from: _ = 0,
-            to:   _ = choices.Length - 1
+            to:   _ = icons.Length - 1
         );
         
-        var choice = _ = choices[index];
-        if (choice == command)
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"{_ = icons[index]}"
-            );
-        }
-        else if (
-            (choice == "!paper"    && command == "!rock")     ||
-            (choice == "!rock"     && command == "!scissors") ||
-            (choice == "!scissors" && command == "!paper")
-        )
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"{_ = icons[index]}"
-            );
-        }
-        else
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"{_ = icons[index]}"
-            );
-        }
+        serviceJoystickBot.SendChatMessage(
+            message: _ = $"{_ = icons[index]}"
+        );
     }
     
     private static void HandleBotCommandRollTheDice(
@@ -381,6 +368,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         {
             case "!lights":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLights(
+                    username:     _ = username,
                     parameters:   _ = parameters,
                     isStreamer:   _ = isStreamer,
                     isSubscriber: _ = isSubscriber

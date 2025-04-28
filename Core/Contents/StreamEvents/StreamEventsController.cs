@@ -186,7 +186,7 @@ internal sealed partial class StreamEventsController() :
             case "Titty Jiggle":
             case "Toy In - 5 Minute(s)":
             case "Toy In - 10 Minute(s)":
-            case "Turn On Light":
+            case "Turn On Ring Light":
                 StreamEventsTipMenuSpice.HandleTipMenuItem(
                     tipMenuItem: _ = tipMenuItem
                 );
@@ -205,6 +205,7 @@ internal sealed partial class StreamEventsController() :
             case "Set Light Color Turquoise":
             case "Set Light Color White":
             case "Set Light Color Yellow":
+            case "Turn Off Lights":
                 StreamEventsTipMenuLights.HandleTipMenuItem(
                     tipMenuItem: _ = tipMenuItem
                 );

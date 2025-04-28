@@ -92,6 +92,10 @@ internal static class StreamEventsTipMenuLights
                 );
                 break;
             
+            case "Turn Off Lights":
+                GoveeLightController.Instance.TurnOffLights();
+                break;
+            
             default:
                 ConsoleLogger.LogMessage(
                     message: _ = 

@@ -104,8 +104,8 @@ internal static class StreamEventsTipMenuSpice
                     lengthInMinutes: _ = 10
                 );
                 break;
-            case "Turn On Light":
-                StreamEventsTipMenuSpice.HandleTurnOnLight();
+            case "Turn On Ring Light":
+                StreamEventsTipMenuSpice.HandleTurnOnRingLight();
                 break;
             
             default:
@@ -306,7 +306,7 @@ internal static class StreamEventsTipMenuSpice
         }
     }
 
-    private static void HandleTurnOnLight()
+    private static void HandleTurnOnRingLight()
     {
         var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
         var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();

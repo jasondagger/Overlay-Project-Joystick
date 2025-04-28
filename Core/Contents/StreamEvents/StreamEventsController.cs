@@ -133,7 +133,7 @@ internal sealed partial class StreamEventsController() :
         {
             case "":
                 StreamEventsController.PlayTipSoundEffect();
-                return;
+                break;
                 
             case "Ohai":
             case "Nice Smile!":

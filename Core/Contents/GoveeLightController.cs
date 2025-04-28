@@ -67,7 +67,15 @@ public sealed partial class GoveeLightController() :
     
     internal void TurnOnLights()
     {
-        this.m_serviceGovee.TurnOnLights();
+        _ = this.m_lightColorElapsed = _ = 0f;
+        _ = this.m_currentColorType  = _ = ServicePastelInterpolator.ColorType.White;
+        
+        var color = _ = ServicePastelInterpolator.GetColorByColorType(
+            colorType: _ = this.m_currentColorType
+        );
+        this.m_serviceGovee.SetLightColor(
+            color: _ = color
+        );
     }
     
     internal static GoveeLightController        Instance                      { get; private set; }

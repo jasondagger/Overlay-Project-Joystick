@@ -192,6 +192,24 @@ internal sealed partial class StreamEventsController() :
                 );
                 break;
             
+            case "Set Light Color Blue":
+            case "Set Light Color Cyan":
+            case "Set Light Color Green":
+            case "Set Light Color Lime":
+            case "Set Light Color Magenta":
+            case "Set Light Color Orange":
+            case "Set Light Color Pink":
+            case "Set Light Color Purple":
+            case "Set Light Color Red":
+            case "Set Light Color Teal":
+            case "Set Light Color Turquoise":
+            case "Set Light Color White":
+            case "Set Light Color Yellow":
+                StreamEventsTipMenuLights.HandleTipMenuItem(
+                    tipMenuItem: _ = tipMenuItem
+                );
+                break;
+            
             case "Edge Control Link - 1 Minute(s)":
             case "Edge Control Link - 2 Minute(s)":
             case "Edge Control Link - 5 Minute(s)":

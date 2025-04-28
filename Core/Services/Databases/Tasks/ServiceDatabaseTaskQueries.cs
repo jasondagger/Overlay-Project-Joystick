@@ -55,6 +55,10 @@ internal static class ServiceDatabaseTaskQueries
 			_ = ServiceDatabaseTaskQueryType.RetrieveListJoystickUsers,
 			ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers
 		},
+		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveLovenseData,
+			ServiceDatabaseTaskQueries.RetrieveAsyncLovenseData
+		},
 	};
     
     private static async Task RetrieveAsyncGoveeData()
@@ -119,6 +123,15 @@ internal static class ServiceDatabaseTaskQueries
 			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers
 		);
 	}
+	
+	private static async Task RetrieveAsyncLovenseData()
+	{
+		var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveLovenseData;
+		await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+			npgsqlStatement:		  _ = npgsqlStatement,
+			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData
+		);
+	}
 
 	private static async Task Start()
 	{
@@ -126,9 +139,8 @@ internal static class ServiceDatabaseTaskQueries
 		await ServiceDatabaseTaskQueries.RetrieveAsyncListGoveeLights();
 		
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncJoystickData();
-	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestFollowers();
-	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestSubscribers();
-	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickLatestTippers();
 	    await ServiceDatabaseTaskQueries.RetrieveAsyncListJoystickUsers();
+
+	    await ServiceDatabaseTaskQueries.RetrieveAsyncLovenseData();
 	}
 };

@@ -57,18 +57,6 @@ internal sealed class ServiceGovee() :
         );
     }
     
-    internal void TurnOnLights()
-    {
-        var serviceGoveePayload = _ = new ServiceGoveePayload();
-        _ = serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.on_off";
-        _ = serviceGoveePayload.Payload.Capability.Instance = $"powerSwitch";
-        _ = serviceGoveePayload.Payload.Capability.Value    = _ = 1;
-        
-        this.SendPayloads(
-            payload: _ = serviceGoveePayload
-        );
-    }
-    
     private const string          c_goveeAddress     = "https://openapi.api.govee.com/";
     
     private string                m_apiKey           = string.Empty;

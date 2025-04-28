@@ -188,4 +188,31 @@ internal static class ServiceDatabaseTaskQueryHandlers
             );
         }
     }
+    
+    internal static Task HandleExecuteQueryAsyncRetrievedLovenseData(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedLovenseData?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedLovenseData(
+                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseLovenseData>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+        
+        return _ = Task.CompletedTask;
+    }
 }

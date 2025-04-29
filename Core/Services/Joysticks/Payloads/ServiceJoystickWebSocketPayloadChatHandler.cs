@@ -414,83 +414,31 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
 
-        // todo: uncomment region when new joystick is rolled out with the value
-        //var isSiteStreamer = _ = author.IsSiteStreamer;
-        //if (isSiteStreamer is false)
-        //{
-        //    return;
-        //}
-        //
-        //ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
-        //    item: _ = username
-        //);
-        //        
-        //string[] messages =
-        //[
-        //    $"Oh shit, it's {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-        //    $"Holy fuck, a wild {_ = username} appeared! Go catch their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-        //    $"Shoutout to {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-        //];
-        //var random = _ = new RandomNumberGenerator();
-        //var index  = _ = random.RandiRange(
-        //    from: _ = 0,
-        //    to:   _ = messages.Length - 1
-        //);
-        //
-        //var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-        //serviceJoystickBot.SendChatMessage(
-        //    message: _ = messages[index]
-        //);
+        var isContentCreator = _ = author.IsContentCreator;
+        if (_ = isContentCreator is false)
+        {
+            return;
+        }
         
-        var serviceGodots    = _ = Services.GetService<ServiceGodots>();
-        var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
-        
-        serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-            headers:                 [],
-            method:                  _ = HttpClient.Method.Get,
-            json:                    _ = string.Empty,
-            requestCompletedHandler: (
-                long     result,
-                long     responseCode,
-                string[] headers,
-                byte[]   body
-            ) =>
-            {
-                var bodyAsString = _ = Encoding.UTF8.GetString(
-                    bytes: _ = body
-                );
-
-                if (
-                    _ = bodyAsString.Contains(
-                        value: _ = $"<title>{username}"
-                    ) is false
-                )
-                {
-                    return;
-                }
-
-                ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
-                    item: _ = username
-                );
+        ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
+            item: _ = username
+        );
                 
-                string[] messages =
-                [
-                    $"Oh shit, it's {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-                    $"Holy fuck, a wild {_ = username} appeared! Go catch their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-                    $"Shoutout to {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-                ];
-                var random = _ = new RandomNumberGenerator();
-                var index  = _ = random.RandiRange(
-                    from: _ = 0,
-                    to:   _ = messages.Length - 1
-                );
-
-                var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-                serviceJoystickBot.SendChatMessage(
-                    message: _ = messages[index]
-                );
-            }
+        string[] messages =
+        [
+            $"Oh shit, it's {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+            $"Holy fuck, a wild {_ = username} appeared! Go catch their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+            $"Shoutout to {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+        ];
+        var random = _ = new RandomNumberGenerator();
+        var index  = _ = random.RandiRange(
+            from: _ = 0,
+            to:   _ = messages.Length - 1
+        );
+        
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        serviceJoystickBot.SendChatMessage(
+            message: _ = messages[index]
         );
     }
     

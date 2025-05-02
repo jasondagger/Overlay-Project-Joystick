@@ -16,6 +16,15 @@ internal sealed partial class ServiceGodotHttp() :
         this.ProcessHttpRequests();
     }
     
+    internal static bool IsResponseCodeSuccessful(
+        long responseCode
+    )
+    {
+        return _ =
+            responseCode is >= ServiceGodotHttp.c_errorCodeSeriesSuccess 
+                and < ServiceGodotHttp.c_errorCodeSeriesRedirection;
+    }
+    
     internal void SendHttpRequest(
         string                      url,
         List<string>                headers,
@@ -56,15 +65,6 @@ internal sealed partial class ServiceGodotHttp() :
     private const uint                                  c_errorCodeSeriesSuccess     = 200U;
     private readonly Queue<ServiceGodotHttpRequestData> m_httpRequestDatas           = new();
     private readonly object                             m_lock                       = new();
-    
-    private static bool IsResponseCodeSuccessful(
-        long responseCode
-    )
-    {
-        return _ =
-            responseCode is  >= ServiceGodotHttp.c_errorCodeSeriesSuccess 
-                         and <  ServiceGodotHttp.c_errorCodeSeriesRedirection;
-    }
 
     private void ProcessHttpRequests()
     {

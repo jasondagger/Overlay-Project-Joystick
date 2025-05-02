@@ -10,6 +10,7 @@ using Overlay.Core.Services.PastelInterpolators;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Overlay.Core.Services.Spotifies;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
@@ -34,13 +35,14 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         );
     }
     
-    private const string                    c_joystickUserStreamLinkPrefix       = "https://joystick.tv/u/";
-    private const string                    c_streamerUsername                   = $"SmoothDagger";
-    private const string                    c_tipCommand                         = $"!tip";
-    private const int                       c_commandRollTheDiceDefaultParameter = 100;
+    private const string                    c_joystickUserStreamLinkPrefix         = "https://joystick.tv/u/";
+    private const string                    c_streamerUsername                     = $"SmoothDagger";
+    private const string                    c_tipCommand                           = $"!tip";
+    private const int                       c_commandRollTheDiceDefaultParameter   = 100;
 
-    private static readonly HashSet<string> s_subscribersWhoUsedLightCommand     = [];
-    private static readonly HashSet<string> s_streamersShoutedOut                = [
+    private static readonly HashSet<string> s_subscribersWhoUsedLightCommand       = [];
+    private static readonly HashSet<string> s_subscribersWhoUsedSongRequestCommand = [];
+    private static readonly HashSet<string> s_streamersShoutedOut                  = [
         _ = ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername
     ];
     
@@ -120,7 +122,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !lights parameter - the following parameters are valid: color/off."
+                message: _ = $"Invalid !lights parameter - the following parameters are valid: [color/off]."
             );
             return;
         }
@@ -338,6 +340,61 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             message: _ = $"🎲 {_ = username} rolled a {_ = randomValue} out of {_ = value}! 🎲"
         );
     }
+
+    private static void HandleBotCommandSongRequest(
+        string username,
+        string parameters,
+        bool   isStreamer,
+        bool   isSubscriber
+    )
+    {
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+
+        if (
+            _ = isStreamer is false &&
+            isSubscriber is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !songrequest user - only subscribers & SmoothDagger have access to this command."
+            );
+            return;
+        }
+
+        if (
+            _ = isStreamer is false &&
+                ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Contains(
+                    item: _ = username
+                )
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !songrequest usage - subscribers can use this only once per stream."
+            );
+            return;
+        }
+        
+        if (
+            string.IsNullOrEmpty(
+                value: _ = parameters
+            ) is true
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !songrequest parameter - the following parameters are valid: [name of song]."
+            );
+            return;
+        }
+
+        var serviceSpotify = Services.GetService<ServiceSpotify>();
+        //serviceSpotify.RequestTrackQueueBySearchTerms(
+        //    searchParameters: _ = parameters
+        //);
+        
+        ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Add(
+            item: _ = username
+        );
+    }
     
     private static void HandleBotCommands(
         ServiceJoystickWebSocketPayloadMessage payloadMessage
@@ -391,6 +448,17 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandRollTheDice(
                     username:   _ = username,
                     parameters: _ = parameters
+                );
+                break;
+            
+            case "!request":
+            case "!songrequest":
+            case "!sr":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandSongRequest(
+                    username:     _ = username,
+                    parameters:   _ = parameters,
+                    isStreamer:   _ = isStreamer,
+                    isSubscriber: _ = isSubscriber
                 );
                 break;
             

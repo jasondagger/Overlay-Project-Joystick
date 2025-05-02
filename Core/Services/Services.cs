@@ -12,6 +12,7 @@ using Overlay.Core.Services.Govee;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.Lovense;
 using Overlay.Core.Services.OBS;
+using Overlay.Core.Services.Spotifies;
 
 namespace Overlay.Core.Services;
 
@@ -86,6 +87,7 @@ internal static class Services
         { _ = typeof(ServiceLovense),            _ = new ServiceLovense()            },
         { _ = typeof(ServiceOBS),                _ = new ServiceOBS()                },
         { _ = typeof(ServicePastelInterpolator), _ = new ServicePastelInterpolator() },
+        { _ = typeof(ServiceSpotify),            _ = new ServiceSpotify()            },
         { _ = typeof(ServiceStreamStates),       _ = new ServiceStreamStates()       },
 	};
 }

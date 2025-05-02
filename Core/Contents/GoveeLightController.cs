@@ -84,7 +84,7 @@ public sealed partial class GoveeLightController() :
 
     private ServiceGovee                        m_serviceGovee                = null;
     private ServicePastelInterpolator           m_servicePastelInterpolator   = null;
-    private ServicePastelInterpolator.ColorType m_currentColorType            = _ = ServicePastelInterpolator.ColorType.Pastel;
+    private ServicePastelInterpolator.ColorType m_currentColorType            = _ = ServicePastelInterpolator.ColorType.White;
     private float                               m_lightColorElapsed           = _ = 0f;
 
     private void RetrieveResources()

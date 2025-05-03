@@ -387,9 +387,9 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         }
 
         var serviceSpotify = Services.GetService<ServiceSpotify>();
-        //serviceSpotify.RequestTrackQueueBySearchTerms(
-        //    searchParameters: _ = parameters
-        //);
+        serviceSpotify.RequestTrackQueueBySearchTerms(
+            searchParameters: _ = parameters
+        );
         
         ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Add(
             item: _ = username

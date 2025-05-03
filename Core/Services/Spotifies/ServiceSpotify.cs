@@ -34,12 +34,11 @@ public sealed partial class ServiceSpotify :
         return _ = Task.CompletedTask;
     }
 
-    private const string                 c_authorizationCode = "AQAvQ63vU3X5guTzivywl3-CqF5g7ETZVZ513VUUpGhpeGezU1SBeXgrYZ091LpSDecYW1i3kmaqfWjrin340DCvjmhm5SEhX6Mgcgm64Os2ZeDbbnaZfq2F8bb9bWGvIjk8CH10CLJELbDenwdt7xHk-5Cw_MvusNi9pWfle3Bj5T-clvvGAyGlrVQscIGY0NZEWoJ4SRKeIczQdWFpBw571q2NYPe6cbl9jDIOh4SzSiKvLNNTx3Xp0g7Hu5_3FxBdI2libvSygIBE8HQXJAHjWqMH";
+    private const string                 c_authorizationCode = "AQA2Kz6NxbmntR2cRmYcP67H0PqcCea4Qw516G-YFl9-XrYse-cNaULNOzusforTz5hq_lhB7Kz4mdEEjp1Uk-oNT_dVGKv6SKpqC4Q8DgSSSvEKwWTslzUDIsBmpvGeVqABZ75R5kfrerqjDgko5MIJ7sQ_ji7bfGvg4LdzvtPBSJy28NopzYVJu5YHYWNNbDM_D8c9eBUK5mf7ZcUqMp3tJnyK0IquyIvbMSCdKTRd4Ut7MB5qRBeA133f-fTqs2Tai65jfosxbAha4pLQo1QJif7E";
     private const string                 c_uriAccessToken    = "https://accounts.spotify.com/api/token";
     private const string                 c_uriApi            = "https://api.spotify.com/v1";
     private const string                 c_uriRedirect       = "http://127.0.0.1:8888/callback";
     private const string                 c_userAccessScopes  = "user-modify-playback-state user-read-currently-playing user-read-playback-state";
-    private const string                 c_refreshToken     = "AQDTGMYa6MkXzFEHIbtM8ckrtWam-cSCWFO1sOorKTMhjSJCMVWj2hrSwa_os4vQfhLENzT-pG0TLr9Y69AewEj4z8jM-Pl_IIaIZ-4jlX7srBVbkweIIi4CQ757tyeEhiU";
     
     private Queue<ServiceSpotifyRequest> m_requestQueue      = new();
     private ServiceGodotHttp             m_serviceGodotHttp  = null;
@@ -58,6 +57,7 @@ public sealed partial class ServiceSpotify :
         _ = this.m_accessToken.AccessToken  = _ = result.SpotifyData_Access_Token;
         _ = this.m_accessToken.RefreshToken = _ = result.SpotifyData_Refresh_Token;
         
+        //this.RequestUserAuthorization();
         this.RequestAccessToken();
     }
     
@@ -76,13 +76,28 @@ public sealed partial class ServiceSpotify :
         {
             return;
         }
+
+        var json = _ = Encoding.UTF8.GetString(
+            bytes: _ = body,
+            index: _ = 0,
+            count: _ = body.Length
+        );
+        var accessToken = _ = JsonHelper.Deserialize<SpotifyResponseAccessToken>(
+            json: _ = json
+        );
         
-        _ = this.m_accessToken = _ = JsonHelper.Deserialize<SpotifyResponseAccessToken>(
-            json: _ = Encoding.UTF8.GetString(
-                bytes: _ = body,
-                index: _ = 0,
-                count: _ = body.Length
-            )
+        _ = this.m_accessToken.AccessToken = accessToken.AccessToken;
+
+        _ = Task.Run(
+            function:
+            async () =>
+            {
+                await Task.Delay(
+                    millisecondsDelay: _ = 3500000
+                );
+                
+                this.RequestAccessToken();
+            }
         );
     }
     
@@ -204,8 +219,25 @@ public sealed partial class ServiceSpotify :
             }
         );
     }*/
-
+    
     private void RequestAccessToken()
+    {
+        var headers = new List<string>()
+        {
+            $"content-type: application/x-www-form-urlencoded",
+            $"Authorization: Basic {_ = Convert.ToBase64String(inArray: _ = Encoding.UTF8.GetBytes(s: _ = $"{_ = this.m_clientId}:{_ = this.m_clientSecret}"))}",
+        };
+        this.m_serviceGodotHttp.SendHttpRequest(
+            url:                     _ = $"{_ = ServiceSpotify.c_uriAccessToken}",
+            headers:                 _ = headers,
+            method:                  _ = HttpClient.Method.Post,
+            json:                    _ = $"grant_type=refresh_token&&" +
+                                         $"refresh_token={_ = this.m_accessToken.RefreshToken}",
+            requestCompletedHandler: this.OnRequestAccessTokenCompleted
+        );
+    }
+
+    private void RequestAccessTokenOld()
     {
         var headers = new List<string>()
         {
@@ -240,7 +272,7 @@ public sealed partial class ServiceSpotify :
         );
     }
     
-    private void RequestTrackQueueBySearchTerms(
+    internal void RequestTrackQueueBySearchTerms(
         string searchParameters
     )
     {

@@ -33,6 +33,24 @@ public sealed partial class ServiceSpotify :
     {
         return _ = Task.CompletedTask;
     }
+    
+    internal void RequestTrackQueueBySearchTerms(
+        string searchParameters
+    )
+    {
+        var headers = _ = new List<string>()
+        {
+            $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
+        };
+        var uriSearchParameters = _ = searchParameters.Replace(' ', '+');
+        this.m_serviceGodotHttp.SendHttpRequest(
+            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/search?q={_ = uriSearchParameters}&type=track&limit=1&offset=0",
+            headers:                 _ = headers,
+            method:                  _ = HttpClient.Method.Get,
+            json:                    _ = string.Empty,
+            requestCompletedHandler: this.OnRequestTrackSearchCompleted
+        );
+    }
 
     private const string                 c_authorizationCode = "AQA2Kz6NxbmntR2cRmYcP67H0PqcCea4Qw516G-YFl9-XrYse-cNaULNOzusforTz5hq_lhB7Kz4mdEEjp1Uk-oNT_dVGKv6SKpqC4Q8DgSSSvEKwWTslzUDIsBmpvGeVqABZ75R5kfrerqjDgko5MIJ7sQ_ji7bfGvg4LdzvtPBSJy28NopzYVJu5YHYWNNbDM_D8c9eBUK5mf7ZcUqMp3tJnyK0IquyIvbMSCdKTRd4Ut7MB5qRBeA133f-fTqs2Tai65jfosxbAha4pLQo1QJif7E";
     private const string                 c_uriAccessToken    = "https://accounts.spotify.com/api/token";
@@ -269,23 +287,6 @@ public sealed partial class ServiceSpotify :
             method:                  HttpClient.Method.Post,
             json:                    string.Empty,
             requestCompletedHandler: this.OnRequestTrackQueueCompleted
-        );
-    }
-    
-    internal void RequestTrackQueueBySearchTerms(
-        string searchParameters
-    )
-    {
-        var headers = _ = new List<string>()
-        {
-            $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
-        };
-        this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/search?q={_ = Uri.EscapeDataString(stringToEscape: _ = searchParameters)}&type=track&limit=1",
-            headers:                 _ = headers,
-            method:                  _ = HttpClient.Method.Get,
-            json:                    _ = string.Empty,
-            requestCompletedHandler: this.OnRequestTrackSearchCompleted
         );
     }
     

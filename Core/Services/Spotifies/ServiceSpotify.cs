@@ -43,7 +43,7 @@ public sealed partial class ServiceSpotify :
             $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
         };
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/search?q={_ = Uri.EscapeDataString(stringToEscape: _ = searchParameters)}&type=track&limit=1",
+            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/search?q={_ = Uri.EscapeDataString(stringToEscape: _ = searchParameters)}&type=track&limit=10",
             headers:                 _ = headers,
             method:                  _ = HttpClient.Method.Get,
             json:                    _ = string.Empty,

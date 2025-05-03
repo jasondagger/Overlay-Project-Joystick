@@ -14,4 +14,5 @@ internal static class ServiceDatabaseTaskEvents
     internal static Action<ServiceDatabaseTaskRetrievedListJoystickLatestSubscribers> RetrievedListJoystickLatestSubscribers { get; set; } = null;
     internal static Action<ServiceDatabaseTaskRetrievedListJoystickLatestTippers>     RetrievedListJoystickLatestTippers     { get; set; } = null;
     internal static Action<ServiceDatabaseTaskRetrievedLovenseData>                   RetrievedLovenseData                   { get; set; } = null;
+    internal static Action<ServiceDatabaseTaskRetrievedSpotifyData>                   RetrievedSpotifyData                   { get; set; } = null;
 }

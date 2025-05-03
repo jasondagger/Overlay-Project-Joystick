@@ -20,4 +20,6 @@ internal static class ServiceDatabaseTaskQueryStatements
 	internal const string           RetrieveListJoystickUsers             = $"SELECT * FROM JoystickUsers";
 	
 	internal const string           RetrieveLovenseData                   = $"SELECT * FROM LovenseData LIMIT 1";
+	
+	internal const string           RetrieveSpotifyData                   = $"SELECT * FROM SpotifyData LIMIT 1";
 }

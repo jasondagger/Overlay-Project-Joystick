@@ -59,6 +59,10 @@ internal static class ServiceDatabaseTaskQueries
 			_ = ServiceDatabaseTaskQueryType.RetrieveLovenseData,
 			ServiceDatabaseTaskQueries.RetrieveAsyncLovenseData
 		},
+		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveSpotifyData,
+			ServiceDatabaseTaskQueries.RetrieveAsyncSpotifyData
+		},
 	};
     
     private static async Task RetrieveAsyncGoveeData()
@@ -130,6 +134,15 @@ internal static class ServiceDatabaseTaskQueries
 		await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 			npgsqlStatement:		  _ = npgsqlStatement,
 			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData
+		);
+	}
+	
+	private static async Task RetrieveAsyncSpotifyData()
+	{
+		var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveSpotifyData;
+		await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+			npgsqlStatement:		  _ = npgsqlStatement,
+			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedSpotifyData
 		);
 	}
 

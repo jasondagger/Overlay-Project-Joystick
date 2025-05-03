@@ -215,4 +215,32 @@ internal static class ServiceDatabaseTaskQueryHandlers
         
         return _ = Task.CompletedTask;
     }
+    
+    internal static Task HandleExecuteQueryAsyncRetrievedSpotifyData(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedSpotifyData?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedSpotifyData(
+                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseSpotifyData>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedSpotifyData)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+        
+        return _ = Task.CompletedTask;
+    }
+
 }

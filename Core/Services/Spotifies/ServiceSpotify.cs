@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Overlay.Core.Services.Databases;
+using Overlay.Core.Services.Databases.Tasks;
+using Overlay.Core.Services.Databases.Tasks.Retrieves;
 
 namespace Overlay.Core.Services.Spotifies;
 
@@ -18,7 +21,6 @@ public sealed partial class ServiceSpotify :
     Task IService.Setup()
     {
         this.RetrieveResources();
-        this.RequestAccessToken();
         return _ = Task.CompletedTask;
     }
     
@@ -32,17 +34,32 @@ public sealed partial class ServiceSpotify :
         return _ = Task.CompletedTask;
     }
 
-    private const string                 c_authorizationCode = "AQAL6RpysdNnTXyrlNT1Au2qTiLdM3sFKbkKMZ62T1nBZAqrBPV1Bypx3OWoWLKj54oZCRByJUnF6R8hAj1VpkFLYH_zCHsAQblaay4J-u1djDz1XMQxBB7uYCoLzlH3kBRCppHeZ5FzOiy_QPQvFqaD1uefqlWv6RBG95oIZi3xl1PJiZTIJXfDCanikerfaCA55aNUH3vP1FaxDqILjHrp-oL3BQ-op82_y2Y8gWTlESVkTzGVz2opzOBkVlPlADfq-ZiPb3t2s1Y4MxE4GeSyWY9B";
+    private const string                 c_authorizationCode = "AQAvQ63vU3X5guTzivywl3-CqF5g7ETZVZ513VUUpGhpeGezU1SBeXgrYZ091LpSDecYW1i3kmaqfWjrin340DCvjmhm5SEhX6Mgcgm64Os2ZeDbbnaZfq2F8bb9bWGvIjk8CH10CLJELbDenwdt7xHk-5Cw_MvusNi9pWfle3Bj5T-clvvGAyGlrVQscIGY0NZEWoJ4SRKeIczQdWFpBw571q2NYPe6cbl9jDIOh4SzSiKvLNNTx3Xp0g7Hu5_3FxBdI2libvSygIBE8HQXJAHjWqMH";
     private const string                 c_uriAccessToken    = "https://accounts.spotify.com/api/token";
     private const string                 c_uriApi            = "https://api.spotify.com/v1";
     private const string                 c_uriRedirect       = "http://127.0.0.1:8888/callback";
     private const string                 c_userAccessScopes  = "user-modify-playback-state user-read-currently-playing user-read-playback-state";
-
+    private const string                 c_refreshToken     = "AQDTGMYa6MkXzFEHIbtM8ckrtWam-cSCWFO1sOorKTMhjSJCMVWj2hrSwa_os4vQfhLENzT-pG0TLr9Y69AewEj4z8jM-Pl_IIaIZ-4jlX7srBVbkweIIi4CQ757tyeEhiU";
+    
     private Queue<ServiceSpotifyRequest> m_requestQueue      = new();
     private ServiceGodotHttp             m_serviceGodotHttp  = null;
-    private SpotifyResponseAccessToken   m_accessToken       = null;
-    private string                       m_clientId          = _ = "a5e70c13f82c4f2ea0babe2177759985";
-    private string                       m_clientSecret      = _ = "2760fb2829d540fea372a2868b03b501";
+    private SpotifyResponseAccessToken   m_accessToken       = new();
+    private string                       m_clientId          = _ = string.Empty;
+    private string                       m_clientSecret      = _ = string.Empty;
+
+    private void HandleServiceDatabaseRetrievedSpotifyData(
+        ServiceDatabaseTaskRetrievedSpotifyData spotifyData
+    )
+    {
+        var result = _ = spotifyData.Result;
+        
+        _ = this.m_clientId                 = _ = result.SpotifyData_Client_Id;
+        _ = this.m_clientSecret             = _ = result.SpotifyData_Client_Secret;
+        _ = this.m_accessToken.AccessToken  = _ = result.SpotifyData_Access_Token;
+        _ = this.m_accessToken.RefreshToken = _ = result.SpotifyData_Refresh_Token;
+        
+        this.RequestAccessToken();
+    }
     
     private void OnRequestAccessTokenCompleted(
         long     result,
@@ -258,5 +275,11 @@ public sealed partial class ServiceSpotify :
     {
         var serviceGodots           = _ = Services.GetService<ServiceGodots>();
         _ = this.m_serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+        
+        _ = ServiceDatabaseTaskEvents.RetrievedSpotifyData += this.HandleServiceDatabaseRetrievedSpotifyData;
+        
+        ServiceDatabase.ExecuteTaskQuery(
+            serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.RetrieveSpotifyData
+        );
     }
 }

@@ -14,4 +14,5 @@ internal enum ServiceDatabaseTaskQueryType :
     RetrieveListJoystickLatestTippers,
     RetrieveListJoystickUsers,
     RetrieveLovenseData,
+    RetrieveSpotifyData,
 }

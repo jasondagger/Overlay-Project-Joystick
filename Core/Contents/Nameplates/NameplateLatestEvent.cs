@@ -293,7 +293,7 @@ internal abstract partial class NameplateLatestEvent() :
 
             m_textLetters.Add(
                 key: i,
-                value: new(
+                value: new TextLetter(
                     richTextLabel: richTextLabel,
                     textLetterScrollState: TextLetterScrollState.Idle,
                     center: richTextLabel.Position.X,

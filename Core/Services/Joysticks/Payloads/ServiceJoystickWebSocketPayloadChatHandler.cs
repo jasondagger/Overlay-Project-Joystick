@@ -34,14 +34,25 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             payloadMessage: _ = payloadMessage
         );
     }
+
+    internal static void AddUserForSongRequests(
+        string username
+    )
+    {
+        ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Add(
+            item: _ = username
+        );
+    }
     
     private const string                    c_joystickUserStreamLinkPrefix         = "https://joystick.tv/u/";
     private const string                    c_streamerUsername                     = $"SmoothDagger";
     private const string                    c_tipCommand                           = $"!tip";
     private const int                       c_commandRollTheDiceDefaultParameter   = 100;
 
+    private static readonly HashSet<string> s_pendingSongRequestTippers            = [];
     private static readonly HashSet<string> s_subscribersWhoUsedLightCommand       = [];
     private static readonly HashSet<string> s_subscribersWhoUsedSongRequestCommand = [];
+    private static readonly HashSet<string> s_subscribersWhoUsedSongSkipCommand    = [];
     private static readonly HashSet<string> s_streamersShoutedOut                  = [
         _ = ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername
     ];
@@ -71,7 +82,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             );
         }
         
-        Chat.Instance.AddChatMessage(
+        Chat.AddChatMessageToInstances(
             username:          _ = username,
             usernameColor:     _ = usernameColor,
             message:           _ = message,
@@ -149,85 +160,85 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             
             case "pastel":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Pastel
+                    colorType: _ = ServicePastelInterpolator.ColorType.Pastel
                 );
                 break;
             
             case "red":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Red
+                    colorType: _ = ServicePastelInterpolator.ColorType.Red
                 );
                 break;
 
             case "orange":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Orange
+                    colorType: _ = ServicePastelInterpolator.ColorType.Orange
                 );
                 break;
 
             case "yellow":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Yellow
+                    colorType: _ = ServicePastelInterpolator.ColorType.Yellow
                 );
                 break;
 
             case "lime":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Lime
+                    colorType: _ = ServicePastelInterpolator.ColorType.Lime
                 );
                 break;
 
             case "green":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Green
+                    colorType: _ = ServicePastelInterpolator.ColorType.Green
                 );
                 break;
 
             case "turquoise":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Turquoise
+                    colorType: _ = ServicePastelInterpolator.ColorType.Turquoise
                 );
                 break;
 
             case "cyan":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Cyan
+                    colorType: _ = ServicePastelInterpolator.ColorType.Cyan
                 );
                 break;
 
             case "teal":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Teal
+                    colorType: _ = ServicePastelInterpolator.ColorType.Teal
                 );
                 break;
 
             case "blue":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Blue
+                    colorType: _ = ServicePastelInterpolator.ColorType.Blue
                 );
                 break;
 
             case "purple":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Purple
+                    colorType: _ = ServicePastelInterpolator.ColorType.Purple
                 );
                 break;
 
             case "magenta":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Magenta
+                    colorType: _ = ServicePastelInterpolator.ColorType.Magenta
                 );
                 break;
 
             case "pink":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.Pink
+                    colorType: _ = ServicePastelInterpolator.ColorType.Pink
                 );
                 break;
                 
             case "white":
                 GoveeLightController.Instance.SetLightColor(
-                    ServicePastelInterpolator.ColorType.White
+                    colorType: _ = ServicePastelInterpolator.ColorType.White
                 );
                 break;
                 
@@ -265,7 +276,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         string[] icons =
         [
             "📄",
-            "🪨",
+            "🗿",
             "✂️"
         ];
         
@@ -349,23 +360,31 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     )
     {
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
-
+        
+        var isTipper = _ = ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Contains(
+            item: _ = username
+        );
+        
         if (
             _ = isStreamer is false &&
-            isSubscriber is false
+            isSubscriber is false && 
+            isTipper is false
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songrequest user - only subscribers & SmoothDagger have access to this command."
+                message: _ = $"Invalid !songrequest user - only subscribers, users who claimed the song request token reward, & SmoothDagger have access to this command."
             );
             return;
         }
+        
+        var hasSubscriberUsedCommand = _ = ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Contains(
+            item: _ = username
+        );
 
         if (
             _ = isStreamer is false &&
-                ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Contains(
-                    item: _ = username
-                )
+            isTipper is false &&
+            hasSubscriberUsedCommand is true
         )
         {
             serviceJoystickBot.SendChatMessage(
@@ -381,7 +400,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songrequest parameter - the following parameters are valid: [name of song]."
+                message: _ = $"Invalid !songrequest parameter - the following parameters are valid: [search parameters]."
             );
             return;
         }
@@ -390,8 +409,71 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         serviceSpotify.RequestTrackQueueBySearchTerms(
             searchParameters: _ = parameters
         );
+
+        if (_ = isTipper is true)
+        {
+            ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Remove(
+                item: _ = username
+            );
+        }
+        else if (_ = isSubscriber is true)
+        {
+            ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Add(
+                item: _ = username
+            );
+        }
+
+    }
+    
+    private static void HandleBotCommandSongSkip(
+        string username,
+        string parameters,
+        bool   isStreamer,
+        bool   isSubscriber
+    )
+    {
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+
+        if (
+            _ = isStreamer is false &&
+                isSubscriber is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !songskip user - only subscribers & SmoothDagger have access to this command."
+            );
+            return;
+        }
+
+        if (
+            _ = isStreamer is false &&
+                ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongSkipCommand.Contains(
+                    item: _ = username
+                )
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !songskip usage - subscribers can use this only once per stream."
+            );
+            return;
+        }
         
-        ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Add(
+        if (
+            string.IsNullOrEmpty(
+                value: _ = parameters
+            ) is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: _ = $"Invalid !songskip parameter - there are no parameters available."
+            );
+            return;
+        }
+
+        var serviceSpotify = Services.GetService<ServiceSpotify>();
+        serviceSpotify.RequestSkipToNextTrack();
+        
+        ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongSkipCommand.Add(
             item: _ = username
         );
     }
@@ -455,6 +537,16 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             case "!songrequest":
             case "!sr":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandSongRequest(
+                    username:     _ = username,
+                    parameters:   _ = parameters,
+                    isStreamer:   _ = isStreamer,
+                    isSubscriber: _ = isSubscriber
+                );
+                break;
+            
+            case "!skip":
+            case "!skipsong":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandSongSkip(
                     username:     _ = username,
                     parameters:   _ = parameters,
                     isStreamer:   _ = isStreamer,

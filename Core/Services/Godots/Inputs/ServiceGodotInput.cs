@@ -152,19 +152,26 @@ internal sealed partial class ServiceGodotInput() :
 		this.SetDefaultInputActionBinds();
 	}
 
-	private static readonly Dictionary<ServiceGodotInputActionType, ServiceGodotInputBind> c_defaultInputActionBinds = new()
+	private static readonly Dictionary<ServiceGodotInputActionType, ServiceGodotInputBind> s_defaultInputActionBinds = new()
     {
         {
-            ServiceGodotInputActionType.ChangeLayoutToDefault,       
+            ServiceGodotInputActionType.ChangeLayoutToAfk,       
             new ServiceGodotInputBind(
-                key:         _ = Key.Kp0,
+                key:         _ = Key.Kp2,
                 mouseButton: _ = MouseButton.None
             )
         },
         {
-            ServiceGodotInputActionType.ChangeLayoutToLarge,       
+            ServiceGodotInputActionType.ChangeLayoutToCode,       
             new ServiceGodotInputBind(
                 key:         _ = Key.Kp1,
+                mouseButton: _ = MouseButton.None
+            )
+        },
+        {
+            ServiceGodotInputActionType.ChangeLayoutToDefault,       
+            new ServiceGodotInputBind(
+                key:         _ = Key.Kp0,
                 mouseButton: _ = MouseButton.None
             )
         },
@@ -178,15 +185,17 @@ internal sealed partial class ServiceGodotInput() :
     };
     private readonly Dictionary<ServiceGodotInputActionType, ServiceGodotInputBind>        m_inputActionBinds        = new()
     {
+        { ServiceGodotInputActionType.ChangeLayoutToAfk,     new ServiceGodotInputBind(key: Key.None, mouseButton: MouseButton.None) },
+        { ServiceGodotInputActionType.ChangeLayoutToCode,    new ServiceGodotInputBind(key: Key.None, mouseButton: MouseButton.None) },
         { ServiceGodotInputActionType.ChangeLayoutToDefault, new ServiceGodotInputBind(key: Key.None, mouseButton: MouseButton.None) },
-        { ServiceGodotInputActionType.ChangeLayoutToLarge,   new ServiceGodotInputBind(key: Key.None, mouseButton: MouseButton.None) },
-        { ServiceGodotInputActionType.CloseApplication,              new ServiceGodotInputBind(key: Key.None, mouseButton: MouseButton.None) },
+        { ServiceGodotInputActionType.CloseApplication,      new ServiceGodotInputBind(key: Key.None, mouseButton: MouseButton.None) },
     };
     private readonly Dictionary<ServiceGodotInputActionType, ServiceGodotInputStateType>   m_inputActionStates       = new()
     {
+        { ServiceGodotInputActionType.ChangeLayoutToAfk,     ServiceGodotInputStateType.Unbound },
+        { ServiceGodotInputActionType.ChangeLayoutToCode,    ServiceGodotInputStateType.Unbound },
         { ServiceGodotInputActionType.ChangeLayoutToDefault, ServiceGodotInputStateType.Unbound },
-        { ServiceGodotInputActionType.ChangeLayoutToLarge,   ServiceGodotInputStateType.Unbound },
-        { ServiceGodotInputActionType.CloseApplication,              ServiceGodotInputStateType.Unbound },
+        { ServiceGodotInputActionType.CloseApplication,      ServiceGodotInputStateType.Unbound },
     };
     private readonly Dictionary<Key, ServiceGodotInputActionType>                          m_inputActionKeys         = new();
     private readonly Dictionary<MouseButton, ServiceGodotInputActionType>                  m_inputActionMouseButtons = new();
@@ -357,7 +366,7 @@ internal sealed partial class ServiceGodotInput() :
 
     private void SetDefaultInputActionBinds()
     {
-        foreach (var inputActionBind in _ = ServiceGodotInput.c_defaultInputActionBinds)
+        foreach (var inputActionBind in _ = ServiceGodotInput.s_defaultInputActionBinds)
         {
             var inputAction = _ = inputActionBind.Key;
             var inputBind   = _ = inputActionBind.Value;

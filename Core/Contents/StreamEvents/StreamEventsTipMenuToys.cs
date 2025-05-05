@@ -1,6 +1,7 @@
 
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
+using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
 using Overlay.Core.Tools;
 
 namespace Overlay.Core.Contents.StreamEvents;
@@ -8,9 +9,10 @@ namespace Overlay.Core.Contents.StreamEvents;
 internal static class StreamEventsTipMenuToys
 {
     internal static void HandleTipMenuItem(
-        string tipMenuItem
+        ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
     )
     {
+        var tipMenuItem = _ = messageMetadata.TipMenuItem;
         switch (_ = tipMenuItem)
         {
             case "Edge Control Link - 1 Minute(s)":

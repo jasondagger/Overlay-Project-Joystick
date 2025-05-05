@@ -44,7 +44,7 @@ public sealed class ServiceJoystickBot() :
             serviceJoystickRequest: _ = serviceJoystickRequest
         );
         
-        Chat.Instance.AddChatMessage(
+        Chat.AddChatMessageToInstances(
             username:          _ = $"{_ = ServiceJoystickBot.c_username}",
             usernameColor:     _ = string.Empty,
             message:           _ = message,
@@ -71,7 +71,7 @@ public sealed class ServiceJoystickBot() :
             function: async () =>
             {
                 await Task.Delay(
-                    millisecondsDelay: _ = 3000
+                    millisecondsDelay: _ = 4000
                 );
                 this.SendChatMessage(
                     message:   _ = $"SmoothDagger is now live!"

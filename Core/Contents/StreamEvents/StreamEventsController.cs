@@ -128,7 +128,7 @@ internal sealed partial class StreamEventsController() :
         ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
     )
     {
-        var tipMenuItem = _ = messageMetadata.TipMenuItem;
+        var tipMenuItem   = _ = messageMetadata.TipMenuItem;
         switch (_ = tipMenuItem)
         {
             case "":
@@ -146,7 +146,7 @@ internal sealed partial class StreamEventsController() :
             case "Do One More!":
             case "Streeeetch!":
                 StreamEventsTipMenuIRL.HandleTipMenuItem(
-                    tipMenuItem: _ = tipMenuItem
+                    messageMetadata: _ = messageMetadata
                 );
                 break;
             
@@ -161,7 +161,7 @@ internal sealed partial class StreamEventsController() :
             case "TF2: Explode":
             case "TF2: Kill":
                 StreamEventsTipMenuGaming.HandleTipMenuItem(
-                    tipMenuItem: _ = tipMenuItem
+                    messageMetadata: _ = messageMetadata
                 );
                 break;
             
@@ -188,7 +188,14 @@ internal sealed partial class StreamEventsController() :
             case "Toy In - 10 Minute(s)":
             case "Turn On Ring Light":
                 StreamEventsTipMenuSpice.HandleTipMenuItem(
-                    tipMenuItem: _ = tipMenuItem
+                    messageMetadata: _ = messageMetadata
+                );
+                break;
+            
+            case "Skip Song":
+            case "Song Request":
+                StreamEventsTipMenuSpotify.HandleTipMenuItem(
+                    messageMetadata: _ = messageMetadata
                 );
                 break;
             
@@ -207,7 +214,7 @@ internal sealed partial class StreamEventsController() :
             case "Set Light Color Yellow":
             case "Turn Off Lights":
                 StreamEventsTipMenuLights.HandleTipMenuItem(
-                    tipMenuItem: _ = tipMenuItem
+                    messageMetadata: _ = messageMetadata
                 );
                 break;
             
@@ -218,7 +225,7 @@ internal sealed partial class StreamEventsController() :
             case "Gush Control Link - 2 Minute(s)":
             case "Gush Control Link - 5 Minute(s)":
                 StreamEventsTipMenuToys.HandleTipMenuItem(
-                    tipMenuItem: _ = tipMenuItem
+                    messageMetadata: _ = messageMetadata
                 );
                 break;
             

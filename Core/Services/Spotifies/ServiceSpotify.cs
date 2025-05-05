@@ -34,6 +34,21 @@ public sealed partial class ServiceSpotify :
         return _ = Task.CompletedTask;
     }
     
+    internal void RequestSkipToNextTrack()
+    {
+        var headers = new List<string>()
+        {
+            $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
+        };
+        this.m_serviceGodotHttp.SendHttpRequest(
+            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/me/player/next",
+            headers:                 _ = headers,
+            method:                  _ = HttpClient.Method.Post,
+            json:                    _ = string.Empty,
+            requestCompletedHandler: this.OnRequestSkipToNextCompleted
+        );
+    }
+    
     internal void RequestTrackQueueBySearchTerms(
         string searchParameters
     )
@@ -51,17 +66,17 @@ public sealed partial class ServiceSpotify :
         );
     }
 
-    private const string                 c_authorizationCode = "AQA2Kz6NxbmntR2cRmYcP67H0PqcCea4Qw516G-YFl9-XrYse-cNaULNOzusforTz5hq_lhB7Kz4mdEEjp1Uk-oNT_dVGKv6SKpqC4Q8DgSSSvEKwWTslzUDIsBmpvGeVqABZ75R5kfrerqjDgko5MIJ7sQ_ji7bfGvg4LdzvtPBSJy28NopzYVJu5YHYWNNbDM_D8c9eBUK5mf7ZcUqMp3tJnyK0IquyIvbMSCdKTRd4Ut7MB5qRBeA133f-fTqs2Tai65jfosxbAha4pLQo1QJif7E";
-    private const string                 c_uriAccessToken    = "https://accounts.spotify.com/api/token";
-    private const string                 c_uriApi            = "https://api.spotify.com/v1";
-    private const string                 c_uriRedirect       = "http://127.0.0.1:8888/callback";
-    private const string                 c_userAccessScopes  = "user-modify-playback-state user-read-currently-playing user-read-playback-state";
+    private const string                        c_authorizationCode = "AQA2Kz6NxbmntR2cRmYcP67H0PqcCea4Qw516G-YFl9-XrYse-cNaULNOzusforTz5hq_lhB7Kz4mdEEjp1Uk-oNT_dVGKv6SKpqC4Q8DgSSSvEKwWTslzUDIsBmpvGeVqABZ75R5kfrerqjDgko5MIJ7sQ_ji7bfGvg4LdzvtPBSJy28NopzYVJu5YHYWNNbDM_D8c9eBUK5mf7ZcUqMp3tJnyK0IquyIvbMSCdKTRd4Ut7MB5qRBeA133f-fTqs2Tai65jfosxbAha4pLQo1QJif7E";
+    private const string                        c_uriAccessToken    = "https://accounts.spotify.com/api/token";
+    private const string                        c_uriApi            = "https://api.spotify.com/v1";
+    private const string                        c_uriRedirect       = "http://127.0.0.1:8888/callback";
+    private const string                        c_userAccessScopes  = "user-modify-playback-state user-read-currently-playing user-read-playback-state";
     
-    private Queue<ServiceSpotifyRequest> m_requestQueue      = new();
-    private ServiceGodotHttp             m_serviceGodotHttp  = null;
-    private SpotifyResponseAccessToken   m_accessToken       = new();
-    private string                       m_clientId          = _ = string.Empty;
-    private string                       m_clientSecret      = _ = string.Empty;
+    private Queue<ServiceSpotifyRequest>        m_requestQueue      = new();
+    private ServiceGodotHttp                    m_serviceGodotHttp  = null;
+    private readonly SpotifyResponseAccessToken m_accessToken       = new();
+    private string                              m_clientId          = _ = string.Empty;
+    private string                              m_clientSecret      = _ = string.Empty;
 
     private void HandleServiceDatabaseRetrievedSpotifyData(
         ServiceDatabaseTaskRetrievedSpotifyData spotifyData
@@ -74,7 +89,6 @@ public sealed partial class ServiceSpotify :
         _ = this.m_accessToken.AccessToken  = _ = result.SpotifyData_Access_Token;
         _ = this.m_accessToken.RefreshToken = _ = result.SpotifyData_Refresh_Token;
         
-        //this.RequestUserAuthorization();
         this.RequestAccessToken();
     }
     
@@ -118,7 +132,7 @@ public sealed partial class ServiceSpotify :
         );
     }
     
-    private void OnRequestTrackQueueCompleted(
+    private void OnRequestSkipToNextCompleted(
         long     result,
         long     responseCode,
         string[] headers,
@@ -127,6 +141,32 @@ public sealed partial class ServiceSpotify :
     {
         var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
         
+        if (
+            ServiceGodotHttp.IsResponseCodeSuccessful(
+                responseCode: _ = responseCode
+            ) is false
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: "Song failed to skip."
+            );
+            return;
+        }
+
+        serviceJoystickBot.SendChatMessage(
+            message: "Song successfully skipped."
+        );
+    }
+    
+    private void OnRequestTrackQueueCompleted(
+        long     result,
+        long     responseCode,
+        string[] headers,
+        byte[]   body
+    )
+    {
+        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+
         if (
             ServiceGodotHttp.IsResponseCodeSuccessful(
                 responseCode: _ = responseCode

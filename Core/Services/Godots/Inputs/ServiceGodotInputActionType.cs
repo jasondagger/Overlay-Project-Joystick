@@ -5,6 +5,7 @@ internal enum ServiceGodotInputActionType :
     uint
 {
     ChangeLayoutToDefault = 0U,
-    ChangeLayoutToLarge,
+    ChangeLayoutToCode,
+    ChangeLayoutToAfk,
     CloseApplication,
 }

@@ -33,10 +33,8 @@ internal sealed partial class Chat() :
 	    
 	    this.PopulateChatMessageCache();
     }
-
-	internal static Chat Instance { get; private set; }
     
-    internal void AddChatMessage(
+    internal static void AddChatMessageToInstances(
         string             username,
         string             usernameColor,
         string             message,
@@ -46,41 +44,29 @@ internal sealed partial class Chat() :
         bool               isSubscriber
     )
     {
-	    var chatMessageData = _ = new ChatMessageData(
-		    username:          _ = username,
-		    usernameColor:     _ = usernameColor,
-		    message:           _ = message,
-		    chatMessageEmotes: _ = chatMessageEmotes,
-		    isModerator:       _ = isModerator,
-		    isStreamer:        _ = isStreamer,
-			isSubscriber:      _ = isSubscriber
-	    );
-	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    foreach (var instance in _ = Chat.s_instances)
 	    {
-		    this.m_pendingChatMessageDatas.Enqueue(
-			    item: _ = chatMessageData
+		    instance.AddChatMessage(
+			    username:          _ = username,
+			    usernameColor:     _ = usernameColor,
+			    message:           _ = message,
+			    chatMessageEmotes: _ = chatMessageEmotes,
+			    isModerator:       _ = isModerator,
+			    isStreamer:        _ = isStreamer,
+			    isSubscriber:      _ = isSubscriber
 		    );
 	    }
     }
 
-    internal void AddDebugMessage(
+    internal static void AddDebugMessageToInstances(
 	    string message
 	)
     {
-	    var chatMessageData = _ = new ChatMessageData(
-		    username:          _ = "SmoothBot",
-		    usernameColor:     _ = string.Empty,
-		    message:           _ = message,
-		    chatMessageEmotes: null,
-		    isModerator:       _ = true,
-		    isStreamer:        _ = false,
-		    isSubscriber:      _ = true
-	    );
-	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    foreach (var instance in _ = Chat.s_instances)
 	    {
-		    this.m_pendingChatMessageDatas.Enqueue(
-			    item: _ = chatMessageData
-		    );
+		    instance.AddDebugMessage(
+			    message: _ = message
+			);
 	    }
     }
     
@@ -171,18 +157,68 @@ internal sealed partial class Chat() :
         $"|zwnj" +
         $@")[^\]]*\]";
 
-    private readonly Queue<ChatMessage>     m_availableChatMessages           = new();
-    private readonly Queue<ChatMessage>     m_displayedChatMessages     = new();
-    private readonly Queue<ChatMessage>     m_queuedChatMessages        = new();
-    private readonly Queue<ChatMessageData> m_pendingChatMessageDatas         = new();
+    private static List<Chat>               s_instances                   = [];
 
-    private readonly object                 m_availableChatMessagesLock       = new();
-    private readonly object                 m_displayedChatMessagesLock = new();
-    private readonly object                 m_pendingChatMessageDatasLock     = new();
-    private readonly object                 m_queuedChatMessagesLock    = new();
+    private readonly Queue<ChatMessage>     m_availableChatMessages       = new();
+    private readonly Queue<ChatMessage>     m_displayedChatMessages       = new();
+    private readonly Queue<ChatMessage>     m_queuedChatMessages          = new();
+    private readonly Queue<ChatMessageData> m_pendingChatMessageDatas     = new();
 
-    private Control                         m_chatPivot                       = null;
-    private int                             m_currentPixel                    = 0;
+    private readonly object                 m_availableChatMessagesLock   = new();
+    private readonly object                 m_displayedChatMessagesLock   = new();
+    private readonly object                 m_pendingChatMessageDatasLock = new();
+    private readonly object                 m_queuedChatMessagesLock      = new();
+
+    private Control                         m_chatPivot                   = null;
+    private int                             m_currentPixel                = 0;
+    
+    private void AddChatMessage(
+	    string             username,
+	    string             usernameColor,
+	    string             message,
+	    ChatMessageEmote[] chatMessageEmotes,
+	    bool               isModerator,
+	    bool               isStreamer,
+	    bool               isSubscriber
+    )
+    {
+	    var chatMessageData = _ = new ChatMessageData(
+		    username:          _ = username,
+		    usernameColor:     _ = usernameColor,
+		    message:           _ = message,
+		    chatMessageEmotes: _ = chatMessageEmotes,
+		    isModerator:       _ = isModerator,
+		    isStreamer:        _ = isStreamer,
+		    isSubscriber:      _ = isSubscriber
+	    );
+	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    {
+		    this.m_pendingChatMessageDatas.Enqueue(
+			    item: _ = chatMessageData
+		    );
+	    }
+    }
+
+    private void AddDebugMessage(
+	    string message
+    )
+    {
+	    var chatMessageData = _ = new ChatMessageData(
+		    username:          _ = "SmoothBot",
+		    usernameColor:     _ = string.Empty,
+		    message:           _ = message,
+		    chatMessageEmotes: null,
+		    isModerator:       _ = true,
+		    isStreamer:        _ = false,
+		    isSubscriber:      _ = true
+	    );
+	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    {
+		    this.m_pendingChatMessageDatas.Enqueue(
+			    item: _ = chatMessageData
+		    );
+	    }
+    }
     
     private static bool IsChatMessageIllegal(
         string message
@@ -365,7 +401,9 @@ internal sealed partial class Chat() :
 
     private void RetrieveResources()
 	{
-		_ = Chat.Instance = _ = this;
+		Chat.s_instances.Add(
+			item: _ = this
+		);
 		_ = this.m_chatPivot = _ = this.GetNode<Control>(
 			path: _ = $"ChatPivot"
 		);

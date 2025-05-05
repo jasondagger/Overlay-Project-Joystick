@@ -1,8 +1,12 @@
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Inputs;
+using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.OBS;
 
 namespace Overlay.Core.Contents;
@@ -11,6 +15,7 @@ public sealed partial class SceneController() :
     Node()
 {
     [Export] public Array<Control> Layouts = [];
+    [Export] public Control ObsControl     = null;
     
     public override void _Ready()
     {
@@ -21,8 +26,10 @@ public sealed partial class SceneController() :
         uint
     {
         Default = 0U,
-        Large,
+        Code,
     }
+
+    private CancellationTokenSource m_cancellationTokenSource = new();
 
     private void RegisterForInputEvents()
     {
@@ -30,8 +37,70 @@ public sealed partial class SceneController() :
         var serviceGodotInput = _ = serviceGodots.GetServiceGodot<ServiceGodotInput>();
 
         _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToDefault] += this.HandleInputActionPressedChangeLayoutToDefault;
-        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToLarge]   += this.HandleInputActionPressedChangeLayoutToLarge;
+        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToCode]    += this.HandleInputActionPressedChangeLayoutToCode;
+        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToAfk]     += this.HandleInputActionPressedChangeLayoutToAfk;
         _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.CloseApplication]      += this.HandleInputActionPressedCloseApplication;
+    }
+    
+    private void HandleInputActionPressedChangeLayoutToAfk(
+        ServiceGodotInputStateType serviceGodotInputStateType
+    )
+    {
+        this.HideLayouts();
+        _ = this.Layouts[_ = (int)LayoutType.Default].Visible = _ = true;
+        ObsControl.Visible = _ = false;
+
+        _ = Task.Run(
+            function: 
+            async () =>
+            {
+                _ = this.m_cancellationTokenSource = _ = new CancellationTokenSource();
+                var cancellationToken = _ = m_cancellationTokenSource.Token;
+                
+                var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+                
+                await Task.Delay(
+                    delay: _ = TimeSpan.FromSeconds(
+                        value: _ = 3d
+                    ),
+                    cancellationToken: _ = cancellationToken
+                );
+                
+                while (_ = cancellationToken.IsCancellationRequested is false)
+                {
+                    serviceJoystickBot.SendChatMessage(
+                        message: _ = $"SmoothDagger is currently AFK & will return shortly!"
+                    );
+                    
+                    await Task.Delay(
+                        delay: _ = TimeSpan.FromMinutes(
+                            value: _ = 5d
+                        ),
+                        cancellationToken: _ = cancellationToken
+                    );
+                }
+            }
+        );
+
+        // TODO: Can I connect to obs?
+        //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        //serviceOBS.ChangeScene(
+        //    sceneName: _ = $"Code"    
+        //);
+    }
+    
+    private void HandleInputActionPressedChangeLayoutToCode(
+        ServiceGodotInputStateType serviceGodotInputStateType
+    )
+    {
+        this.HideLayouts();
+        _ = this.Layouts[_ = (int)LayoutType.Code].Visible = _ = true;
+
+        // TODO: Can I connect to obs?
+        //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        //serviceOBS.ChangeScene(
+        //    sceneName: _ = $"Code"    
+        //);
     }
     
     private void HandleInputActionPressedChangeLayoutToDefault(
@@ -40,25 +109,12 @@ public sealed partial class SceneController() :
     {
         this.HideLayouts();
         _ = this.Layouts[_ = (int)LayoutType.Default].Visible = _ = true;
-        
-        // TODO: Can I connect to obs?
-        //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
-        //serviceOBS.ChangeScene(
-        //    sceneName: _ = $"Default"    
-        //);
-    }
-    
-    private void HandleInputActionPressedChangeLayoutToLarge(
-        ServiceGodotInputStateType serviceGodotInputStateType
-    )
-    {
-        this.HideLayouts();
-        _ = this.Layouts[_ = (int)LayoutType.Large].Visible = _ = true;
+        ObsControl.Visible = _ = true;
 
         // TODO: Can I connect to obs?
         //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
         //serviceOBS.ChangeScene(
-        //    sceneName: _ = $"Large"    
+        //    sceneName: _ = $"Default"    
         //);
     }
     
@@ -76,5 +132,6 @@ public sealed partial class SceneController() :
         {
             _ = layout.Visible = _ = false;
         }
+        this.m_cancellationTokenSource.Cancel();
     }
 }

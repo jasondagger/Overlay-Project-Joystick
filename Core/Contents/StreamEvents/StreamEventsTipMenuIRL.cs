@@ -11,9 +11,10 @@ namespace Overlay.Core.Contents.StreamEvents;
 internal static class StreamEventsTipMenuIRL
 {
     internal static void HandleTipMenuItem(
-        string tipMenuItem
+        ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
     )
     {
+        var tipMenuItem = _ = messageMetadata.TipMenuItem;
         switch (_ = tipMenuItem)
         {
             case "Ohai":

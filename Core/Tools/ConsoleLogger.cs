@@ -22,12 +22,9 @@ internal static class ConsoleLogger
             );
             
             #if DEBUG
-            if (_ = Chat.Instance is not null)
-            {
-                Chat.Instance.AddDebugMessage(
-                    message: _ = fullMessage
-                );
-            }
+            Chat.AddDebugMessageToInstances(
+                message: _ = fullMessage
+            );
             #endif
         }
     }
@@ -45,12 +42,9 @@ internal static class ConsoleLogger
             );
 
             #if DEBUG
-            if (_ = Chat.Instance is not null)
-            {
-                Chat.Instance.AddDebugMessage(
-                    message: _ = fullMessage
-                );
-            }
+            Chat.AddDebugMessageToInstances(
+                message: _ = fullMessage
+            );
             #endif
         }
     }

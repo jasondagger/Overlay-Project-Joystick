@@ -8,6 +8,8 @@ using Overlay.Core.Services.Govee.Payloads;
 using Overlay.Core.Tools;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text;
+using System.Text.Json;
 
 namespace Overlay.Core.Services.Govee;
 
@@ -29,6 +31,12 @@ internal sealed class ServiceGovee() :
     Task IService.Stop()
     {
         return _ = Task.CompletedTask;
+    }
+
+    internal enum LightScene :
+        uint
+    {
+        Default = 15863356
     }
     
     internal void SetLightColor(
@@ -56,12 +64,36 @@ internal sealed class ServiceGovee() :
             payload: _ = serviceGoveePayload
         );
     }
+
+    internal void SetLightScene(
+        string sceneName
+    )
+    {
+        if (
+            _ = this.m_scenes.ContainsKey(
+                key: _ = sceneName
+            ) is false
+        )
+        {
+            return;
+        }
+        
+        var serviceGoveePayload = _ = new ServiceGoveePayload();
+        _ = serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
+        _ = serviceGoveePayload.Payload.Capability.Instance = $"diyScene";
+        _ = serviceGoveePayload.Payload.Capability.Value    = _ = this.m_scenes[key: _ = sceneName];
+        
+        this.SendPayloads(
+            payload: _ = serviceGoveePayload
+        );
+    }
     
-    private const string          c_goveeAddress     = "https://openapi.api.govee.com/";
-    
-    private string                m_apiKey           = string.Empty;
-    private readonly List<string> m_hardwareIds      = [];
-    private ServiceGodotHttp      m_serviceGodotHttp = null;
+    private const string                     c_goveeAddress     = "https://openapi.api.govee.com/";
+
+    private readonly Dictionary<string, int> m_scenes           = [];
+    private string                           m_apiKey           = string.Empty;
+    private readonly List<string>            m_hardwareIds      = [];
+    private ServiceGodotHttp                 m_serviceGodotHttp = null;
     
     private static int ConvertColorToInt(
         Color color
@@ -82,6 +114,8 @@ internal sealed class ServiceGovee() :
                 item: _ = light.GoveeLight_Hardware_Id
             );
         }
+        
+        this.RequestDIYScenes();
     }
     
     private void HandleServiceDatabaseRetrievedGoveeData(
@@ -96,6 +130,65 @@ internal sealed class ServiceGovee() :
     {
         var serviceGodots           = _ = Services.GetService<ServiceGodots>();
         _ = this.m_serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+    }
+    
+    private void RequestDIYScenes()
+    {
+        var payload = _ = new ServiceGoveePayload();
+            
+        _ = payload.Payload.Device = _ = this.m_hardwareIds[0];
+        
+        var json = _ = JsonHelper.Serialize(
+            @object: _ = payload
+        );
+        
+        this.m_serviceGodotHttp.SendHttpRequest(
+            url:                     _ = $"{_ = ServiceGovee.c_goveeAddress}router/api/v1/device/diy-scenes",
+            headers:                 [
+                $"Govee-API-Key: {_ = this.m_apiKey}",
+                $"Content-Type: application/json",
+            ],
+            method:                  _ = HttpClient.Method.Post,
+            json:                    _ = json,
+            requestCompletedHandler: (
+                long     result,
+                long     responseCode,
+                string[] headers,
+                byte[]   body
+            ) =>
+            {
+                if (_ = responseCode >= 300)
+                {
+                    ConsoleLogger.LogMessageError(
+                        messageError: _ =
+                            $"{_ = nameof(ServiceGovee)}." +
+                            $"{_ = nameof(ServiceGovee.SendPayloads)}() " +
+                            $"EXCEPTION: {_ = responseCode} error."
+                    );
+                }
+                
+                var bodyAsString = _ = Encoding.UTF8.GetString(
+                    bytes: _ = body
+                );
+                var serviceGoveeDIY = _ = JsonHelper.Deserialize<ServiceGoveeDIY>(
+                    json: _ = bodyAsString
+                );
+
+                foreach (var capability in serviceGoveeDIY.Payload.Capabilities)
+                {
+                    var options = _ = capability.Parameters.Options;
+                    foreach (var option in options)
+                    {
+                        var value = _ = (JsonElement)option.Value;
+
+                        this.m_scenes.TryAdd(
+                            key:   _ = option.Name,
+                            value: _ = value.GetInt32()
+                        );
+                    }
+                }
+            }
+        );
     }
     
     private void SendPayloads(
@@ -125,7 +218,7 @@ internal sealed class ServiceGovee() :
                     byte[]   body
                 ) =>
                 {
-                    if (responseCode >= 300)
+                    if (_ = responseCode >= 300)
                     {
                         ConsoleLogger.LogMessageError(
                             messageError: _ =

@@ -212,6 +212,7 @@ internal sealed partial class StreamEventsController() :
             case "Set Light Color Turquoise":
             case "Set Light Color White":
             case "Set Light Color Yellow":
+            case "Set Light Scene Pastel Rainbow":
             case "Turn Off Lights":
                 StreamEventsTipMenuLights.HandleTipMenuItem(
                     messageMetadata: _ = messageMetadata

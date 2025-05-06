@@ -57,6 +57,15 @@ public sealed partial class GoveeLightController() :
         }
     }
 
+    internal void SetLightScene(
+        string sceneName
+    )
+    {
+        this.m_serviceGovee.SetLightScene(
+            sceneName: _ = sceneName
+        );
+    }
+
     internal void TurnOffLights()
     {
         _ = this.m_lightColorElapsed = _ = 0f;

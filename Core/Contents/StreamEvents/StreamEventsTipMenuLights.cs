@@ -94,6 +94,12 @@ internal static class StreamEventsTipMenuLights
                 );
                 break;
             
+            case "Set Light Scene Pastel Rainbow":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: _ = "Pastel Rainbow"
+                );
+                break;
+            
             case "Turn Off Lights":
                 GoveeLightController.Instance.TurnOffLights();
                 break;

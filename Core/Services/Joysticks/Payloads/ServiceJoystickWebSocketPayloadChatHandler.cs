@@ -137,21 +137,8 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             );
             return;
         }
-        
-        var commandSplit = _ = parameters.Split(
-            separator: _ = ' '
-        );
-        if (
-            commandSplit.Length > 1
-        )
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !lights parameter - !lights must be in the following format: !lights on."
-            );
-            return;
-        }
 
-        var command = _ = commandSplit[0].ToLower();
+        var command = _ = parameters.ToLower();
         switch (_ = command)
         {
             case "off":
@@ -161,6 +148,12 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             case "pastel":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.Pastel
+                );
+                break;
+            
+            case "pastel rainbow":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: _ = "Pastel Rainbow"
                 );
                 break;
             

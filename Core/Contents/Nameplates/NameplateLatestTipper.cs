@@ -22,9 +22,16 @@ internal sealed partial class NameplateLatestTipper() :
     )
     {
         var result = _ = retrievedListJoystickLatestTippers.Result;
-        
-        foreach (var joystickLatestTipper in _ = result)
+
+        var target = _ = result.Count - 5;
+        if (target < 0)
         {
+            target = 0;
+        }
+        
+        for (var i = result.Count - 1; i >= target; i--)
+        {
+            var joystickLatestTipper = _ = result[i];
             this.m_names.Enqueue(
                 item: _ = joystickLatestTipper.JoystickLatest_Latest_Tipper
             );

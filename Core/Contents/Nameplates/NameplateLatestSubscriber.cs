@@ -23,8 +23,15 @@ internal sealed partial class NameplateLatestSubscriber() :
     {
         var result = _ = retrievedListJoystickLatestSubscribers.Result;
 
-        foreach (var joystickLatestSubscriber in _ = result)
+        var target = _ = result.Count - 5;
+        if (target < 0)
         {
+            target = 0;
+        }
+        
+        for (var i = result.Count - 1; i >= target; i--)
+        {
+            var joystickLatestSubscriber = _ = result[i];
             this.m_names.Enqueue(
                 item: _ = joystickLatestSubscriber.JoystickLatest_Latest_Subscriber
             );

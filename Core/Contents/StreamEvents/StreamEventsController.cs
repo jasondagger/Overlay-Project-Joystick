@@ -202,17 +202,13 @@ internal sealed partial class StreamEventsController() :
             case "Set Light Color Blue":
             case "Set Light Color Cyan":
             case "Set Light Color Green":
-            case "Set Light Color Lime":
             case "Set Light Color Magenta":
-            case "Set Light Color Orange":
-            case "Set Light Color Pink":
-            case "Set Light Color Purple":
             case "Set Light Color Red":
-            case "Set Light Color Teal":
-            case "Set Light Color Turquoise":
             case "Set Light Color White":
             case "Set Light Color Yellow":
-            case "Set Light Scene Pastel Rainbow":
+            case "Set Light Scene Heatwave":
+            case "Set Light Scene Icy":
+            case "Set Light Scene Rainbow":
             case "Turn Off Lights":
                 StreamEventsTipMenuLights.HandleTipMenuItem(
                     messageMetadata: _ = messageMetadata

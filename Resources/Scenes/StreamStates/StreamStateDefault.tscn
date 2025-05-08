@@ -236,7 +236,7 @@ anchors_preset = 0
 
 [node name="SceneController" type="Node" parent="RootControl/Controllers" node_paths=PackedStringArray("Layouts", "ObsControl")]
 script = ExtResource("2_niean")
-Layouts = [NodePath("../../LayoutDefault"), NodePath("../../LayoutCode"), NodePath("")]
+Layouts = [NodePath("../../LayoutDefault"), NodePath("../../LayoutCode")]
 ObsControl = NodePath("../../LayoutDefault/OBS")
 
 [node name="StreamEventsController" type="Node" parent="RootControl/Controllers"]

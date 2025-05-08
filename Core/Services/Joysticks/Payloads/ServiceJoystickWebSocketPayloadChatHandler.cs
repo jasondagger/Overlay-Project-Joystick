@@ -144,16 +144,22 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             case "off":
                 GoveeLightController.Instance.TurnOffLights();
                 break;
-            
-            case "pastel":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Pastel
+
+            case "rainbow":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: _ = "Rainbow"
                 );
                 break;
             
-            case "pastel rainbow":
+            case "heatwave":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Pastel Rainbow"
+                    sceneName: _ = "Heatwave"
+                );
+                break;
+            
+            case "icy":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: _ = "Icy"
                 );
                 break;
             
@@ -162,22 +168,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                     colorType: _ = ServicePastelInterpolator.ColorType.Red
                 );
                 break;
-
-            case "orange":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Orange
-                );
-                break;
-
+            
             case "yellow":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.Yellow
-                );
-                break;
-
-            case "lime":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Lime
                 );
                 break;
 
@@ -187,21 +181,9 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 );
                 break;
 
-            case "turquoise":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Turquoise
-                );
-                break;
-
             case "cyan":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.Cyan
-                );
-                break;
-
-            case "teal":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Teal
                 );
                 break;
 
@@ -211,24 +193,12 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 );
                 break;
 
-            case "purple":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Purple
-                );
-                break;
-
             case "magenta":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.Magenta
                 );
                 break;
 
-            case "pink":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Pink
-                );
-                break;
-                
             case "white":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.White

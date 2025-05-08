@@ -34,33 +34,9 @@ internal static class StreamEventsTipMenuLights
                 );
                 break;
 
-            case "Set Light Color Lime":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Lime
-                );
-                break;
-
             case "Set Light Color Magenta":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.Magenta
-                );
-                break;
-
-            case "Set Light Color Orange":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Orange
-                );
-                break;
-
-            case "Set Light Color Pink":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Pink
-                );
-                break;
-
-            case "Set Light Color Purple":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Purple
                 );
                 break;
 
@@ -69,19 +45,7 @@ internal static class StreamEventsTipMenuLights
                     colorType: _ = ServicePastelInterpolator.ColorType.Red
                 );
                 break;
-
-            case "Set Light Color Teal":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Teal
-                );
-                break;
-
-            case "Set Light Color Turquoise":
-                GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Turquoise
-                );
-                break;
-
+            
             case "Set Light Color White":
                 GoveeLightController.Instance.SetLightColor(
                     colorType: _ = ServicePastelInterpolator.ColorType.White
@@ -94,9 +58,21 @@ internal static class StreamEventsTipMenuLights
                 );
                 break;
             
-            case "Set Light Scene Pastel Rainbow":
+            case "Set Light Scene Heatwave":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Pastel Rainbow"
+                    sceneName: _ = "Heatwave"
+                );
+                break;
+            
+            case "Set Light Scene Icy":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: _ = "Icy"
+                );
+                break;
+            
+            case "Set Light Scene Rainbow":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: _ = "Rainbow"
                 );
                 break;
             

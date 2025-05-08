@@ -102,7 +102,7 @@ internal static class ServiceDatabaseTaskLogic
         $"Port=5432;" +
         $"Database=overlay;" +
         $"Username=postgres;" +
-        $"Password=postgres";
+        $"Password=root";
 
     private static async Task CompleteTransactionExecuteNonQueryAsync(
         NpgsqlTransaction databaseTransaction,

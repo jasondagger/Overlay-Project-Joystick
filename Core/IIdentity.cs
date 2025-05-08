@@ -1,4 +1,4 @@
-﻿
+
 namespace Overlay.Core;
 
 internal interface IIdentity

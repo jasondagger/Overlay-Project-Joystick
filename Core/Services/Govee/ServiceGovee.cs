@@ -190,6 +190,40 @@ internal sealed class ServiceGovee() :
             }
         );
     }
+
+    private void RequestDeviceInformation()
+    {
+        this.m_serviceGodotHttp.SendHttpRequest(
+            url:                     _ = $"{_ = ServiceGovee.c_goveeAddress}router/api/v1/user/devices",
+            headers:                 [
+                $"Govee-API-Key: {_ = this.m_apiKey}",
+                $"Content-Type: application/json",
+            ],
+            method:                  _ = HttpClient.Method.Get,
+            json:                    _ = string.Empty,
+            requestCompletedHandler: (
+                long     result,
+                long     responseCode,
+                string[] headers,
+                byte[]   body
+            ) =>
+            {
+                if (_ = responseCode >= 300)
+                {
+                    ConsoleLogger.LogMessageError(
+                        messageError: _ =
+                            $"{_ = nameof(ServiceGovee)}." +
+                            $"{_ = nameof(ServiceGovee.SendPayloads)}() " +
+                            $"EXCEPTION: {_ = responseCode} error."
+                    );
+                }
+                
+                var bodyAsString = _ = Encoding.UTF8.GetString(
+                    bytes: _ = body
+                );
+            }
+        );
+    }
     
     private void SendPayloads(
         ServiceGoveePayload payload
@@ -227,6 +261,10 @@ internal sealed class ServiceGovee() :
                                 $"EXCEPTION: {_ = responseCode} error."
                         );
                     }
+
+                    var bodyAsString = _ = Encoding.UTF8.GetString(
+                        bytes: _ = body
+                    );
                 }
             );
         }

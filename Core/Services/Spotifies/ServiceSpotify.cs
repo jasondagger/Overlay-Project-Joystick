@@ -66,7 +66,7 @@ public sealed partial class ServiceSpotify :
         );
     }
 
-    private const string                        c_authorizationCode = "AQA2Kz6NxbmntR2cRmYcP67H0PqcCea4Qw516G-YFl9-XrYse-cNaULNOzusforTz5hq_lhB7Kz4mdEEjp1Uk-oNT_dVGKv6SKpqC4Q8DgSSSvEKwWTslzUDIsBmpvGeVqABZ75R5kfrerqjDgko5MIJ7sQ_ji7bfGvg4LdzvtPBSJy28NopzYVJu5YHYWNNbDM_D8c9eBUK5mf7ZcUqMp3tJnyK0IquyIvbMSCdKTRd4Ut7MB5qRBeA133f-fTqs2Tai65jfosxbAha4pLQo1QJif7E";
+    private const string                        c_authorizationCode = "AQCSSUISzULYyX9xAvkXzy1dKRJeWuu-YzyKxniJ3wa8IV69tYhoheOUS3V4_-xEW4-Hyq8wPYUWhU5mj0CnkYgSylswkPS-YIERH-bMOnYtkbibD6lO_CNSJR5kN4EhIzKMa4cukiZWLtjCqlvtwG2IMC6csiN1vWGArby_kiPXz9h3GlAQwmGxZ0R-UH5E8_xzotBdS-YOZt16Jp3hyOOXCNIexNZgXlAdZTXn2QZxcbtRQgDu51nO6EAgQZ5Pt6cW9GnTvYRHvze6qVH3IYDBv4Ni";
     private const string                        c_uriAccessToken    = "https://accounts.spotify.com/api/token";
     private const string                        c_uriApi            = "https://api.spotify.com/v1";
     private const string                        c_uriRedirect       = "http://127.0.0.1:8888/callback";

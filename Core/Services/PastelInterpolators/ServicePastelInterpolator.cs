@@ -31,19 +31,12 @@ public sealed partial class ServicePastelInterpolator() :
         uint
     {
         Red = 0u,
-        Orange,
         Yellow,
-        Lime,
         Green,
-        Turquoise,
         Cyan,
-        Teal,
         Blue,
-        Purple,
         Magenta,
-        Pink,
-        White,
-        Pastel
+        White
     }
 
     public enum RainbowColorIndexType :
@@ -121,34 +114,22 @@ public sealed partial class ServicePastelInterpolator() :
 
     private static readonly Dictionary<ColorType, Color> c_colorCodes = new()
     {
-        { _ = ColorType.Red,       _ = new Color(rgba: _ = 0xF898A4FF) },
-        { _ = ColorType.Orange,    _ = new Color(rgba: _ = 0xFBCCADFF) },
-        { _ = ColorType.Yellow,    _ = new Color(rgba: _ = 0xFDFFB6FF) },
-        { _ = ColorType.Lime,      _ = new Color(rgba: _ = 0xE4FFBBFF) },
-        { _ = ColorType.Green,     _ = new Color(rgba: _ = 0xCAFFBFFF) },
-        { _ = ColorType.Turquoise, _ = new Color(rgba: _ = 0xB3FBDEFF) },
-        { _ = ColorType.Cyan,      _ = new Color(rgba: _ = 0x9BF6FFFF) },
-        { _ = ColorType.Teal,      _ = new Color(rgba: _ = 0x9EDCFFFF) },
-        { _ = ColorType.Blue,      _ = new Color(rgba: _ = 0xA0C4FFFF) },
-        { _ = ColorType.Purple,    _ = new Color(rgba: _ = 0xD0C5FFFF) },
-        { _ = ColorType.Magenta,   _ = new Color(rgba: _ = 0xFFC6FFFF) },
-        { _ = ColorType.Pink,      _ = new Color(rgba: _ = 0xFCAFDCFF) },
+        { _ = ColorType.Red,       _ = new Color(rgba: _ = 0xFF0000FF) },
+        { _ = ColorType.Yellow,    _ = new Color(rgba: _ = 0xFFFF00FF) },
+        { _ = ColorType.Green,     _ = new Color(rgba: _ = (uint) 0x00FF00FF) },
+        { _ = ColorType.Cyan,      _ = new Color(rgba: _ = (uint) 0x00FFFFFF) },
+        { _ = ColorType.Blue,      _ = new Color(rgba: _ = (uint) 0x0000FFFF) },
+        { _ = ColorType.Magenta,   _ = new Color(rgba: _ = 0xFF00FFFF) },
         { _ = ColorType.White,     _ = new Color(rgba: _ = 0xF2F2F2FF) },
     };
     private static readonly Dictionary<ColorType, string> c_colorHexes = new()
     {
         { _ = ColorType.Red,       _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red       ].ToHtml() },
-        { _ = ColorType.Orange,    _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Orange    ].ToHtml() },
         { _ = ColorType.Yellow,    _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow    ].ToHtml() },
-        { _ = ColorType.Lime,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Lime      ].ToHtml() },
         { _ = ColorType.Green,     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green     ].ToHtml() },
-        { _ = ColorType.Turquoise, _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Turquoise ].ToHtml() },
         { _ = ColorType.Cyan,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan      ].ToHtml() },
-        { _ = ColorType.Teal,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Teal      ].ToHtml() },
         { _ = ColorType.Blue,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue      ].ToHtml() },
-        { _ = ColorType.Purple,    _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Purple    ].ToHtml() },
         { _ = ColorType.Magenta,   _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta   ].ToHtml() },
-        { _ = ColorType.Pink,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Pink      ].ToHtml() },
         { _ = ColorType.White,     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.White     ].ToHtml() },
     };
 

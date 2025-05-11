@@ -112,6 +112,7 @@ internal sealed partial class StreamEventsController() :
         string[] messages =
         [
             $"The MYTH, the LEGEND! {_ = messageMetadata.Who} just subscribed!",
+            $"{_ = messageMetadata.Who} just subscribed! Thank you so much for keeping my circuits running!",
         ];
         var index = _ = this.m_random.RandiRange(
             0, 

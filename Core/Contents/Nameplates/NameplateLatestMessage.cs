@@ -112,6 +112,7 @@ internal sealed partial class NameplateLatestMessage() :
         $"Feel free to lurk or chat!",
         $"Make sure you're following the rules.",
         $"Add SmoothDagger on Steam to play!",
+        $"Stay hydrated!",
     ];
     
     private bool                                 m_isRichTextLabelScrolling                        = false;
@@ -211,14 +212,14 @@ internal sealed partial class NameplateLatestMessage() :
                 y: 0f
             );
 
-            m_textLetters.Add(
-                key: i,
-                value: new(
-                    richTextLabel: richTextLabel,
+            this.m_textLetters.Add(
+                key:   i,
+                value: new TextLetter(
+                    richTextLabel:         richTextLabel,
                     textLetterScrollState: TextLetterScrollState.Idle,
-                    center: richTextLabel.Position.X,
-                    start: richTextLabel.Position.X + c_scrollDistance,
-                    end: richTextLabel.Position.X - c_scrollDistance - positionX
+                    center:                richTextLabel.Position.X,
+                    start:                 richTextLabel.Position.X + NameplateLatestMessage.c_scrollDistance,
+                    end:                   richTextLabel.Position.X - NameplateLatestMessage.c_scrollDistance - positionX
                 )
             );
 
@@ -229,8 +230,8 @@ internal sealed partial class NameplateLatestMessage() :
             positionX += richTextLabel.GetContentWidth();
         }
 
-        m_distanceOffScreen = positionX - c_scrollDistance;
-        m_targetX = m_initialPosition.X - m_distanceOffScreen;
+        this.m_distanceOffScreen = positionX - NameplateLatestMessage.c_scrollDistance;
+        this.m_targetX = this.m_initialPosition.X - this.m_distanceOffScreen;
     }
     
     private void DestroyTextLetters()
@@ -249,7 +250,7 @@ internal sealed partial class NameplateLatestMessage() :
         float delta
     )
     {
-        const float startRotation = c_imageIconRotation;
+        const float startRotation = NameplateLatestMessage.c_imageIconRotation;
         const float endRotation = 0f;
 
         m_imageIconElapsed += c_imageIconSpeed * delta;

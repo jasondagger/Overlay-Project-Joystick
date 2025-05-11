@@ -41,7 +41,8 @@ public sealed class ServiceJoystick() :
 	)
 	{
 		Task.Run(
-			function: async () =>
+			function:
+			async () =>
 			{
 				var json = _ = JsonHelper.Serialize(
 					@object: _ = serviceJoystickRequest
@@ -329,7 +330,7 @@ public sealed class ServiceJoystick() :
 					function: async () =>
 					{
 						await Task.Delay(3000);
-						SendRequestTest();
+						this.SendRequestTest();
 					}
 				);
 			}

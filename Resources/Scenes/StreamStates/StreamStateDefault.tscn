@@ -205,15 +205,15 @@ shader_parameter/color = Color(0.94902, 0.94902, 0.94902, 1)
 shader = ExtResource("4_7ex8q")
 shader_parameter/color = Color(0.101961, 0.101961, 0.101961, 0.815686)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qaq0q"]
-shader = ExtResource("6_28isn")
-shader_parameter/color = Color(1, 1, 1, 1)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rss2l"]
 shader = ExtResource("6_28isn")
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28i0m"]
+shader = ExtResource("6_28isn")
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qaq0q"]
 shader = ExtResource("6_28isn")
 shader_parameter/color = Color(1, 1, 1, 1)
 
@@ -234,10 +234,11 @@ anchors_preset = 0
 
 [node name="Controllers" type="Node" parent="RootControl"]
 
-[node name="SceneController" type="Node" parent="RootControl/Controllers" node_paths=PackedStringArray("Layouts", "ObsControl")]
+[node name="SceneController" type="Node" parent="RootControl/Controllers" node_paths=PackedStringArray("Layouts", "Hideable", "Rainbows")]
 script = ExtResource("2_niean")
 Layouts = [NodePath("../../LayoutDefault"), NodePath("../../LayoutCode")]
-ObsControl = NodePath("../../LayoutDefault/OBS")
+Hideable = NodePath("../../LayoutDefault/Hideable")
+Rainbows = NodePath("../../Background/Rainbows")
 
 [node name="StreamEventsController" type="Node" parent="RootControl/Controllers"]
 script = ExtResource("3_28isn")
@@ -1077,51 +1078,12 @@ offset_bottom = 398.0
 pivot_offset = Vector2(181, 200)
 script = ExtResource("33_tfyti")
 
-[node name="OBS" type="Control" parent="RootControl/LayoutDefault"]
+[node name="Hideable" type="Control" parent="RootControl/LayoutDefault"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BorderWebcam0" type="ColorRect" parent="RootControl/LayoutDefault/OBS"]
-material = SubResource("ShaderMaterial_qaq0q")
-layout_mode = 0
-offset_left = 2544.0
-offset_top = 112.0
-offset_right = 3728.0
-offset_bottom = 1024.0
-script = ExtResource("7_mjhir")
-
-[node name="BorderWebcam0BurnDown" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam0"]
-material = ExtResource("8_62sso")
-layout_mode = 0
-offset_right = 1184.0
-offset_bottom = 944.0
-script = ExtResource("7_mjhir")
-
-[node name="BorderWebcam0BurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam0"]
-material = ExtResource("9_niean")
-layout_mode = 0
-offset_left = -32.0
-offset_right = 1184.0
-offset_bottom = 912.0
-script = ExtResource("7_mjhir")
-
-[node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam0"]
-material = ExtResource("10_tjdmb")
-layout_mode = 0
-offset_right = 1216.0
-offset_bottom = 912.0
-script = ExtResource("7_mjhir")
-
-[node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam0"]
-material = ExtResource("11_xepxj")
-layout_mode = 0
-offset_top = -32.0
-offset_right = 1184.0
-offset_bottom = 912.0
-script = ExtResource("7_mjhir")
-
-[node name="BorderWebcam1" type="ColorRect" parent="RootControl/LayoutDefault/OBS"]
+[node name="BorderWebcam1" type="ColorRect" parent="RootControl/LayoutDefault/Hideable"]
 material = SubResource("ShaderMaterial_rss2l")
 layout_mode = 0
 offset_left = 2544.0
@@ -1130,14 +1092,14 @@ offset_right = 3728.0
 offset_bottom = 2048.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderWebcam1BurnDown" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam1"]
+[node name="BorderWebcam1BurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1"]
 material = ExtResource("8_62sso")
 layout_mode = 0
 offset_right = 1184.0
 offset_bottom = 944.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderWebcam1BurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam1"]
+[node name="BorderWebcam1BurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1"]
 material = ExtResource("9_niean")
 layout_mode = 0
 offset_left = -32.0
@@ -1145,14 +1107,14 @@ offset_right = 1184.0
 offset_bottom = 912.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderWebcam1BurnRight" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam1"]
+[node name="BorderWebcam1BurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1"]
 material = ExtResource("10_tjdmb")
 layout_mode = 0
 offset_right = 1216.0
 offset_bottom = 912.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderWebcam1BurnUp" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderWebcam1"]
+[node name="BorderWebcam1BurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1"]
 material = ExtResource("11_xepxj")
 layout_mode = 0
 offset_top = -32.0
@@ -1160,7 +1122,7 @@ offset_right = 1184.0
 offset_bottom = 912.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderScreenCapture" type="ColorRect" parent="RootControl/LayoutDefault/OBS"]
+[node name="BorderScreenCapture" type="ColorRect" parent="RootControl/LayoutDefault/Hideable"]
 material = SubResource("ShaderMaterial_28i0m")
 layout_mode = 0
 offset_left = 112.0
@@ -1169,7 +1131,7 @@ offset_right = 2448.0
 offset_bottom = 1440.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderScreenCaptureBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderScreenCapture"]
+[node name="BorderScreenCaptureBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture"]
 material = ExtResource("8_62sso")
 layout_mode = 0
 offset_top = 32.0
@@ -1177,7 +1139,7 @@ offset_right = 2336.0
 offset_bottom = 1360.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderScreenCaptureBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderScreenCapture"]
+[node name="BorderScreenCaptureBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture"]
 material = ExtResource("9_niean")
 layout_mode = 0
 offset_left = -32.0
@@ -1185,7 +1147,7 @@ offset_right = 2304.0
 offset_bottom = 1328.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderScreenCaptureBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderScreenCapture"]
+[node name="BorderScreenCaptureBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture"]
 material = ExtResource("10_tjdmb")
 layout_mode = 0
 offset_left = 32.0
@@ -1193,7 +1155,7 @@ offset_right = 2368.0
 offset_bottom = 1328.0
 script = ExtResource("7_mjhir")
 
-[node name="BorderScreenCaptureBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/OBS/BorderScreenCapture"]
+[node name="BorderScreenCaptureBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture"]
 material = ExtResource("11_xepxj")
 layout_mode = 0
 offset_top = -32.0
@@ -1201,34 +1163,13 @@ offset_right = 2336.0
 offset_bottom = 1296.0
 script = ExtResource("7_mjhir")
 
-[node name="MockUp" type="Control" parent="RootControl/LayoutDefault/OBS"]
+[node name="MockUp" type="Control" parent="RootControl/LayoutDefault/Hideable"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Webcam0" type="ColorRect" parent="RootControl/LayoutDefault/OBS/MockUp"]
-layout_mode = 0
-offset_left = 2560.0
-offset_top = 128.0
-offset_right = 3712.0
-offset_bottom = 1008.0
-color = Color(0.101961, 0.101961, 0.101961, 1)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/OBS/MockUp/Webcam0"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 880.0
-bbcode_enabled = true
-text = "[color=#ffffff][font_size=48]
-
-
-
-
-
-[center]WEBCAM 0"
-
-[node name="Webcam1" type="ColorRect" parent="RootControl/LayoutDefault/OBS/MockUp"]
+[node name="Webcam1" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/MockUp"]
 layout_mode = 0
 offset_left = 2560.0
 offset_top = 1152.0
@@ -1236,7 +1177,7 @@ offset_right = 3712.0
 offset_bottom = 2032.0
 color = Color(0.101961, 0.101961, 0.101961, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/OBS/MockUp/Webcam1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/Hideable/MockUp/Webcam1"]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 880.0
@@ -1249,7 +1190,7 @@ text = "[color=#ffffff][font_size=48]
 
 [center]WEBCAM 1"
 
-[node name="ScreenCapture" type="ColorRect" parent="RootControl/LayoutDefault/OBS/MockUp"]
+[node name="ScreenCapture" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/MockUp"]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 128.0
@@ -1257,7 +1198,7 @@ offset_right = 2432.0
 offset_bottom = 1424.0
 color = Color(0.101961, 0.101961, 0.101961, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/OBS/MockUp/ScreenCapture"]
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/Hideable/MockUp/ScreenCapture"]
 layout_mode = 0
 offset_right = 2304.0
 offset_bottom = 1296.0
@@ -1272,6 +1213,71 @@ text = "[color=#ffffff][font_size=48]
 
 
 [center]SCREEN CAPTURE"
+
+[node name="BorderWebcam0" type="ColorRect" parent="RootControl/LayoutDefault"]
+material = SubResource("ShaderMaterial_qaq0q")
+layout_mode = 0
+offset_left = 2544.0
+offset_top = 112.0
+offset_right = 3728.0
+offset_bottom = 1024.0
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnDown" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0"]
+material = ExtResource("8_62sso")
+layout_mode = 0
+offset_right = 1184.0
+offset_bottom = 944.0
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0"]
+material = ExtResource("9_niean")
+layout_mode = 0
+offset_left = -32.0
+offset_right = 1184.0
+offset_bottom = 912.0
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0"]
+material = ExtResource("10_tjdmb")
+layout_mode = 0
+offset_right = 1216.0
+offset_bottom = 912.0
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0"]
+material = ExtResource("11_xepxj")
+layout_mode = 0
+offset_top = -32.0
+offset_right = 1184.0
+offset_bottom = 912.0
+script = ExtResource("7_mjhir")
+
+[node name="MockUp" type="Control" parent="RootControl/LayoutDefault"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Webcam0" type="ColorRect" parent="RootControl/LayoutDefault/MockUp"]
+layout_mode = 0
+offset_left = 2560.0
+offset_top = 128.0
+offset_right = 3712.0
+offset_bottom = 1008.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/MockUp/Webcam0"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 880.0
+bbcode_enabled = true
+text = "[color=#ffffff][font_size=48]
+
+
+
+
+
+[center]WEBCAM 0"
 
 [node name="LayoutCode" type="Control" parent="RootControl"]
 visible = false

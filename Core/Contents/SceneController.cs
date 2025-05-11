@@ -15,7 +15,8 @@ public sealed partial class SceneController() :
     Node()
 {
     [Export] public Array<Control> Layouts = [];
-    [Export] public Control ObsControl     = null;
+    [Export] public Control Hideable       = null;
+    [Export] public Control Rainbows       = null;
     
     public override void _Ready()
     {
@@ -48,7 +49,8 @@ public sealed partial class SceneController() :
     {
         this.HideLayouts();
         _ = this.Layouts[_ = (int)LayoutType.Default].Visible = _ = true;
-        ObsControl.Visible = _ = false;
+        Hideable.Visible = _ = false;
+        Rainbows.Visible = _ = false;
 
         _ = Task.Run(
             function: 
@@ -95,7 +97,7 @@ public sealed partial class SceneController() :
     {
         this.HideLayouts();
         _ = this.Layouts[_ = (int)LayoutType.Code].Visible = _ = true;
-
+        Rainbows.Visible = _ = true;
         // TODO: Can I connect to obs?
         //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
         //serviceOBS.ChangeScene(
@@ -109,7 +111,8 @@ public sealed partial class SceneController() :
     {
         this.HideLayouts();
         _ = this.Layouts[_ = (int)LayoutType.Default].Visible = _ = true;
-        ObsControl.Visible = _ = true;
+        Hideable.Visible = _ = true;
+        Rainbows.Visible = _ = true;
 
         // TODO: Can I connect to obs?
         //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();

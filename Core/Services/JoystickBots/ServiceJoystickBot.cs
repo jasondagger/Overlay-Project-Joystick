@@ -1,13 +1,10 @@
 
-using System.Threading.Tasks;
-using Godot;
 using Overlay.Core.Contents.Chats;
 using Overlay.Core.Services.Databases.Tasks;
 using Overlay.Core.Services.Databases.Tasks.Retrieves;
 using Overlay.Core.Services.Joysticks;
-using Overlay.Core.Services.Joysticks.Payloads;
-using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
 using Overlay.Core.Services.Joysticks.Requests;
+using System.Threading.Tasks;
 
 namespace Overlay.Core.Services.JoystickBots;
 

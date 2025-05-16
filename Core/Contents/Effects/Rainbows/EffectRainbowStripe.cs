@@ -6,7 +6,7 @@ namespace Overlay.Core.Contents.Effects;
 public partial class EffectRainbowStripe() :
     ColorRect()
 {
-    [Export] public ServicePastelInterpolator.RainbowColorIndexType RainbowColorIndex = _ = ServicePastelInterpolator.RainbowColorIndexType.Color0;
+    [Export] public ServicePastelInterpolator.RainbowColorIndexType RainbowColorIndex = ServicePastelInterpolator.RainbowColorIndexType.Color0;
     
     public override void _Process(
         double delta
@@ -22,22 +22,22 @@ public partial class EffectRainbowStripe() :
     }
     
     private ServicePastelInterpolator m_servicePastelInterpolator = null;
-    private ShaderMaterial m_material = null;
+    private ShaderMaterial            m_material                  = null;
     
     private void RetrieveResources()
     {
-        _ = this.m_servicePastelInterpolator = _ = Services.Services.GetService<ServicePastelInterpolator>();
+        this.m_servicePastelInterpolator = Services.Services.GetService<ServicePastelInterpolator>();
     }
     
     private void SetShaderMaterial()
     {
-        _ = this.m_material = _ = (ShaderMaterial)this.Get(
-            property: _ = $"material"
+        this.m_material = (ShaderMaterial)this.Get(
+            property: $"material"
         );
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = this.RainbowColorIndex	
+            param: $"color",
+            value: this.m_servicePastelInterpolator.GetColor(
+                rainbowColorIndexType: this.RainbowColorIndex
             )
         );
     }
@@ -45,9 +45,9 @@ public partial class EffectRainbowStripe() :
     private void UpdateShaderResources()
     {
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = this.RainbowColorIndex
+            param: $"color",
+            value: this.m_servicePastelInterpolator.GetColor(
+                rainbowColorIndexType: this.RainbowColorIndex
             )
         );
     }

@@ -9,15 +9,15 @@ namespace Overlay.Core.Contents.Effects.Rainbows;
 public sealed partial class EffectRainbowExtender() : 
 	Control()
 {
-	[Export] public ColorRect[] ColorRectBorders  = _ = new ColorRect[2];
-	[Export] public ColorRect[] ColorRectRainbows = _ = new ColorRect[6];
+	[Export] public ColorRect[] ColorRectBorders  = new ColorRect[2];
+	[Export] public ColorRect[] ColorRectRainbows = new ColorRect[6];
 
 	public override void _Process(
 		double delta
 	)
 	{
 		this.ProcessRainbowState(
-			delta: _ = (float)delta
+			delta: (float)delta
 		);
 	}
 
@@ -76,16 +76,16 @@ public sealed partial class EffectRainbowExtender() :
 		new RainbowColorRect(),
 		new RainbowColorRect()
 	];
-	private RainbowColorType[]                                      m_rainbowColorAnimationOrder       = _ = EnumHelper.GetRandomizedValues<RainbowColorType>();
-	private RainbowStateType                                        m_currentRainbowState              = _ = RainbowStateType.Shown;
-	private float                                                   m_elapsed                          = _ = 0f;
-	private float                                                   m_targetElapsed                    = _ = 3;
+	private RainbowColorType[]                                      m_rainbowColorAnimationOrder       = EnumHelper.GetRandomizedValues<RainbowColorType>();
+	private RainbowStateType                                        m_currentRainbowState              = RainbowStateType.Shown;
+	private float                                                   m_elapsed                          = 0f;
+	private float                                                   m_targetElapsed                    = 3;
 	
 	private static float GenerateRandomTargetElapsedTimeForShown()
 	{
-		return _ = EffectRainbowExtender.s_randomNumberGenerator.RandfRange(
-			from: _ = EffectRainbowExtender.c_targetElapsedToShowMin,
-			to:   _ = EffectRainbowExtender.c_targetElapsedToShowMax
+		return EffectRainbowExtender.s_randomNumberGenerator.RandfRange(
+			from: EffectRainbowExtender.c_targetElapsedToShowMin,
+			to:   EffectRainbowExtender.c_targetElapsedToShowMax
 		);
 	}
 
@@ -93,15 +93,15 @@ public sealed partial class EffectRainbowExtender() :
 		float delta
 	)
 	{
-		_ = this.m_elapsed += _ = delta;
-		if (_ = this.m_elapsed < this.m_targetElapsed)
+		this.m_elapsed += delta;
+		if (this.m_elapsed < this.m_targetElapsed)
 		{
 			return;
 		}
 		
-		_ = this.m_currentRainbowState        = _ = RainbowStateType.Show;
-		_ = this.m_elapsed                    = _ = 0f;
-		_ = this.m_rainbowColorAnimationOrder = _ = EnumHelper.GetRandomizedValues<RainbowColorType>();
+		this.m_currentRainbowState        = RainbowStateType.Show;
+		this.m_elapsed                    = 0f;
+		this.m_rainbowColorAnimationOrder = EnumHelper.GetRandomizedValues<RainbowColorType>();
 		
 		this.RandomizeColorRectDelayTimes();
 	}
@@ -110,46 +110,46 @@ public sealed partial class EffectRainbowExtender() :
 		float delta
 	)
 	{
-		_ = this.m_elapsed += _ = delta;
-		var offset = _ = delta * EffectRainbowExtender.c_colorRectSpeed;
+		this.m_elapsed += delta;
+		var offset = delta * EffectRainbowExtender.c_colorRectSpeed;
 		
 		// update each color bar position
 		foreach (var rainbowColorType in this.m_rainbowColorAnimationOrder)
 		{
-			var rainbowColorRect = _ = this.m_rainbowColorRects[key: _ = rainbowColorType];
+			var rainbowColorRect = this.m_rainbowColorRects[key: rainbowColorType];
 
-			if (_ = this.m_elapsed < rainbowColorRect.Delay)
+			if (this.m_elapsed < rainbowColorRect.Delay)
 			{
 				continue;
 			}
 			
-			var colorRect = _ = rainbowColorRect.ColorRect;
-			var position  = _ = colorRect.Position;
+			var colorRect = rainbowColorRect.ColorRect;
+			var position  = colorRect.Position;
 
-			_ = position.Y += _ = offset;
+			position.Y += offset;
 				
-			_ = colorRect.Position = _ = position;
+			colorRect.Position = position;
 		}
 		
 		// update each white border position
 		foreach (var rainbowColorRectBorder in this.m_rainbowColorRectBorders)
 		{
-			if (_ = this.m_elapsed < rainbowColorRectBorder.Delay)
+			if (this.m_elapsed < rainbowColorRectBorder.Delay)
 			{
 				continue;
 			}
 			
-			var colorRect = _ = rainbowColorRectBorder.ColorRect;
-			var position  = _ = colorRect.Position;
+			var colorRect = rainbowColorRectBorder.ColorRect;
+			var position  = colorRect.Position;
 
-			_ = position.Y += _ = offset;
+			position.Y += offset;
 				
-			_ = colorRect.Position = _ = position;
+			colorRect.Position = position;
 		}
 
-		var colorRectBorder = _ = this.ColorRectBorders[1];
-		var colorRectBorderPosition = _ = colorRectBorder.Position;
-		if (_ = colorRectBorderPosition.Y < EffectRainbowExtender.c_lengthOfColorRect)
+		var colorRectBorder = this.ColorRectBorders[1];
+		var colorRectBorderPosition = colorRectBorder.Position;
+		if (colorRectBorderPosition.Y < EffectRainbowExtender.c_lengthOfColorRect)
 		{
 			return;
 		}
@@ -157,99 +157,99 @@ public sealed partial class EffectRainbowExtender() :
 		// reset positions & sizes
 		foreach (var colorRect in this.ColorRectBorders)
 		{
-			var position  = _ = colorRect.Position;
-			var size      = _ = colorRect.Size;
+			var position  = colorRect.Position;
+			var size      = colorRect.Size;
 
-			position.Y = _ = 0f;
-			size.X     = _ = 0f;
+			position.Y = 0f;
+			size.X     = 0f;
 				
-			_ = colorRect.Position = _ = position;
-			_ = colorRect.Size     = _ = size;
+			colorRect.Position = position;
+			colorRect.Size     = size;
 		}
 		foreach (var colorRect in this.ColorRectRainbows)
 		{
-			var position  = _ = colorRect.Position;
-			var size      = _ = colorRect.Size;
+			var position  = colorRect.Position;
+			var size      = colorRect.Size;
 
-			position.Y = _ = 0f;
-			size.X     = _ = 0f;
+			position.Y = 0f;
+			size.X     = 0f;
 				
-			_ = colorRect.Position = _ = position;
-			_ = colorRect.Size     = _ = size;
+			colorRect.Position = position;
+			colorRect.Size     = size;
 		}
 
 		// move to hidden state
-		_ = this.m_currentRainbowState = _ = RainbowStateType.Hidden;
-		_ = this.m_elapsed             = _ = 0f;
-		_ = this.m_targetElapsed       = _ = EffectRainbowExtender.c_targetElapsedToStayHidden;
+		this.m_currentRainbowState = RainbowStateType.Hidden;
+		this.m_elapsed             = 0f;
+		this.m_targetElapsed       = EffectRainbowExtender.c_targetElapsedToStayHidden;
 	}
 	
 	private void HandleRainbowShow(
 		float delta
 	)
 	{
-		_ = this.m_elapsed += _ = delta;
-		var offset = _ = delta * EffectRainbowExtender.c_colorRectSpeed;
+		this.m_elapsed += delta;
+		var offset = delta * EffectRainbowExtender.c_colorRectSpeed;
 		
 		// update each bar size
 		foreach (var rainbowColorType in this.m_rainbowColorAnimationOrder)
 		{
-			var rainbowColorRect = _ = this.m_rainbowColorRects[key: _ = rainbowColorType];
+			var rainbowColorRect = this.m_rainbowColorRects[key: rainbowColorType];
 
-			if (_ = this.m_elapsed < rainbowColorRect.Delay)
+			if (this.m_elapsed < rainbowColorRect.Delay)
 			{
 				continue;
 			}
 			
-			var colorRect = _ = rainbowColorRect.ColorRect;
-			var size      = _ = colorRect.Size;
+			var colorRect = rainbowColorRect.ColorRect;
+			var size      = colorRect.Size;
 
-			_ = size.X += _ = offset;
+			size.X += offset;
 				
-			_ = colorRect.Size = _ = size;
+			colorRect.Size = size;
 		}
 		
 		// update each white border size
 		foreach (var rainbowColorRectBorder in this.m_rainbowColorRectBorders)
 		{
-			if (_ = this.m_elapsed < rainbowColorRectBorder.Delay)
+			if (this.m_elapsed < rainbowColorRectBorder.Delay)
 			{
 				continue;
 			}
 			
-			var colorRect = _ = rainbowColorRectBorder.ColorRect;
-			var size      = _ = colorRect.Size;
+			var colorRect = rainbowColorRectBorder.ColorRect;
+			var size      = colorRect.Size;
 
-			_ = size.X += _ = offset;
+			size.X += offset;
 				
-			_ = colorRect.Size = _ = size;
+			colorRect.Size = size;
 		}
 
-		var colorRectBorder     = _ = this.ColorRectBorders[1];
-		var colorRectBorderSize = _ = colorRectBorder.Size;
-		if (_ = colorRectBorderSize.X < EffectRainbowExtender.c_lengthOfColorRect)
+		var colorRectBorder     = this.ColorRectBorders[1];
+		var colorRectBorderSize = colorRectBorder.Size;
+		if (colorRectBorderSize.X < EffectRainbowExtender.c_lengthOfColorRect)
 		{
 			return;
 		}
 		
-		_ = this.m_currentRainbowState = _ = RainbowStateType.Shown;
-		_ = this.m_elapsed             = _ = 0f;
-		_ = this.m_targetElapsed       = _ = EffectRainbowExtender.GenerateRandomTargetElapsedTimeForShown();
+		this.m_currentRainbowState = RainbowStateType.Shown;
+		this.m_elapsed             = 0f;
+		this.m_targetElapsed       = EffectRainbowExtender.GenerateRandomTargetElapsedTimeForShown();
 	}
 
 	private void HandleRainbowShown(
 		float delta
 	)
 	{
-		_ = this.m_elapsed += _ = delta;
-		if (_ = this.m_elapsed < this.m_targetElapsed)
+		this.m_elapsed += delta;
+		if (this.m_elapsed < this.m_targetElapsed)
 		{
 			return;
 		}
 		
-		_ = this.m_currentRainbowState        = _ = RainbowStateType.Hide;
-		_ = this.m_elapsed                    = _ = 0f;
-		_ = this.m_rainbowColorAnimationOrder = _ = EnumHelper.GetRandomizedValues<RainbowColorType>();
+		this.m_currentRainbowState        = RainbowStateType.Hide;
+		this.m_elapsed                    = 0f;
+		this.m_rainbowColorAnimationOrder = EnumHelper.GetRandomizedValues<RainbowColorType>();
 
 		this.RandomizeColorRectDelayTimes();
 	}
@@ -258,29 +258,29 @@ public sealed partial class EffectRainbowExtender() :
 		float delta
 	)
 	{
-		switch (_ = this.m_currentRainbowState)
+		switch (this.m_currentRainbowState)
 		{
 			case RainbowStateType.Hidden:
 				this.HandleRainbowHidden(
-					delta: _ = delta
+					delta: delta
 				);
 				break;
 			
 			case RainbowStateType.Hide:
 				this.HandleRainbowHide(
-					delta: _ = delta
+					delta: delta
 				);
 				break;
 			
 			case RainbowStateType.Show:
 				this.HandleRainbowShow(
-					delta: _ = delta
+					delta: delta
 				);
 				break;
 			
 			case RainbowStateType.Shown:
 				this.HandleRainbowShown(
-					delta: _ = delta
+					delta: delta
 				);
 				break;
 			
@@ -291,44 +291,44 @@ public sealed partial class EffectRainbowExtender() :
 	
 	private void RandomizeColorRectDelayTimes()
 	{
-		var offset = _ = 0f;
+		var offset = 0f;
 		foreach (var rainbowColorType in this.m_rainbowColorAnimationOrder)
 		{
-			_ = this.m_rainbowColorRects[key: _ = rainbowColorType].Delay = _ = offset;
+			this.m_rainbowColorRects[key: rainbowColorType].Delay = offset;
 			
-			_ = offset += _ = EffectRainbowExtender.s_randomNumberGenerator.RandfRange(
-				from: _ = EffectRainbowExtender.c_delayTimerMin,
-				to:   _ = EffectRainbowExtender.c_delayTimerMax
+			offset += EffectRainbowExtender.s_randomNumberGenerator.RandfRange(
+				from: EffectRainbowExtender.c_delayTimerMin,
+				to:   EffectRainbowExtender.c_delayTimerMax
 			);
 		}
 
 		foreach (var rainbowColorRectBorder in this.m_rainbowColorRectBorders)
 		{
-			_ = rainbowColorRectBorder.Delay = _ = offset;
+			rainbowColorRectBorder.Delay = offset;
 			
-			_ = offset += _ = EffectRainbowExtender.s_randomNumberGenerator.RandfRange(
-				from: _ = EffectRainbowExtender.c_delayTimerMin,
-				to:   _ = EffectRainbowExtender.c_delayTimerMax
+			offset += EffectRainbowExtender.s_randomNumberGenerator.RandfRange(
+				from: EffectRainbowExtender.c_delayTimerMin,
+				to:   EffectRainbowExtender.c_delayTimerMax
 			);
 		}
 	}
 
 	private void RetrieveResources()
 	{
-		var rainbowColorTypes = _ = Enum.GetValues<RainbowColorType>();
+		var rainbowColorTypes = Enum.GetValues<RainbowColorType>();
 		foreach (var rainbowColorType in rainbowColorTypes)
 		{
-			var index     = _ = (int) rainbowColorType;
-			var colorRect = _ = this.ColorRectRainbows[_ = index];
+			var index     = (int) rainbowColorType;
+			var colorRect = this.ColorRectRainbows[index];
 			
-			_ = this.m_rainbowColorRects[
-				key: _ = rainbowColorType
-			].ColorRect = _ = colorRect;
+			this.m_rainbowColorRects[
+				key: rainbowColorType
+			].ColorRect = colorRect;
 		}
 
-		for (var i = _ = 0; i < this.ColorRectBorders.Length; i++)
+		for (var i = 0; i < this.ColorRectBorders.Length; i++)
 		{
-			_ = this.m_rainbowColorRectBorders[i].ColorRect = _ = this.ColorRectBorders[i];
+			this.m_rainbowColorRectBorders[i].ColorRect = this.ColorRectBorders[i];
 		}
 	}
 }

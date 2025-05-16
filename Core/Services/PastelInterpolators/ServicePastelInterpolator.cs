@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace Overlay.Core.Services.PastelInterpolators;
 
-public sealed partial class ServicePastelInterpolator() :
+public sealed class ServicePastelInterpolator() :
     IService
 {
     Task IService.Setup()
     {
         this.StartColorInterpolation();
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     Task IService.Start()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     Task IService.Stop()
     {
         this.Shutdown();
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     public enum ColorType :
@@ -54,15 +54,15 @@ public sealed partial class ServicePastelInterpolator() :
         RainbowColorIndexType rainbowColorIndexType
     )
     {
-        return _ = this.m_rainbowColorDatas[key: _ = rainbowColorIndexType].Current;
+        return this.m_rainbowColorDatas[key: rainbowColorIndexType].Current;
     }
 
     public string GetColorAsHex(
         RainbowColorIndexType rainbowColorIndexType
     )
     {
-        return _ = this.GetColor(
-            rainbowColorIndexType: _ = rainbowColorIndexType    
+        return this.GetColor(
+            rainbowColorIndexType: rainbowColorIndexType    
         ).ToHtml();
     }
 
@@ -70,14 +70,14 @@ public sealed partial class ServicePastelInterpolator() :
         ColorType colorType
     )
     {
-        return _ = ServicePastelInterpolator.c_colorHexes[key: _ = colorType];
+        return ServicePastelInterpolator.c_colorHexes[key: colorType];
     }
     
     public static Color GetColorByColorType(
         ColorType colorType
     )
     {
-        return _ = ServicePastelInterpolator.c_colorCodes[key: _ = colorType];
+        return ServicePastelInterpolator.c_colorCodes[key: colorType];
     }
     
     private enum ColorInterpolationType :
@@ -93,10 +93,10 @@ public sealed partial class ServicePastelInterpolator() :
 
     private sealed class RainbowColorIndexData
     {
-        public Color                  Current           { get; set; } = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.White];
-        public Color                  Previous          { get; set; } = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.White];
-        public float                  Interpolation     { get; set; } = _ = 0f;
-        public ColorInterpolationType InterpolationType { get; set; } = _ = ColorInterpolationType.RedToYellow;
+        public Color                  Current           { get; set; } = ServicePastelInterpolator.c_colorCodes[key: ColorType.White];
+        public Color                  Previous          { get; set; } = ServicePastelInterpolator.c_colorCodes[key: ColorType.White];
+        public float                  Interpolation     { get; set; } = 0f;
+        public ColorInterpolationType InterpolationType { get; set; } = ColorInterpolationType.RedToYellow;
 
         public RainbowColorIndexData(
             Color                  current,
@@ -105,98 +105,98 @@ public sealed partial class ServicePastelInterpolator() :
             ColorInterpolationType interpolationType
         )
         {
-            _ = this.Current           = _ = current;
-            _ = this.Previous          = _ = previous;
-            _ = this.Interpolation     = _ = interpolation;
-            _ = this.InterpolationType = _ = interpolationType;
+            this.Current           = current;
+            this.Previous          = previous;
+            this.Interpolation     = interpolation;
+            this.InterpolationType = interpolationType;
         }
     }
 
     private static readonly Dictionary<ColorType, Color> c_colorCodes = new()
     {
-        { _ = ColorType.Red,       _ = new Color(rgba: _ = 0xFF0000FF) },
-        { _ = ColorType.Yellow,    _ = new Color(rgba: _ = 0xFFFF00FF) },
-        { _ = ColorType.Green,     _ = new Color(rgba: _ = (uint) 0x00FF00FF) },
-        { _ = ColorType.Cyan,      _ = new Color(rgba: _ = (uint) 0x00FFFFFF) },
-        { _ = ColorType.Blue,      _ = new Color(rgba: _ = (uint) 0x0000FFFF) },
-        { _ = ColorType.Magenta,   _ = new Color(rgba: _ = 0xFF00FFFF) },
-        { _ = ColorType.White,     _ = new Color(rgba: _ = 0xF2F2F2FF) },
+        { ColorType.Red,       new Color(rgba: 0xFF0000FF) },
+        { ColorType.Yellow,    new Color(rgba: 0xFFFF00FF) },
+        { ColorType.Green,     new Color(rgba: (uint) 0x00FF00FF) },
+        { ColorType.Cyan,      new Color(rgba: (uint) 0x00FFFFFF) },
+        { ColorType.Blue,      new Color(rgba: (uint) 0x0000FFFF) },
+        { ColorType.Magenta,   new Color(rgba: 0xFF00FFFF) },
+        { ColorType.White,     new Color(rgba: 0xF2F2F2FF) },
     };
     private static readonly Dictionary<ColorType, string> c_colorHexes = new()
     {
-        { _ = ColorType.Red,       _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red       ].ToHtml() },
-        { _ = ColorType.Yellow,    _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow    ].ToHtml() },
-        { _ = ColorType.Green,     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green     ].ToHtml() },
-        { _ = ColorType.Cyan,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan      ].ToHtml() },
-        { _ = ColorType.Blue,      _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue      ].ToHtml() },
-        { _ = ColorType.Magenta,   _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta   ].ToHtml() },
-        { _ = ColorType.White,     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.White     ].ToHtml() },
+        { ColorType.Red,       ServicePastelInterpolator.c_colorCodes[key: ColorType.Red       ].ToHtml() },
+        { ColorType.Yellow,    ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow    ].ToHtml() },
+        { ColorType.Green,     ServicePastelInterpolator.c_colorCodes[key: ColorType.Green     ].ToHtml() },
+        { ColorType.Cyan,      ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan      ].ToHtml() },
+        { ColorType.Blue,      ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue      ].ToHtml() },
+        { ColorType.Magenta,   ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta   ].ToHtml() },
+        { ColorType.White,     ServicePastelInterpolator.c_colorCodes[key: ColorType.White     ].ToHtml() },
     };
 
-    private const float c_colorInterpolationRate = 0.25f;
-    private bool        m_shutdownRequested      = _ = false;
+    private const float c_colorInterpolationRate = 0.5f;
+    private bool        m_shutdownRequested      = false;
 
     private readonly Dictionary<RainbowColorIndexType, RainbowColorIndexData> m_rainbowColorDatas = new()
     {
         {
-            _ = RainbowColorIndexType.Color0,
-            _ = new RainbowColorIndexData(
-                current:           _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red],
-                previous:          _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red],
-                interpolation:     _ = 0f,
-                interpolationType: _ = ColorInterpolationType.RedToYellow
+            RainbowColorIndexType.Color0,
+            new RainbowColorIndexData(
+                current:           ServicePastelInterpolator.c_colorCodes[key: ColorType.Red],
+                previous:          ServicePastelInterpolator.c_colorCodes[key: ColorType.Red],
+                interpolation:     0f,
+                interpolationType: ColorInterpolationType.RedToYellow
             )
         },
         {
-            _ = RainbowColorIndexType.Color1,
-            _ = new RainbowColorIndexData(
-                current:           _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow],
-                previous:          _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow],
-                interpolation:     _ = 0f,
-                interpolationType: _ = ColorInterpolationType.YellowToGreen
+            RainbowColorIndexType.Color1,
+            new RainbowColorIndexData(
+                current:           ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow],
+                previous:          ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow],
+                interpolation:     0f,
+                interpolationType: ColorInterpolationType.YellowToGreen
             )
         },
         {
-            _ = RainbowColorIndexType.Color2,
-            _ = new RainbowColorIndexData(
-                current:           _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green],
-                previous:          _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green],
-                interpolation:     _ = 0f,
-                interpolationType: _ = ColorInterpolationType.GreenToCyan
+            RainbowColorIndexType.Color2,
+            new RainbowColorIndexData(
+                current:           ServicePastelInterpolator.c_colorCodes[key: ColorType.Green],
+                previous:          ServicePastelInterpolator.c_colorCodes[key: ColorType.Green],
+                interpolation:     0f,
+                interpolationType: ColorInterpolationType.GreenToCyan
             )
         },
         {
-            _ = RainbowColorIndexType.Color3,
-            _ = new RainbowColorIndexData(
-                current:           _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan],
-                previous:          _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan],
-                interpolation:     _ = 0f,
-                interpolationType: _ = ColorInterpolationType.CyanToBlue
+            RainbowColorIndexType.Color3,
+            new RainbowColorIndexData(
+                current:           ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan],
+                previous:          ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan],
+                interpolation:     0f,
+                interpolationType: ColorInterpolationType.CyanToBlue
             )
         },
         {
-            _ = RainbowColorIndexType.Color4,
-            _ = new RainbowColorIndexData(
-                current:           _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue],
-                previous:          _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue],
-                interpolation:     _ = 0f,
-                interpolationType: _ = ColorInterpolationType.BlueToMagenta
+            RainbowColorIndexType.Color4,
+            new RainbowColorIndexData(
+                current:           ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue],
+                previous:          ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue],
+                interpolation:     0f,
+                interpolationType: ColorInterpolationType.BlueToMagenta
             )
         },
         {
-            _ = RainbowColorIndexType.Color5,
-            _ = new RainbowColorIndexData(
-                current:           _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta],
-                previous:          _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta],
-                interpolation:     _ = 0f,
-                interpolationType: _ = ColorInterpolationType.MagentaToRed
+            RainbowColorIndexType.Color5,
+            new RainbowColorIndexData(
+                current:           ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta],
+                previous:          ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta],
+                interpolation:     0f,
+                interpolationType: ColorInterpolationType.MagentaToRed
             )
         }
     };
 
     private void Shutdown()
     {
-        _ = this.m_shutdownRequested = _ = true;
+        this.m_shutdownRequested = true;
     }
     
     private void StartColorInterpolation()
@@ -204,18 +204,18 @@ public sealed partial class ServicePastelInterpolator() :
         Task.Run(
             action: () =>
             {
-                var stopwatch = _ = new Stopwatch();
+                var stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                var lastTime = _ = 0D;
-                while (_ = this.m_shutdownRequested is false)
+                var lastTime = 0D;
+                while (this.m_shutdownRequested is false)
                 {
-                    var currentTime = _ = stopwatch.Elapsed.TotalSeconds;
-                    var deltaTime   = _ = currentTime - lastTime;
-                    lastTime        = _ = currentTime;
+                    var currentTime = stopwatch.Elapsed.TotalSeconds;
+                    var deltaTime   = currentTime - lastTime;
+                    lastTime        = currentTime;
                     
                     this.UpdateColor(
-                        delta: _ = (float)deltaTime
+                        delta: (float)deltaTime
                     );
                 }
             }
@@ -226,105 +226,105 @@ public sealed partial class ServicePastelInterpolator() :
         float delta
     )
     {
-        var rainbowColorIndexTypes = _ = Enum.GetValues<RainbowColorIndexType>();
+        var rainbowColorIndexTypes = Enum.GetValues<RainbowColorIndexType>();
         foreach (var rainbowColorIndexType in rainbowColorIndexTypes)
         {
-            var rainbowColorIndexData  = _ = this.m_rainbowColorDatas[key: rainbowColorIndexType];
-            var currentColor           = _ = rainbowColorIndexData.Current;
-            var previousColor          = _ = rainbowColorIndexData.Previous;
-            var colorInterpolation     = _ = rainbowColorIndexData.Interpolation;
-            var colorInterpolationType = _ = rainbowColorIndexData.InterpolationType;
+            var rainbowColorIndexData  = this.m_rainbowColorDatas[key: rainbowColorIndexType];
+            var currentColor           = rainbowColorIndexData.Current;
+            var previousColor          = rainbowColorIndexData.Previous;
+            var colorInterpolation     = rainbowColorIndexData.Interpolation;
+            var colorInterpolationType = rainbowColorIndexData.InterpolationType;
 
-            _ = colorInterpolation += _ = ServicePastelInterpolator.c_colorInterpolationRate * delta;
-            switch (_ = colorInterpolationType)
+            colorInterpolation += ServicePastelInterpolator.c_colorInterpolationRate * delta;
+            switch (colorInterpolationType)
             {
                 case ColorInterpolationType.RedToYellow:
-                    _ = currentColor = _ = previousColor.Lerp(
-                        to:     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow],
-                        weight: _ = colorInterpolation
+                    currentColor = previousColor.Lerp(
+                        to:     ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow],
+                        weight: colorInterpolation
                     );
 
-                    if (_ = colorInterpolation >= 1f)
+                    if (colorInterpolation >= 1f)
                     {
-                        _ = colorInterpolation     = _ = 0f;
-                        _ = currentColor           = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow];
-                        _ = previousColor          = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Yellow];
-                        _ = colorInterpolationType = _ = ColorInterpolationType.YellowToGreen;
+                        colorInterpolation     = 0f;
+                        currentColor           = ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow];
+                        previousColor          = ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow];
+                        colorInterpolationType = ColorInterpolationType.YellowToGreen;
                     }
                     break;
 
                 case ColorInterpolationType.YellowToGreen:
-                    _ = currentColor = _ = previousColor.Lerp(
-                        to:     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green],
-                        weight: _ = colorInterpolation
+                    currentColor = previousColor.Lerp(
+                        to:     ServicePastelInterpolator.c_colorCodes[key: ColorType.Green],
+                        weight: colorInterpolation
                     );
 
-                    if (_ = colorInterpolation >= 1f)
+                    if (colorInterpolation >= 1f)
                     {
-                        _ = colorInterpolation     = _ = 0f;
-                        _ = currentColor           = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green];
-                        _ = previousColor          = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Green];
-                        _ = colorInterpolationType = _ = ColorInterpolationType.GreenToCyan;
+                        colorInterpolation     = 0f;
+                        currentColor           = ServicePastelInterpolator.c_colorCodes[key: ColorType.Green];
+                        previousColor          = ServicePastelInterpolator.c_colorCodes[key: ColorType.Green];
+                        colorInterpolationType = ColorInterpolationType.GreenToCyan;
                     }
                     break;
 
                 case ColorInterpolationType.GreenToCyan:
-                    _ = currentColor = _ = previousColor.Lerp(
-                        to:     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan],
-                        weight: _ = colorInterpolation
+                    currentColor = previousColor.Lerp(
+                        to:     ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan],
+                        weight: colorInterpolation
                     );
 
-                    if (_ = colorInterpolation >= 1f)
+                    if (colorInterpolation >= 1f)
                     {
-                        _ = colorInterpolation     = _ = 0f;
-                        _ = currentColor           = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan];
-                        _ = previousColor          = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Cyan];
-                        _ = colorInterpolationType = _ = ColorInterpolationType.CyanToBlue;
+                        colorInterpolation     = 0f;
+                        currentColor           = ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan];
+                        previousColor          = ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan];
+                        colorInterpolationType = ColorInterpolationType.CyanToBlue;
                     }
                     break;
 
                 case ColorInterpolationType.CyanToBlue:
-                    _ = currentColor = _ = previousColor.Lerp(
-                        to:     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue],
-                        weight: _ = colorInterpolation
+                    currentColor = previousColor.Lerp(
+                        to:     ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue],
+                        weight: colorInterpolation
                     );
 
-                    if (_ = colorInterpolation >= 1f)
+                    if (colorInterpolation >= 1f)
                     {
-                        _ = colorInterpolation     = _ = 0f;
-                        _ = currentColor           = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue];
-                        _ = previousColor          = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Blue];
-                        _ = colorInterpolationType = _ = ColorInterpolationType.BlueToMagenta;
+                        colorInterpolation     = 0f;
+                        currentColor           = ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue];
+                        previousColor          = ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue];
+                        colorInterpolationType = ColorInterpolationType.BlueToMagenta;
                     }
                     break;
 
                 case ColorInterpolationType.BlueToMagenta:
-                    _ = currentColor = _ = previousColor.Lerp(
-                        to:     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta],
-                        weight: _ = colorInterpolation
+                    currentColor = previousColor.Lerp(
+                        to:     ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta],
+                        weight: colorInterpolation
                     );
 
-                    if (_ = colorInterpolation >= 1f)
+                    if (colorInterpolation >= 1f)
                     {
-                        _ = colorInterpolation     = _ = 0f;
-                        _ = currentColor           = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta];
-                        _ = previousColor          = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Magenta];
-                        _ = colorInterpolationType = _ = ColorInterpolationType.MagentaToRed;
+                        colorInterpolation     = 0f;
+                        currentColor           = ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta];
+                        previousColor          = ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta];
+                        colorInterpolationType = ColorInterpolationType.MagentaToRed;
                     }
                     break;
 
                 case ColorInterpolationType.MagentaToRed:
-                    _ = currentColor = _ = previousColor.Lerp(
-                        to:     _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red],
-                        weight: _ = colorInterpolation
+                    currentColor = previousColor.Lerp(
+                        to:     ServicePastelInterpolator.c_colorCodes[key: ColorType.Red],
+                        weight: colorInterpolation
                     );
 
-                    if (_ = colorInterpolation >= 1f)
+                    if (colorInterpolation >= 1f)
                     {
-                        _ = colorInterpolation     = _ = 0f;
-                        _ = currentColor           = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red];
-                        _ = previousColor          = _ = ServicePastelInterpolator.c_colorCodes[key: _ = ColorType.Red];
-                        _ = colorInterpolationType = _ = ColorInterpolationType.RedToYellow;
+                        colorInterpolation     = 0f;
+                        currentColor           = ServicePastelInterpolator.c_colorCodes[key: ColorType.Red];
+                        previousColor          = ServicePastelInterpolator.c_colorCodes[key: ColorType.Red];
+                        colorInterpolationType = ColorInterpolationType.RedToYellow;
                     }
                     break;
 
@@ -332,10 +332,10 @@ public sealed partial class ServicePastelInterpolator() :
                     break;
             }
 
-            _ = rainbowColorIndexData.Current           = _ = currentColor;
-            _ = rainbowColorIndexData.Previous          = _ = previousColor;
-            _ = rainbowColorIndexData.Interpolation     = _ = colorInterpolation;
-            _ = rainbowColorIndexData.InterpolationType = _ = colorInterpolationType;
+            rainbowColorIndexData.Current           = currentColor;
+            rainbowColorIndexData.Previous          = previousColor;
+            rainbowColorIndexData.Interpolation     = colorInterpolation;
+            rainbowColorIndexData.InterpolationType = colorInterpolationType;
         }
     }
 }

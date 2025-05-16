@@ -13,66 +13,72 @@ internal static class StreamEventsTipMenuLights
         ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
     )
     {
-        var tipMenuItem   = _ = messageMetadata.TipMenuItem;
-        switch (_ = tipMenuItem)
+        var tipMenuItem = messageMetadata.TipMenuItem;
+        switch (tipMenuItem)
         {
             case "Set Light Color Blue":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Blue
+                    colorType: ServicePastelInterpolator.ColorType.Blue
                 );
                 break;
 
             case "Set Light Color Cyan":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Cyan
+                    colorType: ServicePastelInterpolator.ColorType.Cyan
                 );
                 break;
 
             case "Set Light Color Green":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Green
+                    colorType: ServicePastelInterpolator.ColorType.Green
                 );
                 break;
 
             case "Set Light Color Magenta":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Magenta
+                    colorType: ServicePastelInterpolator.ColorType.Magenta
                 );
                 break;
 
             case "Set Light Color Red":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Red
+                    colorType: ServicePastelInterpolator.ColorType.Red
                 );
                 break;
             
             case "Set Light Color White":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.White
+                    colorType: ServicePastelInterpolator.ColorType.White
                 );
                 break;
 
             case "Set Light Color Yellow":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Yellow
+                    colorType: ServicePastelInterpolator.ColorType.Yellow
                 );
                 break;
             
             case "Set Light Scene Heatwave":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Heatwave"
+                    sceneName: "Heatwave"
                 );
                 break;
             
             case "Set Light Scene Icy":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Icy"
+                    sceneName: "Icy"
                 );
                 break;
             
             case "Set Light Scene Rainbow":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Rainbow"
+                    sceneName: "Rainbow"
+                );
+                break;
+            
+            case "Set Light Scene Toxic":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: "Toxic"
                 );
                 break;
             
@@ -82,20 +88,20 @@ internal static class StreamEventsTipMenuLights
             
             default:
                 ConsoleLogger.LogMessage(
-                    message: _ = 
+                    message: 
                         $"EXCEPTION: " +
-                        $"{_ = nameof(StreamEventsTipMenuLights)}." +
-                        $"{_ = nameof(StreamEventsTipMenuLights.HandleTipMenuItem)}() - " +
+                        $"{nameof(StreamEventsTipMenuLights)}." +
+                        $"{nameof(StreamEventsTipMenuLights.HandleTipMenuItem)}() - " +
                         $"Missing tip menu item \"{tipMenuItem}\"."
                 );
                 return;
         }
         
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
             
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+            soundAlertType: ServiceGodotAudio.SoundAlertType.Tip
         );
     }
 }

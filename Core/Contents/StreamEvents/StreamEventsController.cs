@@ -23,25 +23,25 @@ internal sealed partial class StreamEventsController() :
         ServiceJoystickWebSocketPayloadMessageMetadataFollowed messageMetadata
     )
     {
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
 
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Followed
+            soundAlertType: ServiceGodotAudio.SoundAlertType.Followed
         );
         
         string[] messages =
         [
-            $"A new follower has appeared! Welcome, {_ = messageMetadata.Who}!",
+            $"A new follower has appeared! Welcome, {messageMetadata.Who}!",
         ];
-        var index = _ = this.m_random.RandiRange(
+        var index = this.m_random.RandiRange(
             0, 
             messages.Length - 1
         );
 
-        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
+            message: messages[index]
         );
     }
     
@@ -49,25 +49,25 @@ internal sealed partial class StreamEventsController() :
         ServiceJoystickWebSocketPayloadMessageMetadataGiftedSubscriptions messageMetadata
     )
     {
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
 
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.GiftedSubscriptions
+            soundAlertType: ServiceGodotAudio.SoundAlertType.GiftedSubscriptions
         );
         
         string[] messages =
         [
-            $"{_ = messageMetadata.Who} gifted {_ = messageMetadata.HowMuch} sub{_ = (messageMetadata.HowMuch > 1 ? "s" : string.Empty)}! Thank you so much!",
+            $"{messageMetadata.Who} gifted {messageMetadata.HowMuch} sub{(messageMetadata.HowMuch > 1 ? "s" : string.Empty)}! Thank you so much!",
         ];
-        var index = _ = this.m_random.RandiRange(
+        var index = this.m_random.RandiRange(
             0, 
             messages.Length - 1
         );
 
-        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
+            message: messages[index]
         );
     }
     
@@ -75,26 +75,26 @@ internal sealed partial class StreamEventsController() :
         ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn messageMetadata
     )
     {
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
 
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.StreamDroppedIn
+            soundAlertType: ServiceGodotAudio.SoundAlertType.StreamDroppedIn
         );
         
         string[] messages =
         [
-            $"Welcome in, {_ = messageMetadata.Who} & friends! Feel free to lurk or chat :)",
-            $"Hello there, {_ = messageMetadata.Who} & friends! Feel free to lurk or chat :)",
+            $"Welcome in, {messageMetadata.Who} & friends! Feel free to lurk or chat :)",
+            $"Hello there, {messageMetadata.Who} & friends! Feel free to lurk or chat :)",
         ];
-        var index = _ = this.m_random.RandiRange(
+        var index = this.m_random.RandiRange(
             0, 
             messages.Length - 1
         );
 
-        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
+            message: messages[index]
         );
     }
     
@@ -102,26 +102,26 @@ internal sealed partial class StreamEventsController() :
         ServiceJoystickWebSocketPayloadMessageMetadataSubscribed messageMetadata
     )
     {
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
         
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Subscribed
+            soundAlertType: ServiceGodotAudio.SoundAlertType.Subscribed
         );
         
         string[] messages =
         [
-            $"The MYTH, the LEGEND! {_ = messageMetadata.Who} just subscribed!",
-            $"{_ = messageMetadata.Who} just subscribed! Thank you so much for keeping my circuits running!",
+            $"The MYTH, the LEGEND! {messageMetadata.Who} just subscribed!",
+            $"{messageMetadata.Who} just subscribed! Thank you so much for keeping my circuits running!",
         ];
-        var index = _ = this.m_random.RandiRange(
+        var index = this.m_random.RandiRange(
             0,
             messages.Length - 1
         );
 
-        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
+            message: messages[index]
         );
     }
     
@@ -129,8 +129,8 @@ internal sealed partial class StreamEventsController() :
         ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
     )
     {
-        var tipMenuItem   = _ = messageMetadata.TipMenuItem;
-        switch (_ = tipMenuItem)
+        var tipMenuItem   = messageMetadata.TipMenuItem;
+        switch (tipMenuItem)
         {
             case "":
                 StreamEventsController.PlayTipSoundEffect();
@@ -147,7 +147,7 @@ internal sealed partial class StreamEventsController() :
             case "Do One More!":
             case "Streeeetch!":
                 StreamEventsTipMenuIRL.HandleTipMenuItem(
-                    messageMetadata: _ = messageMetadata
+                    messageMetadata: messageMetadata
                 );
                 break;
             
@@ -162,7 +162,7 @@ internal sealed partial class StreamEventsController() :
             case "TF2: Explode":
             case "TF2: Kill":
                 StreamEventsTipMenuGaming.HandleTipMenuItem(
-                    messageMetadata: _ = messageMetadata
+                    messageMetadata: messageMetadata
                 );
                 break;
             
@@ -189,14 +189,14 @@ internal sealed partial class StreamEventsController() :
             case "Toy In - 10 Minute(s)":
             case "Turn On Ring Light":
                 StreamEventsTipMenuSpice.HandleTipMenuItem(
-                    messageMetadata: _ = messageMetadata
+                    messageMetadata: messageMetadata
                 );
                 break;
             
             case "Skip Song":
             case "Song Request":
                 StreamEventsTipMenuSpotify.HandleTipMenuItem(
-                    messageMetadata: _ = messageMetadata
+                    messageMetadata: messageMetadata
                 );
                 break;
             
@@ -210,9 +210,10 @@ internal sealed partial class StreamEventsController() :
             case "Set Light Scene Heatwave":
             case "Set Light Scene Icy":
             case "Set Light Scene Rainbow":
+            case "Set Light Scene Toxic":
             case "Turn Off Lights":
                 StreamEventsTipMenuLights.HandleTipMenuItem(
-                    messageMetadata: _ = messageMetadata
+                    messageMetadata: messageMetadata
                 );
                 break;
             
@@ -223,16 +224,16 @@ internal sealed partial class StreamEventsController() :
             case "Gush Control Link - 2 Minute(s)":
             case "Gush Control Link - 5 Minute(s)":
                 StreamEventsTipMenuToys.HandleTipMenuItem(
-                    messageMetadata: _ = messageMetadata
+                    messageMetadata: messageMetadata
                 );
                 break;
             
             default:
                 ConsoleLogger.LogMessage(
-                    message: _ = 
+                    message: 
                         $"EXCEPTION: " +
-                        $"{_ = nameof(StreamEventsController)}." +
-                        $"{_ = nameof(StreamEventsController.HandleWebSocketPayloadStreamEventTipped)}() - " +
+                        $"{nameof(StreamEventsController)}." +
+                        $"{nameof(StreamEventsController.HandleWebSocketPayloadStreamEventTipped)}() - " +
                         $"Missing tip menu item \"{tipMenuItem}\"."
                 );
                 return;
@@ -241,35 +242,35 @@ internal sealed partial class StreamEventsController() :
         string[] messages =
         [
             $"Cha-CHING! Thank you!",
-            $"Thank you for keeping my circuits running, {_ = messageMetadata.Who}!",
+            $"Thank you for keeping my circuits running, {messageMetadata.Who}!",
         ];
-        var index = _ = this.m_random.RandiRange(
+        var index = this.m_random.RandiRange(
             0, 
             messages.Length - 1
         );
 
-        var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
+            message: messages[index]
         );
     }
     
     private static void PlayTipSoundEffect()
     {
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
         
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.Tip
+            soundAlertType: ServiceGodotAudio.SoundAlertType.Tip
         );
     }
     
     private void SubscribeToStreamEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed            += this.HandleWebSocketPayloadStreamEventFollowed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.GiftedSubscriptions += this.HandleWebSocketPayloadStreamEventGiftedSubscriptions;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn     += this.HandleWebSocketPayloadStreamEventStreamDroppedIn;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed          += this.HandleWebSocketPayloadStreamEventSubscribed;
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped              += this.HandleWebSocketPayloadStreamEventTipped;
+        ServiceJoystickWebSocketPayloadStreamEvents.Followed            += this.HandleWebSocketPayloadStreamEventFollowed;
+        ServiceJoystickWebSocketPayloadStreamEvents.GiftedSubscriptions += this.HandleWebSocketPayloadStreamEventGiftedSubscriptions;
+        ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn     += this.HandleWebSocketPayloadStreamEventStreamDroppedIn;
+        ServiceJoystickWebSocketPayloadStreamEvents.Subscribed          += this.HandleWebSocketPayloadStreamEventSubscribed;
+        ServiceJoystickWebSocketPayloadStreamEvents.Tipped              += this.HandleWebSocketPayloadStreamEventTipped;
     }
 }

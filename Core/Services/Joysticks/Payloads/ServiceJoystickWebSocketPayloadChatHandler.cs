@@ -1,15 +1,12 @@
 
-using Godot;
 using Overlay.Core.Contents;
 using Overlay.Core.Contents.Chats;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
-using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.PastelInterpolators;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Overlay.Core.Services.Spotifies;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
@@ -22,16 +19,16 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     )
     {
         ServiceJoystickWebSocketPayloadChatHandler.AddChatMessage(
-            payloadMessage: _ = payloadMessage
+            payloadMessage: payloadMessage
         );
         ServiceJoystickWebSocketPayloadChatHandler.PlayChatNotificationSoundEffect(
-            payloadMessage: _ = payloadMessage
+            payloadMessage: payloadMessage
         );
         ServiceJoystickWebSocketPayloadChatHandler.HandleStreamerShoutout(
-            payloadMessage: _ = payloadMessage
+            payloadMessage: payloadMessage
         );
         ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommands(
-            payloadMessage: _ = payloadMessage
+            payloadMessage: payloadMessage
         );
     }
 
@@ -40,7 +37,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     )
     {
         ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Add(
-            item: _ = username
+            item: username
         );
     }
     
@@ -54,42 +51,42 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     private static readonly HashSet<string> s_subscribersWhoUsedSongRequestCommand = [];
     private static readonly HashSet<string> s_subscribersWhoUsedSongSkipCommand    = [];
     private static readonly HashSet<string> s_streamersShoutedOut                  = [
-        _ = ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername
+        ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername
     ];
     
     private static void AddChatMessage(
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var author            = _ = payloadMessage.Author;
-        var message           = _ = payloadMessage.Text;
+        var author            = payloadMessage.Author;
+        var message           = payloadMessage.Text;
         
-        var username          = _ = author.Username;
-        var usernameColor     = _ = author.UsernameColor;
-        var isModerator       = _ = author.IsModerator;
-        var isStreamer        = _ = author.IsStreamer;
-        var isSubscriber      = _ = author.IsSubscriber;
+        var username          = author.Username;
+        var usernameColor     = author.UsernameColor;
+        var isModerator       = author.IsModerator;
+        var isStreamer        = author.IsStreamer;
+        var isSubscriber      = author.IsSubscriber;
         
-        var emotes            = _ = payloadMessage.EmotesUsed;
-        var numberOfEmotes    = _ = emotes.Length;
-        var chatMessageEmotes = _ = new ChatMessageEmote[_ = numberOfEmotes];
-        for (var i = _ = 0U; _ = i < numberOfEmotes; _ = i++)
+        var emotes            = payloadMessage.EmotesUsed;
+        var numberOfEmotes    = emotes.Length;
+        var chatMessageEmotes = new ChatMessageEmote[numberOfEmotes];
+        for (var i = 0U; i < numberOfEmotes; i++)
         {
-            var emote                = _ = emotes[i];
-            _ = chatMessageEmotes[i] = _ = new ChatMessageEmote(
-                code: _ = emote.Code,
-                url:  _ = emote.SignedUrl
+            var emote                = emotes[i];
+            chatMessageEmotes[i] = new ChatMessageEmote(
+                code: emote.Code,
+                url:  emote.SignedUrl
             );
         }
         
         Chat.AddChatMessageToInstances(
-            username:          _ = username,
-            usernameColor:     _ = usernameColor,
-            message:           _ = message,
-            chatMessageEmotes: _ = chatMessageEmotes,
-            isModerator:       _ = isModerator,
-            isStreamer:        _ = isStreamer,
-            isSubscriber:      _ = isSubscriber
+            username:          username,
+            usernameColor:     usernameColor,
+            message:           message,
+            chatMessageEmotes: chatMessageEmotes,
+            isModerator:       isModerator,
+            isStreamer:        isStreamer,
+            isSubscriber:      isSubscriber
         );
     }
 
@@ -100,120 +97,121 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         bool   isSubscriber
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
 
-        if (
-            _ = isStreamer is false &&
-            isSubscriber is false
-        )
+        switch (isStreamer)
         {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !lights user - only subscribers & SmoothDagger have access to this command."
-            );
-            return;
+            case false when
+                isSubscriber is false:
+                serviceJoystickBot.SendChatMessage(
+                    message: $"Invalid !lights user - only subscribers & SmoothDagger have access to this command."
+                );
+                return;
+            
+            case false when
+                ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedLightCommand.Contains(
+                    item: username
+                ):
+                serviceJoystickBot.SendChatMessage(
+                    message: $"Invalid !lights usage - subscribers can use this only once per stream."
+                );
+                return;
         }
 
-        if (
-            _ = isStreamer is false &&
-            ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedLightCommand.Contains(
-                item: _ = username
-            )
-        )
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !lights usage - subscribers can use this only once per stream."
-            );
-            return;
-        }
-        
         if (
             string.IsNullOrEmpty(
-                value: _ = parameters
+                value: parameters
             ) is true
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !lights parameter - the following parameters are valid: [color/off]."
+                message: $"Invalid !lights parameter - the following parameters are valid: [color/off]."
             );
             return;
         }
 
-        var command = _ = parameters.ToLower();
-        switch (_ = command)
+        var command = parameters.ToLower();
+        switch (command)
         {
             case "off":
                 GoveeLightController.Instance.TurnOffLights();
                 break;
-
-            case "rainbow":
-                GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Rainbow"
-                );
-                break;
             
             case "heatwave":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Heatwave"
+                    sceneName: "Heatwave"
                 );
                 break;
             
             case "icy":
                 GoveeLightController.Instance.SetLightScene(
-                    sceneName: _ = "Icy"
+                    sceneName: "Icy"
+                );
+                break;
+
+            case "rainbow":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: "Rainbow"
+                );
+                break;
+            
+            case "toxic":
+                GoveeLightController.Instance.SetLightScene(
+                    sceneName: "Toxic"
                 );
                 break;
             
             case "red":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Red
+                    colorType: ServicePastelInterpolator.ColorType.Red
                 );
                 break;
             
             case "yellow":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Yellow
+                    colorType: ServicePastelInterpolator.ColorType.Yellow
                 );
                 break;
 
             case "green":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Green
+                    colorType: ServicePastelInterpolator.ColorType.Green
                 );
                 break;
 
             case "cyan":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Cyan
+                    colorType: ServicePastelInterpolator.ColorType.Cyan
                 );
                 break;
 
             case "blue":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Blue
+                    colorType: ServicePastelInterpolator.ColorType.Blue
                 );
                 break;
 
             case "magenta":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.Magenta
+                    colorType: ServicePastelInterpolator.ColorType.Magenta
                 );
                 break;
 
             case "white":
                 GoveeLightController.Instance.SetLightColor(
-                    colorType: _ = ServicePastelInterpolator.ColorType.White
+                    colorType: ServicePastelInterpolator.ColorType.White
                 );
                 break;
                 
             default:
                 serviceJoystickBot.SendChatMessage(
-                    message: _ = $"Invalid !lights parameter - the color or scene is invalid."
+                    message: $"Invalid !lights parameter - the color or scene is invalid."
                 );
                 return;
         }
 
         ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedLightCommand.Add(
-            item: _ = username
+            item: username
         );
     }
     
@@ -222,16 +220,16 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
         
         if (
             string.IsNullOrEmpty(
-                value: _ = parameters
+                value: parameters
             ) is false
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid {_ = command} parameter - {_ = command} has no parameters."
+                message: $"Invalid {command} parameter - {command} has no parameters."
             );
             return;
         }
@@ -243,14 +241,14 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             "✂️"
         ];
         
-        var random = _ = new RandomNumberGenerator();
-        var index  = _ = random.RandiRange(
-            from: _ = 0,
-            to:   _ = icons.Length - 1
+        var random = new RandomNumberGenerator();
+        var index  = random.RandiRange(
+            from: 0,
+            to:   icons.Length - 1
         );
         
         serviceJoystickBot.SendChatMessage(
-            message: _ = $"{_ = icons[index]}"
+            message: $"{icons[index]}"
         );
     }
     
@@ -259,10 +257,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
         
-        var commandSplit = _ = parameters.Split(
-            separator: _ = ' '
+        var commandSplit = parameters.Split(
+            separator: ' '
         );
         
         if (
@@ -270,21 +268,21 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !rtd parameter - !rtd must be in the following format: !rtd 69."
+                message: $"Invalid !rtd parameter - !rtd must be in the following format: !rtd 69."
             );
             return;
         }
         
-        var hasValue = _ = long.TryParse(
-            s:      _ = commandSplit[0],
+        var hasValue = long.TryParse(
+            s:      commandSplit[0],
             result: out var value
         );
-        var hasParameters = _ = string.IsNullOrEmpty(
-            value: _ = parameters
+        var hasParameters = string.IsNullOrEmpty(
+            value: parameters
         ) is false;
         
         if (
-            _ = 
+            
             hasParameters is true &&
             (
                 hasValue is false ||
@@ -293,25 +291,25 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !rtd parameter - !rtd parameter must be empty or a whole number greater than 0."
+                message: $"Invalid !rtd parameter - !rtd parameter must be empty or a whole number greater than 0."
             );
             return;
         }
         
         if (
             string.IsNullOrEmpty(
-                value: _ = parameters
+                value: parameters
             ) is true
         )
         {
-            _ = value = _ = ServiceJoystickWebSocketPayloadChatHandler.c_commandRollTheDiceDefaultParameter;
+            value = ServiceJoystickWebSocketPayloadChatHandler.c_commandRollTheDiceDefaultParameter;
         }
         
-        var random      = _ = new Random();
-        var randomValue = _ = random.NextInt64() % value + 1;
+        var random      = new Random();
+        var randomValue = random.NextInt64() % value + 1;
 
         serviceJoystickBot.SendChatMessage(
-            message: _ = $"🎲 {_ = username} rolled a {_ = randomValue} out of {_ = value}! 🎲"
+            message: $"🎲 {username} rolled a {randomValue} out of {value}! 🎲"
         );
     }
 
@@ -322,67 +320,67 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         bool   isSubscriber
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
         
-        var isTipper = _ = ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Contains(
-            item: _ = username
+        var isTipper = ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Contains(
+            item: username
         );
         
         if (
-            _ = isStreamer is false &&
+            isStreamer is false &&
             isSubscriber is false && 
             isTipper is false
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songrequest user - only subscribers, users who claimed the song request token reward, & SmoothDagger have access to this command."
+                message: $"Invalid !songrequest user - only subscribers, users who claimed the song request token reward, & SmoothDagger have access to this command."
             );
             return;
         }
         
-        var hasSubscriberUsedCommand = _ = ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Contains(
-            item: _ = username
+        var hasSubscriberUsedCommand = ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Contains(
+            item: username
         );
 
         if (
-            _ = isStreamer is false &&
+            isStreamer is false &&
             isTipper is false &&
             hasSubscriberUsedCommand is true
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songrequest usage - subscribers can use this only once per stream."
+                message: $"Invalid !songrequest usage - subscribers can use this only once per stream."
             );
             return;
         }
         
         if (
             string.IsNullOrEmpty(
-                value: _ = parameters
+                value: parameters
             ) is true
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songrequest parameter - the following parameters are valid: [search parameters]."
+                message: $"Invalid !songrequest parameter - the following parameters are valid: [search parameters]."
             );
             return;
         }
 
         var serviceSpotify = Services.GetService<ServiceSpotify>();
         serviceSpotify.RequestTrackQueueBySearchTerms(
-            searchParameters: _ = parameters
+            searchParameters: parameters
         );
 
-        if (_ = isTipper is true)
+        if (isTipper is true)
         {
             ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Remove(
-                item: _ = username
+                item: username
             );
         }
-        else if (_ = isSubscriber is true)
+        else if (isSubscriber is true)
         {
             ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Add(
-                item: _ = username
+                item: username
             );
         }
     }
@@ -394,40 +392,35 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         bool   isSubscriber
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
 
-        if (
-            _ = isStreamer is false &&
-                isSubscriber is false
-        )
+        switch (isStreamer)
         {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songskip user - only subscribers & SmoothDagger have access to this command."
-            );
-            return;
-        }
-
-        if (
-            _ = isStreamer is false &&
+            case false when
+                isSubscriber is false:
+                serviceJoystickBot.SendChatMessage(
+                    message: $"Invalid !songskip user - only subscribers & SmoothDagger have access to this command."
+                );
+                return;
+            
+            case false when
                 ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongSkipCommand.Contains(
-                    item: _ = username
-                )
-        )
-        {
-            serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songskip usage - subscribers can use this only once per stream."
-            );
-            return;
+                    item: username
+                ):
+                serviceJoystickBot.SendChatMessage(
+                    message: $"Invalid !songskip usage - subscribers can use this only once per stream."
+                );
+                return;
         }
-        
+
         if (
             string.IsNullOrEmpty(
-                value: _ = parameters
+                value: parameters
             ) is false
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: _ = $"Invalid !songskip parameter - there are no parameters available."
+                message: $"Invalid !songskip parameter - there are no parameters available."
             );
             return;
         }
@@ -436,7 +429,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         serviceSpotify.RequestSkipToNextTrack();
         
         ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongSkipCommand.Add(
-            item: _ = username
+            item: username
         );
     }
     
@@ -444,35 +437,35 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var message = _ = payloadMessage.Text;
+        var message = payloadMessage.Text;
         if (
             message.StartsWith(
-                value: _ = '!'
+                value: '!'
             ) is false
         )
         {
             return;
         }
         
-        var author       = _ = payloadMessage.Author;
-        var username     = _ = author.Username;
-        var isSubscriber = _ = author.IsSubscriber;
-        var isStreamer   = _ = author.IsStreamer;
+        var author       = payloadMessage.Author;
+        var username     = author.Username;
+        var isSubscriber = author.IsSubscriber;
+        var isStreamer   = author.IsStreamer;
 
-        var commandSplit = _ = message.Split(
-            separator: _ = ' ',
-            count:     _ = 2
+        var commandSplit = message.Split(
+            separator: ' ',
+            count:     2
         );
-        var command    = _ = commandSplit[0].ToLower();
-        var parameters = _ = commandSplit.Length > 1 ? commandSplit[1].ToLower() : string.Empty;
-        switch (_ = command)
+        var command    = commandSplit[0].ToLower();
+        var parameters = commandSplit.Length > 1 ? commandSplit[1].ToLower() : string.Empty;
+        switch (command)
         {
             case "!lights":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLights(
-                    username:     _ = username,
-                    parameters:   _ = parameters,
-                    isStreamer:   _ = isStreamer,
-                    isSubscriber: _ = isSubscriber
+                    username:     username,
+                    parameters:   parameters,
+                    isStreamer:   isStreamer,
+                    isSubscriber: isSubscriber
                 );
                 break;
             
@@ -480,8 +473,8 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             case "!rock":
             case "!scissors":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandRockPaperScissors(
-                    command:    _ = command,
-                    parameters: _ = parameters
+                    command:    command,
+                    parameters: parameters
                 );
                 break;
             
@@ -490,8 +483,8 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             case "!rollthedice":
             case "!rtd":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandRollTheDice(
-                    username:   _ = username,
-                    parameters: _ = parameters
+                    username:   username,
+                    parameters: parameters
                 );
                 break;
             
@@ -499,20 +492,20 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             case "!songrequest":
             case "!sr":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandSongRequest(
-                    username:     _ = username,
-                    parameters:   _ = parameters,
-                    isStreamer:   _ = isStreamer,
-                    isSubscriber: _ = isSubscriber
+                    username:     username,
+                    parameters:   parameters,
+                    isStreamer:   isStreamer,
+                    isSubscriber: isSubscriber
                 );
                 break;
             
             case "!skip":
             case "!skipsong":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandSongSkip(
-                    username:     _ = username,
-                    parameters:   _ = parameters,
-                    isStreamer:   _ = isStreamer,
-                    isSubscriber: _ = isSubscriber
+                    username:     username,
+                    parameters:   parameters,
+                    isStreamer:   isStreamer,
+                    isSubscriber: isSubscriber
                 );
                 break;
             
@@ -525,10 +518,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var author   = _ = payloadMessage.Author;
-        var username = _ = author.Username;
+        var author   = payloadMessage.Author;
+        var username = author.Username;
         if (
-            _ = ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Contains(
+            ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Contains(
                 username
             ) is true
         )
@@ -536,31 +529,31 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
 
-        var isContentCreator = _ = author.IsContentCreator;
-        if (_ = isContentCreator is false)
+        var isContentCreator = author.IsContentCreator;
+        if (isContentCreator is false)
         {
             return;
         }
         
         ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
-            item: _ = username
+            item: username
         );
                 
         string[] messages =
         [
-            $"Oh shit, it's {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-            $"Holy fuck, a wild {_ = username} appeared! Go catch their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
-            $"Shoutout to {_ = username}! Check out their streams: {_ = ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{_ = username}",
+            $"Oh shit, it's {username}! Check out their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
+            $"Holy fuck, a wild {username} appeared! Go catch their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
+            $"Shoutout to {username}! Check out their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
         ];
-        var random = _ = new RandomNumberGenerator();
-        var index  = _ = random.RandiRange(
-            from: _ = 0,
-            to:   _ = messages.Length - 1
+        var random = new RandomNumberGenerator();
+        var index  = random.RandiRange(
+            from: 0,
+            to:   messages.Length - 1
         );
         
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
         serviceJoystickBot.SendChatMessage(
-            message: _ = messages[index]
+            message: messages[index]
         );
     }
     
@@ -568,52 +561,50 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var message = _ = payloadMessage.Text;
+        var message = payloadMessage.Text;
         if (
-            _ = message.StartsWith(
-                value: _ = ServiceJoystickWebSocketPayloadChatHandler.c_tipCommand
+            message.StartsWith(
+                value: ServiceJoystickWebSocketPayloadChatHandler.c_tipCommand
             ) is true
         )
         {
-            var remainingMessage = _ = message.Replace(
-                oldValue: _ = $"{_ = ServiceJoystickWebSocketPayloadChatHandler.c_tipCommand}",
-                newValue: _ = string.Empty
+            var remainingMessage = message.Replace(
+                oldValue: $"{ServiceJoystickWebSocketPayloadChatHandler.c_tipCommand}",
+                newValue: string.Empty
             );
 
-            var isValidTip = _ = true;
-            for (var index = _ = 0; _ = index < remainingMessage.Length; _ = index++)
+            var isValidTip = true;
+            foreach (var character in remainingMessage)
             {
-                var character = _ = remainingMessage[index];
-                
-                var isCharacterASpace = _ = character is ' ';
-                if (_ = isCharacterASpace)
+                var isCharacterASpace = character is ' ';
+                if (isCharacterASpace)
                 {
                     continue;
                 }
 
-                var isCharacterANumber = _ = char.IsNumber(
-                    c: _ = character
+                var isCharacterANumber = char.IsNumber(
+                    c: character
                 );
-                if (_ = isCharacterANumber)
+                if (isCharacterANumber)
                 {
                     break;
                 }
 
-                _ = isValidTip = _ = false;
+                isValidTip = false;
                 break;
             }
 
-            if (_ = isValidTip is true)
+            if (isValidTip is true)
             {
                 return;
             }
         }
         
-        var serviceGodots     = _ = Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = _ = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        var serviceGodots     = Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
             
         serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: _ = ServiceGodotAudio.SoundAlertType.ChatNotification
+            soundAlertType: ServiceGodotAudio.SoundAlertType.ChatNotification
         );
     }
 }

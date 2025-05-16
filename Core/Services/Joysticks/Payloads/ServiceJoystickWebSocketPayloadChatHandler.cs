@@ -207,9 +207,9 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 
             default:
                 serviceJoystickBot.SendChatMessage(
-                    message: _ = $"Invalid !lights parameter - the parameter is invalid."
+                    message: _ = $"Invalid !lights parameter - the color or scene is invalid."
                 );
-                break;
+                return;
         }
 
         ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedLightCommand.Add(
@@ -385,7 +385,6 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 item: _ = username
             );
         }
-
     }
     
     private static void HandleBotCommandSongSkip(

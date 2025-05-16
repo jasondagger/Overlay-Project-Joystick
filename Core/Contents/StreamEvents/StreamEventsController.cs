@@ -115,7 +115,7 @@ internal sealed partial class StreamEventsController() :
             $"{_ = messageMetadata.Who} just subscribed! Thank you so much for keeping my circuits running!",
         ];
         var index = _ = this.m_random.RandiRange(
-            0, 
+            0,
             messages.Length - 1
         );
 

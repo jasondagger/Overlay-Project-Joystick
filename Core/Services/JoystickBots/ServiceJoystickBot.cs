@@ -58,10 +58,14 @@ public sealed class ServiceJoystickBot() :
 
     private static readonly string[] s_notificationMessages =
     [
-        "Want to request a song? Consider becoming a subscriber! Subscribers get one free song request per stream & more! Check the description for more information.",
+        "Want to request a song? Subscribers get one free song request per stream using the !songrequest command! Check the description for more information.",
+        "Not digging the lights? Subscribers can type !lights with a color to change the lights once per stream & more!",
+        "Consider subscribing for access to a suite of commands that control the lights & sound of the stream!",
+        "Want to play with us? Add SmoothDagger on Steam to join in on the fun!",
     ];
 
-    private string                   m_joystickChannelId    = string.Empty;
+    private string                   m_joystickChannelId     = string.Empty;
+    private int                      m_lastNotificationIndex = -1;
     
     private void HandleRetrievedJoystickData(
         ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData
@@ -102,14 +106,23 @@ public sealed class ServiceJoystickBot() :
                     await Task.Delay(
                         millisecondsDelay: 600000
                     );
-                    
+
                     var index = random.Next(
                         minValue: 0,
                         maxValue: ServiceJoystickBot.s_notificationMessages.Length
                     );
+                    while (index == this.m_lastNotificationIndex)
+                    {
+                        index = random.Next(
+                            minValue: 0,
+                            maxValue: ServiceJoystickBot.s_notificationMessages.Length
+                        );
+                    }
+                    
                     this.SendChatMessage(
                         message: ServiceJoystickBot.s_notificationMessages[index]
                     );
+                    this.m_lastNotificationIndex = index;
                 }
             }
         );

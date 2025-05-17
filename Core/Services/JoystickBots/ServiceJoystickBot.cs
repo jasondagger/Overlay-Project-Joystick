@@ -1,4 +1,5 @@
 
+using System;
 using Overlay.Core.Contents.Chats;
 using Overlay.Core.Services.Databases.Tasks;
 using Overlay.Core.Services.Databases.Tasks.Retrieves;
@@ -14,64 +15,71 @@ public sealed class ServiceJoystickBot() :
     Task IService.Setup()
     {
         this.RegisterForRetrievedJoystickData();
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     Task IService.Start()
     {
-        return _ = Task.CompletedTask;
+        this.StartSendingNotificationMessages();
+        return Task.CompletedTask;
     }
 
     Task IService.Stop()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     internal void SendChatMessage(
         string message
     )
     {
-        var serviceJoystick        = _ = Services.GetService<ServiceJoystick>();
-        var serviceJoystickRequest = _ = ServiceJoystickRequest.CreateServiceJoystickRequestChatMessage(
-            text:      _ = message,
-            channelId: _ = this.m_joystickChannelId
+        var serviceJoystick        = Services.GetService<ServiceJoystick>();
+        var serviceJoystickRequest = ServiceJoystickRequest.CreateServiceJoystickRequestChatMessage(
+            text:      message,
+            channelId: this.m_joystickChannelId
         );
         
         serviceJoystick.SendRequest(
-            serviceJoystickRequest: _ = serviceJoystickRequest
+            serviceJoystickRequest: serviceJoystickRequest
         );
         
         Chat.AddChatMessageToInstances(
-            username:          _ = $"{_ = ServiceJoystickBot.c_username}",
-            usernameColor:     _ = string.Empty,
-            message:           _ = message,
+            username:          $"{ServiceJoystickBot.c_username}",
+            usernameColor:     string.Empty,
+            message:           message,
             chatMessageEmotes: null,
-            isModerator:       _ = true,
-            isStreamer:        _ = false,
-            isSubscriber:      _ = true
+            isModerator:       true,
+            isStreamer:        false,
+            isSubscriber:      true
         );
     }
 
-    private const string                   c_username          = "SmoothBot";
+    private const string             c_username             = "SmoothBot";
 
-    private string                         m_joystickChannelId = _ = string.Empty;
+    private static readonly string[] s_notificationMessages =
+    [
+        "Want to request a song? Consider becoming a subscriber! Subscribers get one free song request per stream & more! Check the description for more information.",
+    ];
+
+    private string                   m_joystickChannelId    = string.Empty;
     
     private void HandleRetrievedJoystickData(
         ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData
     )
     {
-        var result = _ = retrievedJoystickData.Result;
+        var result = retrievedJoystickData.Result;
         
-        _ = this.m_joystickChannelId = _ = result.JoystickData_Channel_Id;
+        this.m_joystickChannelId = result.JoystickData_Channel_Id;
 
         Task.Run(
-            function: async () =>
+            function:
+            async () =>
             {
                 await Task.Delay(
-                    millisecondsDelay: _ = 4000
+                    millisecondsDelay: 4000
                 );
                 this.SendChatMessage(
-                    message:   _ = $"SmoothDagger is now live!"
+                    message: $"SmoothDagger is now live!"
                 );
             }
         );
@@ -79,6 +87,31 @@ public sealed class ServiceJoystickBot() :
     
     private void RegisterForRetrievedJoystickData()
     {
-        _ = ServiceDatabaseTaskEvents.RetrievedJoystickData += this.HandleRetrievedJoystickData;
+        ServiceDatabaseTaskEvents.RetrievedJoystickData += this.HandleRetrievedJoystickData;
+    }
+
+    private void StartSendingNotificationMessages()
+    {
+        Task.Run(
+            function: 
+            async () =>
+            {
+                var random = new Random();
+                while (true)
+                {
+                    await Task.Delay(
+                        millisecondsDelay: 600000
+                    );
+                    
+                    var index = random.Next(
+                        minValue: 0,
+                        maxValue: ServiceJoystickBot.s_notificationMessages.Length
+                    );
+                    this.SendChatMessage(
+                        message: ServiceJoystickBot.s_notificationMessages[index]
+                    );
+                }
+            }
+        );
     }
 }

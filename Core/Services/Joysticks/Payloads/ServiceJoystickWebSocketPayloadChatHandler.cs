@@ -5,9 +5,10 @@ using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.PastelInterpolators;
+using Overlay.Core.Services.Spotifies;
 using System;
 using System.Collections.Generic;
-using Overlay.Core.Services.Spotifies;
+using System.Linq;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
@@ -40,17 +41,49 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             item: username
         );
     }
-    
-    private const string                    c_joystickUserStreamLinkPrefix         = "https://joystick.tv/u/";
-    private const string                    c_streamerUsername                     = $"SmoothDagger";
-    private const string                    c_tipCommand                           = $"!tip";
-    private const int                       c_commandRollTheDiceDefaultParameter   = 100;
 
-    private static readonly HashSet<string> s_pendingSongRequestTippers            = [];
-    private static readonly HashSet<string> s_subscribersWhoUsedLightCommand       = [];
-    private static readonly HashSet<string> s_subscribersWhoUsedSongRequestCommand = [];
-    private static readonly HashSet<string> s_subscribersWhoUsedSongSkipCommand    = [];
-    private static readonly HashSet<string> s_streamersShoutedOut                  = [
+    internal static void ProcessSongRequest(
+        bool succeeded
+    )
+    {
+        var actioner = ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequesters.Dequeue();
+        if (succeeded is true)
+        {
+            return;
+        }
+        
+        if (actioner.IsSubscriber is true)
+        {
+            ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Remove(
+                item: actioner.Name
+            );
+        }
+        else if (actioner.IsTipper is true)
+        {
+            ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Add(
+                item: actioner.Name
+            );
+        }
+    }
+
+    private class SpotifySongActioner
+    {
+        internal string Name         = string.Empty;
+        internal bool   IsSubscriber = false;
+        internal bool   IsTipper     = false;
+    }
+    
+    private const string                               c_joystickUserStreamLinkPrefix         = "https://joystick.tv/u/";
+    private const string                               c_streamerUsername                     = $"SmoothDagger";
+    private const string                               c_tipCommand                           = $"!tip";
+    private const int                                  c_commandRollTheDiceDefaultParameter   = 100;
+
+    private static readonly Queue<SpotifySongActioner> s_pendingSongRequesters                = [];
+    private static readonly HashSet<string>            s_pendingSongRequestTippers            = [];
+    private static readonly HashSet<string>            s_subscribersWhoUsedLightCommand       = [];
+    private static readonly HashSet<string>            s_subscribersWhoUsedSongRequestCommand = [];
+    private static readonly HashSet<string>            s_subscribersWhoUsedSongSkipCommand    = [];
+    private static readonly HashSet<string>            s_streamersShoutedOut                  = [
         ServiceJoystickWebSocketPayloadChatHandler.c_streamerUsername
     ];
     
@@ -87,6 +120,17 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             isModerator:       isModerator,
             isStreamer:        isStreamer,
             isSubscriber:      isSubscriber
+        );
+    }
+    
+    private static void HandleBotCommandBallsOfSteel()
+    {
+        
+        var serviceGodots     = Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: ServiceGodotAudio.SoundAlertType.BallsOfSteel
         );
     }
 
@@ -321,6 +365,14 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     )
     {
         var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
+
+        if (ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequesters.Any(pendingSongRequester => pendingSongRequester.Name == username))
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: $"Spotify is still processing your song request. Please wait before making another request."
+            );
+            return;
+        }
         
         var isTipper = ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequestTippers.Contains(
             item: username
@@ -341,7 +393,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var hasSubscriberUsedCommand = ServiceJoystickWebSocketPayloadChatHandler.s_subscribersWhoUsedSongRequestCommand.Contains(
             item: username
         );
-
+        
         if (
             isStreamer is false &&
             isTipper is false &&
@@ -365,10 +417,14 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             );
             return;
         }
-
-        var serviceSpotify = Services.GetService<ServiceSpotify>();
-        serviceSpotify.RequestTrackQueueBySearchTerms(
-            searchParameters: parameters
+        
+        ServiceJoystickWebSocketPayloadChatHandler.s_pendingSongRequesters.Enqueue(
+            item: new SpotifySongActioner
+            {
+                Name         = username,
+                IsSubscriber = isSubscriber,
+                IsTipper     = isTipper
+            }
         );
 
         if (isTipper is true)
@@ -383,6 +439,11 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 item: username
             );
         }
+
+        var serviceSpotify = Services.GetService<ServiceSpotify>();
+        serviceSpotify.RequestTrackQueueBySearchTerms(
+            searchParameters: parameters
+        );
     }
     
     private static void HandleBotCommandSongSkip(
@@ -460,6 +521,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var parameters = commandSplit.Length > 1 ? commandSplit[1].ToLower() : string.Empty;
         switch (command)
         {
+            case "!balls":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandBallsOfSteel();
+                break;
+            
             case "!lights":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLights(
                     username:     username,

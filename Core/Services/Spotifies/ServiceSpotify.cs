@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Overlay.Core.Services.Databases;
 using Overlay.Core.Services.Databases.Tasks;
 using Overlay.Core.Services.Databases.Tasks.Retrieves;
+using Overlay.Core.Services.Joysticks.Payloads;
 
 namespace Overlay.Core.Services.Spotifies;
 
@@ -21,30 +22,30 @@ public sealed partial class ServiceSpotify :
     Task IService.Setup()
     {
         this.RetrieveResources();
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     Task IService.Start()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     Task IService.Stop()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     internal void RequestSkipToNextTrack()
     {
         var headers = new List<string>()
         {
-            $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
+            $"Authorization: Bearer {this.m_accessToken.AccessToken}",
         };
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/me/player/next",
-            headers:                 _ = headers,
-            method:                  _ = HttpClient.Method.Post,
-            json:                    _ = string.Empty,
+            url:                     $"{ServiceSpotify.c_uriApi}/me/player/next",
+            headers:                 headers,
+            method:                  HttpClient.Method.Post,
+            json:                    string.Empty,
             requestCompletedHandler: this.OnRequestSkipToNextCompleted
         );
     }
@@ -53,15 +54,15 @@ public sealed partial class ServiceSpotify :
         string searchParameters
     )
     {
-        var headers = _ = new List<string>()
+        var headers = new List<string>()
         {
-            $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
+            $"Authorization: Bearer {this.m_accessToken.AccessToken}",
         };
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceSpotify.c_uriApi}/search?q={_ = Uri.EscapeDataString(stringToEscape: _ = searchParameters)}&type=track&limit=10",
-            headers:                 _ = headers,
-            method:                  _ = HttpClient.Method.Get,
-            json:                    _ = string.Empty,
+            url:                     $"{ServiceSpotify.c_uriApi}/search?q={Uri.EscapeDataString(stringToEscape: searchParameters)}&type=track&limit=10",
+            headers:                 headers,
+            method:                  HttpClient.Method.Get,
+            json:                    string.Empty,
             requestCompletedHandler: this.OnRequestTrackSearchCompleted
         );
     }
@@ -75,19 +76,19 @@ public sealed partial class ServiceSpotify :
     private Queue<ServiceSpotifyRequest>        m_requestQueue      = new();
     private ServiceGodotHttp                    m_serviceGodotHttp  = null;
     private readonly SpotifyResponseAccessToken m_accessToken       = new();
-    private string                              m_clientId          = _ = string.Empty;
-    private string                              m_clientSecret      = _ = string.Empty;
+    private string                              m_clientId          = string.Empty;
+    private string                              m_clientSecret      = string.Empty;
 
     private void HandleServiceDatabaseRetrievedSpotifyData(
         ServiceDatabaseTaskRetrievedSpotifyData spotifyData
     )
     {
-        var result = _ = spotifyData.Result;
+        var result = spotifyData.Result;
         
-        _ = this.m_clientId                 = _ = result.SpotifyData_Client_Id;
-        _ = this.m_clientSecret             = _ = result.SpotifyData_Client_Secret;
-        _ = this.m_accessToken.AccessToken  = _ = result.SpotifyData_Access_Token;
-        _ = this.m_accessToken.RefreshToken = _ = result.SpotifyData_Refresh_Token;
+        this.m_clientId                 = result.SpotifyData_Client_Id;
+        this.m_clientSecret             = result.SpotifyData_Client_Secret;
+        this.m_accessToken.AccessToken  = result.SpotifyData_Access_Token;
+        this.m_accessToken.RefreshToken = result.SpotifyData_Refresh_Token;
         
         this.RequestAccessToken();
     }
@@ -101,30 +102,30 @@ public sealed partial class ServiceSpotify :
     {
         if (
             ServiceGodotHttp.IsResponseCodeSuccessful(
-                responseCode: _ = responseCode
+                responseCode: responseCode
             ) is false
         )
         {
             return;
         }
 
-        var json = _ = Encoding.UTF8.GetString(
-            bytes: _ = body,
-            index: _ = 0,
-            count: _ = body.Length
+        var json = Encoding.UTF8.GetString(
+            bytes: body,
+            index: 0,
+            count: body.Length
         );
-        var accessToken = _ = JsonHelper.Deserialize<SpotifyResponseAccessToken>(
-            json: _ = json
+        var accessToken = JsonHelper.Deserialize<SpotifyResponseAccessToken>(
+            json: json
         );
         
-        _ = this.m_accessToken.AccessToken = accessToken.AccessToken;
+        this.m_accessToken.AccessToken = accessToken.AccessToken;
 
-        _ = Task.Run(
+        Task.Run(
             function:
             async () =>
             {
                 await Task.Delay(
-                    millisecondsDelay: _ = 3500000
+                    millisecondsDelay: 3500000
                 );
                 
                 this.RequestAccessToken();
@@ -139,11 +140,11 @@ public sealed partial class ServiceSpotify :
         byte[]   body
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
         
         if (
             ServiceGodotHttp.IsResponseCodeSuccessful(
-                responseCode: _ = responseCode
+                responseCode: responseCode
             ) is false
         )
         {
@@ -165,22 +166,28 @@ public sealed partial class ServiceSpotify :
         byte[]   body
     )
     {
-        var serviceJoystickBot = _ = Services.GetService<ServiceJoystickBot>();
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
 
         if (
             ServiceGodotHttp.IsResponseCodeSuccessful(
-                responseCode: _ = responseCode
+                responseCode: responseCode
             ) is false
         )
         {
             serviceJoystickBot.SendChatMessage(
                 message: "Song failed to queue."
             );
+            ServiceJoystickWebSocketPayloadChatHandler.ProcessSongRequest(
+                succeeded: false
+            );
             return;
         }
 
         serviceJoystickBot.SendChatMessage(
             message: "Song successfully queued."
+        );
+        ServiceJoystickWebSocketPayloadChatHandler.ProcessSongRequest(
+            succeeded: true
         );
     }
     
@@ -193,33 +200,33 @@ public sealed partial class ServiceSpotify :
     {
         if (
             ServiceGodotHttp.IsResponseCodeSuccessful(
-                responseCode: _ = responseCode
+                responseCode: responseCode
             ) is false
         )
         {
             return;
         }
         
-        var spotifyResponse = _ = JsonHelper.Deserialize<SpotifyResponseSearchItem>(
-            json: _ = Encoding.UTF8.GetString(
-                bytes: _ = body,
-                index: _ = 0,
-                count: _ = body.Length
+        var spotifyResponse = JsonHelper.Deserialize<SpotifyResponseSearchItem>(
+            json: Encoding.UTF8.GetString(
+                bytes: body,
+                index: 0,
+                count: body.Length
             )
         );
 
-        var tracks = _ = spotifyResponse?.Tracks;
-        var items  = _ = tracks?.Items;
+        var tracks = spotifyResponse?.Tracks;
+        var items  = tracks?.Items;
         if ( 
-            _ = items is null || 
+            items is null || 
             items.Length is 0
         )
         {
             return;
         }
             
-        var track = _ = items[0];
-        var uri   = _ = track.Uri;
+        var track = items[0];
+        var uri   = track.Uri;
         this.RequestTrackAddedToQueue(
             trackUri: uri
         );
@@ -227,7 +234,7 @@ public sealed partial class ServiceSpotify :
 
     /*private void ProcessRequests()
     {
-        _ = Task.Run(
+        Task.Run(
             function:
             async () =>
             {
@@ -236,9 +243,9 @@ public sealed partial class ServiceSpotify :
                     ServiceSpotifyRequest request;
                     lock (m_currentSpotifyTwitchDatasLock)
                     {
-                        if (_ = this.m_requestQueue.Count > 0u)
+                        if (this.m_requestQueue.Count > 0u)
                         {
-                            _ = request = this.m_requestQueue.Dequeue();
+                            request = this.m_requestQueue.Dequeue();
                         }
                         else
                         {
@@ -282,14 +289,14 @@ public sealed partial class ServiceSpotify :
         var headers = new List<string>()
         {
             $"content-type: application/x-www-form-urlencoded",
-            $"Authorization: Basic {_ = Convert.ToBase64String(inArray: _ = Encoding.UTF8.GetBytes(s: _ = $"{_ = this.m_clientId}:{_ = this.m_clientSecret}"))}",
+            $"Authorization: Basic {Convert.ToBase64String(inArray: Encoding.UTF8.GetBytes(s: $"{this.m_clientId}:{this.m_clientSecret}"))}",
         };
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceSpotify.c_uriAccessToken}",
-            headers:                 _ = headers,
-            method:                  _ = HttpClient.Method.Post,
-            json:                    _ = $"grant_type=refresh_token&&" +
-                                         $"refresh_token={_ = this.m_accessToken.RefreshToken}",
+            url:                     $"{ServiceSpotify.c_uriAccessToken}",
+            headers:                 headers,
+            method:                  HttpClient.Method.Post,
+            json:                    $"grant_type=refresh_token&" +
+                                     $"refresh_token={this.m_accessToken.RefreshToken}",
             requestCompletedHandler: this.OnRequestAccessTokenCompleted
         );
     }
@@ -299,15 +306,15 @@ public sealed partial class ServiceSpotify :
         var headers = new List<string>()
         {
             $"content-type: application/x-www-form-urlencoded",
-            $"Authorization: Basic {_ = Convert.ToBase64String(inArray: _ = Encoding.UTF8.GetBytes(s: _ = $"{_ = this.m_clientId}:{_ = this.m_clientSecret}"))}",
+            $"Authorization: Basic {Convert.ToBase64String(inArray: Encoding.UTF8.GetBytes(s: $"{this.m_clientId}:{this.m_clientSecret}"))}",
         };
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceSpotify.c_uriAccessToken}",
-            headers:                 _ = headers,
-            method:                  _ = HttpClient.Method.Post,
-            json:                    _ = $"grant_type=authorization_code&" +
-                                     $"code={_ = ServiceSpotify.c_authorizationCode}&" +
-                                     $"redirect_uri={_ = ServiceSpotify.c_uriRedirect}",
+            url:                     $"{ServiceSpotify.c_uriAccessToken}",
+            headers:                 headers,
+            method:                  HttpClient.Method.Post,
+            json:                    $"grant_type=authorization_code&" +
+                                     $"code={ServiceSpotify.c_authorizationCode}&" +
+                                     $"redirect_uri={ServiceSpotify.c_uriRedirect}",
             requestCompletedHandler: this.OnRequestAccessTokenCompleted
         );
     }
@@ -316,12 +323,12 @@ public sealed partial class ServiceSpotify :
         string trackUri
     )
     {
-        var headers = _ = new List<string>()
+        var headers = new List<string>()
         {
-            $"Authorization: Bearer {_ = this.m_accessToken.AccessToken}",
+            $"Authorization: Bearer {this.m_accessToken.AccessToken}",
         };
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     $"{_ = ServiceSpotify.c_uriApi}/me/player/queue?uri={_ = Uri.EscapeDataString(stringToEscape: _ = trackUri)}",
+            url:                     $"{ServiceSpotify.c_uriApi}/me/player/queue?uri={Uri.EscapeDataString(stringToEscape: trackUri)}",
             headers:                 headers,
             method:                  HttpClient.Method.Post,
             json:                    string.Empty,
@@ -331,13 +338,13 @@ public sealed partial class ServiceSpotify :
     
     private void RequestUserAuthorization()
     {
-        _ = OS.ShellOpen(
-            uri: _ = 
+        OS.ShellOpen(
+            uri: 
                 $"https://accounts.spotify.com/authorize?" +
                 $"response_type=code&" +
-                $"client_id={_ = this.m_clientId}&" +
-                $"scope={_ = Uri.EscapeDataString(stringToEscape: _ = ServiceSpotify.c_userAccessScopes)}&" +
-                $"redirect_uri={_ = ServiceSpotify.c_uriRedirect}&" +
+                $"client_id={this.m_clientId}&" +
+                $"scope={Uri.EscapeDataString(stringToEscape: ServiceSpotify.c_userAccessScopes)}&" +
+                $"redirect_uri={ServiceSpotify.c_uriRedirect}&" +
                 $"state=1&" +
                 $"show_dialog=true"
         );
@@ -345,13 +352,13 @@ public sealed partial class ServiceSpotify :
     
     private void RetrieveResources()
     {
-        var serviceGodots           = _ = Services.GetService<ServiceGodots>();
-        _ = this.m_serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+        var serviceGodots           = Services.GetService<ServiceGodots>();
+        this.m_serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
         
-        _ = ServiceDatabaseTaskEvents.RetrievedSpotifyData += this.HandleServiceDatabaseRetrievedSpotifyData;
+        ServiceDatabaseTaskEvents.RetrievedSpotifyData += this.HandleServiceDatabaseRetrievedSpotifyData;
         
         ServiceDatabase.ExecuteTaskQuery(
-            serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.RetrieveSpotifyData
+            serviceDatabaseTaskQueryType: ServiceDatabaseTaskQueryType.RetrieveSpotifyData
         );
     }
 }

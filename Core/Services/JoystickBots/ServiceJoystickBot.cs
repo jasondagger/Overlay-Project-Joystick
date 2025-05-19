@@ -104,7 +104,7 @@ public sealed class ServiceJoystickBot() :
                 while (true)
                 {
                     await Task.Delay(
-                        millisecondsDelay: 600000
+                        millisecondsDelay: 3000000
                     );
 
                     var index = random.Next(

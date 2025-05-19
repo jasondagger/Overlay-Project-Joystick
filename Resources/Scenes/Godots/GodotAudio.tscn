@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwnfcarlhuxa1"]
+[gd_scene load_steps=16 format=3 uid="uid://cwnfcarlhuxa1"]
 
 [ext_resource type="Script" uid="uid://bbgiwrng66wyu" path="res://Core/Services/Godots/Audios/ServiceGodotAudio.cs" id="1_gg7pa"]
 [ext_resource type="AudioStream" uid="uid://bq2c5l44ohvy5" path="res://Resources/Audios/SoundAlerts/Applause.mp3" id="2_x2giy"]
+[ext_resource type="AudioStream" uid="uid://yojywnry24ts" path="res://Resources/Audios/SoundAlerts/BallsOfSteel.mp3" id="3_kyb0a"]
 [ext_resource type="AudioStream" uid="uid://dqm53h7kkvc2v" path="res://Resources/Audios/SoundAlerts/ChatNotification.mp3" id="3_x2giy"]
 [ext_resource type="AudioStream" uid="uid://di8qeo050a165" path="res://Resources/Audios/SoundAlerts/Godlike.mp3" id="3_x7scy"]
 [ext_resource type="AudioStream" uid="uid://b1v5pafwbhgii" path="res://Resources/Audios/SoundAlerts/Heartbeats.mp3" id="4_r55xi"]
@@ -21,6 +22,10 @@ script = ExtResource("1_gg7pa")
 [node name="AudioStreamPlayer_Applause" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_x2giy")
 volume_db = 3.0
+
+[node name="AudioStreamPlayer_BallsOfSteel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kyb0a")
+volume_db = 10.0
 
 [node name="AudioStreamPlayer_ChatNotification" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_x2giy")

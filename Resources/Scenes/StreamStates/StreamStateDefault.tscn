@@ -175,27 +175,27 @@ shader_parameter/color = Color(0.94902, 0.94902, 0.94902, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ibhqp"]
 shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.972549, 0.596078, 0.643137, 1)
+shader_parameter/color = Color(0.972549, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1126b"]
 shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.992157, 1, 0.713726, 1)
+shader_parameter/color = Color(0.992157, 1, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3baif"]
 shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.792157, 1, 0.74902, 1)
+shader_parameter/color = Color(0, 1, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v51mv"]
 shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.607843, 0.964706, 1, 1)
+shader_parameter/color = Color(0, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5uns"]
 shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.627451, 0.768627, 1, 1)
+shader_parameter/color = Color(0, 0, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6oauf"]
 shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(1, 0.776471, 1, 1)
+shader_parameter/color = Color(1, 0, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mvpnp"]
 shader = ExtResource("4_7ex8q")

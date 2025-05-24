@@ -9,6 +9,8 @@ using Overlay.Core.Services.Spotifies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Overlay.Core.Services.Geminis;
+using Overlay.Core.Services.Godots.TextToSpeeches;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
@@ -30,6 +32,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         );
         ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommands(
             payloadMessage: payloadMessage
+        );
+        
+        ServiceGodotTextToSpeech.Speak(
+            message: $"{payloadMessage.Author.Username} says... {payloadMessage.Text}"
         );
     }
 
@@ -123,9 +129,17 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         );
     }
     
+    private static void HandleBotCommandAsk(
+        string message
+    )
+    {
+        ServiceGemini.Ask(
+            message: message
+        );
+    }
+    
     private static void HandleBotCommandBallsOfSteel()
     {
-        
         var serviceGodots     = Services.GetService<ServiceGodots>();
         var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
         
@@ -521,6 +535,12 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var parameters = commandSplit.Length > 1 ? commandSplit[1].ToLower() : string.Empty;
         switch (command)
         {
+            case "!ask":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandAsk(
+                    message: parameters
+                );
+                break;
+            
             case "!balls":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandBallsOfSteel();
                 break;

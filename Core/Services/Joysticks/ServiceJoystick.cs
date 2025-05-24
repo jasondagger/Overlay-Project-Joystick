@@ -11,7 +11,6 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Joysticks.Requests;
 
 namespace Overlay.Core.Services.Joysticks;
@@ -22,18 +21,18 @@ public sealed class ServiceJoystick() :
 	Task IService.Setup()
 	{
 		this.RegisterForRetrievedJoystickData();
-		return _ = Task.CompletedTask;
+		return Task.CompletedTask;
 	}
 
 	Task IService.Start()
 	{
-		return _ = Task.CompletedTask;
+		return Task.CompletedTask;
 	}
 
 	Task IService.Stop()
 	{
 		this.Shutdown();
-		return _ = Task.CompletedTask;
+		return Task.CompletedTask;
 	}
 
 	internal void SendRequest(
@@ -44,11 +43,11 @@ public sealed class ServiceJoystick() :
 			function:
 			async () =>
 			{
-				var json = _ = JsonHelper.Serialize(
-					@object: _ = serviceJoystickRequest
+				var json = JsonHelper.Serialize(
+					@object: serviceJoystickRequest
 				);
 				await this.SendWebSocketMessage(
-					message: _ = json
+					message: json
 				);
 			}
 		);
@@ -61,10 +60,10 @@ public sealed class ServiceJoystick() :
 	private ServiceJoystickToken m_joystickToken                = null;
 	private ClientWebSocket      m_clientWebSocket              = null;
 	
-	private string               m_joystickAuthorizationCode    = _ = string.Empty;
-	private string               m_joystickClientId             = _ = string.Empty;
-	private string               m_joystickClientSecret         = _ = string.Empty;
-	private bool                 m_shutdownRequested            = _ = false;
+	private string               m_joystickAuthorizationCode    = string.Empty;
+	private string               m_joystickClientId             = string.Empty;
+	private string               m_joystickClientSecret         = string.Empty;
+	private bool                 m_shutdownRequested            = false;
 	
 	private void ConnectWebSocket()
 	{
@@ -74,59 +73,59 @@ public sealed class ServiceJoystick() :
 			{
 				try
 				{
-					var uri = _ = new Uri(
-						uriString: _ = $"{_ = ServiceJoystick.c_joystickWebSocketAddress}?token={_ = this.GetClientDataAsBase64String()}"
+					var uri = new Uri(
+						uriString: $"{ServiceJoystick.c_joystickWebSocketAddress}?token={this.GetClientDataAsBase64String()}"
 					);
 
-					_ = this.m_clientWebSocket = _ = new ClientWebSocket();
+					this.m_clientWebSocket = new ClientWebSocket();
 					this.m_clientWebSocket.Options.AddSubProtocol(
-						subProtocol: _ = $"actioncable-v1-json"
+						subProtocol: $"actioncable-v1-json"
 					);
 					await this.m_clientWebSocket.ConnectAsync(
-						uri:               _ = uri,
-						cancellationToken: _ = CancellationToken.None
+						uri:               uri,
+						cancellationToken: CancellationToken.None
 					);
 				
 					await this.SendWebSocketMessage(
-						message: _ = ServiceJoystick.c_joystickSubscribeMessage
+						message: ServiceJoystick.c_joystickSubscribeMessage
 					);
 
 #if DEBUG
 					ConsoleLogger.LogMessage(
-						message: _ = $"{_ = nameof(ServiceJoystick)}.{_ = nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
+						message: $"{nameof(ServiceJoystick)}.{nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
 					);
 #endif
-					while (_ = this.m_shutdownRequested is false)
+					while (this.m_shutdownRequested is false)
 					{
-						var isWebSocketOpen = _ = this.m_clientWebSocket.State is WebSocketState.Open;
-						if (_ = isWebSocketOpen is false)
+						var isWebSocketOpen = this.m_clientWebSocket.State is WebSocketState.Open;
+						if (isWebSocketOpen is false)
 						{
 							continue;
 						}
 					
-						var bytes  = _ = new byte[16384u];
-						var result = _ = await this.m_clientWebSocket.ReceiveAsync(
-							buffer:            _ = bytes,
-							cancellationToken: _ = CancellationToken.None
+						var bytes  = new byte[16384u];
+						var result = await this.m_clientWebSocket.ReceiveAsync(
+							buffer:            bytes,
+							cancellationToken: CancellationToken.None
 						);
 						
-						var webSocketPayloadMessage = _ = ServiceJoystick.ParseWebSocketPayload(
-							bytes:  _ = bytes,
-							result: _ = result
+						var webSocketPayloadMessage = ServiceJoystick.ParseWebSocketPayload(
+							bytes:  bytes,
+							result: result
 						);
 						ServiceJoystick.HandleWebSocketPayloadMessage(
-							payloadMessage: _ = webSocketPayloadMessage
+							payloadMessage: webSocketPayloadMessage
 						);
 					}
 				}
 				catch (Exception exception)
 				{
 					ConsoleLogger.LogMessageError(
-						messageError: _ = 
+						messageError: 
 							$"EXCEPTION: " +
-							$"{_ = nameof(ServiceJoystick)}." +
-							$"{_ = nameof(ServiceJoystick.ConnectWebSocket)}() - " +
-							$"{_ = exception.Message}"
+							$"{nameof(ServiceJoystick)}." +
+							$"{nameof(ServiceJoystick.ConnectWebSocket)}() - " +
+							$"{exception.Message}"
 					);
 					
 					_ = Task.Run(
@@ -134,7 +133,7 @@ public sealed class ServiceJoystick() :
 						async () =>
 						{
 							await Task.Delay(
-								millisecondsDelay: _ = ServiceJoystick.c_reconnectDelayInMilliseconds
+								millisecondsDelay: ServiceJoystick.c_reconnectDelayInMilliseconds
 							);
 							
 							this.ConnectWebSocket();
@@ -147,12 +146,12 @@ public sealed class ServiceJoystick() :
 
 	private string GetClientDataAsBase64String()
 	{
-		var clientData        = _ = $"{_ = this.m_joystickClientId}:{_ = this.m_joystickClientSecret}";
-		var clientDataAsBytes = _ = Encoding.UTF8.GetBytes(
-			s: _ = clientData
+		var clientData        = $"{this.m_joystickClientId}:{this.m_joystickClientSecret}";
+		var clientDataAsBytes = Encoding.UTF8.GetBytes(
+			s: clientData
 		);
-		return _ = Convert.ToBase64String(
-			inArray: _ = clientDataAsBytes
+		return Convert.ToBase64String(
+			inArray: clientDataAsBytes
 		);
 	}
 	
@@ -160,11 +159,11 @@ public sealed class ServiceJoystick() :
 		ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData
 	)
 	{
-		var result = _ = retrievedJoystickData.Result;
+		var result = retrievedJoystickData.Result;
 
-		_ = this.m_joystickAuthorizationCode = _ = result.JoystickData_Authorization_Code;
-		_ = this.m_joystickClientId          = _ = result.JoystickData_Client_Id;
-		_ = this.m_joystickClientSecret      = _ = result.JoystickData_Client_Secret;
+		this.m_joystickAuthorizationCode = result.JoystickData_Authorization_Code;
+		this.m_joystickClientId          = result.JoystickData_Client_Id;
+		this.m_joystickClientSecret      = result.JoystickData_Client_Secret;
 		
 		this.ConnectWebSocket();
 		this.RetrieveJoystickToken();
@@ -175,7 +174,7 @@ public sealed class ServiceJoystick() :
 	)
 	{
 		ServiceJoystickWebSocketPayloadChatHandler.HandleWebSocketPayloadChat(
-			payloadMessage: _ = payloadMessage
+			payloadMessage: payloadMessage
 		);
 	}
 	
@@ -183,29 +182,29 @@ public sealed class ServiceJoystick() :
 		ServiceJoystickWebSocketPayloadMessage payloadMessage
 	)
 	{
-		if (_ = payloadMessage is null)
+		if (payloadMessage is null)
 		{
 			return;
 		}
 		
-		var payloadMessageEvent = _ = payloadMessage.Event;
-		switch (_ = payloadMessageEvent)
+		var payloadMessageEvent = payloadMessage.Event;
+		switch (payloadMessageEvent)
 		{
 			case "ChatMessage":
 				ServiceJoystick.HandleWebSocketPayloadChatMessage(
-					payloadMessage: _ = payloadMessage
+					payloadMessage: payloadMessage
 				);
 				break;
 			
 			case "StreamEvent":
                 ServiceJoystick.HandleWebSocketPayloadStreamEvent(
-					payloadMessage: _ = payloadMessage
+					payloadMessage: payloadMessage
 				);
 				break;
 			
 			case "UserPresence":
 				ServiceJoystick.HandleWebSocketPayloadUserPresence(
-					payloadMessage: _ = payloadMessage
+					payloadMessage: payloadMessage
 				);
 				break;
 			
@@ -219,7 +218,7 @@ public sealed class ServiceJoystick() :
 	)
 	{
 		ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEvent(
-			payloadMessage: _ = payloadMessage
+			payloadMessage: payloadMessage
 		);
 	}
 	
@@ -228,7 +227,7 @@ public sealed class ServiceJoystick() :
 	)
 	{
 		ServiceJoystickWebSocketPayloadUserPresenceHandler.HandleWebSocketPayloadUserPresence(
-			payloadMessage: _ = payloadMessage
+			payloadMessage: payloadMessage
 		);
 	}
 
@@ -237,53 +236,53 @@ public sealed class ServiceJoystick() :
 		WebSocketReceiveResult result
 	)
 	{
-		var json = _ = Encoding.UTF8.GetString(
-			bytes: _ = bytes,
-			index: _ = 0,
-			count: _ = result.Count
+		var json = Encoding.UTF8.GetString(
+			bytes: bytes,
+			index: 0,
+			count: result.Count
 		);
-		var payloadType = _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadType>(
-			json: _ = json
+		var payloadType = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadType>(
+			json: json
 		).Type;
 		
 		if (
-			_ = payloadType.Equals(
-				obj: _ = string.Empty
+			payloadType.Equals(
+				obj: string.Empty
 			) is false
 		)
 		{
 			return null;
 		}
 
-		var payload = _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayload>(
-			json: _ = json
+		var payload = JsonHelper.Deserialize<ServiceJoystickWebSocketPayload>(
+			json: json
 		);
-		return _ = payload.Message;
+		return payload.Message;
 	}
 
 	private void RegisterForRetrievedJoystickData()
 	{
-		_ = ServiceDatabaseTaskEvents.RetrievedJoystickData += this.HandleRetrievedJoystickData;
+		ServiceDatabaseTaskEvents.RetrievedJoystickData += this.HandleRetrievedJoystickData;
 	}
 	
 	private void RetrieveJoystickToken()
 	{
-		var serviceGodots    = _ = Services.GetService<ServiceGodots>();
-		var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+		var serviceGodots    = Services.GetService<ServiceGodots>();
+		var serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 		
 		serviceGodotHttp.SendHttpRequest(
 			url: _ =
 				$"https://joystick.tv/api/oauth/token?" +
 				$"redirect_uri=unused&" +
-				$"code={_ = this.m_joystickAuthorizationCode}&" +
+				$"code={this.m_joystickAuthorizationCode}&" +
 				$"grant_type=authorization_code",
 			headers: [
-				$"Authorization: Basic {_ = this.GetClientDataAsBase64String()}",
+				$"Authorization: Basic {this.GetClientDataAsBase64String()}",
 				$"Content-Type: application/x-www-form-urlencoded",
 				$"Accept: application/json"
 			],
-			method: _ = HttpClient.Method.Post,
-			json:   _ = string.Empty,
+			method: HttpClient.Method.Post,
+			json:   string.Empty,
 			requestCompletedHandler: (
 				long     result,
 				long     responseCode,
@@ -291,11 +290,11 @@ public sealed class ServiceJoystick() :
 				byte[]   body
 			) =>
 			{
-				var bodyAsString = _ = Encoding.UTF8.GetString(
-					bytes: _ = body
+				var bodyAsString = Encoding.UTF8.GetString(
+					bytes: body
 				);
-				_ = this.m_joystickToken = _ = JsonHelper.Deserialize<ServiceJoystickToken>(
-					json: _ = bodyAsString
+				this.m_joystickToken = JsonHelper.Deserialize<ServiceJoystickToken>(
+					json: bodyAsString
 				);
 
 				// todo: if joystick adds rest calls, implement refresh token loop
@@ -307,18 +306,18 @@ public sealed class ServiceJoystick() :
 	{
 		// https://support.joystick.tv/developer_support/#testing-your-bot
 		
-		var serviceGodots    = _ = Services.GetService<ServiceGodots>();
-		var serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+		var serviceGodots    = Services.GetService<ServiceGodots>();
+		var serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 		
 		serviceGodotHttp.SendHttpRequest(
 			url: _ =
 				$"https://joystick.tv/echo",
 			headers: [
-				$"Authorization: Basic {_ = this.GetClientDataAsBase64String()}",
+				$"Authorization: Basic {this.GetClientDataAsBase64String()}",
 				$"Content-Type: application/json"
 			],
-			method: _ = HttpClient.Method.Post,
-			json:   _ = "{\n  \"sample\": {\n    \"event\": \"StreamEvent\",\n    \"data\": \"Tipped\"\n  }\n}",
+			method: HttpClient.Method.Post,
+			json:   "{\n  \"sample\": {\n    \"event\": \"StreamEvent\",\n    \"data\": \"Tipped\"\n  }\n}",
 			requestCompletedHandler: (
 				long     result,
 				long     responseCode,
@@ -343,29 +342,29 @@ public sealed class ServiceJoystick() :
 	{
 		try
 		{
-			var buffer = _ = Encoding.UTF8.GetBytes(
-				s: _ = message
+			var buffer = Encoding.UTF8.GetBytes(
+				s: message
 			);
 			await this.m_clientWebSocket.SendAsync(
-				buffer:            _ = buffer,
-				messageType:       _ = WebSocketMessageType.Text,
-				endOfMessage:      _ = true,
-				cancellationToken: _ = CancellationToken.None
+				buffer:            buffer,
+				messageType:       WebSocketMessageType.Text,
+				endOfMessage:      true,
+				cancellationToken: CancellationToken.None
 			);
 		}
 		catch (Exception exception)
 		{
 			ConsoleLogger.LogMessageError(
 				messageError: _ =
-					$"{_ = nameof(ServiceJoystick)}." +
-					$"{_ = nameof(ServiceJoystick.SendWebSocketMessage)}() - " +
-					$"EXCEPTION: {_ = exception.Message}"
+					$"{nameof(ServiceJoystick)}." +
+					$"{nameof(ServiceJoystick.SendWebSocketMessage)}() - " +
+					$"EXCEPTION: {exception.Message}"
 			);
 		}
 	}
 
 	private void Shutdown()
 	{
-		_ = this.m_shutdownRequested = _ = true;
+		this.m_shutdownRequested = true;
 	}
 }

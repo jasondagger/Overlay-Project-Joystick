@@ -14,6 +14,10 @@ config/name="Overlay"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
+[audio]
+
+general/text_to_speech=true
+
 [display]
 
 window/size/viewport_width=3840

@@ -2,6 +2,7 @@
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.Godots.Inputs;
+using Overlay.Core.Services.Godots.TextToSpeeches;
 using Overlay.Core.Tools;
 using Overlay.Core.Tools.ResourcePaths;
 // ReSharper disable All
@@ -32,22 +33,23 @@ internal sealed class ServiceGodots :
         where TServiceGodot :
             ServiceGodot
     {
-        return _ = this.m_serviceGodots[key: _ = typeof(TServiceGodot)] as TServiceGodot;
+        return this.m_serviceGodots[key: typeof(TServiceGodot)] as TServiceGodot;
     }
 
     private static readonly Dictionary<Type, string> c_serviceGodotTypePaths = new()
     {
-        { _ = typeof(ServiceGodotAudio), _ = ResourcePaths.GodotAudio },
-        { _ = typeof(ServiceGodotHttp),  _ = ResourcePaths.GodotHttp  },
-        { _ = typeof(ServiceGodotInput), _ = ResourcePaths.GodotInput },
+        { typeof(ServiceGodotAudio),        ResourcePaths.GodotAudio        },
+        { typeof(ServiceGodotHttp),         ResourcePaths.GodotHttp         },
+        { typeof(ServiceGodotInput),        ResourcePaths.GodotInput        },
+        { typeof(ServiceGodotTextToSpeech), ResourcePaths.GodotTextToSpeech },
 	};
 	private readonly Dictionary<Type, ServiceGodot>  m_serviceGodots         = new();
 
     private void AddServiceGodotScenes()
     {
-		var type   = _ = this.GetType();
-        var method = _ = type.GetMethod(
-            name:        _ = $"{_ = nameof(ServiceGodots.AddServiceGodotScene)}",
+		var type   = this.GetType();
+        var method = type.GetMethod(
+            name:        $"{nameof(ServiceGodots.AddServiceGodotScene)}",
             bindingAttr: _ =
                 BindingFlags.Instance |
                 BindingFlags.NonPublic
@@ -58,22 +60,22 @@ internal sealed class ServiceGodots :
             return;
         }
 
-        foreach (var serviceGodotTypePath in _ = ServiceGodots.c_serviceGodotTypePaths)
+        foreach (var serviceGodotTypePath in ServiceGodots.c_serviceGodotTypePaths)
         {
-            var serviceGodotType = _ = serviceGodotTypePath.Key;
-            var serviceGodotPath = _ = serviceGodotTypePath.Value;
+            var serviceGodotType = serviceGodotTypePath.Key;
+            var serviceGodotPath = serviceGodotTypePath.Value;
 
-            var parameters    = _ = new object[] 
+            var parameters    = new object[] 
             {
-                _ = serviceGodotPath
+                serviceGodotPath
             };
-            var genericMethod = _ = method.MakeGenericMethod(
-                typeArguments: _ = serviceGodotType
+            var genericMethod = method.MakeGenericMethod(
+                typeArguments: serviceGodotType
             );
 
-            _ = genericMethod.Invoke(
-                obj:        _ = this,
-                parameters: _ = parameters
+            genericMethod.Invoke(
+                obj:        this,
+                parameters: parameters
             );
         }
     }
@@ -84,29 +86,29 @@ internal sealed class ServiceGodots :
 		where TServiceGodot :
 			ServiceGodot
 	{
-        var packedScene = _ = ResourceLoader.Load(
-            path:      _ = path,
-            typeHint:  _ = $"{_ = nameof(PackedScene)}",
-            cacheMode: _ = ResourceLoader.CacheMode.Reuse
+        var packedScene = ResourceLoader.Load(
+            path:      path,
+            typeHint:  $"{nameof(PackedScene)}",
+            cacheMode: ResourceLoader.CacheMode.Reuse
         ) as PackedScene;
         if (packedScene is not null)
         {
-            var serviceGodot = _ = packedScene.Instantiate() as TServiceGodot;
+            var serviceGodot = packedScene.Instantiate() as TServiceGodot;
             serviceGodot.Start();
 
-			_ = this.m_serviceGodots[key: _ = typeof(TServiceGodot)] = _ = serviceGodot;
+			this.m_serviceGodots[key: typeof(TServiceGodot)] = serviceGodot;
 
 			base.Node.AddChild(
-                node: _ = serviceGodot
+                node: serviceGodot
 			);
         }
         else
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceGodots)}." +
-                    $"{_ = nameof(ServiceGodots.AddServiceGodotScene)}() - " +
-                    $"Failed to load from {_ = path}"
+                    $"{nameof(ServiceGodots)}." +
+                    $"{nameof(ServiceGodots.AddServiceGodotScene)}() - " +
+                    $"Failed to load from {path}"
             );
         }
     }

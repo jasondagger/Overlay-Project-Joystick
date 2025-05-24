@@ -25,7 +25,7 @@ volume_db = 3.0
 
 [node name="AudioStreamPlayer_BallsOfSteel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kyb0a")
-volume_db = 10.0
+volume_db = 8.0
 
 [node name="AudioStreamPlayer_ChatNotification" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_x2giy")

@@ -142,10 +142,11 @@ internal sealed partial class StreamEventsController() :
             case "You Look Great!":
             case "Headpats":
             case "Belly Rub":
-            case "Hydrate":
-            case "Toke Up":
-            case "Do One More!":
             case "Streeeetch!":
+            case "Do One More!":
+            case "Hydrate":
+            case "Just Lurkin'":
+            case "Toke Up":
                 StreamEventsTipMenuIRL.HandleTipMenuItem(
                     messageMetadata: messageMetadata
                 );

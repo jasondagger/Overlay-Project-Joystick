@@ -10,9 +10,9 @@ internal sealed partial class ServiceGodotTextToSpeech() :
         string message
     )
     {
-        OS.Execute(
-            path:      "espeak",
-            arguments: ["-a", "200", message]
+        DisplayServer.TtsSpeak(
+            text:  message,
+            voice: "English (America)+Alex"
         );
     }
 }

@@ -67,9 +67,9 @@ public sealed class ServiceGemini() :
                     message: response.Text
                 );
                 
-                //ServiceGodotTextToSpeech.Speak(
-                //    message: $"SmoothBot says... {response.Text}"
-                //);
+                ServiceGodotTextToSpeech.Speak(
+                    message: $"SmoothBot says... {response.Text}"
+                );
             }
         );
     }

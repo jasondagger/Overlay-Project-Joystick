@@ -12,7 +12,8 @@ internal sealed partial class ServiceGodotTextToSpeech() :
     {
         DisplayServer.TtsSpeak(
             text:  message,
-            voice: "English (America)+Alex"
+            voice: "English (America)",
+            volume: 100
         );
     }
 }

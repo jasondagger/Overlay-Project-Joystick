@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Overlay.Core.Services.Geminis;
 using Overlay.Core.Services.Govee;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.Lovense;
@@ -80,6 +81,7 @@ internal static class Services
     private static readonly Dictionary<Type, IService> c_serviceTypes = new()
     {
 		{ _ = typeof(ServiceDatabase),           _ = new ServiceDatabase()           },
+        { _ = typeof(ServiceGemini),             _ = new ServiceGemini()             },
         { _ = typeof(ServiceGodots),             _ = new ServiceGodots()             },
         { _ = typeof(ServiceGovee),              _ = new ServiceGovee()              },
         { _ = typeof(ServiceJoystick),           _ = new ServiceJoystick()           },

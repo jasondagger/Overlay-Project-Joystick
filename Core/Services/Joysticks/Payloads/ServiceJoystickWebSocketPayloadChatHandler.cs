@@ -133,7 +133,8 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         string message
     )
     {
-        ServiceGemini.Ask(
+        var serviceGemini = Services.GetService<ServiceGemini>();
+        serviceGemini.Ask(
             message: message
         );
     }

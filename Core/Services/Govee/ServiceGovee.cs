@@ -20,17 +20,17 @@ internal sealed class ServiceGovee() :
     {
         this.SubscribeToServiceDatabaseEvents();
         this.RetrieveResources();
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     Task IService.Start()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     Task IService.Stop()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     internal enum LightScene :
@@ -43,25 +43,25 @@ internal sealed class ServiceGovee() :
         Color color
     )
     {
-        var rgbValue = _ = ServiceGovee.ConvertColorToInt(
-            color: _ = color
+        var rgbValue = ServiceGovee.ConvertColorToInt(
+            color: color
         );
-        var serviceGoveePayload = _ = new ServiceGoveePayload();
-        _ = serviceGoveePayload.Payload.Capability.Value = _ = rgbValue;
+        var serviceGoveePayload = new ServiceGoveePayload();
+        serviceGoveePayload.Payload.Capability.Value = rgbValue;
         this.SendPayloads(
-            payload: _ = serviceGoveePayload
+            payload: serviceGoveePayload
         );
     }
     
     internal void TurnOffLights()
     {
-        var serviceGoveePayload = _ = new ServiceGoveePayload();
-        _ = serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.on_off";
-        _ = serviceGoveePayload.Payload.Capability.Instance = $"powerSwitch";
-        _ = serviceGoveePayload.Payload.Capability.Value    = _ = 0;
+        var serviceGoveePayload = new ServiceGoveePayload();
+        serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.on_off";
+        serviceGoveePayload.Payload.Capability.Instance = $"powerSwitch";
+        serviceGoveePayload.Payload.Capability.Value    = 0;
         
         this.SendPayloads(
-            payload: _ = serviceGoveePayload
+            payload: serviceGoveePayload
         );
     }
 
@@ -70,21 +70,21 @@ internal sealed class ServiceGovee() :
     )
     {
         if (
-            _ = this.m_scenes.ContainsKey(
-                key: _ = sceneName
+            this.m_scenes.ContainsKey(
+                key: sceneName
             ) is false
         )
         {
             return;
         }
         
-        var serviceGoveePayload = _ = new ServiceGoveePayload();
-        _ = serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
-        _ = serviceGoveePayload.Payload.Capability.Instance = $"diyScene";
-        _ = serviceGoveePayload.Payload.Capability.Value    = _ = this.m_scenes[key: _ = sceneName];
+        var serviceGoveePayload = new ServiceGoveePayload();
+        serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
+        serviceGoveePayload.Payload.Capability.Instance = $"diyScene";
+        serviceGoveePayload.Payload.Capability.Value    = this.m_scenes[key: sceneName];
         
         this.SendPayloads(
-            payload: _ = serviceGoveePayload
+            payload: serviceGoveePayload
         );
     }
     
@@ -106,12 +106,12 @@ internal sealed class ServiceGovee() :
         ServiceDatabaseTaskRetrievedListGoveeLights lights    
     )
     {
-        var result = _ = lights.Result;
+        var result = lights.Result;
         
-        foreach (var light in _ = result)
+        foreach (var light in result)
         {
             this.m_hardwareIds.Add(
-                item: _ = light.GoveeLight_Hardware_Id
+                item: light.GoveeLight_Hardware_Id
             );
         }
         
@@ -122,34 +122,34 @@ internal sealed class ServiceGovee() :
         ServiceDatabaseTaskRetrievedGoveeData goveeData    
     )
     {
-        var result        = _ = goveeData.Result;
-        _ = this.m_apiKey = _ = result.GoveeData_Api_Key;
+        var result    = goveeData.Result;
+        this.m_apiKey = result.GoveeData_Api_Key;
     }
     
     private void RetrieveResources()
     {
-        var serviceGodots           = _ = Services.GetService<ServiceGodots>();
-        _ = this.m_serviceGodotHttp = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+        var serviceGodots           = Services.GetService<ServiceGodots>();
+        this.m_serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
     }
     
     private void RequestDIYScenes()
     {
-        var payload = _ = new ServiceGoveePayload();
+        var payload = new ServiceGoveePayload();
             
-        _ = payload.Payload.Device = _ = this.m_hardwareIds[0];
+        payload.Payload.Device = this.m_hardwareIds[0];
         
-        var json = _ = JsonHelper.Serialize(
-            @object: _ = payload
+        var json = JsonHelper.Serialize(
+            @object: payload
         );
         
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceGovee.c_goveeAddress}router/api/v1/device/diy-scenes",
+            url:                     $"{ServiceGovee.c_goveeAddress}router/api/v1/device/diy-scenes",
             headers:                 [
-                $"Govee-API-Key: {_ = this.m_apiKey}",
+                $"Govee-API-Key: {this.m_apiKey}",
                 $"Content-Type: application/json",
             ],
-            method:                  _ = HttpClient.Method.Post,
-            json:                    _ = json,
+            method:                  HttpClient.Method.Post,
+            json:                    json,
             requestCompletedHandler: (
                 long     result,
                 long     responseCode,
@@ -157,33 +157,33 @@ internal sealed class ServiceGovee() :
                 byte[]   body
             ) =>
             {
-                if (_ = responseCode >= 300)
+                if (responseCode >= 300)
                 {
                     ConsoleLogger.LogMessageError(
                         messageError: _ =
-                            $"{_ = nameof(ServiceGovee)}." +
-                            $"{_ = nameof(ServiceGovee.SendPayloads)}() " +
-                            $"EXCEPTION: {_ = responseCode} error."
+                            $"{nameof(ServiceGovee)}." +
+                            $"{nameof(ServiceGovee.SendPayloads)}() " +
+                            $"EXCEPTION: {responseCode} error."
                     );
                 }
                 
-                var bodyAsString = _ = Encoding.UTF8.GetString(
-                    bytes: _ = body
+                var bodyAsString = Encoding.UTF8.GetString(
+                    bytes: body
                 );
-                var serviceGoveeDIY = _ = JsonHelper.Deserialize<ServiceGoveeDIY>(
-                    json: _ = bodyAsString
+                var serviceGoveeDIY = JsonHelper.Deserialize<ServiceGoveeDIY>(
+                    json: bodyAsString
                 );
 
                 foreach (var capability in serviceGoveeDIY.Payload.Capabilities)
                 {
-                    var options = _ = capability.Parameters.Options;
+                    var options = capability.Parameters.Options;
                     foreach (var option in options)
                     {
-                        var value = _ = (JsonElement)option.Value;
+                        var value = (JsonElement)option.Value;
 
                         this.m_scenes.TryAdd(
-                            key:   _ = option.Name,
-                            value: _ = value.GetInt32()
+                            key:   option.Name,
+                            value: value.GetInt32()
                         );
                     }
                 }
@@ -194,13 +194,13 @@ internal sealed class ServiceGovee() :
     private void RequestDeviceInformation()
     {
         this.m_serviceGodotHttp.SendHttpRequest(
-            url:                     _ = $"{_ = ServiceGovee.c_goveeAddress}router/api/v1/user/devices",
+            url:                     $"{ServiceGovee.c_goveeAddress}router/api/v1/user/devices",
             headers:                 [
-                $"Govee-API-Key: {_ = this.m_apiKey}",
+                $"Govee-API-Key: {this.m_apiKey}",
                 $"Content-Type: application/json",
             ],
-            method:                  _ = HttpClient.Method.Get,
-            json:                    _ = string.Empty,
+            method:                  HttpClient.Method.Get,
+            json:                    string.Empty,
             requestCompletedHandler: (
                 long     result,
                 long     responseCode,
@@ -208,18 +208,18 @@ internal sealed class ServiceGovee() :
                 byte[]   body
             ) =>
             {
-                if (_ = responseCode >= 300)
+                if (responseCode >= 300)
                 {
                     ConsoleLogger.LogMessageError(
                         messageError: _ =
-                            $"{_ = nameof(ServiceGovee)}." +
-                            $"{_ = nameof(ServiceGovee.SendPayloads)}() " +
-                            $"EXCEPTION: {_ = responseCode} error."
+                            $"{nameof(ServiceGovee)}." +
+                            $"{nameof(ServiceGovee.SendPayloads)}() " +
+                            $"EXCEPTION: {responseCode} error."
                     );
                 }
                 
-                var bodyAsString = _ = Encoding.UTF8.GetString(
-                    bytes: _ = body
+                var bodyAsString = Encoding.UTF8.GetString(
+                    bytes: body
                 );
             }
         );
@@ -229,22 +229,22 @@ internal sealed class ServiceGovee() :
         ServiceGoveePayload payload
     )
     {
-        foreach (var hardwareId in _ = this.m_hardwareIds)
+        foreach (var hardwareId in this.m_hardwareIds)
         {
-            _ = payload.Payload.Device = _ = hardwareId;
+            payload.Payload.Device = hardwareId;
             
-            var json = _ = JsonHelper.Serialize(
-                @object: _ = payload
+            var json = JsonHelper.Serialize(
+                @object: payload
             );
             
             this.m_serviceGodotHttp.SendHttpRequest(
-                url:                     _ = $"{_ = ServiceGovee.c_goveeAddress}router/api/v1/device/control",
+                url:                     $"{ServiceGovee.c_goveeAddress}router/api/v1/device/control",
                 headers:                 [
-                    $"Govee-API-Key: {_ = this.m_apiKey}",
+                    $"Govee-API-Key: {this.m_apiKey}",
                     $"Content-Type: application/json",
                 ],
-                method:                  _ = HttpClient.Method.Post,
-                json:                    _ = json,
+                method:                  HttpClient.Method.Post,
+                json:                    json,
                 requestCompletedHandler: (
                     long     result,
                     long     responseCode,
@@ -252,18 +252,18 @@ internal sealed class ServiceGovee() :
                     byte[]   body
                 ) =>
                 {
-                    if (_ = responseCode >= 300)
+                    if (responseCode >= 300)
                     {
                         ConsoleLogger.LogMessageError(
                             messageError: _ =
-                                $"{_ = nameof(ServiceGovee)}." +
-                                $"{_ = nameof(ServiceGovee.SendPayloads)}() " +
-                                $"EXCEPTION: {_ = responseCode} error."
+                                $"{nameof(ServiceGovee)}." +
+                                $"{nameof(ServiceGovee.SendPayloads)}() " +
+                                $"EXCEPTION: {responseCode} error."
                         );
                     }
 
-                    var bodyAsString = _ = Encoding.UTF8.GetString(
-                        bytes: _ = body
+                    var bodyAsString = Encoding.UTF8.GetString(
+                        bytes: body
                     );
                 }
             );
@@ -272,7 +272,7 @@ internal sealed class ServiceGovee() :
     
     private void SubscribeToServiceDatabaseEvents()
     {
-        _ = ServiceDatabaseTaskEvents.RetrievedGoveeData       += this.HandleServiceDatabaseRetrievedGoveeData;
-        _ = ServiceDatabaseTaskEvents.RetrievedListGoveeLights += this.HandleServiceDatabaseRetrievedListGoveeLights;
+        ServiceDatabaseTaskEvents.RetrievedGoveeData       += this.HandleServiceDatabaseRetrievedGoveeData;
+        ServiceDatabaseTaskEvents.RetrievedListGoveeLights += this.HandleServiceDatabaseRetrievedListGoveeLights;
     }
 }

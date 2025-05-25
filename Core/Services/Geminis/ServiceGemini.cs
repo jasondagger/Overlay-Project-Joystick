@@ -2,6 +2,8 @@
 using System.Text;
 using System.Threading.Tasks;
 using Godot;
+using Overlay.Core.Services.Databases.Tasks;
+using Overlay.Core.Services.Databases.Tasks.Retrieves;
 using Overlay.Core.Services.Geminis.Payloads;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Https;
@@ -11,11 +13,12 @@ using Overlay.Core.Tools;
 
 namespace Overlay.Core.Services.Geminis;
 
-public sealed class ServiceGemini() :
+public sealed partial class ServiceGemini() :
     IService
 {
     Task IService.Setup()
     {
+        this.SubscribeToServiceDatabaseEvents();
         return Task.CompletedTask;
     }
 
@@ -29,7 +32,7 @@ public sealed class ServiceGemini() :
         return Task.CompletedTask;
     }
 
-    internal static void Ask(
+    internal void Ask(
         string message
     )
     {
@@ -38,7 +41,7 @@ public sealed class ServiceGemini() :
 		
         serviceGodotHttp.SendHttpRequest(
             url: _ =
-                $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={ServiceGemini.c_apiKey}",
+                $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={this.m_apiKey}",
             headers: [
                 $"Content-Type: application/json"
             ],
@@ -74,5 +77,18 @@ public sealed class ServiceGemini() :
         );
     }
 
-    private const string c_apiKey = "AIzaSyCFURChZabT2ZKmhPHnEOugiUI9i_sOBVo";
+    private string m_apiKey = string.Empty;
+    
+    private void HandleServiceDatabaseRetrievedGoveeData(
+        ServiceDatabaseTaskRetrievedGoogleData googleData    
+    )
+    {
+        var result    = googleData.Result;
+        this.m_apiKey = result.GoogleData_Api_Key;
+    }
+    
+    private void SubscribeToServiceDatabaseEvents()
+    {
+        _ = ServiceDatabaseTaskEvents.RetrievedGoogleData += this.HandleServiceDatabaseRetrievedGoveeData;
+    }
 }

@@ -1,6 +1,4 @@
 ﻿
-using Overlay.Core.Services.Databases.Models;
-
 namespace Overlay.Core.Services.Databases.Tasks;
 
 internal static class ServiceDatabaseTaskQueryStatements
@@ -9,6 +7,8 @@ internal static class ServiceDatabaseTaskQueryStatements
 	{
 		
 	}
+	
+	internal const string RetrieveGoogleData                     = $"SELECT * FROM GoogleData LIMIT 1";
 	
 	internal const string RetrieveGoveeData                     = $"SELECT * FROM GoveeData LIMIT 1";
 	internal const string RetrieveListGoveeLights               = $"SELECT * FROM GoveeLights";

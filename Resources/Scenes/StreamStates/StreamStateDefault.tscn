@@ -20,9 +20,9 @@
 [ext_resource type="Material" uid="uid://bmnsb3f12a5fo" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeLeft.tres" id="9_niean"]
 [ext_resource type="Script" uid="uid://dfkmnqhk68848" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundSnow.cs" id="10_pkstr"]
 [ext_resource type="Material" uid="uid://dxa0382d04i5u" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeRight.tres" id="10_tjdmb"]
-[ext_resource type="Texture2D" uid="uid://g0kd4egbwxli" path="res://Resources/Textures/Effects/Particles/Penis.png" id="11_4r38b"]
 [ext_resource type="Material" uid="uid://dv6vkntylsjdw" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeUp.tres" id="11_xepxj"]
 [ext_resource type="Script" uid="uid://wuk8mxl2a36v" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundGodRays.cs" id="12_4r38b"]
+[ext_resource type="Texture2D" uid="uid://d0by8y3gu23se" path="res://Resources/Textures/Effects/Particles/Snowflake.png" id="13_iwrga"]
 [ext_resource type="Material" uid="uid://fvk0eaupd4pn" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorder.tres" id="18_v74uj"]
 [ext_resource type="Material" uid="uid://crqia762w5lnx" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeDown.tres" id="20_f2fsi"]
 [ext_resource type="Material" uid="uid://cyphwemtqgx2s" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeLeft.tres" id="21_v74uj"]
@@ -167,7 +167,7 @@ shader_parameter/wave_max = 0.8
 shader_parameter/wave_speed = 0.5
 shader_parameter/wave_rotation = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/particle_texture = ExtResource("11_4r38b")
+shader_parameter/particle_texture = ExtResource("13_iwrga")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7jueq"]
 shader = ExtResource("4_7ex8q")

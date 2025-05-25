@@ -28,6 +28,10 @@ internal static class ServiceDatabaseTaskQueries
 			ServiceDatabaseTaskQueries.Start
 		},
 		{
+			_ = ServiceDatabaseTaskQueryType.RetrieveGoogleData,
+			ServiceDatabaseTaskQueries.RetrieveAsyncGoogleData
+		},
+		{
 			_ = ServiceDatabaseTaskQueryType.RetrieveGoveeData,
 			ServiceDatabaseTaskQueries.RetrieveAsyncGoveeData
 		},
@@ -64,6 +68,15 @@ internal static class ServiceDatabaseTaskQueries
 			ServiceDatabaseTaskQueries.RetrieveAsyncSpotifyData
 		},
 	};
+    
+    private static async Task RetrieveAsyncGoogleData()
+    {
+	    var npgsqlStatement = _ = ServiceDatabaseTaskQueryStatements.RetrieveGoogleData;
+	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
+		    npgsqlStatement:		  _ = npgsqlStatement,
+		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoogleData
+	    );
+    }
     
     private static async Task RetrieveAsyncGoveeData()
     {
@@ -148,6 +161,8 @@ internal static class ServiceDatabaseTaskQueries
 
 	private static async Task Start()
 	{
+		await ServiceDatabaseTaskQueries.RetrieveAsyncGoogleData();
+		
 		await ServiceDatabaseTaskQueries.RetrieveAsyncGoveeData();
 		await ServiceDatabaseTaskQueries.RetrieveAsyncListGoveeLights();
 		

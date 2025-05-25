@@ -6,6 +6,7 @@ namespace Overlay.Core.Services.Databases.Tasks;
 
 internal static class ServiceDatabaseTaskEvents
 {
+    internal static Action<ServiceDatabaseTaskRetrievedGoogleData>                    RetrievedGoogleData                    { get; set; } = null;
     internal static Action<ServiceDatabaseTaskRetrievedGoveeData>                     RetrievedGoveeData                     { get; set; } = null;
     internal static Action<ServiceDatabaseTaskRetrievedJoystickData>                  RetrievedJoystickData                  { get; set; } = null;
     internal static Action<ServiceDatabaseTaskRetrievedListGoveeLights>               RetrievedListGoveeLights               { get; set; } = null;

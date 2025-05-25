@@ -10,6 +10,33 @@ namespace Overlay.Core.Services.Databases.Tasks;
 
 internal static class ServiceDatabaseTaskQueryHandlers
 {
+    internal static Task HandleExecuteQueryAsyncRetrievedGoogleData(
+        NpgsqlDataReader npgsqlDataReader
+    )
+    {
+        try
+        {
+            ServiceDatabaseTaskEvents.RetrievedGoogleData?.Invoke(
+                obj: new ServiceDatabaseTaskRetrievedGoogleData(
+                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseGoogleData>(
+                        npgsqlDataReader: _ = npgsqlDataReader
+                    )
+                )
+            );
+        }
+        catch (Exception exception)
+        {
+            ConsoleLogger.LogMessageError(
+                messageError: _ =
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
+                    $"EXCEPTION: {_ = exception.Message}"
+            );
+        }
+        
+        return _ = Task.CompletedTask;
+    }
+    
     internal static Task HandleExecuteQueryAsyncRetrievedGoveeData(
         NpgsqlDataReader npgsqlDataReader
     )

@@ -16,12 +16,12 @@ internal static class ServiceDatabaseTaskQueries
         ServiceDatabaseTaskQueryType serviceDatabaseTaskQueryType
     )
     {
-        await ServiceDatabaseTaskQueries.c_taskQueries[
+        await ServiceDatabaseTaskQueries.s_taskQueries[
 			key: serviceDatabaseTaskQueryType
 		].Invoke();
     }
 
-    private static readonly Dictionary<ServiceDatabaseTaskQueryType, Func<Task>> c_taskQueries = new()
+    private static readonly Dictionary<ServiceDatabaseTaskQueryType, Func<Task>> s_taskQueries = new()
     {
         {
 			ServiceDatabaseTaskQueryType.Start,

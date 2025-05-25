@@ -29,67 +29,67 @@ internal static class Services
             class,
             IService
     {
-        return _ = Services.c_serviceTypes[
-            key: _ = typeof(TService)
+        return Services.c_serviceTypes[
+            key: typeof(TService)
         ] as TService;
     }
 
     internal static async Task Start()
     {
-        var tasksSetup = _ = new List<Task>();
+        var tasksSetup = new List<Task>();
         
         // Service Setup
         tasksSetup.AddRange(
-            from serviceTypes in _ = Services.c_serviceTypes 
-                select _ = serviceTypes.Value into service 
-                select _ = service.Setup()
+            from serviceTypes in Services.c_serviceTypes 
+                select serviceTypes.Value into service 
+                select service.Setup()
         );
         
         await Task.WhenAll(
-            tasks: _ = tasksSetup
+            tasks: tasksSetup
         );
 
         // Service Start
-        var tasksStart = _ = new List<Task>();
+        var tasksStart = new List<Task>();
         
         tasksStart.AddRange(
-            from serviceTypes in _ = Services.c_serviceTypes
-                select _ = serviceTypes.Value into service
-                select _ = service.Start()
+            from serviceTypes in Services.c_serviceTypes
+                select serviceTypes.Value into service
+                select service.Start()
         );
         
         await Task.WhenAll(
-            tasks: _ = tasksStart
+            tasks: tasksStart
         );
     }
 
     internal static async Task Stop()
     {
-        var tasksStop = _ = new List<Task>();
+        var tasksStop = new List<Task>();
         
         tasksStop.AddRange(
-            from serviceTypes in _ = Services.c_serviceTypes
-                select _ = serviceTypes.Value into service 
-                    select _ = service.Stop()
+            from serviceTypes in Services.c_serviceTypes
+                select serviceTypes.Value into service 
+                    select service.Stop()
         );
         
         await Task.WhenAll(
-            tasks: _ = tasksStop
+            tasks: tasksStop
         );
     }
 
     private static readonly Dictionary<Type, IService> c_serviceTypes = new()
     {
-		{ _ = typeof(ServiceDatabase),           _ = new ServiceDatabase()           },
-        { _ = typeof(ServiceGemini),             _ = new ServiceGemini()             },
-        { _ = typeof(ServiceGodots),             _ = new ServiceGodots()             },
-        { _ = typeof(ServiceGovee),              _ = new ServiceGovee()              },
-        { _ = typeof(ServiceJoystick),           _ = new ServiceJoystick()           },
-        { _ = typeof(ServiceJoystickBot),        _ = new ServiceJoystickBot()        },
-        { _ = typeof(ServiceLovense),            _ = new ServiceLovense()            },
-        { _ = typeof(ServiceOBS),                _ = new ServiceOBS()                },
-        { _ = typeof(ServicePastelInterpolator), _ = new ServicePastelInterpolator() },
-        { _ = typeof(ServiceSpotify),            _ = new ServiceSpotify()            },
-        { _ = typeof(ServiceStreamStates),       _ = new ServiceStreamStates()       },
+		{ typeof(ServiceDatabase),           new ServiceDatabase()           },
+        { typeof(ServiceGemini),             new ServiceGemini()             },
+        { typeof(ServiceGodots),             new ServiceGodots()             },
+        { typeof(ServiceGovee),              new ServiceGovee()              },
+        { typeof(ServiceJoystick),           new ServiceJoystick()           },
+        { typeof(ServiceJoystickBot),        new ServiceJoystickBot()        },
+        { typeof(ServiceLovense),            new ServiceLovense()            },
+        { typeof(ServiceOBS),                new ServiceOBS()                },
+        { typeof(ServicePastelInterpolator), new ServicePastelInterpolator() },
+        { typeof(ServiceSpotify),            new ServiceSpotify()            },
+        { typeof(ServiceStreamStates),       new ServiceStreamStates()       },
 	};
 }

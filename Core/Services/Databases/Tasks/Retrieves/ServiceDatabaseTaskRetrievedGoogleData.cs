@@ -8,5 +8,5 @@ internal sealed class ServiceDatabaseTaskRetrievedGoogleData(
 ) :
 	ServiceDatabaseTask<ServiceDatabaseGoogleData, ServiceDatabaseGoogleData>()
 {
-	internal override ServiceDatabaseGoogleData Result { get; set; } = _ = result;
+	internal override ServiceDatabaseGoogleData Result { get; set; } = result;
 }

@@ -18,8 +18,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedGoogleData?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedGoogleData(
-                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseGoogleData>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseGoogleData>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -28,13 +28,13 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
         
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     internal static Task HandleExecuteQueryAsyncRetrievedGoveeData(
@@ -45,8 +45,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedGoveeData?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedGoveeData(
-                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseGoveeData>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseGoveeData>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -55,13 +55,13 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
         
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     internal static async Task HandleExecuteQueryAsyncRetrievedListGoveeLights(
@@ -72,8 +72,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedListGoveeLights?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedListGoveeLights(
-                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseGoveeLight>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseGoveeLight>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -82,9 +82,9 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -97,8 +97,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedJoystickData?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedJoystickData(
-                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseJoystickData>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseJoystickData>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -107,13 +107,13 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickData)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickData)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
 
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     internal static async Task HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers(
@@ -124,8 +124,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedListJoystickLatestFollowers?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedListJoystickLatestFollowers(
-                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestFollower>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestFollower>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -134,9 +134,9 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -149,8 +149,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedListJoystickLatestSubscribers?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedListJoystickLatestSubscribers(
-                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestSubscriber>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestSubscriber>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -159,9 +159,9 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -174,8 +174,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedListJoystickLatestTippers?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedListJoystickLatestTippers(
-                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestTipper>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickLatestTipper>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -184,9 +184,9 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -199,8 +199,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedListJoystickUsers?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedListJoystickUsers(
-                    result: _ = await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickUser>(
-						npgsqlDataReader: _ = npgsqlDataReader
+                    result: await ServiceDatabaseModelReader.ReadServiceDatabaseModelsFromSqlDataReaderAsync<ServiceDatabaseJoystickUser>(
+						npgsqlDataReader: npgsqlDataReader
 					)
 				)
             );
@@ -209,9 +209,9 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -224,8 +224,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedLovenseData?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedLovenseData(
-                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseLovenseData>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseLovenseData>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -234,13 +234,13 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
         
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
     
     internal static Task HandleExecuteQueryAsyncRetrievedSpotifyData(
@@ -251,8 +251,8 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ServiceDatabaseTaskEvents.RetrievedSpotifyData?.Invoke(
                 obj: new ServiceDatabaseTaskRetrievedSpotifyData(
-                    result: _ = ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseSpotifyData>(
-                        npgsqlDataReader: _ = npgsqlDataReader
+                    result: ServiceDatabaseModelReader.ReadServiceDatabaseModelFromSqlDataReader<ServiceDatabaseSpotifyData>(
+                        npgsqlDataReader: npgsqlDataReader
                     )
                 )
             );
@@ -261,13 +261,13 @@ internal static class ServiceDatabaseTaskQueryHandlers
         {
             ConsoleLogger.LogMessageError(
                 messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedSpotifyData)}() " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
+                    $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedSpotifyData)}() " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
         
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
 }

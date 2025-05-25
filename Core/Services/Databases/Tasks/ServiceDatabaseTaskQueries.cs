@@ -71,7 +71,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncGoogleData()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveGoogleData;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveGoogleData;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoogleData
@@ -80,7 +80,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncGoveeData()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveGoveeData;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveGoveeData;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData
@@ -89,7 +89,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncJoystickData()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveJoystickData;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveJoystickData;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickData
@@ -98,7 +98,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncListGoveeLights()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListGoveeLights;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListGoveeLights;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights
@@ -107,7 +107,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncListJoystickLatestFollowers()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestFollowers;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestFollowers;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers
@@ -116,7 +116,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncListJoystickLatestSubscribers()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestSubscribers;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestSubscribers;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers
@@ -125,7 +125,7 @@ internal static class ServiceDatabaseTaskQueries
     
     private static async Task RetrieveAsyncListJoystickLatestTippers()
     {
-	    var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestTippers;
+	    const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickLatestTippers;
 	    await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 		    npgsqlStatement:		  npgsqlStatement,
 		    executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers
@@ -134,7 +134,7 @@ internal static class ServiceDatabaseTaskQueries
 
 	private static async Task RetrieveAsyncListJoystickUsers()
 	{
-		var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickUsers;
+		const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveListJoystickUsers;
 		await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 			npgsqlStatement:		  npgsqlStatement,
 			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers
@@ -143,7 +143,7 @@ internal static class ServiceDatabaseTaskQueries
 	
 	private static async Task RetrieveAsyncLovenseData()
 	{
-		var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveLovenseData;
+		const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveLovenseData;
 		await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 			npgsqlStatement:		  npgsqlStatement,
 			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData
@@ -152,7 +152,7 @@ internal static class ServiceDatabaseTaskQueries
 	
 	private static async Task RetrieveAsyncSpotifyData()
 	{
-		var npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveSpotifyData;
+		const string npgsqlStatement = ServiceDatabaseTaskQueryStatements.RetrieveSpotifyData;
 		await ServiceDatabaseTaskLogic.ExecuteQueryAsync(
 			npgsqlStatement:		  npgsqlStatement,
 			executeQueryAsyncHandler: ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedSpotifyData

@@ -69,10 +69,6 @@ public sealed partial class ServiceGemini() :
                 serviceJoystickBot.SendChatMessage(
                     message: response.Text
                 );
-                
-                ServiceGodotTextToSpeech.Speak(
-                    message: $"SmoothBot says... {response.Text}"
-                );
             }
         );
     }

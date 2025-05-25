@@ -6,6 +6,7 @@ using Overlay.Core.Services.Databases.Tasks.Retrieves;
 using Overlay.Core.Services.Joysticks;
 using Overlay.Core.Services.Joysticks.Requests;
 using System.Threading.Tasks;
+using Overlay.Core.Services.Godots.TextToSpeeches;
 
 namespace Overlay.Core.Services.JoystickBots;
 
@@ -52,6 +53,10 @@ public sealed class ServiceJoystickBot() :
             isStreamer:        false,
             isSubscriber:      true
         );
+        
+        ServiceGodotTextToSpeech.Speak(
+            message: $"{ServiceJoystickBot.c_username} says... {message}"
+        );
     }
 
     private const string             c_username             = "SmoothBot";
@@ -60,7 +65,7 @@ public sealed class ServiceJoystickBot() :
     [
         "Want to request a song? Subscribers get one free song request per stream using the !songrequest command! Check the description for more information.",
         "Not digging the lights? Subscribers can type !lights with a color to change the lights once per stream & more!",
-        "Consider subscribing for access to a suite of commands that control the lights & sound of the stream!",
+        "Consider subscribing for access to commands that control the lights & sound of the stream!",
         "Want to play with us? Add SmoothDagger on Steam to join in on the fun!",
     ];
 

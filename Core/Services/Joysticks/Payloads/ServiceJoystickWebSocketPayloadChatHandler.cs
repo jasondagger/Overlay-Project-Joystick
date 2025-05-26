@@ -596,6 +596,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 break;
             
             case "!layout":
+            case "!lo":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLayout(
                     username:   username,
                     parameters: parameters

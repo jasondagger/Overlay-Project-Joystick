@@ -14,18 +14,18 @@ internal sealed partial class ServiceOBS() :
 {
     Task IService.Setup()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     Task IService.Start()
     {
 	    this.ConnectWebSocket();
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     Task IService.Stop()
     {
-        return _ = Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     internal void ChangeScene(
@@ -35,43 +35,35 @@ internal sealed partial class ServiceOBS() :
 	    Task.Run(
 		    function: async () =>
 		    {
-			    if (_ = this.m_clientWebSocket.State is not WebSocketState.Open)
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
 			    {
 				    return;
 			    }
 			    
-			    var request = new ServiceOBSRequestSceneChange(
-				    requestType: _ = "SetCurrentScene",
-				    sceneName:   _ = sceneName
-			    );
-
-			    var jsonRequest = _ = JsonSerializer.Serialize(
-				    value: _ = request
+			    var buffer      = Encoding.UTF8.GetBytes(
+				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"SetCurrentProgramScene\",  \"requestId\": \"f819dcf0-89cc-11eb-8f0e-382c4ac93b9c\",  \"requestData\": {{\"sceneName\": \"{sceneName}\"}}}}}}"
 				);
-			    var buffer      = _ = Encoding.UTF8.GetBytes(
-				    s: _ = jsonRequest
-				);
-			    var segment     = _ = new ArraySegment<byte>(
-				    array: _ = buffer
+			    var segment     = new ArraySegment<byte>(
+				    array: buffer
 				);
 
 			    try
 			    {
 				    await this.m_clientWebSocket.SendAsync(
-					    buffer:            _ = segment,
-					    messageType:       _ = WebSocketMessageType.Text,
-					    endOfMessage:      _ = true, 
-					    cancellationToken: _ = CancellationToken.None
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
 				    );
 			    }
 			    catch (WebSocketException exception)
 			    {
 				    ConsoleLogger.LogMessageError(
-					    messageError: _ = 
+					    messageError: 
 						    $"EXCEPTION: " +
-						    $"{_ = nameof(ServiceOBS)}." +
-						    $"{_ = nameof(ServiceOBS.ChangeScene)}() - " +
-						    $"{_ = exception.Message}"
+						    $"{nameof(ServiceOBS)}." +
+						    $"{nameof(ServiceOBS.ChangeScene)}() - " +
+						    $"{exception.Message}"
 				    );
 			    }
 		    }
@@ -88,60 +80,85 @@ internal sealed partial class ServiceOBS() :
 		Task.Run(
 			function: async () =>
 			{
-				var uri = _ = new Uri(
-					uriString: _ = $"{_ = ServiceOBS.c_obsWebSocketAddress}:{_ = ServiceOBS.c_obsWebSocketPort}"
+				var uri = new Uri(
+					uriString: $"{ServiceOBS.c_obsWebSocketAddress}:{ServiceOBS.c_obsWebSocketPort}"
 				);
 
-				_ = this.m_clientWebSocket = _ = new ClientWebSocket();
+				this.m_clientWebSocket = new ClientWebSocket();
 
 				await this.m_clientWebSocket.ConnectAsync(
-					uri:               _ = uri,
-					cancellationToken: _ = CancellationToken.None
+					uri:               uri,
+					cancellationToken: CancellationToken.None
 				);
 				
 #if DEBUG
 				ConsoleLogger.LogMessage(
-					message: _ = $"{_ = nameof(ServiceOBS)}.{_ = nameof(this.ConnectWebSocket)}() - OBS web socket connect successful."
+					message: $"{nameof(ServiceOBS)}.{nameof(this.ConnectWebSocket)}() - OBS web socket connect successful."
 				);
 #endif
 				
-				ChangeScene("Default");
+				var buffer  = Encoding.UTF8.GetBytes(
+					s: "{\n  \"op\": 1,\n  \"d\": {\n    \"rpcVersion\": 1,\n    \"eventSubscriptions\": 33\n  }\n}"
+				);
+				var segment = new ArraySegment<byte>(
+					array: buffer
+				);
+
+				try
+				{
+					await this.m_clientWebSocket.SendAsync(
+						buffer:            segment,
+						messageType:       WebSocketMessageType.Text,
+						endOfMessage:      true, 
+						cancellationToken: CancellationToken.None
+					);
+				}
+				catch (WebSocketException exception)
+				{
+					ConsoleLogger.LogMessageError(
+						messageError: 
+						$"EXCEPTION: " +
+						$"{nameof(ServiceOBS)}." +
+						$"{nameof(ServiceOBS.ConnectWebSocket)}() - " +
+						$"{exception.Message}"
+					);
+				}
 
 				while (true)
 				{
 					try
 					{
-						var isWebSocketOpen = _ = this.m_clientWebSocket.State is WebSocketState.Open;
-						if (_ = isWebSocketOpen is false)
+						var isWebSocketOpen = this.m_clientWebSocket.State is WebSocketState.Open;
+						if (isWebSocketOpen is false)
 						{
 							continue;
 						}
 						
-						var bytes  = _ = new byte[4096u];
-						var result = _ = await this.m_clientWebSocket.ReceiveAsync(
-							buffer:            _ = bytes,
-							cancellationToken: _ = CancellationToken.None
+						var bytes  = new byte[4096u];
+						var result = await this.m_clientWebSocket.ReceiveAsync(
+							buffer:            bytes,
+							cancellationToken: CancellationToken.None
 						);
 
 						ServiceOBS.ParseWebSocketPayload(
-							bytes:  _ = bytes,
-							result: _ = result
+							bytes:  bytes,
+							result: result
 						);
 					}
 					catch (Exception exception)
 					{
 						ConsoleLogger.LogMessageError(
-							messageError: _ = 
+							messageError: 
 								$"EXCEPTION: " +
-								$"{_ = nameof(ServiceOBS)}." +
-								$"{_ = nameof(ServiceOBS.ConnectWebSocket)}() - " +
-								$"{_ = exception.Message}"
+								$"{nameof(ServiceOBS)}." +
+								$"{nameof(ServiceOBS.ConnectWebSocket)}() - " +
+								$"{exception.Message}"
 						);
 
 						await this.m_clientWebSocket.CloseAsync(
-							closeStatus:       _ = WebSocketCloseStatus.NormalClosure,
-							statusDescription: _ = string.Empty,
-							cancellationToken: _ = CancellationToken.None
+							closeStatus:       WebSocketCloseStatus.NormalClosure,
+							statusDescription: string.Empty,
+							cancellationToken: CancellationToken.None
 						);
 						
 						this.ConnectWebSocket();
@@ -157,10 +174,10 @@ internal sealed partial class ServiceOBS() :
 		WebSocketReceiveResult result
 	)
 	{
-		var json = _ = Encoding.UTF8.GetString(
-			bytes: _ = bytes,
-			index: _ = 0,
-			count: _ = result.Count
+		var json = Encoding.UTF8.GetString(
+			bytes: bytes,
+			index: 0,
+			count: result.Count
 		);
 	}
 }

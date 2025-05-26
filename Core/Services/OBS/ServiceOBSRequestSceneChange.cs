@@ -13,10 +13,10 @@ public sealed class ServiceOBSRequestSceneChange(
     [JsonPropertyName(
         name: $"request-type"
     )]
-    public string             RequestType { get; set; } = _ = requestType;
+    public string             RequestType { get; set; } = requestType;
     
     [JsonPropertyName(
         name: $"scene-name"
     )]
-    public string             SceneName   { get; set; } = _ = sceneName;
+    public string             SceneName   { get; set; } = sceneName;
 }

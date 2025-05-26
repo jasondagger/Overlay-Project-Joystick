@@ -84,11 +84,10 @@ public sealed partial class SceneController() :
             }
         );
 
-        // TODO: Can I connect to obs?
-        //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
-        //serviceOBS.ChangeScene(
-        //    sceneName: _ = $"Code"    
-        //);
+        var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        serviceOBS.ChangeScene(
+            sceneName: _ = $"AFK"    
+        );
     }
     
     private void HandleInputActionPressedChangeLayoutToCode(
@@ -98,11 +97,10 @@ public sealed partial class SceneController() :
         this.HideLayouts();
         _ = this.Layouts[_ = (int)LayoutType.Code].Visible = _ = true;
         Rainbows.Visible = _ = true;
-        // TODO: Can I connect to obs?
-        //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
-        //serviceOBS.ChangeScene(
-        //    sceneName: _ = $"Code"    
-        //);
+        var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        serviceOBS.ChangeScene(
+            sceneName: _ = $"Code"    
+        );
     }
     
     private void HandleInputActionPressedChangeLayoutToDefault(
@@ -114,11 +112,10 @@ public sealed partial class SceneController() :
         Hideable.Visible = _ = true;
         Rainbows.Visible = _ = true;
 
-        // TODO: Can I connect to obs?
-        //var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
-        //serviceOBS.ChangeScene(
-        //    sceneName: _ = $"Default"    
-        //);
+        var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        serviceOBS.ChangeScene(
+            sceneName: _ = $"Main"    
+        );
     }
     
     private void HandleInputActionPressedCloseApplication(

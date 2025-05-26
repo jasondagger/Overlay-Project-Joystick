@@ -148,6 +148,55 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             soundAlertType: ServiceGodotAudio.SoundAlertType.BallsOfSteel
         );
     }
+    
+    private static void HandleBotCommandLayout(
+        string username,
+        string parameters
+    )
+    {
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
+        if (username != "SmoothDagger")
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: $"Invalid !layout user - only SmoothDagger can use this command."
+            );
+            return;
+        }
+        
+        if (
+            string.IsNullOrEmpty(
+                value: parameters
+            ) is true
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: $"Invalid !layout parameter - the following parameters are valid: [afk/code/main]."
+            );
+            return;
+        }
+
+        var command = parameters.ToLower();
+        switch (command)
+        {
+            case "afk":
+                SceneController.Instance.SetLayoutToAfk();
+                break;
+            
+            case "code":
+                SceneController.Instance.SetLayoutToCode();
+                break;
+            
+            case "main":
+                SceneController.Instance.SetLayoutToMain();
+                break;
+            
+            default:
+                serviceJoystickBot.SendChatMessage(
+                    message: $"Invalid !layout parameter - the following parameters are valid: [afk/code/main]."
+                );
+                break;
+        }
+    }
 
     private static void HandleBotCommandLights(
         string username,
@@ -544,6 +593,13 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             
             case "!balls":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandBallsOfSteel();
+                break;
+            
+            case "!layout":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLayout(
+                    username:   username,
+                    parameters: parameters
+                );
                 break;
             
             case "!lights":

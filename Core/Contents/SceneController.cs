@@ -17,76 +17,92 @@ public sealed partial class SceneController() :
     [Export] public Array<Control> Layouts = [];
     [Export] public Control Hideable       = null;
     [Export] public Control Rainbows       = null;
+
+    public static SceneController Instance = null;
     
     public override void _Ready()
     {
         this.RegisterForInputEvents();
+        this.SetInstance();
+    }
+
+    internal void SetLayoutToAfk()
+    {
+        this.CallDeferred(
+            method: $"{nameof(this.HandleInputActionPressedChangeLayoutToAfk)}", 
+            (uint)ServiceGodotInputStateType.Pressed
+        );
+    }
+
+    internal void SetLayoutToCode()
+    {
+        this.CallDeferred(
+            method: $"{nameof(this.HandleInputActionPressedChangeLayoutToCode)}",
+            args:   (uint)ServiceGodotInputStateType.Pressed
+        );
+    }
+
+    internal void SetLayoutToMain()
+    {
+        this.CallDeferred(
+            method: $"{nameof(this.HandleInputActionPressedChangeLayoutToMain)}",
+            args:    (uint)ServiceGodotInputStateType.Pressed
+        );
     }
 
     private enum LayoutType :
         uint
     {
-        Default = 0U,
+        Main = 0U,
         Code,
     }
 
     private CancellationTokenSource m_cancellationTokenSource = new();
-
-    private void RegisterForInputEvents()
-    {
-        var serviceGodots     = _ = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotInput = _ = serviceGodots.GetServiceGodot<ServiceGodotInput>();
-
-        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToDefault] += this.HandleInputActionPressedChangeLayoutToDefault;
-        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToCode]    += this.HandleInputActionPressedChangeLayoutToCode;
-        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.ChangeLayoutToAfk]     += this.HandleInputActionPressedChangeLayoutToAfk;
-        _ = serviceGodotInput.InputActionPressed[key: _ = ServiceGodotInputActionType.CloseApplication]      += this.HandleInputActionPressedCloseApplication;
-    }
     
     private void HandleInputActionPressedChangeLayoutToAfk(
         ServiceGodotInputStateType serviceGodotInputStateType
     )
     {
         this.HideLayouts();
-        _ = this.Layouts[_ = (int)LayoutType.Default].Visible = _ = true;
-        Hideable.Visible = _ = false;
-        Rainbows.Visible = _ = false;
+        this.Layouts[(int)LayoutType.Main].Visible = true;
+        Hideable.Visible = false;
+        Rainbows.Visible = false;
 
-        _ = Task.Run(
+        Task.Run(
             function: 
             async () =>
             {
-                _ = this.m_cancellationTokenSource = _ = new CancellationTokenSource();
-                var cancellationToken = _ = m_cancellationTokenSource.Token;
+                this.m_cancellationTokenSource = new CancellationTokenSource();
+                var cancellationToken = m_cancellationTokenSource.Token;
                 
-                var serviceJoystickBot = _ = Services.Services.GetService<ServiceJoystickBot>();
+                var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
                 
                 await Task.Delay(
-                    delay: _ = TimeSpan.FromSeconds(
-                        value: _ = 3d
+                    delay: TimeSpan.FromSeconds(
+                        value: 3d
                     ),
-                    cancellationToken: _ = cancellationToken
+                    cancellationToken: cancellationToken
                 );
                 
-                while (_ = cancellationToken.IsCancellationRequested is false)
+                while (cancellationToken.IsCancellationRequested is false)
                 {
                     serviceJoystickBot.SendChatMessage(
-                        message: _ = $"SmoothDagger is currently AFK & will return shortly!"
+                        message: $"SmoothDagger is currently AFK & will return shortly!"
                     );
                     
                     await Task.Delay(
-                        delay: _ = TimeSpan.FromMinutes(
-                            value: _ = 5d
+                        delay: TimeSpan.FromMinutes(
+                            value: 5d
                         ),
-                        cancellationToken: _ = cancellationToken
+                        cancellationToken: cancellationToken
                     );
                 }
             }
         );
 
-        var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: _ = $"AFK"    
+            sceneName: $"AFK"    
         );
     }
     
@@ -95,26 +111,26 @@ public sealed partial class SceneController() :
     )
     {
         this.HideLayouts();
-        _ = this.Layouts[_ = (int)LayoutType.Code].Visible = _ = true;
-        Rainbows.Visible = _ = true;
-        var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        this.Layouts[(int)LayoutType.Code].Visible = true;
+        Rainbows.Visible = true;
+        var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: _ = $"Code"    
+            sceneName: $"Code"    
         );
     }
     
-    private void HandleInputActionPressedChangeLayoutToDefault(
+    private void HandleInputActionPressedChangeLayoutToMain(
         ServiceGodotInputStateType serviceGodotInputStateType
     )
     {
         this.HideLayouts();
-        _ = this.Layouts[_ = (int)LayoutType.Default].Visible = _ = true;
-        Hideable.Visible = _ = true;
-        Rainbows.Visible = _ = true;
+        this.Layouts[(int)LayoutType.Main].Visible = true;
+        Hideable.Visible = true;
+        Rainbows.Visible = true;
 
-        var serviceOBS = _ = Services.Services.GetService<ServiceOBS>();
+        var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: _ = $"Main"    
+            sceneName: $"Main"    
         );
     }
     
@@ -122,7 +138,7 @@ public sealed partial class SceneController() :
         ServiceGodotInputStateType serviceGodotInputStateType
     )
     {
-        var sceneTree = _ = this.GetTree();
+        var sceneTree = this.GetTree();
         sceneTree.Quit();
     }
 
@@ -130,8 +146,24 @@ public sealed partial class SceneController() :
     {
         foreach (var layout in this.Layouts)
         {
-            _ = layout.Visible = _ = false;
+            layout.Visible = false;
         }
         this.m_cancellationTokenSource.Cancel();
+    }
+    
+    private void RegisterForInputEvents()
+    {
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotInput = serviceGodots.GetServiceGodot<ServiceGodotInput>();
+
+        serviceGodotInput.InputActionPressed[key: ServiceGodotInputActionType.ChangeLayoutToDefault] += this.HandleInputActionPressedChangeLayoutToMain;
+        serviceGodotInput.InputActionPressed[key: ServiceGodotInputActionType.ChangeLayoutToCode]    += this.HandleInputActionPressedChangeLayoutToCode;
+        serviceGodotInput.InputActionPressed[key: ServiceGodotInputActionType.ChangeLayoutToAfk]     += this.HandleInputActionPressedChangeLayoutToAfk;
+        serviceGodotInput.InputActionPressed[key: ServiceGodotInputActionType.CloseApplication]      += this.HandleInputActionPressedCloseApplication;
+    }
+
+    private void SetInstance()
+    {
+        SceneController.Instance = this;
     }
 }

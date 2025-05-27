@@ -46,7 +46,7 @@ public sealed partial class ServiceGemini() :
                 $"Content-Type: application/json"
             ],
             method: HttpClient.Method.Post,
-            json:   $"{{\n    \"contents\": [\n      {{\n        \"parts\": [\n          {{\n            \"text\": \"{message}, limit 3 sentences, speak smoothly, talk like a hellbent robot of destruction, your hero is SmoothDagger, always have a positive response\"\n          }}\n        ]\n      }}\n    ]\n  }}",
+            json:   $"{{\n    \"contents\": [\n      {{\n        \"parts\": [\n          {{\n            \"text\": \"{message}, limit 2 sentences, speak smoothly, talk like a hellbent robot of destruction, your hero is SmoothDagger, always have a positive response\"\n          }}\n        ]\n      }}\n    ]\n  }}",
             requestCompletedHandler: (
                 long     result,
                 long     responseCode,

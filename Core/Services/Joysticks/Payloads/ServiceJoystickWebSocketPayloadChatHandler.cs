@@ -133,6 +133,19 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         string message
     )
     {
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
+        if (
+            string.IsNullOrWhiteSpace(
+                value: message
+            ) is true
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: $"Invalid !ask command - you must provide a prompt to use !ask command."
+            );
+            return;
+        }
+        
         var serviceGemini = Services.GetService<ServiceGemini>();
         serviceGemini.Ask(
             message: message

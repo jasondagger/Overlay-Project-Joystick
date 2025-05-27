@@ -141,7 +141,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         )
         {
             serviceJoystickBot.SendChatMessage(
-                message: $"Invalid !ask command - you must provide a prompt to use !ask command."
+                message: $"Invalid !ask command - you must provide a prompt to use the !ask command."
             );
             return;
         }

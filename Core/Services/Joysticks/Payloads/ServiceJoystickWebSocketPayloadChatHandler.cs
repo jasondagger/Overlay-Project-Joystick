@@ -188,14 +188,21 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         var command = parameters.ToLower();
         switch (command)
         {
+            case "a":
             case "afk":
                 SceneController.Instance.SetLayoutToAfk();
                 break;
             
+            case "large":
+            case "l":
+            case "c":
             case "code":
                 SceneController.Instance.SetLayoutToCode();
                 break;
             
+            case "d":
+            case "default":
+            case "m":
             case "main":
                 SceneController.Instance.SetLayoutToMain();
                 break;
@@ -609,6 +616,7 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandBallsOfSteel();
                 break;
             
+            case "!l":
             case "!layout":
             case "!lo":
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandLayout(

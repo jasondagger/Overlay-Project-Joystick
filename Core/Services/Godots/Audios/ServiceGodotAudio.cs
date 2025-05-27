@@ -12,6 +12,7 @@ internal sealed partial class ServiceGodotAudio() :
 		uint
 	{
 		Applause = 0u,
+		Ass,
 		BallsOfSteel,
 		ChatNotification,
 		Followed,

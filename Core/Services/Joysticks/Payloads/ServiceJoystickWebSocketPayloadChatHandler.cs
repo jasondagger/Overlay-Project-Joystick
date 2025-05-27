@@ -139,6 +139,16 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
         );
     }
     
+    private static void HandleBotCommandAss()
+    {
+        var serviceGodots     = Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+        
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: ServiceGodotAudio.SoundAlertType.Ass
+        );
+    }
+    
     private static void HandleBotCommandBallsOfSteel()
     {
         var serviceGodots     = Services.GetService<ServiceGodots>();
@@ -589,6 +599,10 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandAsk(
                     message: parameters
                 );
+                break;
+            
+            case "!ass":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandAss();
                 break;
             
             case "!balls":

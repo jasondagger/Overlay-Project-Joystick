@@ -1,13 +1,15 @@
 
+using System;
 using Godot;
 using Overlay.Core.Services.PastelInterpolators;
-using Overlay.Core.Tools;
 
 namespace Overlay.Core.Contents.Effects;
 
 public sealed partial class EffectBackgroundVaporwave() :
     ColorRect()
 {
+    public static EffectBackgroundVaporwave Instance { get; private set; } = null;
+    
     public override void _Process(
         double delta
     )
@@ -17,27 +19,59 @@ public sealed partial class EffectBackgroundVaporwave() :
     
     public override void _Ready()
     {
+        this.SetInstance();
         this.RetrieveResources();
         this.SetShaderMaterial();
     }
+    
+    internal void AdjustVaporwaveSpeed(
+        int intensity
+    )
+    {
+        var intensityClamped = Math.Clamp(
+            value: intensity, 
+            min:   EffectBackgroundVaporwave.c_minimumIntensity, 
+            max:   EffectBackgroundVaporwave.c_maximumIntensity
+        );
+
+        this.m_material.SetShaderParameter(
+            param: $"speed_scale",
+            value: intensityClamped
+        );
+    }
+    
+    internal void ResetVaporwaveSpeed()
+    {
+        this.AdjustVaporwaveSpeed(
+            intensity: 1
+        );
+    }
+    
+    private const int				  c_maximumIntensity          = 20;
+    private const int				  c_minimumIntensity          = 1;
     
     private ServicePastelInterpolator m_servicePastelInterpolator = null;
     private ShaderMaterial            m_material                  = null;
     
     private void RetrieveResources()
     {
-        _ = this.m_servicePastelInterpolator = _ = Services.Services.GetService<ServicePastelInterpolator>();
+        this.m_servicePastelInterpolator = Services.Services.GetService<ServicePastelInterpolator>();
+    }
+    
+    private void SetInstance()
+    {
+        EffectBackgroundVaporwave.Instance = this;
     }
     
     private void SetShaderMaterial()
     {
-        _ = this.m_material = _ = (ShaderMaterial)this.Get(
-            property: _ = $"material"
+        this.m_material = (ShaderMaterial)this.Get(
+            property: $"material"
         );
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0	
+            param: $"color",
+            value: this.m_servicePastelInterpolator.GetColor(
+                rainbowColorIndexType: ServicePastelInterpolator.RainbowColorIndexType.Color0	
             )
         );
     }
@@ -45,9 +79,9 @@ public sealed partial class EffectBackgroundVaporwave() :
     private void UpdateShaderResources()
     {
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0	
+            param: $"color",
+            value: this.m_servicePastelInterpolator.GetColor(
+                rainbowColorIndexType: ServicePastelInterpolator.RainbowColorIndexType.Color0	
             )
         );
     }

@@ -20,7 +20,7 @@ internal sealed partial class Chat() :
 	)
 	{
 		base._Process(
-			delta: _ = delta
+			delta: delta
 		);
 
 		this.ProcessQueuedChatMessage();
@@ -44,16 +44,16 @@ internal sealed partial class Chat() :
         bool               isSubscriber
     )
     {
-	    foreach (var instance in _ = Chat.s_instances)
+	    foreach (var instance in Chat.s_instances)
 	    {
 		    instance.AddChatMessage(
-			    username:          _ = username,
-			    usernameColor:     _ = usernameColor,
-			    message:           _ = message,
-			    chatMessageEmotes: _ = chatMessageEmotes,
-			    isModerator:       _ = isModerator,
-			    isStreamer:        _ = isStreamer,
-			    isSubscriber:      _ = isSubscriber
+			    username:          username,
+			    usernameColor:     usernameColor,
+			    message:           message,
+			    chatMessageEmotes: chatMessageEmotes,
+			    isModerator:       isModerator,
+			    isStreamer:        isStreamer,
+			    isSubscriber:      isSubscriber
 		    );
 	    }
     }
@@ -62,23 +62,23 @@ internal sealed partial class Chat() :
 	    string message
 	)
     {
-	    foreach (var instance in _ = Chat.s_instances)
+	    foreach (var instance in Chat.s_instances)
 	    {
 		    instance.AddDebugMessage(
-			    message: _ = message
+			    message: message
 			);
 	    }
     }
     
     private readonly struct ChatMessageData
     {
-	    internal readonly string             Username          = _ = string.Empty;
-	    internal readonly string             UsernameColor     = _ = string.Empty;
-	    internal readonly string             Message           = _ = string.Empty;
+	    internal readonly string             Username          = string.Empty;
+	    internal readonly string             UsernameColor     = string.Empty;
+	    internal readonly string             Message           = string.Empty;
 	    internal readonly ChatMessageEmote[] ChatMessageEmotes = null;
-	    internal readonly bool               IsModerator       = _ = false;
-	    internal readonly bool               IsStreamer        = _ = false;
-	    internal readonly bool               IsSubscriber      = _ = false;
+	    internal readonly bool               IsModerator       = false;
+	    internal readonly bool               IsStreamer        = false;
+	    internal readonly bool               IsSubscriber      = false;
 
 	    public ChatMessageData(
 		    string             username,
@@ -90,13 +90,13 @@ internal sealed partial class Chat() :
 			bool               isSubscriber
 	    )
 	    {
-		    _ = this.Username          = _ = username;
-		    _ = this.UsernameColor     = _ = usernameColor;
-		    _ = this.Message           = _ = message;
-		    _ = this.ChatMessageEmotes = _ = chatMessageEmotes;
-		    _ = this.IsModerator       = _ = isModerator;
-		    _ = this.IsStreamer        = _ = isStreamer;
-		    _ = this.IsSubscriber      = _ = isSubscriber;
+		    this.Username          = username;
+		    this.UsernameColor     = usernameColor;
+		    this.Message           = message;
+		    this.ChatMessageEmotes = chatMessageEmotes;
+		    this.IsModerator       = isModerator;
+		    this.IsStreamer        = isStreamer;
+		    this.IsSubscriber      = isSubscriber;
 	    }
     };
 
@@ -157,7 +157,7 @@ internal sealed partial class Chat() :
         $"|zwnj" +
         $@")[^\]]*\]";
 
-    private static List<Chat>               s_instances                   = [];
+    private static readonly List<Chat>      s_instances                   = [];
 
     private readonly Queue<ChatMessage>     m_availableChatMessages       = new();
     private readonly Queue<ChatMessage>     m_displayedChatMessages       = new();
@@ -182,19 +182,19 @@ internal sealed partial class Chat() :
 	    bool               isSubscriber
     )
     {
-	    var chatMessageData = _ = new ChatMessageData(
-		    username:          _ = username,
-		    usernameColor:     _ = usernameColor,
-		    message:           _ = message,
-		    chatMessageEmotes: _ = chatMessageEmotes,
-		    isModerator:       _ = isModerator,
-		    isStreamer:        _ = isStreamer,
-		    isSubscriber:      _ = isSubscriber
+	    var chatMessageData = new ChatMessageData(
+		    username:          username,
+		    usernameColor:     usernameColor,
+		    message:           message,
+		    chatMessageEmotes: chatMessageEmotes,
+		    isModerator:       isModerator,
+		    isStreamer:        isStreamer,
+		    isSubscriber:      isSubscriber
 	    );
-	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    lock (this.m_pendingChatMessageDatasLock)
 	    {
 		    this.m_pendingChatMessageDatas.Enqueue(
-			    item: _ = chatMessageData
+			    item: chatMessageData
 		    );
 	    }
     }
@@ -203,19 +203,19 @@ internal sealed partial class Chat() :
 	    string message
     )
     {
-	    var chatMessageData = _ = new ChatMessageData(
-		    username:          _ = "SmoothBot",
-		    usernameColor:     _ = string.Empty,
-		    message:           _ = message,
+	    var chatMessageData = new ChatMessageData(
+		    username:          "SmoothBot",
+		    usernameColor:     string.Empty,
+		    message:           message,
 		    chatMessageEmotes: null,
-		    isModerator:       _ = true,
-		    isStreamer:        _ = false,
-		    isSubscriber:      _ = true
+		    isModerator:       true,
+		    isStreamer:        false,
+		    isSubscriber:      true
 	    );
-	    lock (_ = this.m_pendingChatMessageDatasLock)
+	    lock (this.m_pendingChatMessageDatasLock)
 	    {
 		    this.m_pendingChatMessageDatas.Enqueue(
-			    item: _ = chatMessageData
+			    item: chatMessageData
 		    );
 	    }
     }
@@ -224,41 +224,41 @@ internal sealed partial class Chat() :
         string message
     )
     {
-        var match = _ = Regex.Match(
-            input:   _ = message,
-            pattern: _ = Chat.c_illegalBbCodePattern,
-            options: _ = RegexOptions.IgnoreCase
+        var match = Regex.Match(
+            input:   message,
+            pattern: Chat.c_illegalBbCodePattern,
+            options: RegexOptions.IgnoreCase
         );
-        return _ = match?.Success is true;
+        return match?.Success is true;
     }
     
     private void OnChatMessageDestroyed()
 	{
 		ChatMessage oldChatMessage;
-        lock (_ = this.m_displayedChatMessagesLock)
+        lock (this.m_displayedChatMessagesLock)
 		{
-            _ = oldChatMessage = _ = this.m_displayedChatMessages.Dequeue();
+            oldChatMessage = this.m_displayedChatMessages.Dequeue();
         }
 
-        var oldestLabelHeight = _ = oldChatMessage.GetLabelHeightInPixels() + Chat.c_pixelSpacing;
-        _ = this.m_currentPixel -= _ = oldestLabelHeight;
+        var oldestLabelHeight = oldChatMessage.GetLabelHeightInPixels() + Chat.c_pixelSpacing;
+        this.m_currentPixel -= oldestLabelHeight;
 
-        lock (_ = this.m_displayedChatMessagesLock)
+        lock (this.m_displayedChatMessagesLock)
 		{ 
-            foreach (var displayedTwitchChatMessage in _ = this.m_displayedChatMessages)
+            foreach (var displayedTwitchChatMessage in this.m_displayedChatMessages)
             {
-                var position  = _ = displayedTwitchChatMessage.Position;
-                _ = position -= _ = new Vector2(
-                    x: _ = 0u,
-                    y: _ = oldestLabelHeight
+                var position  = displayedTwitchChatMessage.Position;
+                position -= new Vector2(
+                    x: 0u,
+                    y: oldestLabelHeight
                 );
 
-                _ = displayedTwitchChatMessage.Position = _ = position;
+                displayedTwitchChatMessage.Position = position;
             }
         }
 
 		this.RecycleChatMessage(
-		    chatMessage: _ = oldChatMessage
+		    chatMessage: oldChatMessage
 		);
     }
 
@@ -266,10 +266,10 @@ internal sealed partial class Chat() :
 		ChatMessage chatMessage
 	)
 	{
-		lock (_ = this.m_queuedChatMessagesLock)
+		lock (this.m_queuedChatMessagesLock)
 		{
             this.m_queuedChatMessages.Enqueue(
-			    item: _ = chatMessage
+			    item: chatMessage
 			);
         }
 	}
@@ -278,18 +278,18 @@ internal sealed partial class Chat() :
 	{
 		for (var i = 0; i < Chat.c_chatMessageCacheSize; i++)
 		{
-            var chatMessage = _ = new ChatMessage
+            var chatMessage = new ChatMessage
             {
                 Generated = this.OnChatMessageGenerated,
                 Destroyed = this.OnChatMessageDestroyed
             };
 
 			this.m_chatPivot.AddChild(
-			    node: _ = chatMessage
+			    node: chatMessage
 			);
 
 			this.m_availableChatMessages.Enqueue(
-				item: _ = chatMessage	
+				item: chatMessage	
 			);
         }
 	}
@@ -297,11 +297,11 @@ internal sealed partial class Chat() :
     private void ProcessQueuedChatMessage()
 	{
         ChatMessage chatMessage;
-        lock (_ = this.m_queuedChatMessagesLock)
+        lock (this.m_queuedChatMessagesLock)
         {
-            if (_ = this.m_queuedChatMessages.Count > 0u)
+            if (this.m_queuedChatMessages.Count > 0u)
             {
-                _ = chatMessage = _ = this.m_queuedChatMessages.Dequeue();
+                chatMessage = this.m_queuedChatMessages.Dequeue();
             }
 			else
 			{
@@ -309,47 +309,47 @@ internal sealed partial class Chat() :
 			}
         }
 
-		_ = chatMessage.Position = new Vector2(
-			x: _ = 0u,
-			y: _ = this.m_currentPixel
+		chatMessage.Position = new Vector2(
+			x: 0u,
+			y: this.m_currentPixel
 		);
 		chatMessage.ShowLabel();
 
-        lock (_ = this.m_displayedChatMessagesLock)
+        lock (this.m_displayedChatMessagesLock)
         {
             this.m_displayedChatMessages.Enqueue(
-                item: _ = chatMessage
+                item: chatMessage
             );
         }
 
-		var labelHeight         = _ = chatMessage.GetLabelHeightInPixels();
-		_ = this.m_currentPixel = _ = this.m_currentPixel + labelHeight + Chat.c_pixelSpacing;
-		while (_ = this.m_currentPixel > Chat.c_maxPixelCount)
+		var labelHeight         = chatMessage.GetLabelHeightInPixels();
+		this.m_currentPixel = this.m_currentPixel + labelHeight + Chat.c_pixelSpacing;
+		while (this.m_currentPixel > Chat.c_maxPixelCount)
 		{
             ChatMessage oldestChatMessage;
-            lock (_ = this.m_displayedChatMessagesLock)
+            lock (this.m_displayedChatMessagesLock)
 			{
-				_ = oldestChatMessage = _ = this.m_displayedChatMessages.Dequeue();
+				oldestChatMessage = this.m_displayedChatMessages.Dequeue();
             }
 
-			var oldestLabelHeight    = _ = oldestChatMessage.GetLabelHeightInPixels() + Chat.c_pixelSpacing;
-			_ = this.m_currentPixel -= _ = oldestLabelHeight;
+			var oldestLabelHeight    = oldestChatMessage.GetLabelHeightInPixels() + Chat.c_pixelSpacing;
+			this.m_currentPixel -= oldestLabelHeight;
 
-			var offset = _ = new Vector2(
-				x: _ = 0u,
-				y: _ = oldestLabelHeight
+			var offset = new Vector2(
+				x: 0u,
+				y: oldestLabelHeight
 			);
 
-            lock (_ = this.m_displayedChatMessagesLock)
+            lock (this.m_displayedChatMessagesLock)
             {
-                foreach (var displayedTwitchChatMessage in _ = this.m_displayedChatMessages)
+                foreach (var displayedTwitchChatMessage in this.m_displayedChatMessages)
                 {
-                    _ = displayedTwitchChatMessage.Position -= _ = offset;
+                    displayedTwitchChatMessage.Position -= offset;
                 }
             }
 
 			this.RecycleChatMessage(
-				chatMessage: _ = oldestChatMessage	
+				chatMessage: oldestChatMessage	
 			);
         }
 	}
@@ -357,11 +357,11 @@ internal sealed partial class Chat() :
 	private void ProcessQueuedChatMessageData()
 	{
         ChatMessageData chatMessageData;
-        lock (_ = this.m_pendingChatMessageDatasLock)
+        lock (this.m_pendingChatMessageDatasLock)
 		{
-            if (_ = this.m_pendingChatMessageDatas.Count > 0u)
+            if (this.m_pendingChatMessageDatas.Count > 0u)
 			{
-                chatMessageData = _ = this.m_pendingChatMessageDatas.Dequeue();
+                chatMessageData = this.m_pendingChatMessageDatas.Dequeue();
             }
 			else
 			{
@@ -370,19 +370,19 @@ internal sealed partial class Chat() :
         }
 
         ChatMessage chatMessage;
-        lock (_ = this.m_availableChatMessagesLock)
+        lock (this.m_availableChatMessagesLock)
         {
-            chatMessage = _ = this.m_availableChatMessages.Dequeue();
+            chatMessage = this.m_availableChatMessages.Dequeue();
         }
 
         chatMessage.Generate(
-            username:          _ = chatMessageData.Username,
-            usernameColor:     _ = chatMessageData.UsernameColor,
-            message:           _ = chatMessageData.Message,
-            chatMessageEmotes: _ = chatMessageData.ChatMessageEmotes,
-            isModerator:       _ = chatMessageData.IsModerator,
-            isStreamer:        _ = chatMessageData.IsStreamer,
-            isSubscriber:      _ = chatMessageData.IsSubscriber
+            username:          chatMessageData.Username,
+            usernameColor:     chatMessageData.UsernameColor,
+            message:           chatMessageData.Message,
+            chatMessageEmotes: chatMessageData.ChatMessageEmotes,
+            isModerator:       chatMessageData.IsModerator,
+            isStreamer:        chatMessageData.IsStreamer,
+            isSubscriber:      chatMessageData.IsSubscriber
         );
     }
 
@@ -390,7 +390,7 @@ internal sealed partial class Chat() :
         ChatMessage chatMessage
     )
     {
-        lock (_ = this.m_availableChatMessagesLock)
+        lock (this.m_availableChatMessagesLock)
         {
             this.m_availableChatMessages.Enqueue(
                 item: chatMessage
@@ -402,10 +402,10 @@ internal sealed partial class Chat() :
     private void RetrieveResources()
 	{
 		Chat.s_instances.Add(
-			item: _ = this
+			item: this
 		);
-		_ = this.m_chatPivot = _ = this.GetNode<Control>(
-			path: _ = $"ChatPivot"
+		this.m_chatPivot = this.GetNode<Control>(
+			path: $"ChatPivot"
 		);
 	}
 }

@@ -12,20 +12,20 @@ internal sealed class ServiceDatabase() :
 	Task IService.Setup()
 	{
 		ServiceDatabase.TestConnection();
-		return _ = Task.CompletedTask;
+		return Task.CompletedTask;
 	}
 
 	Task IService.Start()
 	{
 		ServiceDatabase.ExecuteTaskQuery(
-			serviceDatabaseTaskQueryType: _ = ServiceDatabaseTaskQueryType.Start
+			serviceDatabaseTaskQueryType: ServiceDatabaseTaskQueryType.Start
 		);
-		return _ = Task.CompletedTask;
+		return Task.CompletedTask;
 	}
 
 	Task IService.Stop()
 	{
-		return _ = Task.CompletedTask;
+		return Task.CompletedTask;
 	}
 
 	internal static void ExecuteTaskNonQuery(
@@ -33,12 +33,12 @@ internal sealed class ServiceDatabase() :
 		List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskSqlParameters
 	)
 	{
-		_ = Task.Run(
+		Task.Run(
 			function: async () =>
 			{
 				await ServiceDatabaseTaskNonQueries.ExecuteAsyncNonQuery(
-					serviceDatabaseTaskNonQueryType:  _ = serviceDatabaseTaskNonQueryType,
-					serviceDatabaseTaskSqlParameters: _ = serviceDatabaseTaskSqlParameters
+					serviceDatabaseTaskNonQueryType:  serviceDatabaseTaskNonQueryType,
+					serviceDatabaseTaskSqlParameters: serviceDatabaseTaskSqlParameters
 				);
 			}
 		);
@@ -48,11 +48,11 @@ internal sealed class ServiceDatabase() :
 		ServiceDatabaseTaskQueryType serviceDatabaseTaskQueryType
 	)
 	{
-		_ = Task.Run(
+		Task.Run(
 			function: async () =>
 			{
 				await ServiceDatabaseTaskQueries.ExecuteAsyncQuery(
-					serviceDatabaseTaskQueryType: _ = serviceDatabaseTaskQueryType
+					serviceDatabaseTaskQueryType: serviceDatabaseTaskQueryType
 				);
 			}
 		);
@@ -60,17 +60,17 @@ internal sealed class ServiceDatabase() :
 
 	private static void TestConnection()
 	{
-		_ = Task.Run(
+		Task.Run(
 			function: async () =>
 			{
-				var isConnected = _ = await ServiceDatabaseTaskLogic.TestConnection();
-				if (_ = isConnected is false)
+				var isConnected = await ServiceDatabaseTaskLogic.TestConnection();
+				if (isConnected is false)
 				{
-					throw _ = new Exception(
+					throw new Exception(
 						message: _ =
-							$"{_ = nameof(ServiceDatabase)}." +
-							$"{_ = nameof(ServiceDatabase.TestConnection)}() - " +
-							$"EXCEPTION: {_ = nameof(ServiceDatabase)} is not connected."
+							$"{nameof(ServiceDatabase)}." +
+							$"{nameof(ServiceDatabase.TestConnection)}() - " +
+							$"EXCEPTION: {nameof(ServiceDatabase)} is not connected."
 					);
 				}
 			}

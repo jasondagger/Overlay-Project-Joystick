@@ -1,13 +1,15 @@
 
+using System;
 using Godot;
 using Overlay.Core.Services.PastelInterpolators;
-using Overlay.Core.Tools;
 
 namespace Overlay.Core.Contents.Effects;
 
 public sealed partial class EffectBackgroundKaleidoscope() :
     ColorRect()
 {
+    public static EffectBackgroundKaleidoscope Instance { get; private set; } = null;
+    
     public override void _Process(
         double delta
     )
@@ -17,27 +19,61 @@ public sealed partial class EffectBackgroundKaleidoscope() :
     
     public override void _Ready()
     {
+        this.SetInstance();
         this.RetrieveResources();
         this.SetShaderMaterial();
     }
+
+    internal void AdjustKaleidoscopeSpeed(
+        int intensity
+    )
+    {
+        var intensityClamped = Math.Clamp(
+            value: intensity, 
+            min:   EffectBackgroundKaleidoscope.c_minimumIntensity, 
+            max:   EffectBackgroundKaleidoscope.c_maximumIntensity
+        );
+        var speed = intensityClamped * EffectBackgroundKaleidoscope.c_kaleidoscopeDefaultSpeed;
+        
+        this.m_material.SetShaderParameter(
+            param: $"animate_speed",
+            value: speed
+        );
+    }
+    
+    internal void ResetKaleidoscopeSpeed()
+    {
+        this.AdjustKaleidoscopeSpeed(
+            intensity: 1
+        );
+    }
+    
+    private const int				  c_maximumIntensity          = 20;
+    private const int				  c_minimumIntensity          = 1;
+    private const float               c_kaleidoscopeDefaultSpeed  = 0.1f;
     
     private ServicePastelInterpolator m_servicePastelInterpolator = null;
     private ShaderMaterial            m_material                  = null;
     
     private void RetrieveResources()
     {
-        _ = this.m_servicePastelInterpolator = _ = Services.Services.GetService<ServicePastelInterpolator>();
+        this.m_servicePastelInterpolator = Services.Services.GetService<ServicePastelInterpolator>();
+    }
+
+    private void SetInstance()
+    {
+        EffectBackgroundKaleidoscope.Instance = this;
     }
     
     private void SetShaderMaterial()
     {
-        _ = this.m_material = _ = (ShaderMaterial)this.Get(
-            property: _ = $"material"
+        this.m_material = (ShaderMaterial)this.Get(
+            property: $"material"
         );
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0	
+            param: $"color",
+            value: this.m_servicePastelInterpolator.GetColor(
+                rainbowColorIndexType: ServicePastelInterpolator.RainbowColorIndexType.Color0	
             )
         );
     }
@@ -45,9 +81,9 @@ public sealed partial class EffectBackgroundKaleidoscope() :
     private void UpdateShaderResources()
     {
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0	
+            param: $"color",
+            value: this.m_servicePastelInterpolator.GetColor(
+                rainbowColorIndexType: ServicePastelInterpolator.RainbowColorIndexType.Color0	
             )
         );
     }

@@ -8,24 +8,24 @@ internal sealed class ServiceDatabaseLovenseData() :
 	ServiceDatabaseModel()
 {
 	[Key]
-	internal int    LovenseData_Id	      { get; set; } = _ = 0;
+	internal int    LovenseData_Id	      { get; set; } = 0;
 	
-	internal string LovenseData_Api_Iv    { get; set; } = _ = string.Empty;
-	internal string LovenseData_Api_Key   { get; set; } = _ = string.Empty;
-	internal string LovenseData_Api_Token { get; set; } = _ = string.Empty;
+	internal string LovenseData_Api_Iv    { get; set; } = string.Empty;
+	internal string LovenseData_Api_Key   { get; set; } = string.Empty;
+	internal string LovenseData_Api_Token { get; set; } = string.Empty;
 
 	internal override void CreateFromNpgsqlDataReader(
 		NpgsqlDataReader npgsqlDataReader
 	)
 	{
-		var readerId	   = _ = (int)    npgsqlDataReader[name: _ = $"{_ = nameof( ServiceDatabaseLovenseData.LovenseData_Id		 )}"];
-		var readerApiIv    = _ = (string) npgsqlDataReader[name: _ = $"{_ = nameof( ServiceDatabaseLovenseData.LovenseData_Api_Iv    )}"];
-		var readerApiKey   = _ = (string) npgsqlDataReader[name: _ = $"{_ = nameof( ServiceDatabaseLovenseData.LovenseData_Api_Key   )}"];
-		var readerApiToken = _ = (string) npgsqlDataReader[name: _ = $"{_ = nameof( ServiceDatabaseLovenseData.LovenseData_Api_Token )}"];
+		var readerId	   = (int)    npgsqlDataReader[name: $"{nameof( ServiceDatabaseLovenseData.LovenseData_Id		 )}"];
+		var readerApiIv    = (string) npgsqlDataReader[name: $"{nameof( ServiceDatabaseLovenseData.LovenseData_Api_Iv    )}"];
+		var readerApiKey   = (string) npgsqlDataReader[name: $"{nameof( ServiceDatabaseLovenseData.LovenseData_Api_Key   )}"];
+		var readerApiToken = (string) npgsqlDataReader[name: $"{nameof( ServiceDatabaseLovenseData.LovenseData_Api_Token )}"];
 		
-		_ = this.LovenseData_Id	       = _ = readerId;
-		_ = this.LovenseData_Api_Iv    = _ = readerApiIv;
-		_ = this.LovenseData_Api_Key   = _ = readerApiKey;
-		_ = this.LovenseData_Api_Token = _ = readerApiToken;
+		this.LovenseData_Id	       = readerId;
+		this.LovenseData_Api_Iv    = readerApiIv;
+		this.LovenseData_Api_Key   = readerApiKey;
+		this.LovenseData_Api_Token = readerApiToken;
 	}
 }

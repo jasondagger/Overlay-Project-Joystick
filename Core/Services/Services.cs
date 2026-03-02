@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 using Overlay.Core.Services.Geminis;
 using Overlay.Core.Services.Govee;
 using Overlay.Core.Services.JoystickBots;
-using Overlay.Core.Services.Lovense;
+using Overlay.Core.Services.Lovenses;
 using Overlay.Core.Services.OBS;
 using Overlay.Core.Services.Spotifies;
+using Overlay.Core.Services.TeamFortress2s;
 
 namespace Overlay.Core.Services;
 
@@ -91,5 +92,6 @@ internal static class Services
         { typeof(ServicePastelInterpolator), new ServicePastelInterpolator() },
         { typeof(ServiceSpotify),            new ServiceSpotify()            },
         { typeof(ServiceStreamStates),       new ServiceStreamStates()       },
+        { typeof(ServiceTeamFortress2),      new ServiceTeamFortress2()      },
 	};
 }

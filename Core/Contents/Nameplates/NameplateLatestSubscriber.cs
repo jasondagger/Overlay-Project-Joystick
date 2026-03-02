@@ -13,17 +13,17 @@ internal sealed partial class NameplateLatestSubscriber() :
 {
     protected override void RegisterForJoystickEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Subscribed           += this.HandleWebSocketPayloadStreamEventSubscribed;
-        _ = ServiceDatabaseTaskEvents.RetrievedListJoystickLatestSubscribers += this.HandleRetrievedJoystickLatestSubscribers;
+        ServiceJoystickWebSocketPayloadStreamEvents.Subscribed           += this.HandleWebSocketPayloadStreamEventSubscribed;
+        ServiceDatabaseTaskEvents.RetrievedListJoystickLatestSubscribers += this.HandleRetrievedJoystickLatestSubscribers;
     }
     
     private void HandleRetrievedJoystickLatestSubscribers(
         ServiceDatabaseTaskRetrievedListJoystickLatestSubscribers retrievedListJoystickLatestSubscribers
     )
     {
-        var result = _ = retrievedListJoystickLatestSubscribers.Result;
+        var result = retrievedListJoystickLatestSubscribers.Result;
 
-        var target = _ = result.Count - 5;
+        var target = result.Count - 5;
         if (target < 0)
         {
             target = 0;
@@ -31,9 +31,9 @@ internal sealed partial class NameplateLatestSubscriber() :
         
         for (var i = result.Count - 1; i >= target; i--)
         {
-            var joystickLatestSubscriber = _ = result[i];
+            var joystickLatestSubscriber = result[i];
             this.m_names.Enqueue(
-                item: _ = joystickLatestSubscriber.JoystickLatest_Latest_Subscriber
+                item: joystickLatestSubscriber.JoystickLatest_Latest_Subscriber
             );
         }
         
@@ -44,21 +44,21 @@ internal sealed partial class NameplateLatestSubscriber() :
         ServiceJoystickWebSocketPayloadMessageMetadataSubscribed messageMetadata
     )
     {
-        var name = _ = messageMetadata.Who;
+        var name = messageMetadata.Who;
         
         ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestSubscriber,
+            serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.AddJoystickLatestSubscriber,
             serviceDatabaseTaskSqlParameters: 
             [
                 new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}",
-                    value:         _ = name
+                    parameterName: $"{nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}",
+                    value:         name
                 )
             ]
         );
         
         this.m_pendingNames.Enqueue(
-            item: _ = name
+            item: name
         );
     }
 }

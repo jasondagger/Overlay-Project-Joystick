@@ -41,7 +41,7 @@ public sealed partial class ServiceGemini() :
 		
         serviceGodotHttp.SendHttpRequest(
             url: _ =
-                $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={this.m_apiKey}",
+                $"https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key={this.m_apiKey}",
             headers: [
                 $"Content-Type: application/json"
             ],

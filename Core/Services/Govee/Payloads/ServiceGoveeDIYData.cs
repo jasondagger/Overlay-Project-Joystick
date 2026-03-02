@@ -9,12 +9,12 @@ public sealed class ServiceGoveeDIYData()
     [JsonPropertyName(
         name: $"sku"
     )]
-    public string                              Sku          { get; set; } = _ = "H607C";
+    public string                              Sku          { get; set; } = string.Empty;
     
     [JsonPropertyName(
         name: $"device"
     )]
-    public string                              Device       { get; set; } = _ = string.Empty;
+    public string                              Device       { get; set; } = string.Empty;
     
     [JsonPropertyName(
         name: $"capabilities"

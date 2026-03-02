@@ -9,9 +9,9 @@ internal static class JsonHelper
         string json
     )
     {
-        return _ = JsonSerializer.Deserialize<TObject>(
-            json:    _ = json,
-            options: _ = JsonHelper.JsonSerializerOptions
+        return JsonSerializer.Deserialize<TObject>(
+            json:    json,
+            options: JsonHelper.JsonSerializerOptions
         );
     }
 
@@ -19,14 +19,14 @@ internal static class JsonHelper
         TObject @object
     )
     {
-        return _ = JsonSerializer.Serialize(
-            value:   _ = @object,
-            options: _ = JsonHelper.JsonSerializerOptions
+        return JsonSerializer.Serialize(
+            value:   @object,
+            options: JsonHelper.JsonSerializerOptions
         );
     }
 
     private static JsonSerializerOptions JsonSerializerOptions { get; } = new()
     {
-        IncludeFields = _ = true,
+        IncludeFields = true,
     };
 }

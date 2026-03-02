@@ -1,23 +1,19 @@
 
+using Godot;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
+using Overlay.Core.Contents;
 using Overlay.Core.Services.Godots.Audios;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.Godots.Inputs;
 using Overlay.Core.Services.Godots.TextToSpeeches;
 using Overlay.Core.Tools;
 using Overlay.Core.Tools.ResourcePaths;
-// ReSharper disable All
+using ServiceGodotBorderBurnController = Overlay.Core.Services.Godots.BorderBurnControllers.ServiceGodotBorderBurnController;
 
 namespace Overlay.Core.Services.Godots;
-
-using Godot;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
-using Overlay.Core.Services.Godots.Https;
-using Overlay.Core.Services.Godots.Inputs;
-using Overlay.Core.Tools;
-using Overlay.Core.Tools.ResourcePaths;
 
 internal sealed class ServiceGodots :
 	ServiceNode
@@ -38,10 +34,11 @@ internal sealed class ServiceGodots :
 
     private static readonly Dictionary<Type, string> c_serviceGodotTypePaths = new()
     {
-        { typeof(ServiceGodotAudio),        ResourcePaths.GodotAudio        },
-        { typeof(ServiceGodotHttp),         ResourcePaths.GodotHttp         },
-        { typeof(ServiceGodotInput),        ResourcePaths.GodotInput        },
-        { typeof(ServiceGodotTextToSpeech), ResourcePaths.GodotTextToSpeech },
+        { typeof(ServiceGodotAudio),                ResourcePaths.GodotAudio                },
+        { typeof(ServiceGodotBorderBurnController), ResourcePaths.GodotBorderBurnController },
+        { typeof(ServiceGodotHttp),                 ResourcePaths.GodotHttp                 },
+        { typeof(ServiceGodotInput),                ResourcePaths.GodotInput                },
+        { typeof(ServiceGodotTextToSpeech),         ResourcePaths.GodotTextToSpeech         },
 	};
 	private readonly Dictionary<Type, ServiceGodot>  m_serviceGodots         = new();
 
@@ -50,7 +47,7 @@ internal sealed class ServiceGodots :
 		var type   = this.GetType();
         var method = type.GetMethod(
             name:        $"{nameof(ServiceGodots.AddServiceGodotScene)}",
-            bindingAttr: _ =
+            bindingAttr:
                 BindingFlags.Instance |
                 BindingFlags.NonPublic
 		);

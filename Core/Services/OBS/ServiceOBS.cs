@@ -140,7 +140,7 @@ internal sealed partial class ServiceOBS() :
 							cancellationToken: CancellationToken.None
 						);
 
-						ServiceOBS.ParseWebSocketPayload(
+						this.ParseWebSocketPayload(
 							bytes:  bytes,
 							result: result
 						);
@@ -169,7 +169,7 @@ internal sealed partial class ServiceOBS() :
 		);
 	}
     
-	private static void ParseWebSocketPayload(
+	private void ParseWebSocketPayload(
 		byte[]                 bytes,
 		WebSocketReceiveResult result
 	)
@@ -179,5 +179,16 @@ internal sealed partial class ServiceOBS() :
 			index: 0,
 			count: result.Count
 		);
+		
+		if (
+			json.Contains(
+				value: "\"op\":2"
+			) is true
+		)
+		{
+			this.ChangeScene(
+				sceneName: "Main"
+			);
+		}
 	}
 }

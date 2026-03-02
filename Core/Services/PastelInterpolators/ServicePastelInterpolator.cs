@@ -27,7 +27,7 @@ public sealed class ServicePastelInterpolator() :
         return Task.CompletedTask;
     }
     
-    public enum ColorType :
+    internal enum ColorType :
         uint
     {
         Red = 0u,
@@ -50,14 +50,26 @@ public sealed class ServicePastelInterpolator() :
         Color5,
     }
     
-    public Color GetColor(
+    internal void AdjustColorInterpolationSpeedByLovenseIntensity(
+        int intensity
+    )
+    {
+        var intensityClamped = Math.Clamp(
+            value: intensity, 
+            min:   ServicePastelInterpolator.c_minimumIntensity, 
+            max:   ServicePastelInterpolator.c_maximumIntensity
+        );
+        this.m_colorInterpolationRate = intensityClamped * ServicePastelInterpolator.c_colorInterpolationRate;
+    }
+    
+    internal Color GetColor(
         RainbowColorIndexType rainbowColorIndexType
     )
     {
         return this.m_rainbowColorDatas[key: rainbowColorIndexType].Current;
     }
 
-    public string GetColorAsHex(
+    internal string GetColorAsHex(
         RainbowColorIndexType rainbowColorIndexType
     )
     {
@@ -66,18 +78,25 @@ public sealed class ServicePastelInterpolator() :
         ).ToHtml();
     }
 
-    public static string GetColorAsHexByColorType(
+    internal static string GetColorAsHexByColorType(
         ColorType colorType
     )
     {
         return ServicePastelInterpolator.c_colorHexes[key: colorType];
     }
     
-    public static Color GetColorByColorType(
+    internal static Color GetColorByColorType(
         ColorType colorType
     )
     {
         return ServicePastelInterpolator.c_colorCodes[key: colorType];
+    }
+    
+    internal void ResetColorInterpolationSpeed()
+    {
+        this.AdjustColorInterpolationSpeedByLovenseIntensity(
+            intensity: 1
+        );
     }
     
     private enum ColorInterpolationType :
@@ -93,10 +112,10 @@ public sealed class ServicePastelInterpolator() :
 
     private sealed class RainbowColorIndexData
     {
-        public Color                  Current           { get; set; } = ServicePastelInterpolator.c_colorCodes[key: ColorType.White];
-        public Color                  Previous          { get; set; } = ServicePastelInterpolator.c_colorCodes[key: ColorType.White];
+        public Color                  Current           { get; set; }
+        public Color                  Previous          { get; set; }
         public float                  Interpolation     { get; set; } = 0f;
-        public ColorInterpolationType InterpolationType { get; set; } = ColorInterpolationType.RedToYellow;
+        public ColorInterpolationType InterpolationType { get; set; }
 
         public RainbowColorIndexData(
             Color                  current,
@@ -116,25 +135,29 @@ public sealed class ServicePastelInterpolator() :
     {
         { ColorType.Red,       new Color(rgba: 0xFF0000FF) },
         { ColorType.Yellow,    new Color(rgba: 0xFFFF00FF) },
-        { ColorType.Green,     new Color(rgba: (uint) 0x00FF00FF) },
-        { ColorType.Cyan,      new Color(rgba: (uint) 0x00FFFFFF) },
-        { ColorType.Blue,      new Color(rgba: (uint) 0x0000FFFF) },
+        { ColorType.Green,     new Color(rgba: 0x00FF00FF) },
+        { ColorType.Cyan,      new Color(rgba: 0x00FFFFFF) },
+        { ColorType.Blue,      new Color(rgba: 0x0000FFFF) },
         { ColorType.Magenta,   new Color(rgba: 0xFF00FFFF) },
         { ColorType.White,     new Color(rgba: 0xF2F2F2FF) },
     };
     private static readonly Dictionary<ColorType, string> c_colorHexes = new()
     {
-        { ColorType.Red,       ServicePastelInterpolator.c_colorCodes[key: ColorType.Red       ].ToHtml() },
-        { ColorType.Yellow,    ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow    ].ToHtml() },
-        { ColorType.Green,     ServicePastelInterpolator.c_colorCodes[key: ColorType.Green     ].ToHtml() },
-        { ColorType.Cyan,      ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan      ].ToHtml() },
-        { ColorType.Blue,      ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue      ].ToHtml() },
-        { ColorType.Magenta,   ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta   ].ToHtml() },
-        { ColorType.White,     ServicePastelInterpolator.c_colorCodes[key: ColorType.White     ].ToHtml() },
+        { ColorType.Red,     ServicePastelInterpolator.c_colorCodes[key: ColorType.Red     ].ToHtml() },
+        { ColorType.Yellow,  ServicePastelInterpolator.c_colorCodes[key: ColorType.Yellow  ].ToHtml() },
+        { ColorType.Green,   ServicePastelInterpolator.c_colorCodes[key: ColorType.Green   ].ToHtml() },
+        { ColorType.Cyan,    ServicePastelInterpolator.c_colorCodes[key: ColorType.Cyan    ].ToHtml() },
+        { ColorType.Blue,    ServicePastelInterpolator.c_colorCodes[key: ColorType.Blue    ].ToHtml() },
+        { ColorType.Magenta, ServicePastelInterpolator.c_colorCodes[key: ColorType.Magenta ].ToHtml() },
+        { ColorType.White,   ServicePastelInterpolator.c_colorCodes[key: ColorType.White   ].ToHtml() },
     };
 
+    private const int	c_maximumIntensity       = 20;
+    private const int	c_minimumIntensity       = 1;
     private const float c_colorInterpolationRate = 0.5f;
+    
     private bool        m_shutdownRequested      = false;
+    private float       m_colorInterpolationRate = ServicePastelInterpolator.c_colorInterpolationRate;
 
     private readonly Dictionary<RainbowColorIndexType, RainbowColorIndexData> m_rainbowColorDatas = new()
     {
@@ -235,7 +258,7 @@ public sealed class ServicePastelInterpolator() :
             var colorInterpolation     = rainbowColorIndexData.Interpolation;
             var colorInterpolationType = rainbowColorIndexData.InterpolationType;
 
-            colorInterpolation += ServicePastelInterpolator.c_colorInterpolationRate * delta;
+            colorInterpolation += this.m_colorInterpolationRate * delta;
             switch (colorInterpolationType)
             {
                 case ColorInterpolationType.RedToYellow:

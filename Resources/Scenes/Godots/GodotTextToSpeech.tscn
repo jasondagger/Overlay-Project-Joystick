@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://clp7txvtvc168"]
+[gd_scene format=3 uid="uid://j18uuwrswwqu"]
 
 [ext_resource type="Script" uid="uid://bu8xlmvl3oqw4" path="res://Core/Services/Godots/TextToSpeeches/ServiceGodotTextToSpeech.cs" id="1_mfbi0"]
 
-[node name="GodotTextToSpeech" type="Node"]
+[node name="GodotTextToSpeech" type="Node" unique_id=1692093231]
 script = ExtResource("1_mfbi0")

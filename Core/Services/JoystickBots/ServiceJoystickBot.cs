@@ -55,18 +55,16 @@ public sealed class ServiceJoystickBot() :
         );
         
         ServiceGodotTextToSpeech.Speak(
-            message: $"{ServiceJoystickBot.c_username} says... {message}"
+            message: $"{ServiceJoystickBot.c_usernameTTS} says... {message}"
         );
     }
 
     private const string             c_username             = "SmoothBot";
+    private const string             c_usernameTTS          = "Smooth Bot";
 
     private static readonly string[] s_notificationMessages =
     [
-        "Want to request a song? Subscribers get one free song request per stream using the !songrequest command! Check the description for more information.",
-        "Not digging the lights? Subscribers can type !lights with a color to change the lights once per stream & more!",
-        "Consider subscribing for access to commands that control the lights & sound of the stream!",
-        "Want to play with us? Add SmoothDagger on Steam to join in on the fun!",
+        "Want to play with us? Add SmoothDagger on Steam!",
     ];
 
     private string                   m_joystickChannelId     = string.Empty;

@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Overlay.Core.Services.Lovense.Payloads;
+namespace Overlay.Core.Services.Lovenses.Payloads;
 
 [Serializable()]
 public sealed class ServiceLovensePayloadAuthorizationToken()

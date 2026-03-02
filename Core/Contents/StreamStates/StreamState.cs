@@ -1,4 +1,7 @@
 
+using Overlay.Core.Services.Godots;
+using Overlay.Core.Services.Godots.BorderBurnControllers;
+
 namespace Overlay.Core.Contents.StreamStates;
 
 using Godot;
@@ -12,6 +15,19 @@ internal abstract partial class StreamState() :
 	{
 		base._EnterTree();
 
-		_ = StreamState.Node = _ = this;
+		StreamState.Node = this;
+	}
+
+	public override void _Ready()
+	{
+		StreamState.RetrieveBorderBurnShaderMaterials();
+	}
+
+	private static void RetrieveBorderBurnShaderMaterials()
+	{
+		var serviceGodots = Services.Services.GetService<ServiceGodots>();
+		var serviceGodotBorderBurnController = serviceGodots.GetServiceGodot<ServiceGodotBorderBurnController>();
+		
+		serviceGodotBorderBurnController.RetrieveBorderBurnShaderMaterials();
 	}
 }

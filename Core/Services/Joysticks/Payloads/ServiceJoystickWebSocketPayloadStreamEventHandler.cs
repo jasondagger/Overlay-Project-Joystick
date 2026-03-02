@@ -10,234 +10,234 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var payloadMessageType = _ = payloadMessage.Type;
-        switch (_ = payloadMessageType)
+        var payloadMessageType = payloadMessage.Type;
+        switch (payloadMessageType)
         {
             case "ChatTimersCleared":
 	            ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventChatTimersCleared(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "ChatTimerStarted":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventChatTimerStarted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "DeviceConnected":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventDeviceConnected(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "DeviceDisconnected":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventDeviceDisconnected(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "DeviceSettingsUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventDeviceSettingsUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "DropinStream":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventDropinStream(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "Ended":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventEnded(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "Followed":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventFollowed(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "FollowerCountUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventFollowerCountUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "GiftedSubscriptions":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventGiftedSubscriptions(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "MilestoneCompleted":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventMilestoneCompleted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "PvpSessionEnded":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventPvpSessionEnded(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "PvpSessionEnding":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventPvpSessionEnding(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "PvpSessionReady":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventPvpSessionReady(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "PvpSessionRequested":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventPvpSessionRequested(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "PvpSessionStarted":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventPvpSessionStarted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "Resubscribed":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventResubscribed(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "SceneUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventSceneUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "SettingsUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventSettingsUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "Started":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventStarted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "StreamDroppedIn":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventStreamDroppedIn(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "StreamEnding":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventStreamEnding(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "StreamModeUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventStreamModeUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "StreamResuming":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventStreamResuming(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "Subscribed":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventSubscribed(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "SubscriberCountUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventSubscriberCountUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipGoalCreated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipGoalCreated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipGoalDeleted":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipGoalDeleted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipGoalIncreased":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipGoalIncreased(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipGoalMet":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipGoalMet(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipGoalUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipGoalUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipMenuItemLocked":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipMenuItemLocked(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "TipMenuItemUnlocked":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipMenuItemUnlocked(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "Tipped":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventTipped(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "UserMuted":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventUserMuted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "UserUnmuted":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventUserUnmuted(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "ViewerCountUpdated":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventViewerCountUpdated(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "WheelSpinClaimed":
                 ServiceJoystickWebSocketPayloadStreamEventHandler.HandleWebSocketPayloadStreamEventWheelSpinClaimed(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
 			
@@ -251,8 +251,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.ChatTimersCleared?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataChatTimersCleared>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataChatTimersCleared>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -262,8 +262,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.ChatTimerStarted?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataChatTimerStarted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataChatTimerStarted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -273,8 +273,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.DeviceConnected?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDeviceConnected>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDeviceConnected>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -284,8 +284,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.DeviceDisconnected?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDeviceDisconnected>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDeviceDisconnected>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -295,8 +295,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.DeviceSettingsUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDeviceSettingsUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDeviceSettingsUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -306,8 +306,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.DropinStream?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDropinStream>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataDropinStream>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -317,8 +317,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.Ended?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataEnded>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataEnded>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -328,8 +328,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.Followed?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataFollowed>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataFollowed>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -339,8 +339,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.FollowerCountUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataFollowerCountUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataFollowerCountUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -350,8 +350,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.GiftedSubscriptions?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataGiftedSubscriptions>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataGiftedSubscriptions>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -361,8 +361,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.MilestoneCompleted?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataMilestoneCompleted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataMilestoneCompleted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -372,8 +372,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.PvpSessionEnded?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionEnded>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionEnded>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -383,8 +383,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.PvpSessionEnding?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionEnding>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionEnding>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -394,8 +394,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.PvpSessionReady?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionReady>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionReady>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -405,8 +405,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.PvpSessionRequested?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionRequested>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionRequested>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -416,8 +416,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.PvpSessionStarted?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionStarted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataPvpSessionStarted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -427,8 +427,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.Resubscribed?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataResubscribed>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataResubscribed>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -438,8 +438,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.SceneUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSceneUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSceneUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -449,8 +449,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.SettingsUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSettingsUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSettingsUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -460,8 +460,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.Started?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStarted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStarted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -471,8 +471,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.StreamDroppedIn?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamDroppedIn>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -482,8 +482,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.StreamEnding?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamEnding>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamEnding>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -493,8 +493,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.StreamModeUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamModeUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamModeUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -504,8 +504,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.StreamResuming?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamResuming>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataStreamResuming>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -515,8 +515,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.Subscribed?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSubscribed>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSubscribed>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -526,8 +526,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.SubscriberCountUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSubscriberCountUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataSubscriberCountUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -537,8 +537,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipGoalCreated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalCreated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalCreated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -548,8 +548,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipGoalDeleted?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalDeleted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalDeleted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -559,8 +559,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipGoalIncreased?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalIncreased>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalIncreased>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -570,8 +570,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipGoalMet?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalMet>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalMet>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -581,8 +581,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipGoalUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipGoalUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -592,8 +592,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipMenuItemLocked?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipMenuItemLocked>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipMenuItemLocked>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -603,8 +603,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.TipMenuItemUnlocked?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipMenuItemUnlocked>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipMenuItemUnlocked>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -614,8 +614,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.Tipped?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipped>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataTipped>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -625,8 +625,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.UserMuted?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataUserMuted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataUserMuted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -636,8 +636,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.UserUnmuted?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataUserUnmuted>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataUserUnmuted>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -647,8 +647,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.ViewerCountUpdated?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataViewerCountUpdated>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataViewerCountUpdated>(
+                json: payloadMessage.Metadata
             )
         );
     }
@@ -658,8 +658,8 @@ internal static class ServiceJoystickWebSocketPayloadStreamEventHandler
     )
     {
         ServiceJoystickWebSocketPayloadStreamEvents.WheelSpinClaimed?.Invoke(
-            obj: _ = JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataWheelSpinClaimed>(
-                json: _ = payloadMessage.Metadata
+            obj: JsonHelper.Deserialize<ServiceJoystickWebSocketPayloadMessageMetadataWheelSpinClaimed>(
+                json: payloadMessage.Metadata
             )
         );
     }

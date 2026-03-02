@@ -7,18 +7,18 @@ internal static class ServiceJoystickWebSocketPayloadUserPresenceHandler
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        var payloadMessageType = _ = payloadMessage.Type;
-        switch (_ = payloadMessageType)
+        var payloadMessageType = payloadMessage.Type;
+        switch (payloadMessageType)
         {
             case "enter_stream":
                 ServiceJoystickWebSocketPayloadUserPresenceHandler.HandleWebSocketPayloadUserPresenceEnterStream(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
             
             case "leave_stream":
                 ServiceJoystickWebSocketPayloadUserPresenceHandler.HandleWebSocketPayloadUserPresenceLeaveStream(
-                    payloadMessage: _ = payloadMessage
+                    payloadMessage: payloadMessage
                 );
                 break;
 			
@@ -31,13 +31,17 @@ internal static class ServiceJoystickWebSocketPayloadUserPresenceHandler
 		ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        
+        ServiceJoystickWebSocketPayloadUserPresenceEvents.UserEntered?.Invoke(
+            obj: payloadMessage
+        );
     }
     
     private static void HandleWebSocketPayloadUserPresenceLeaveStream(
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
     {
-        
+        ServiceJoystickWebSocketPayloadUserPresenceEvents.UserLeft?.Invoke(
+            obj: payloadMessage
+        );
     }
 }

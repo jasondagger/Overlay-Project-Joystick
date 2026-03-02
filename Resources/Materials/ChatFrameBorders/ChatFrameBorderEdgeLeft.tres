@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cyphwemtqgx2s"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cyphwemtqgx2s"]
 
 [ext_resource type="Shader" uid="uid://6nndgfy5y6h4" path="res://Resources/Shaders/OBSFrameBorderEdge.gdshader" id="1_7vmyu"]
 [ext_resource type="Texture2D" uid="uid://bsu4b7ylxcgpl" path="res://Resources/Textures/Cutouts/Chats/ChatBackgroundLeft.png" id="2_q48vl"]
@@ -8,8 +8,8 @@
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c5uns"]
 width = 1024
 height = 1024
-seamless = true
 noise = SubResource("FastNoiseLite_1126b")
+seamless = true
 
 [resource]
 shader = ExtResource("1_7vmyu")

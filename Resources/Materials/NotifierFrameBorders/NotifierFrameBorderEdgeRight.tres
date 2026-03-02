@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://d1tusttxkuk2w"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d1tusttxkuk2w"]
 
 [ext_resource type="Shader" uid="uid://6nndgfy5y6h4" path="res://Resources/Shaders/OBSFrameBorderEdge.gdshader" id="1_p333v"]
 [ext_resource type="Texture2D" uid="uid://fpg1r1gdbcw1" path="res://Resources/Textures/Cutouts/Notifiers/NotifierBackgroundRight.png" id="2_kc8tb"]
@@ -8,8 +8,8 @@
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6oauf"]
 width = 1024
 height = 1024
-seamless = true
 noise = SubResource("FastNoiseLite_1126b")
+seamless = true
 
 [resource]
 shader = ExtResource("1_p333v")

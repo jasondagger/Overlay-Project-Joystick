@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Overlay.Core.Services.Geminis;
 using Overlay.Core.Services.Godots.TextToSpeeches;
+using Overlay.Core.Services.TeamFortress2s;
 using RandomNumberGenerator = Godot.RandomNumberGenerator;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
@@ -587,7 +588,56 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
             item: username
         );
     }
-    
+
+    private static void HandleBotCommandTF2(
+        string username,
+        string parameters
+    )
+    {
+        var serviceJoystickBot = Services.GetService<ServiceJoystickBot>();
+        if (username is not "SmoothDagger")
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: $"Invalid !tf2 user - only SmoothDagger can use this command."
+            );
+            return;
+        }
+
+        var serviceTF2 = Services.GetService<ServiceTeamFortress2>();
+
+        var commandSplit = parameters.Split(
+            separator: ' '
+        );
+        
+        if (
+            commandSplit.Length > 1
+        )
+        {
+            serviceJoystickBot.SendChatMessage(
+                message: $"Invalid !tf2 parameter - !tf2 must be followed by start or stop."
+            );
+            return;
+        }
+
+        var command = commandSplit[0];
+        switch (command)
+        {
+            case "start":
+                serviceTF2.StartReadingConsoleLog();
+                break;
+            
+            case "stop":
+                serviceTF2.StopReadingConsoleLog();
+                break;
+            
+            default:
+                serviceJoystickBot.SendChatMessage(
+                    message: $"Invalid !tf2 parameter - !tf2 must be followed by start or stop."
+                );
+                return;
+        }
+    }
+
     private static void HandleBotCommands(
         ServiceJoystickWebSocketPayloadMessage payloadMessage
     )
@@ -687,6 +737,13 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
                 );
                 break;
             
+            case "!tf2":
+                ServiceJoystickWebSocketPayloadChatHandler.HandleBotCommandTF2(
+                    username:   username,
+                    parameters: parameters
+                );
+                break;
+            
             default:
                 return;
         }
@@ -697,31 +754,27 @@ internal static class ServiceJoystickWebSocketPayloadChatHandler
     )
     {
         var author   = payloadMessage.Author;
-        var username = author.Username;
-        if (
-            ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Contains(
-                username
-            ) is true
-        )
-        {
-            return;
-        }
-
         var isContentCreator = author.IsContentCreator;
         if (isContentCreator is false)
         {
             return;
         }
         
-        ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
-            item: username
-        );
-                
+        var username = author.Username;
+        if (
+            ServiceJoystickWebSocketPayloadChatHandler.s_streamersShoutedOut.Add(
+                item: username
+            ) is false
+        )
+        {
+            return;
+        }
+
         string[] messages =
         [
-            $"Oh shit, it's {username}! Check out their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
-            $"Holy fuck, a wild {username} appeared! Go catch their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
-            $"Shoutout to {username}! Check out their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
+            $"Oh shit, it's @{username}! Check out their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
+            $"Holy fuck, a wild @{username} appeared! Go catch their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
+            $"Shoutout to @{username}! Check out their streams: {ServiceJoystickWebSocketPayloadChatHandler.c_joystickUserStreamLinkPrefix}{username}",
         ];
         var random = new RandomNumberGenerator();
         var index  = random.RandiRange(

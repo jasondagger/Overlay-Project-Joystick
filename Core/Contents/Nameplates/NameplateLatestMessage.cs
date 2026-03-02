@@ -207,6 +207,7 @@ internal sealed partial class NameplateLatestMessage() :
             var richTextLabel = RichTextLabelSampler.DequeueRichTextLabel(
                 letter: letter
             );
+            
             richTextLabel.Position = new Vector2(
                 x: positionX,
                 y: 0f

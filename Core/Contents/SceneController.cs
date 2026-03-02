@@ -18,7 +18,7 @@ public sealed partial class SceneController() :
     [Export] public Control Hideable       = null;
     [Export] public Control Rainbows       = null;
 
-    public static SceneController Instance = null;
+    public static SceneController Instance { get; private set; } = null;
     
     public override void _Ready()
     {

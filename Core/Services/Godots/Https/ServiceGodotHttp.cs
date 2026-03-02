@@ -20,9 +20,8 @@ internal sealed partial class ServiceGodotHttp() :
         long responseCode
     )
     {
-        return _ =
-            responseCode is >= ServiceGodotHttp.c_errorCodeSeriesSuccess 
-                and < ServiceGodotHttp.c_errorCodeSeriesRedirection;
+        return responseCode is >= ServiceGodotHttp.c_errorCodeSeriesSuccess 
+            and < ServiceGodotHttp.c_errorCodeSeriesRedirection;
     }
     
     internal void SendHttpRequest(
@@ -33,30 +32,29 @@ internal sealed partial class ServiceGodotHttp() :
         HttpRequestCompletedHandler requestCompletedHandler
     )
     {
-        var requiresContentLengthHeader = _ = method is Method.Post or Method.Put;
+        var requiresContentLengthHeader = method is Method.Post or Method.Put;
 
         if (
-            _ = requiresContentLengthHeader is true &&
+            requiresContentLengthHeader is true &&
             json.Length is 0
         )
         {
-            // credits to https://twitch.tv/schrobby
             headers.Add(
-                item: _ = $"Content-Length: 0"
+                item: $"Content-Length: 0"
             );
         }
 
-        var httpRequestData = _ = new ServiceGodotHttpRequestData(
-            url:                     _ = url,
-            headers:                 _ = headers.ToArray(),
-            method:                  _ = method,
-            json:                    _ = json,
-            requestCompletedHandler: _ = requestCompletedHandler
+        var httpRequestData = new ServiceGodotHttpRequestData(
+            url:                     url,
+            headers:                 headers.ToArray(),
+            method:                  method,
+            json:                    json,
+            requestCompletedHandler: requestCompletedHandler
         );
-        lock (_ = this.m_lock)
+        lock (this.m_lock)
         {
             this.m_httpRequestDatas.Enqueue(
-                item: _ = httpRequestData
+                item: httpRequestData
             );
         }
     }
@@ -69,11 +67,11 @@ internal sealed partial class ServiceGodotHttp() :
     private void ProcessHttpRequests()
     {
         ServiceGodotHttpRequestData httpRequestData;
-        lock (_ = this.m_lock)
+        lock (this.m_lock)
         {
-            if (_ = this.m_httpRequestDatas.Count > 0U)
+            if (this.m_httpRequestDatas.Count > 0U)
             {
-                _ = httpRequestData = _ = this.m_httpRequestDatas.Dequeue();
+                httpRequestData = this.m_httpRequestDatas.Dequeue();
             }
             else
             {
@@ -81,12 +79,12 @@ internal sealed partial class ServiceGodotHttp() :
             }
         }
 
-        var httpRequest = _ = new HttpRequest();
+        var httpRequest = new HttpRequest();
         this.AddChild(
-            node: _ = httpRequest
+            node: httpRequest
         );
 
-        httpRequest.RequestCompleted += _ = httpRequestData.RequestCompletedHandler;
+        httpRequest.RequestCompleted += httpRequestData.RequestCompletedHandler;
         httpRequest.RequestCompleted +=
         (
             long     result,
@@ -98,11 +96,11 @@ internal sealed partial class ServiceGodotHttp() :
             httpRequest.QueueFree();
         };
 
-        _ = httpRequest.Request(
-            url:           _ = httpRequestData.Url,
-            customHeaders: _ = httpRequestData.Headers,
-            method:        _ = httpRequestData.Method,
-            requestData:   _ = httpRequestData.Json
+        httpRequest.Request(
+            url:           httpRequestData.Url,
+            customHeaders: httpRequestData.Headers,
+            method:        httpRequestData.Method,
+            requestData:   httpRequestData.Json
         );
     }
 }

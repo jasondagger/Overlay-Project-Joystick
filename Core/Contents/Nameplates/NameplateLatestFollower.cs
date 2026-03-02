@@ -13,17 +13,17 @@ internal sealed partial class NameplateLatestFollower() :
 {
     protected override void RegisterForJoystickEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Followed           += this.HandleWebSocketPayloadStreamEventFollowed;
-        _ = ServiceDatabaseTaskEvents.RetrievedListJoystickLatestFollowers += this.HandleRetrievedJoystickLatestFollowers;
+        ServiceJoystickWebSocketPayloadStreamEvents.Followed           += this.HandleWebSocketPayloadStreamEventFollowed;
+        ServiceDatabaseTaskEvents.RetrievedListJoystickLatestFollowers += this.HandleRetrievedJoystickLatestFollowers;
     }
     
     private void HandleRetrievedJoystickLatestFollowers(
         ServiceDatabaseTaskRetrievedListJoystickLatestFollowers retrievedListJoystickLatestFollowers
     )
     {
-        var result = _ = retrievedListJoystickLatestFollowers.Result;
+        var result = retrievedListJoystickLatestFollowers.Result;
 
-        var target = _ = result.Count - 5;
+        var target = result.Count - 5;
         if (target < 0)
         {
             target = 0;
@@ -31,9 +31,9 @@ internal sealed partial class NameplateLatestFollower() :
         
         for (var i = result.Count - 1; i >= target; i--)
         {
-            var joystickLatestFollower = _ = result[i];
+            var joystickLatestFollower = result[i];
             this.m_names.Enqueue(
-                item: _ = joystickLatestFollower.JoystickLatest_Latest_Follower
+                item: joystickLatestFollower.JoystickLatest_Latest_Follower
             );
         }
         
@@ -44,21 +44,21 @@ internal sealed partial class NameplateLatestFollower() :
         ServiceJoystickWebSocketPayloadMessageMetadataFollowed messageMetadata
     )
     {
-        var name = _ = messageMetadata.Who;
+        var name = messageMetadata.Who;
         
         ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestFollower,
+            serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.AddJoystickLatestFollower,
             serviceDatabaseTaskSqlParameters: 
             [
                 new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatestFollower.JoystickLatest_Latest_Follower)}",
-                    value:         _ = name
+                    parameterName: $"{nameof(ServiceDatabaseJoystickLatestFollower.JoystickLatest_Latest_Follower)}",
+                    value:         name
                 )
             ]
         );
         
         this.m_pendingNames.Enqueue(
-            item: _ = name
+            item: name
         );
     }
 }

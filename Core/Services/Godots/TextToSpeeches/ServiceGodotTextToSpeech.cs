@@ -10,10 +10,10 @@ internal sealed partial class ServiceGodotTextToSpeech() :
         string message
     )
     {
-        var voices = DisplayServer.TtsGetVoicesForLanguage("en");
+        var voices = DisplayServer.TtsGetVoices();
         DisplayServer.TtsSpeak(
             text:   message,
-            voice:  "english-mb-en1",
+            voice:  "serena",
             volume: 100
         );
     }

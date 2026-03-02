@@ -32,12 +32,6 @@ internal sealed class ServiceGovee() :
     {
         return Task.CompletedTask;
     }
-
-    internal enum LightScene :
-        uint
-    {
-        Default = 15863356
-    }
     
     internal void SetLightColor(
         Color color
@@ -46,10 +40,18 @@ internal sealed class ServiceGovee() :
         var rgbValue = ServiceGovee.ConvertColorToInt(
             color: color
         );
+        
         var serviceGoveePayload = new ServiceGoveePayload();
         serviceGoveePayload.Payload.Capability.Value = rgbValue;
+        
         this.SendPayloads(
-            payload: serviceGoveePayload
+            payload:       serviceGoveePayload,
+            ceilingLights: false
+        );
+        
+        this.SendPayloads(
+            payload:       serviceGoveePayload,
+            ceilingLights: true
         );
     }
     
@@ -61,7 +63,12 @@ internal sealed class ServiceGovee() :
         serviceGoveePayload.Payload.Capability.Value    = 0;
         
         this.SendPayloads(
-            payload: serviceGoveePayload
+            payload:       serviceGoveePayload,
+            ceilingLights: false
+        );
+        this.SendPayloads(
+            payload:       serviceGoveePayload,
+            ceilingLights: true
         );
     }
 
@@ -70,30 +77,55 @@ internal sealed class ServiceGovee() :
     )
     {
         if (
-            this.m_scenes.ContainsKey(
-                key: sceneName
-            ) is false
+            this.m_scenesStandingLights.TryGetValue(sceneName, out var light) is true
         )
         {
-            return;
+            var serviceGoveePayloadLightsStanding = new ServiceGoveePayload();
+            serviceGoveePayloadLightsStanding.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
+            serviceGoveePayloadLightsStanding.Payload.Capability.Instance = $"diyScene";
+            serviceGoveePayloadLightsStanding.Payload.Capability.Value    = light;
+        
+            this.SendPayloads(
+                payload:       serviceGoveePayloadLightsStanding,
+                ceilingLights: false
+            );
         }
         
-        var serviceGoveePayload = new ServiceGoveePayload();
-        serviceGoveePayload.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
-        serviceGoveePayload.Payload.Capability.Instance = $"diyScene";
-        serviceGoveePayload.Payload.Capability.Value    = this.m_scenes[key: sceneName];
+        if (
+            this.m_scenesCeilingLights.TryGetValue(sceneName, out light) is true
+        )
+        {
+            var serviceGoveePayloadLightsCeiling = new ServiceGoveePayload();
+            serviceGoveePayloadLightsCeiling.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
+            serviceGoveePayloadLightsCeiling.Payload.Capability.Instance = $"diyScene";
+            serviceGoveePayloadLightsCeiling.Payload.Capability.Value    = this.m_scenesCeilingLights[key: sceneName];
         
-        this.SendPayloads(
-            payload: serviceGoveePayload
-        );
+            this.SendPayloads(
+                payload:       serviceGoveePayloadLightsCeiling,
+                ceilingLights: true
+            );
+        }
     }
     
-    private const string                     c_goveeAddress     = "https://openapi.api.govee.com/";
+    private const string                     c_goveeAddress          = "https://openapi.api.govee.com/";
+    private const string                     c_goveeLightSkuCeiling  = "H6008";
+    private const string                     c_goveeLightSkuStanding = "H607C";
 
-    private readonly Dictionary<string, int> m_scenes           = [];
-    private string                           m_apiKey           = string.Empty;
-    private readonly List<string>            m_hardwareIds      = [];
-    private ServiceGodotHttp                 m_serviceGodotHttp = null;
+    private readonly Dictionary<string, int> m_scenesStandingLights  = [];
+    private readonly Dictionary<string, int> m_scenesCeilingLights   = [];
+    private string                           m_apiKey                = string.Empty;
+    private readonly List<string>            m_hardwareIds           = [];
+    private ServiceGodotHttp                 m_serviceGodotHttp      = null;
+
+    private enum GoveeLights
+    {
+        StandingLight1,
+        StandingLight2,
+        CeilingLight1,
+        CeilingLight2,
+        CeilingLight3,
+        StandingLight3,
+    }
     
     private static int ConvertColorToInt(
         Color color
@@ -115,7 +147,8 @@ internal sealed class ServiceGovee() :
             );
         }
         
-        this.RequestDIYScenes();
+        this.RequestDIYScenesForStandingLights();
+        this.RequestDIYScenesForCeilingLights();
     }
     
     private void HandleServiceDatabaseRetrievedGoveeData(
@@ -132,12 +165,17 @@ internal sealed class ServiceGovee() :
         this.m_serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
     }
     
-    private void RequestDIYScenes()
+    private void RequestDIYScenesForStandingLights()
     {
-        var payload = new ServiceGoveePayload();
-            
-        payload.Payload.Device = this.m_hardwareIds[0];
-        
+        var payload = new ServiceGoveePayload
+        {
+            Payload =
+            {
+                Device = this.m_hardwareIds[(int) GoveeLights.StandingLight1],
+                Sku    = ServiceGovee.c_goveeLightSkuStanding
+            }
+        };
+
         var json = JsonHelper.Serialize(
             @object: payload
         );
@@ -160,7 +198,7 @@ internal sealed class ServiceGovee() :
                 if (responseCode >= 300)
                 {
                     ConsoleLogger.LogMessageError(
-                        messageError: _ =
+                        messageError: 
                             $"{nameof(ServiceGovee)}." +
                             $"{nameof(ServiceGovee.SendPayloads)}() " +
                             $"EXCEPTION: {responseCode} error."
@@ -181,7 +219,7 @@ internal sealed class ServiceGovee() :
                     {
                         var value = (JsonElement)option.Value;
 
-                        this.m_scenes.TryAdd(
+                        this.m_scenesStandingLights.TryAdd(
                             key:   option.Name,
                             value: value.GetInt32()
                         );
@@ -190,6 +228,70 @@ internal sealed class ServiceGovee() :
             }
         );
     }
+    
+    private void RequestDIYScenesForCeilingLights()
+        {
+            var payload = new ServiceGoveePayload
+            {
+                Payload =
+                {
+                    Device = this.m_hardwareIds[(int) GoveeLights.CeilingLight1],
+                    Sku    = ServiceGovee.c_goveeLightSkuCeiling
+                }
+            };
+    
+            var json = JsonHelper.Serialize(
+                @object: payload
+            );
+            
+            this.m_serviceGodotHttp.SendHttpRequest(
+                url:                     $"{ServiceGovee.c_goveeAddress}router/api/v1/device/diy-scenes",
+                headers:                 [
+                    $"Govee-API-Key: {this.m_apiKey}",
+                    $"Content-Type: application/json",
+                ],
+                method:                  HttpClient.Method.Post,
+                json:                    json,
+                requestCompletedHandler: (
+                    long     result,
+                    long     responseCode,
+                    string[] headers,
+                    byte[]   body
+                ) =>
+                {
+                    if (responseCode >= 300)
+                    {
+                        ConsoleLogger.LogMessageError(
+                            messageError: 
+                                $"{nameof(ServiceGovee)}." +
+                                $"{nameof(ServiceGovee.SendPayloads)}() " +
+                                $"EXCEPTION: {responseCode} error."
+                        );
+                    }
+                    
+                    var bodyAsString = Encoding.UTF8.GetString(
+                        bytes: body
+                    );
+                    var serviceGoveeDIY = JsonHelper.Deserialize<ServiceGoveeDIY>(
+                        json: bodyAsString
+                    );
+    
+                    foreach (var capability in serviceGoveeDIY.Payload.Capabilities)
+                    {
+                        var options = capability.Parameters.Options;
+                        foreach (var option in options)
+                        {
+                            var value = (JsonElement)option.Value;
+    
+                            this.m_scenesCeilingLights.TryAdd(
+                                key:   option.Name,
+                                value: value.GetInt32()
+                            );
+                        }
+                    }
+                }
+            );
+        }
 
     private void RequestDeviceInformation()
     {
@@ -211,7 +313,7 @@ internal sealed class ServiceGovee() :
                 if (responseCode >= 300)
                 {
                     ConsoleLogger.LogMessageError(
-                        messageError: _ =
+                        messageError: 
                             $"{nameof(ServiceGovee)}." +
                             $"{nameof(ServiceGovee.SendPayloads)}() " +
                             $"EXCEPTION: {responseCode} error."
@@ -226,12 +328,14 @@ internal sealed class ServiceGovee() :
     }
     
     private void SendPayloads(
-        ServiceGoveePayload payload
+        ServiceGoveePayload payload,
+        bool ceilingLights
     )
     {
         foreach (var hardwareId in this.m_hardwareIds)
         {
             payload.Payload.Device = hardwareId;
+            payload.Payload.Sku    = ceilingLights ? ServiceGovee.c_goveeLightSkuCeiling : ServiceGovee.c_goveeLightSkuStanding;
             
             var json = JsonHelper.Serialize(
                 @object: payload
@@ -255,7 +359,7 @@ internal sealed class ServiceGovee() :
                     if (responseCode >= 300)
                     {
                         ConsoleLogger.LogMessageError(
-                            messageError: _ =
+                            messageError: 
                                 $"{nameof(ServiceGovee)}." +
                                 $"{nameof(ServiceGovee.SendPayloads)}() " +
                                 $"EXCEPTION: {responseCode} error."

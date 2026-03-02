@@ -7,14 +7,14 @@ namespace Overlay.Core.Services.Databases.Models;
 internal sealed class ServiceDatabaseJoystickLatestSubscriber() :
 	ServiceDatabaseModel()
 {
-	internal string JoystickLatest_Latest_Subscriber { get; set; } = _ = string.Empty;
+	internal string JoystickLatest_Latest_Subscriber { get; set; } = string.Empty;
 
 	internal override void CreateFromNpgsqlDataReader(
 		NpgsqlDataReader npgsqlDataReader
 	)
 	{
-		var readerLatestSubscriber = _ = (string) npgsqlDataReader[name: _ = $"{_ = nameof( ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber )}"];
+		var readerLatestSubscriber = (string) npgsqlDataReader[name: $"{nameof( ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber )}"];
 
-		_ = this.JoystickLatest_Latest_Subscriber = _ = readerLatestSubscriber;
+		this.JoystickLatest_Latest_Subscriber = readerLatestSubscriber;
 	}
 }

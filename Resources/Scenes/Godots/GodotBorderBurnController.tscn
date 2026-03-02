@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://lyjumi8ri8mj"]
+
+[ext_resource type="Script" uid="uid://myr358icche2" path="res://Core/Services/Godots/BorderBurnControllers/ServiceGodotBorderBurnController.cs" id="1_aufip"]
+
+[node name="GodotBorderBurnController" type="Node" unique_id=1475633205]
+script = ExtResource("1_aufip")

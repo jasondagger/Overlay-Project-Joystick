@@ -1,23 +1,8 @@
 
 using Godot;
 using Overlay.Core.Services;
-using Overlay.Core.Services.Databases;
-using Overlay.Core.Services.Databases.Tasks;
-using Overlay.Core.Services.Databases.Tasks.Retrieves;
-using Overlay.Core.Services.Godots;
-using Overlay.Core.Services.Godots.Https;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using Overlay.Core.Contents.Effects;
-using Overlay.Core.Services.Godots.Audios;
-using Overlay.Core.Services.Godots.Inputs;
-using Overlay.Core.Services.Govee.Payloads;
-using Overlay.Core.Services.Joysticks;
-using Overlay.Core.Services.Joysticks.Payloads;
-using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
-using Overlay.Core.Tools;
 
 namespace Overlay;
 
@@ -27,29 +12,25 @@ internal sealed partial class Main() :
 	public override async void _EnterTree()
 	{
 #if DEBUG
-		if (_ = Main.Node is not null)
+		if (Main.Node is not null)
 		{
-			throw _ = new Exception(
-				message: _ =
+			throw new Exception(
+				message:
 					$"EXCEPTION: " +
-					$"{_ = nameof(Main)}." +
-					$"{_ = nameof(Main.Node)} - " +
-					$"Duplicate '{_ = nameof(Main)}' detected."
+					$"{nameof(Main)}." +
+					$"{nameof(Main.Node)} - " +
+					$"Duplicate '{nameof(Main)}' detected."
 			);
 		}
 #endif
 
-		_ = Main.Node = _ = this;
+		Main.Node = this;
 		
 		await Services.Start();
 		
-		// ServiceJoystickWebSocketPayloadStreamEvents.ChatTimerStarted += T;
-		// ServiceDatabaseTaskEvents.RetrievedListJoystickUsers += TestDatabaseRead;
-		// ServiceDatabaseTaskEvents.RetrievedJoystickData += TestDatabaseRead;
-		TestHttp();
-		// TestDatabaseWrite();
-		
-		// each letter & symbol as a .res file
+		DisplayServer.WindowSetMode(
+			mode: DisplayServer.WindowMode.Windowed
+		);
 	}
 
 	public override void _Process(
@@ -66,12 +47,12 @@ internal sealed partial class Main() :
 		Node target
 	)
 	{
-		lock (_ = Main.s_lock)
+		lock (Main.s_lock)
 		{
 			Main.s_nodeTargets.Enqueue(
-				item: _ = new NodeTarget(
-					node:   _ = node,
-					target: _ = target
+				item: new NodeTarget(
+					node:   node,
+					target: target
 				)
 			);
 		}
@@ -82,8 +63,8 @@ internal sealed partial class Main() :
 		Node target
 	)
 	{
-		internal Node Node   { get; set; } = _ = node;
-		internal Node Target { get; set; } = _ = target;
+		internal Node Node   { get; set; } = node;
+		internal Node Target { get; set; } = target;
 	}
 
 	private static readonly Queue<NodeTarget> s_nodeTargets = new();
@@ -92,11 +73,11 @@ internal sealed partial class Main() :
 	private static void ProcessNodeTargets()
 	{
 		NodeTarget nodeTarget;
-		lock (_ = Main.s_lock)
+		lock (Main.s_lock)
 		{
-			if (_ = Main.s_nodeTargets.Count > 0U)
+			if (Main.s_nodeTargets.Count > 0U)
 			{
-				_ = nodeTarget = _ = Main.s_nodeTargets.Dequeue();
+				nodeTarget = Main.s_nodeTargets.Dequeue();
 			}
 			else
 			{
@@ -104,41 +85,11 @@ internal sealed partial class Main() :
 			}
 		}
 		
-		var node   = _ = nodeTarget.Node;
-		var target = _ = nodeTarget.Target;
+		var node   = nodeTarget.Node;
+		var target = nodeTarget.Target;
 		
 		target.AddChild(
-			node: _ = node
+			node: node
 		);
-	}
-	
-	private static void TestDatabaseWrite()
-	{
-		ServiceDatabase.ExecuteTaskNonQuery(
-			ServiceDatabaseTaskNonQueryType.AddJoystickUser,
-			[
-				new ServiceDatabaseTaskNpgsqlParameter(
-					"joystickuser_customchattextcolor",
-					"#FF2CFF"
-				),
-				new ServiceDatabaseTaskNpgsqlParameter(
-					"joystickuser_username",
-					"SmoothDagger"
-				),
-			]
-		);
-	}
-
-	private static void TestDatabaseRead(
-		ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData 
-	)
-	{
-		var i = 0;
-		i++;
-	}
-
-	private static void TestHttp()
-	{
-
 	}
 }

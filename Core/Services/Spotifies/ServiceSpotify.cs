@@ -16,7 +16,7 @@ using Overlay.Core.Services.Joysticks.Payloads;
 
 namespace Overlay.Core.Services.Spotifies;
 
-public sealed partial class ServiceSpotify : 
+public sealed class ServiceSpotify : 
     IService
 {
     Task IService.Setup()
@@ -67,7 +67,7 @@ public sealed partial class ServiceSpotify :
         );
     }
 
-    private const string                        c_authorizationCode = "AQCSSUISzULYyX9xAvkXzy1dKRJeWuu-YzyKxniJ3wa8IV69tYhoheOUS3V4_-xEW4-Hyq8wPYUWhU5mj0CnkYgSylswkPS-YIERH-bMOnYtkbibD6lO_CNSJR5kN4EhIzKMa4cukiZWLtjCqlvtwG2IMC6csiN1vWGArby_kiPXz9h3GlAQwmGxZ0R-UH5E8_xzotBdS-YOZt16Jp3hyOOXCNIexNZgXlAdZTXn2QZxcbtRQgDu51nO6EAgQZ5Pt6cW9GnTvYRHvze6qVH3IYDBv4Ni";
+    private const string                        c_authorizationCode = "AQDRY-0WsMTiBxh0a_7Y6NjiHKSEcIjxoriW9soDZMXWhvkBqkrLTXUZ1p76rJj8TjNN7r1veNNHZk3SDnTmrWlTWNSuug9XRrs1XuVwNaSXehJBkYGaUkhSE5tW95yExd64WUTYF3SdTSXjJxa0gbdLW4OOGlUaI9_MPkiGV9GxGBVFOGC2cBgX3z9FDGNHmLmRN6SUOUKLnP7AkMYDAVC0kWwhlwI9Bt4SCdPDtnFxl0EAkBVQvs6oAH1AdcEk9MN-xpQkyMfj7fc_8xJ1bd6O6l5W";
     private const string                        c_uriAccessToken    = "https://accounts.spotify.com/api/token";
     private const string                        c_uriApi            = "https://api.spotify.com/v1";
     private const string                        c_uriRedirect       = "http://127.0.0.1:8888/callback";

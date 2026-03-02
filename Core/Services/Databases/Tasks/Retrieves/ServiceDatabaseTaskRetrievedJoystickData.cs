@@ -8,5 +8,5 @@ internal sealed class ServiceDatabaseTaskRetrievedJoystickData(
 ) :
 	ServiceDatabaseTask<ServiceDatabaseJoystickData, ServiceDatabaseJoystickData>()
 {
-	internal override ServiceDatabaseJoystickData Result { get; set; } = _ = result;
+	internal override ServiceDatabaseJoystickData Result { get; set; } = result;
 }

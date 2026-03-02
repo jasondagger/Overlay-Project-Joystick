@@ -27,7 +27,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -54,7 +54,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedGoveeData)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -81,7 +81,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListGoveeLights)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -106,7 +106,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedJoystickData)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -133,7 +133,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestFollowers)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -158,7 +158,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestSubscribers)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -183,7 +183,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickLatestTippers)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -208,7 +208,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedListJoystickUsers)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -233,7 +233,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedLovenseData)}() " +
                     $"EXCEPTION: {exception.Message}"
@@ -260,7 +260,7 @@ internal static class ServiceDatabaseTaskQueryHandlers
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
+                messageError: 
                     $"{nameof(ServiceDatabaseTaskQueryHandlers)}." +
                     $"{nameof(ServiceDatabaseTaskQueryHandlers.HandleExecuteQueryAsyncRetrievedSpotifyData)}() " +
                     $"EXCEPTION: {exception.Message}"

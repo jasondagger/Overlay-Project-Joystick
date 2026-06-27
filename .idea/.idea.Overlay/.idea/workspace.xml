@@ -14,140 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1a383b3-b2e5-43e6-a688-9e7d92e33533" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Contents/GoveeLightControllerStanding.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuAvatarsLightsAndSounds.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuNSFW.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseBankUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/dictionaries/project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Twitch/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Twitch/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Twitch/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Chats/Chat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Chats/Chat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Chats/ChatMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Chats/ChatMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Chats/ChatMessageEmote.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Chats/ChatMessageEmote.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundGodRays.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundGodRays.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundKaleidoscope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundKaleidoscope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundSnow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundSnow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundVaporwave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundVaporwave.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/Rainbows/EffectRainbowExtender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/Rainbows/EffectRainbowExtender.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/Rainbows/EffectRainbowStripe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/Rainbows/EffectRainbowStripe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Effects/RichTextLabelSampler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Effects/RichTextLabelSampler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/GoveeLightController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/GoveeLightController.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/GoveeLightControllerStanding.cs.uid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/Nameplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/Nameplate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestFollower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestFollower.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestSubscriber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestSubscriber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestTipper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestTipper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLogo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLogo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/OBS/OBSBorderFrame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/OBS/OBSBorderFrame.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/SceneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/SceneController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuGaming.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuGaming.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuIRL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuIRL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuLights.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuLights.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuAvatarsLightsAndSounds.cs.uid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuSpice.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuSpice.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuNSFW.cs.uid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuSpotify.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuSpotify.cs.uid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuToys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuSubscribers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuToys.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuSubscribers.cs.uid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Contents/UserEvents/UserPresenceEventsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/UserEvents/UserPresenceEventsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseJoystickLatestSubscriber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseJoystickLatestSubscriber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseJoystickUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseJoystickUser.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseBankUser.cs.uid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseModelReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Models/ServiceDatabaseModelReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/ServiceDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/ServiceDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/Retrieves/ServiceDatabaseTaskRetrievedListGoveeLights.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/Retrieves/ServiceDatabaseTaskRetrievedListGoveeLights.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/Retrieves/ServiceDatabaseTaskRetrievedListGoveeLights.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/Retrieves/ServiceDatabaseTaskRetrievedListGoveeLights.cs.uid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/Retrieves/ServiceDatabaseTaskRetrievedListJoystickUsers.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/Retrieves/ServiceDatabaseTaskRetrievedListJoystickUsers.cs.uid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskNonQueries.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskNonQueries.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskNonQueryType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskNonQueryType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskNpgsqlParameter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskNpgsqlParameter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueries.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueries.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueryHandlers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueryHandlers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueryStatements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueryStatements.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueryType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskQueryType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Geminis/ServiceGemini.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Geminis/ServiceGemini.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Godots/Audios/ServiceGodotAudio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Godots/Audios/ServiceGodotAudio.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Godots/BorderBurnControllers/ServiceGodotBorderBurnController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Godots/BorderBurnControllers/ServiceGodotBorderBurnController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Godots/Inputs/ServiceGodotInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Godots/Inputs/ServiceGodotInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Godots/TextToSpeeches/ServiceGodotTextToSpeech.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Godots/TextToSpeeches/ServiceGodotTextToSpeech.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Govee/Payloads/ServiceGoveePayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Govee/Payloads/ServiceGoveePayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Govee/Payloads/ServiceGoveePayloadData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Govee/Payloads/ServiceGoveePayloadData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Govee/Payloads/ServiceGoveePayloadDataCapability.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Govee/Payloads/ServiceGoveePayloadDataCapability.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Govee/ServiceGovee.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Govee/ServiceGovee.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/IService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/IService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/JoystickBots/ServiceJoystickBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/JoystickBots/ServiceJoystickBot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/Metadatas/ServiceJoystickWebSocketPayloadMessageMetadataMilestoneCompleted.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/Metadatas/ServiceJoystickWebSocketPayloadMessageMetadataMilestoneCompleted.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadStreamEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadStreamEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Requests/ServiceJoystickRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Requests/ServiceJoystickRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/ServiceJoystick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/ServiceJoystick.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Lovenses/ServiceLovense.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Lovenses/ServiceLovense.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/OBS/ServiceOBS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/OBS/ServiceOBS.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/PastelInterpolators/ServicePastelInterpolator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/PastelInterpolators/ServicePastelInterpolator.cs.uid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Services.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Services.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/Spotifies/ServiceSpotify.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Spotifies/ServiceSpotify.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Services/TeamFortress2s/ServiceTeamFortress2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/TeamFortress2s/ServiceTeamFortress2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Tools/EnumHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Tools/EnumHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Main.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overlay.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Overlay.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overlay.csproj.old" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overlay.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Overlay.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Audios/SoundAlerts/Tip.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Audios/SoundAlerts/Tip.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Audios/SoundAlerts/Tip.mp3.import" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Audios/SoundAlerts/Tip.mp3.import" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorder.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorder.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeDown.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeDown.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeLeft.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeLeft.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeRight.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeRight.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeUp.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeUp.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/Nameplate/NameplateIconLatestFollower.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/Nameplate/NameplateIconLatestFollower.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/Nameplate/NameplateIconLatestSubscriber.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/Nameplate/NameplateIconLatestSubscriber.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/Nameplate/NameplateIconLatestTipper.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/Nameplate/NameplateIconLatestTipper.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorder.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorder.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeDown.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeDown.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeDown.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeDown.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeLeft.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeLeft.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeRight.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeRight.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeUp.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeUp.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Scenes/Chats/ChatMessage.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Scenes/Chats/ChatMessage.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Scenes/Godots/GodotAudio.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Scenes/Godots/GodotAudio.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Scenes/StreamStates/StreamStateDefault.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Scenes/StreamStates/StreamStateDefault.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/BackgroundGodRays.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/BackgroundGodRays.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/BackgroundKaleidoscope.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/BackgroundKaleidoscope.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/BackgroundSnow.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/BackgroundSnow.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/BackgroundStars.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/BackgroundStars.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/BackgroundVaporwave.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/BackgroundVaporwave.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/OBSFrameBorder.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/OBSFrameBorder.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Shaders/OBSFrameBorderEdge.gdshader" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Shaders/OBSFrameBorderEdge.gdshader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Effects/Particles/Penis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Effects/Particles/Penis.png.import" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Effects/Particles/Snowflake.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Effects/Particles/Snowflake.png.import" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Icons/Icon_Follower.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Icons/Icon_Follower.png.import" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Icons/Icon_Subscriber.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Icons/Icon_Subscriber.png.import" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Icons/Icon_Tip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Textures/Icons/Icon_Tip.png.import" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/export_presets.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/export_presets.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -642,7 +510,7 @@
       <workItem from="1780113207062" duration="924000" />
       <workItem from="1780380514778" duration="666000" />
       <workItem from="1781929600426" duration="781000" />
-      <workItem from="1782535045839" duration="2422000" />
+      <workItem from="1782535045839" duration="3242000" />
     </task>
     <servers />
   </component>

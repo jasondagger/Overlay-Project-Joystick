@@ -318,7 +318,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
     private const string                                                          c_commandSFX                                        = $"!sfx";
     private const string                                                          c_commandTip                                        = $"!tip";
     private const int                                                             c_delayGushControlLinkSetupInMilliseconds           = 30000;
-    private const string                                                          c_joystickUserStreamLinkPrefix                      = "https://api.joystick.tv/u/";
+    private const string                                                          c_joystickUserStreamLinkPrefix                      = "https://www.joystick.tv/u/";
     private const int                                                             c_previewLengthInMilliseconds                       = 10000;
     private const int                                                             c_previewTimeoutInMilliseconds                      = 300000;
     private const string                                                          c_streamerUsername                                  = $"SmoothDagger";

@@ -1,6 +1,4 @@
 ﻿
-using System.Data;
-
 namespace Overlay.Core.Services.Databases.Tasks;
 
 internal sealed class ServiceDatabaseTaskNpgsqlParameter
@@ -10,10 +8,10 @@ internal sealed class ServiceDatabaseTaskNpgsqlParameter
         object    value
     )
     {
-        _ = this.ParameterName = _ = parameterName;
-		_ = this.Value         = _ = value;
+        this.ParameterName = parameterName;
+		this.Value         = value;
 	}
 
-	internal string    ParameterName { get; } = _ = string.Empty;
-    internal object    Value         { get; } = null;
+	internal string ParameterName { get; } = string.Empty;
+    internal object Value         { get; } = null;
 }

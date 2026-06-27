@@ -20,56 +20,69 @@ internal static class ServiceDatabaseTaskLogic
     {
         try
         {
-            await using var npgsqlConnection = _ = new NpgsqlConnection(
-                connectionString: _ = ServiceDatabaseTaskLogic.c_connectionString
+            await using var npgsqlConnection = new NpgsqlConnection(
+                connectionString: ServiceDatabaseTaskLogic.c_connectionString
             );
             await npgsqlConnection.OpenAsync();
 
             await ServiceDatabaseTaskLogic.StartTransactionExecuteNonQueryAsync(
-                npgsqlConnection:                    _ = npgsqlConnection,
-                npgsqlStatement:                     _ = npgsqlStatement,
-                serviceDatabaseTaskNpgsqlParameters: _ = serviceDatabaseTaskNpgsqlParameters
+                npgsqlConnection:                    npgsqlConnection,
+                npgsqlStatement:                     npgsqlStatement,
+                serviceDatabaseTaskNpgsqlParameters: serviceDatabaseTaskNpgsqlParameters
             );
         }
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskLogic)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskLogic.ExecuteNonQueryAsync)}() - " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                messageError: 
+                    $"{nameof(ServiceDatabaseTaskLogic)}." +
+                    $"{nameof(ServiceDatabaseTaskLogic.ExecuteNonQueryAsync)}() - " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
 
     internal static async Task ExecuteQueryAsync(
-        string                       npgsqlStatement,
-        ExecuteTaskQueryAsyncHandler executeQueryAsyncHandler
+        string                                   npgsqlStatement,
+        ExecuteTaskQueryAsyncHandler             executeQueryAsyncHandler,
+        List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters = null
     )
     {
         try
         {
-            await using var npgsqlConnection = _ = new NpgsqlConnection(
-                connectionString: _ = ServiceDatabaseTaskLogic.c_connectionString
+            await using var npgsqlConnection = new NpgsqlConnection(
+                connectionString: ServiceDatabaseTaskLogic.c_connectionString
 			);
             await npgsqlConnection.OpenAsync();
 
-            await using var npgsqlCommand = _ = new NpgsqlCommand(
-                cmdText:    _ = npgsqlStatement,
-                connection: _ = npgsqlConnection
+            await using var npgsqlCommand = new NpgsqlCommand(
+                cmdText:    npgsqlStatement,
+                connection: npgsqlConnection
             );
-            await using var npqsqlDataReader = _ = await npgsqlCommand.ExecuteReaderAsync();
+            
+            if (serviceDatabaseTaskNpgsqlParameters is not null)
+            {
+                foreach (var parameter in serviceDatabaseTaskNpgsqlParameters)
+                {
+                    npgsqlCommand.Parameters.AddWithValue(
+                        parameterName: parameter.ParameterName, 
+                        value:         parameter.Value
+                    );
+                }
+            }
+            
+            await using var npqsqlDataReader = await npgsqlCommand.ExecuteReaderAsync();
             await executeQueryAsyncHandler.Invoke(
-                npgsqlDataReader: _ = npqsqlDataReader
+                npgsqlDataReader: npqsqlDataReader
 			);
         }
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskLogic)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskLogic.ExecuteQueryAsync)}() EXCEPTION: - " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                messageError:
+                    $"{nameof(ServiceDatabaseTaskLogic)}." +
+                    $"{nameof(ServiceDatabaseTaskLogic.ExecuteQueryAsync)}() EXCEPTION: - " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -78,23 +91,23 @@ internal static class ServiceDatabaseTaskLogic
     {
         try
         {
-            await using var npgsqlConnection = _ = new NpgsqlConnection(
-                connectionString: _ = ServiceDatabaseTaskLogic.c_connectionString
+            await using var npgsqlConnection = new NpgsqlConnection(
+                connectionString: ServiceDatabaseTaskLogic.c_connectionString
 			);
             await npgsqlConnection.OpenAsync();
 
-            return _ = true;
+            return true;
         }
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskLogic)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskLogic.TestConnection)}() - " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                messageError:
+                    $"{nameof(ServiceDatabaseTaskLogic)}." +
+                    $"{nameof(ServiceDatabaseTaskLogic.TestConnection)}() - " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
-        return _ = false;
+        return false;
     }
 
     private const string c_connectionString =
@@ -111,17 +124,17 @@ internal static class ServiceDatabaseTaskLogic
     {
         try
         {
-            _ = await npgsqlCommand.ExecuteNonQueryAsync();
+            await npgsqlCommand.ExecuteNonQueryAsync();
             await databaseTransaction.CommitAsync();
         }
         catch (Exception exception)
         {
             await databaseTransaction.RollbackAsync();
             ConsoleLogger.LogMessageError(
-                messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskLogic)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskLogic.CompleteTransactionExecuteNonQueryAsync)}() - " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                messageError:
+                    $"{nameof(ServiceDatabaseTaskLogic)}." +
+                    $"{nameof(ServiceDatabaseTaskLogic.CompleteTransactionExecuteNonQueryAsync)}() - " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }
@@ -134,36 +147,36 @@ internal static class ServiceDatabaseTaskLogic
     {
         try
         {
-            await using var databaseTransaction = _ = await npgsqlConnection.BeginTransactionAsync();
-            await using var npgsqlCommand = _ = new NpgsqlCommand(
-                cmdText:     _ = npgsqlStatement,
-                connection:  _ = npgsqlConnection,
-                transaction: _ = databaseTransaction
+            await using var databaseTransaction = await npgsqlConnection.BeginTransactionAsync();
+            await using var npgsqlCommand = new NpgsqlCommand(
+                cmdText:     npgsqlStatement,
+                connection:  npgsqlConnection,
+                transaction: databaseTransaction
             );
             
-            foreach (var serviceDatabaseTaskNpgsqlParameter in _ = serviceDatabaseTaskNpgsqlParameters)
+            foreach (var serviceDatabaseTaskNpgsqlParameter in serviceDatabaseTaskNpgsqlParameters)
             {
-                var parameterName = _ = serviceDatabaseTaskNpgsqlParameter.ParameterName;
-                var value         = _ = serviceDatabaseTaskNpgsqlParameter.Value;
+                var parameterName = serviceDatabaseTaskNpgsqlParameter.ParameterName;
+                var value         = serviceDatabaseTaskNpgsqlParameter.Value;
 
-                _ = npgsqlCommand.Parameters.AddWithValue(
-                    parameterName: _ = parameterName,
-                    value:         _ = value
+                npgsqlCommand.Parameters.AddWithValue(
+                    parameterName: parameterName,
+                    value:         value
                 );
             }
 
             await ServiceDatabaseTaskLogic.CompleteTransactionExecuteNonQueryAsync(
-                databaseTransaction: _ = databaseTransaction,
-                npgsqlCommand:       _ = npgsqlCommand
+                databaseTransaction: databaseTransaction,
+                npgsqlCommand:       npgsqlCommand
             );
         }
         catch (Exception exception)
         {
             ConsoleLogger.LogMessageError(
-                messageError: _ =
-                    $"{_ = nameof(ServiceDatabaseTaskLogic)}." +
-                    $"{_ = nameof(ServiceDatabaseTaskLogic.StartTransactionExecuteNonQueryAsync)}() - " +
-                    $"EXCEPTION: {_ = exception.Message}"
+                messageError:
+                    $"{nameof(ServiceDatabaseTaskLogic)}." +
+                    $"{nameof(ServiceDatabaseTaskLogic.StartTransactionExecuteNonQueryAsync)}() - " +
+                    $"EXCEPTION: {exception.Message}"
             );
         }
     }

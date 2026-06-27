@@ -3,6 +3,8 @@ using Godot;
 using Overlay.Core.Services;
 using System;
 using System.Collections.Generic;
+using Overlay.Core.Contents;
+using Overlay.Core.Contents.Effects.Rainbows;
 
 namespace Overlay;
 
@@ -38,6 +40,12 @@ internal sealed partial class Main() :
 	)
 	{
 		Main.ProcessNodeTargets();
+		SpectrumMusicAnalyzer.Update(
+			delta: (float) delta
+		);
+		EffectRainbowStripe.UpdateGlobalPhase(
+			delta: (float) delta
+		);
 	}
 
 	internal static Node Node { get; private set; } = null;

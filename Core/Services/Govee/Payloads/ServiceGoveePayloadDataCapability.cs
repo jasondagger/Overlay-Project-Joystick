@@ -9,15 +9,15 @@ public sealed class ServiceGoveePayloadDataCapability()
     [JsonPropertyName(
         name: $"type"
     )]
-    public string         Type     { get; set; } = _ = "devices.capabilities.color_setting";
+    public string         Type     { get; set; } = "devices.capabilities.color_setting";
     
     [JsonPropertyName(
         name: $"instance"
     )]
-    public string         Instance { get; set; } = _ = $"colorRgb";
+    public string         Instance { get; set; } = $"colorRgb";
     
     [JsonPropertyName(
         name: $"value"
     )]
-    public int            Value    { get; set; } = _ = 0;
+    public int            Value    { get; set; } = 0;
 }

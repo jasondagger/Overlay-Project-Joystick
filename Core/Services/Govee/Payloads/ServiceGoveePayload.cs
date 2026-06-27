@@ -10,7 +10,7 @@ public sealed class ServiceGoveePayload()
     [JsonPropertyName(
         name: $"requestId"
     )]
-    public string                  RequestId { get; set; } = _ = "uuid";
+    public string                  RequestId { get; set; } = "uuid";
 
     [JsonPropertyName(
         name: $"payload"

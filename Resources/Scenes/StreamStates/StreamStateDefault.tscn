@@ -1,33 +1,51 @@
-[gd_scene format=3 uid="uid://br8t8shp3sr6c"]
+[gd_scene format=4 uid="uid://br8t8shp3sr6c"]
 
 [ext_resource type="Script" uid="uid://cnqnjyyfxixru" path="res://Core/Contents/StreamStates/StreamStateDefault.cs" id="1_o72j2"]
+[ext_resource type="Script" uid="uid://dm0xs1gowhpfi" path="res://Core/Contents/BackgroundAvatarsController.cs" id="2_3x5dk"]
+[ext_resource type="Script" uid="uid://c8bcxgike14a6" path="res://Core/Contents/GoveeLightControllerCeiling.cs" id="2_l7qxh"]
 [ext_resource type="Script" uid="uid://bblw6ujue51l2" path="res://Core/Contents/SceneController.cs" id="2_niean"]
 [ext_resource type="Shader" uid="uid://clfc8riu2t8va" path="res://Resources/Shaders/BackgroundStars.gdshader" id="2_p0f6j"]
+[ext_resource type="PackedScene" uid="uid://c1mts7cgrc5a" path="res://Resources/Scenes/Avatars/BackgroundAvatar.tscn" id="3_3x5dk"]
+[ext_resource type="Script" uid="uid://ebdkqy1p5gpt" path="res://Core/Contents/GoveeLightControllerStanding.cs" id="3_6fqfh"]
 [ext_resource type="Script" uid="uid://iop6g11sympj" path="res://Core/Contents/StreamEvents/StreamEventsController.cs" id="3_28isn"]
 [ext_resource type="Script" uid="uid://cnxwer3ek0lf" path="res://Core/Contents/Effects/Rainbows/EffectRainbowExtender.cs" id="3_pkstr"]
 [ext_resource type="Shader" uid="uid://dcw54kutra1pe" path="res://Resources/Shaders/BackgroundGodRays.gdshader" id="4_4r38b"]
 [ext_resource type="Shader" uid="uid://drvgwjqxdolsi" path="res://Resources/Shaders/Color.gdshader" id="4_7ex8q"]
-[ext_resource type="Script" uid="uid://ebdkqy1p5gpt" path="res://Core/Contents/GoveeLightController.cs" id="4_iwrga"]
 [ext_resource type="Shader" uid="uid://d2uk3qwib3f7" path="res://Resources/Shaders/BackgroundSnow.gdshader" id="4_o72j2"]
 [ext_resource type="Shader" uid="uid://brjfr2to16lyk" path="res://Resources/Shaders/BackgroundKaleidoscope.gdshader" id="4_tjdmb"]
 [ext_resource type="Script" uid="uid://v86sw1r3mp7q" path="res://Core/Contents/Effects/Rainbows/EffectRainbowStripe.cs" id="5_4r38b"]
 [ext_resource type="Script" uid="uid://bra1wjt6bhk4v" path="res://Core/Contents/UserEvents/UserPresenceEventsController.cs" id="5_d836i"]
 [ext_resource type="Script" uid="uid://b0qf050fqx7o" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundKaleidoscope.cs" id="5_xepxj"]
 [ext_resource type="Shader" uid="uid://1jyvu32ik8jl" path="res://Resources/Shaders/OBSFrameBorder.gdshader" id="6_28isn"]
-[ext_resource type="Shader" uid="uid://b7jba6jfpcvcj" path="res://Resources/Shaders/BackgroundVaporwave.gdshader" id="6_fvku6"]
-[ext_resource type="Script" uid="uid://bekm460xcq2yv" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundVaporwave.cs" id="6_lhe6f"]
 [ext_resource type="Script" uid="uid://dm6galdixwbw4" path="res://Core/Contents/OBS/OBSBorderFrame.cs" id="7_mjhir"]
+[ext_resource type="Script" uid="uid://dl3gse51k4b83" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundStars.cs" id="7_uwk53"]
 [ext_resource type="Material" uid="uid://633bex560c3n" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeDown.tres" id="8_62sso"]
+[ext_resource type="Script" uid="uid://b2qrgw4dadpmq" path="res://Core/Contents/VoiceController.cs" id="9_7e4xp"]
 [ext_resource type="Material" uid="uid://bmnsb3f12a5fo" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeLeft.tres" id="9_niean"]
 [ext_resource type="Script" uid="uid://dfkmnqhk68848" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundSnow.cs" id="10_pkstr"]
 [ext_resource type="Material" uid="uid://dxa0382d04i5u" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeRight.tres" id="10_tjdmb"]
 [ext_resource type="Material" uid="uid://dv6vkntylsjdw" path="res://Resources/Materials/OBSFrameBorders/OBSFrameBorderEdgeUp.tres" id="11_xepxj"]
-[ext_resource type="Script" uid="uid://wuk8mxl2a36v" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundGodRays.cs" id="12_4r38b"]
-[ext_resource type="Texture2D" uid="uid://d0by8y3gu23se" path="res://Resources/Textures/Effects/Particles/Snowflake.png" id="13_iwrga"]
+[ext_resource type="Texture2D" uid="uid://d0by8y3gu23se" path="res://Resources/Textures/Icons/Icon_Snowflake.png" id="13_iwrga"]
+[ext_resource type="Shader" uid="uid://c76d2solxlqbp" path="res://Resources/Shaders/BackgroundEnvironmentSun.gdshader" id="13_lex1t"]
+[ext_resource type="Shader" uid="uid://cdnamg2aefsfl" path="res://Resources/Shaders/BackgroundEnvironmentRailing.gdshader" id="15_mw7u5"]
+[ext_resource type="Shader" uid="uid://c6gy05tnww85p" path="res://Resources/Shaders/BackgroundEnvironmentClouds.gdshader" id="15_wy6a4"]
+[ext_resource type="Shader" uid="uid://d0kud6ihjolfg" path="res://Resources/Shaders/BackgroundAvatar.gdshader" id="15_x002a"]
+[ext_resource type="Shader" uid="uid://d2vpiwxak56bn" path="res://Resources/Shaders/BackgroundConfetti.gdshader" id="16_6fqfh"]
+[ext_resource type="Script" uid="uid://bw48xu1b0x6hk" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundGeometry.cs" id="16_n3fnb"]
+[ext_resource type="Shader" uid="uid://c6ribddyrhujv" path="res://Resources/Shaders/BackgroundEnvironmentRocksAndTrees.gdshader" id="17_3d1os"]
+[ext_resource type="Texture2D" uid="uid://2xr5hoicjp7f" path="res://Resources/Textures/Effects/Particles/ConfettiSpritesheet.png" id="17_8gud7"]
+[ext_resource type="Script" uid="uid://wuk8mxl2a36v" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundGodRays.cs" id="17_x002a"]
+[ext_resource type="Script" uid="uid://dch14itqdk5fy" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundConfetti.cs" id="18_8gud7"]
 [ext_resource type="Material" uid="uid://fvk0eaupd4pn" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorder.tres" id="18_v74uj"]
+[ext_resource type="Shader" uid="uid://c4s6vg7ro50j7" path="res://Resources/Shaders/BackgroundEnvironmentTerrain.gdshader" id="18_wy6a4"]
+[ext_resource type="Script" uid="uid://djg7b24ggarop" path="res://Core/Contents/Effects/Rainbows/EffectRainbowBorder.cs" id="19_jcb5f"]
+[ext_resource type="Material" uid="uid://cl1q1yol0yxxj" path="res://Resources/Materials/RainbowStripeEdge.tres" id="19_lutk6"]
+[ext_resource type="Shader" uid="uid://diox0nfk4ddx6" path="res://Resources/Shaders/RainbowColorLine.gdshader" id="20_6q0ck"]
 [ext_resource type="Material" uid="uid://crqia762w5lnx" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeDown.tres" id="20_f2fsi"]
+[ext_resource type="Shader" uid="uid://de505k0v8j8fh" path="res://Resources/Shaders/BackgroundEnvironmentRoad.gdshader" id="21_8kq02"]
 [ext_resource type="Material" uid="uid://cyphwemtqgx2s" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeLeft.tres" id="21_v74uj"]
 [ext_resource type="Material" uid="uid://bba1vjrq7sfs5" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeRight.tres" id="22_3gobe"]
+[ext_resource type="Script" uid="uid://cfbdpoba0r3v6" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundGeometryVaporwave.cs" id="23_03yed"]
 [ext_resource type="Script" uid="uid://rlr0mj1kglx5" path="res://Core/Contents/Chats/Chat.cs" id="23_mjhir"]
 [ext_resource type="Material" uid="uid://bhl08lsjbm8ci" path="res://Resources/Materials/ChatFrameBorders/ChatFrameBorderEdgeUp.tres" id="23_tfyti"]
 [ext_resource type="PackedScene" uid="uid://c2trsakuyscam" path="res://Resources/Scenes/Chats/ChatMessage.tscn" id="24_5uidy"]
@@ -36,6 +54,7 @@
 [ext_resource type="Material" uid="uid://hva41a0mx3kd" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeLeft.tres" id="26_0b5xl"]
 [ext_resource type="Script" uid="uid://cfh8q6l3bqlok" path="res://Core/Contents/Nameplates/Nameplate.cs" id="26_525sr"]
 [ext_resource type="Material" uid="uid://d1tusttxkuk2w" path="res://Resources/Materials/NotifierFrameBorders/NotifierFrameBorderEdgeRight.tres" id="27_qm20r"]
+[ext_resource type="PackedScene" uid="uid://buwrairlwjrkv" path="res://Resources/Scenes/Avatars/BackgroundAvatarPreview.tscn" id="28_x7gex"]
 [ext_resource type="Script" uid="uid://iut46abd5ufa" path="res://Core/Contents/Nameplates/NameplateLatest.cs" id="31_rfl27"]
 [ext_resource type="Script" uid="uid://buf34m426ag05" path="res://Core/Contents/Effects/RichTextLabelSampler.cs" id="32_00c1p"]
 [ext_resource type="Material" uid="uid://odl7gr2nko0e" path="res://Resources/Materials/Nameplate/NameplateIcon.tres" id="32_b3hb5"]
@@ -118,25 +137,39 @@
 [ext_resource type="PackedScene" uid="uid://bteinal3psgag" path="res://Resources/Scenes/Nameplates/Letters/Special/'.tscn" id="102_vnub1"]
 [ext_resource type="Script" uid="uid://dvys5d6aj6hmr" path="res://Core/Contents/Nameplates/NameplateLatestMessage.cs" id="107_24xeb"]
 [ext_resource type="Script" uid="uid://bdyri6bp704iy" path="res://Core/Contents/Nameplates/NameplateLogo.cs" id="111_c8jl6"]
+[ext_resource type="Texture2D" uid="uid://cbhkb1mihqx3r" path="res://Resources/Textures/Cutouts/AvatarNameplates/AvatarNameplateBackground.png" id="140_03yed"]
+[ext_resource type="Shader" uid="uid://6nndgfy5y6h4" path="res://Resources/Shaders/OBSFrameBorderEdge.gdshader" id="141_x7gex"]
+[ext_resource type="Texture2D" uid="uid://c0t82hubtkjpj" path="res://Resources/Textures/Cutouts/AvatarNameplates/AvatarNameplateBackgroundLeft.png" id="143_5iaad"]
+[ext_resource type="Texture2D" uid="uid://dta5wcnhea2kb" path="res://Resources/Textures/Cutouts/AvatarNameplates/AvatarNameplateBackgroundRight.png" id="144_oktss"]
+[ext_resource type="Texture2D" uid="uid://mftg1k500puu" path="res://Resources/Textures/Cutouts/AvatarNameplates/AvatarNameplateBackgroundTop.png" id="145_mjpwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kabx6"]
 shader = ExtResource("2_p0f6j")
 shader_parameter/color = Color(0.0646965, 0.0646966, 0.0646965, 1)
+shader_parameter/star_color = Color(0, 0, 0, 1)
+shader_parameter/at_time = 0.0
+shader_parameter/at_time_slow = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xepxj"]
 shader = ExtResource("4_tjdmb")
-shader_parameter/animate_speed = 0.1
+shader_parameter/internal_time = 0.25
 shader_parameter/resolution = 50000.0
 shader_parameter/color = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvku6"]
-shader = ExtResource("6_fvku6")
-shader_parameter/battery = 1.0
-shader_parameter/anchor = -0.5
-shader_parameter/speed_scale = 1.0
-shader_parameter/fov = 0.2
-shader_parameter/background_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/bloom_intensity = 4.2400001539000005
+shader_parameter/transition_weight = 0.0
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+shader_parameter/rotation_speed = 0.6
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4r38b"]
 shader = ExtResource("4_4r38b")
@@ -146,7 +179,7 @@ shader_parameter/spread = 0.525
 shader_parameter/cutoff = 0.025
 shader_parameter/falloff = 0.5
 shader_parameter/edge_fade = 0.075
-shader_parameter/speed = 3.0
+shader_parameter/at_time = 0.0
 shader_parameter/ray1_density = 8.0
 shader_parameter/ray2_density = 30.0
 shader_parameter/ray2_intensity = 0.2
@@ -154,53 +187,1274 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/hdr = false
 shader_parameter/seed = 7.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjpwu"]
+shader = ExtResource("21_8kq02")
+shader_parameter/battery = 1.0
+shader_parameter/anchor = 0.0
+shader_parameter/fov = 0.2
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/audio_offset = 0.0
+shader_parameter/audio_time = 0.0
+shader_parameter/grid_size = 15.0
+shader_parameter/base_scroll_speed = 1.50000007125
+shader_parameter/line_thickness = 0.15
+shader_parameter/background_color = Color(0, 0.05, 0.1, 1)
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/transition_weight = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/model = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpxcl"]
+shader = ExtResource("13_lex1t")
+shader_parameter/battery = 1.0
+shader_parameter/anchor = 0.0
+shader_parameter/fov = 0.2
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/audio_offset = 0.0
+shader_parameter/audio_time = 0.0
+shader_parameter/grid_size = 15.0
+shader_parameter/base_scroll_speed = 1.50000007125
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/transition_weight = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/model = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oktss"]
+shader = ExtResource("15_wy6a4")
+shader_parameter/battery = 1.0
+shader_parameter/anchor = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/base_scroll_speed = 1.50000007125
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/transition_weight = 0.0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iaad"]
+shader = ExtResource("18_wy6a4")
+shader_parameter/battery = 1.0
+shader_parameter/anchor = 0.0
+shader_parameter/fov = 0.2
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/audio_offset = 0.0
+shader_parameter/audio_time = 0.0
+shader_parameter/grid_size = 15.0
+shader_parameter/base_scroll_speed = 1.50000007125
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/transition_weight = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/model = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ja342"]
+shader = ExtResource("17_3d1os")
+shader_parameter/battery = 1.0
+shader_parameter/anchor = 0.0
+shader_parameter/fov = 0.2
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/audio_offset = 0.0
+shader_parameter/audio_time = 0.0
+shader_parameter/grid_size = 15.0
+shader_parameter/base_scroll_speed = 1.50000007125
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/transition_weight = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/model = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7gex"]
+shader = ExtResource("15_mw7u5")
+shader_parameter/battery = 1.0
+shader_parameter/anchor = 0.0
+shader_parameter/fov = 0.2
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(0, 0, 0, 1)
+shader_parameter/audio_offset = 0.0
+shader_parameter/audio_time = 0.0
+shader_parameter/grid_size = 15.0
+shader_parameter/base_scroll_speed = 1.50000007125
+shader_parameter/current_slot_0 = 0
+shader_parameter/current_slot_1 = 0
+shader_parameter/current_slot_2 = 0
+shader_parameter/current_slot_3 = 0
+shader_parameter/current_slot_4 = 0
+shader_parameter/next_slot_0 = 0
+shader_parameter/next_slot_1 = 0
+shader_parameter/next_slot_2 = 0
+shader_parameter/next_slot_3 = 0
+shader_parameter/next_slot_4 = 0
+shader_parameter/transition_weight = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/model = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5erhm"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 0
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4jpo"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 11
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5kfpy"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 2
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sd5cl"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 3
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0klbf"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 4
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyrlk"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 5
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drqvu"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 6
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbowr"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 7
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7yjvp"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 8
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uapsn"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 9
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86mdl"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 10
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8pwbw"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 12
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a71v7"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 13
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uotug"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 14
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgp6b"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 15
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmwii"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 16
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3l75k"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 17
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bifa8"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 18
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lciu5"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 19
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7p5cp"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 20
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2qkd"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 21
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wctlf"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 22
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytcla"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 23
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mh0yg"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 24
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3wac"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 25
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8v4o"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 26
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g21tj"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 27
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a56cv"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 28
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wvo24"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 29
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shs5r"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 30
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpe0k"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 31
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh3cc"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 32
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4xbew"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 33
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yq4a"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 34
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iy0gs"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 35
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g64ef"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 36
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ws3vl"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 37
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nkhv"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 38
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcnnk"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 39
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t55s"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 40
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8dhm"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 41
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3m11"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 42
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wkwy"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 43
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smfks"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 44
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yf3yg"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 45
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubg6j"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 46
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65p0y"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 47
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jfs0i"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 48
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1omdk"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 49
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aed10"]
+shader = ExtResource("15_x002a")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 1
+shader_parameter/effect_slot_2 = 2
+shader_parameter/effect_slot_3 = 3
+shader_parameter/model = 50
+shader_parameter/color_base = Color(1, 0, 0, 1)
+shader_parameter/color_outline = Color(1, 1, 0, 1)
+shader_parameter/color_effect_slot_0 = Color(0, 1, 0, 1)
+shader_parameter/color_effect_slot_1 = Color(0, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(0, 0, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 0, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j60v6"]
+shader = ExtResource("16_6fqfh")
+shader_parameter/confetti_texture = ExtResource("17_8gud7")
+shader_parameter/confetti_color = Color(1, 0.5, 1, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/audio_offset = 0.0
+shader_parameter/base_fall_speed = 2.0
+shader_parameter/atlas_columns = 6.0
+shader_parameter/atlas_rows = 6.0
+shader_parameter/particle_density = 80.000003325
+shader_parameter/base_size = 0.86500004038898
+shader_parameter/rotation_speed = 0.0
+shader_parameter/glow_intensity = 2.5
+shader_parameter/stutter_intensity = 0.0
+shader_parameter/stutter_speed = 5.52400021489
+shader_parameter/feather = 50.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p0f6j"]
 shader = ExtResource("4_o72j2")
-shader_parameter/dimensions = Vector2(1152, 648)
-shader_parameter/rows = 20.0
-shader_parameter/columns = 5.0
-shader_parameter/vertical_scroll = 0.05
-shader_parameter/horizontal_scroll = 0.00999998
-shader_parameter/size_min = 0.3
-shader_parameter/size_max = 0.6
-shader_parameter/wave_min = 0.1
-shader_parameter/wave_max = 0.8
-shader_parameter/wave_speed = 0.5
-shader_parameter/wave_rotation = 1.0
-shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/particle_texture = ExtResource("13_iwrga")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/audio_time = 1.0
+shader_parameter/screen_size = Vector2(1920, 1080)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1cm5"]
+shader = ExtResource("4_7ex8q")
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mw7u5"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3fnb"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lex1t"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h21eh"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3d1os"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy6a4"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7jueq"]
 shader = ExtResource("4_7ex8q")
 shader_parameter/color = Color(0.94902, 0.94902, 0.94902, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibhqp"]
-shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.972549, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8kq02"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1126b"]
-shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0.992157, 1, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7hlt"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3baif"]
-shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0, 1, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_03yed"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v51mv"]
-shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxmwp"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5uns"]
-shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(0, 0, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7e4xp"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6oauf"]
-shader = ExtResource("4_7ex8q")
-shader_parameter/color = Color(1, 0, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8vg18"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mvpnp"]
 shader = ExtResource("4_7ex8q")
 shader_parameter/color = Color(0.94902, 0.94902, 0.94902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibhqp"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1126b"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3baif"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v51mv"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5uns"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6oauf"]
+shader = ExtResource("20_6q0ck")
+shader_parameter/palette = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/palette_alt = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/global_phase = 0.0
+shader_parameter/band_id = 0
+shader_parameter/effect_slot_0 = 1
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/effect_slot_4 = 0
+shader_parameter/music_intensity = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gewe"]
 shader = ExtResource("4_7ex8q")
@@ -208,23 +1462,118 @@ shader_parameter/color = Color(0.101961, 0.101961, 0.101961, 0.815686)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rss2l"]
 shader = ExtResource("6_28isn")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/feather = 50.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28i0m"]
 shader = ExtResource("6_28isn")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/feather = 50.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qaq0q"]
 shader = ExtResource("6_28isn")
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/feather = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5agf"]
+shader = ExtResource("6_28isn")
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/background = ExtResource("140_03yed")
+shader_parameter/feather = 50.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5kfpy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jboht"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_5kfpy")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28rll"]
+shader = ExtResource("141_x7gex")
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_jboht")
+shader_parameter/textureBackground = ExtResource("145_mjpwu")
+shader_parameter/radius = 0.425
+shader_parameter/effectControl = 0.215
+shader_parameter/shape = 1.0
+shader_parameter/tiling_factor = Vector2(0.75, 0.25)
+shader_parameter/noise_offset = Vector2(2.88, 6.595)
+shader_parameter/feather = 50.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5erhm"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c5uns"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_5erhm")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdko4"]
+shader = ExtResource("141_x7gex")
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_c5uns")
+shader_parameter/textureBackground = ExtResource("143_5iaad")
+shader_parameter/radius = 0.425
+shader_parameter/effectControl = 0.215
+shader_parameter/shape = 1.0
+shader_parameter/tiling_factor = Vector2(1, 0.325)
+shader_parameter/noise_offset = Vector2(0, 0)
+shader_parameter/feather = 50.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r4jpo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6oauf"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_r4jpo")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhoom"]
+shader = ExtResource("141_x7gex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_6oauf")
+shader_parameter/textureBackground = ExtResource("144_oktss")
+shader_parameter/radius = 0.425
+shader_parameter/effectControl = 0.2410000114475
+shader_parameter/shape = 1.0
+shader_parameter/tiling_factor = Vector2(1, 0.325)
+shader_parameter/noise_offset = Vector2(0, 0)
+shader_parameter/feather = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uupol"]
+shader = ExtResource("141_x7gex")
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_jboht")
+shader_parameter/textureBackground = ExtResource("145_mjpwu")
+shader_parameter/radius = 0.425
+shader_parameter/effectControl = 0.215
+shader_parameter/shape = 1.0
+shader_parameter/tiling_factor = Vector2(0.75, 0.25)
+shader_parameter/noise_offset = Vector2(0, 0)
+shader_parameter/feather = 50.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_62sso"]
 shader = ExtResource("6_28isn")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/feather = 50.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_niean"]
 shader = ExtResource("6_28isn")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
+shader_parameter/feather = 50.0
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_d836i"]
 
 [node name="StreamStateDefault" type="Node" unique_id=1231840922]
 script = ExtResource("1_o72j2")
@@ -232,17 +1581,27 @@ script = ExtResource("1_o72j2")
 [node name="RootControl" type="Control" parent="." unique_id=624230405]
 layout_mode = 3
 anchors_preset = 0
+scale = Vector2(0.5, 0.5)
 
 [node name="Controllers" type="Node" parent="RootControl" unique_id=38063743]
 
-[node name="GoveeLightController" type="Node" parent="RootControl/Controllers" unique_id=373115940]
-script = ExtResource("4_iwrga")
+[node name="BackgroundAvatarsController" type="Node" parent="RootControl/Controllers" unique_id=188443900 node_paths=PackedStringArray("BackgroundAvatarPreview", "BackgroundAvatars")]
+script = ExtResource("2_3x5dk")
+BackgroundAvatarPreview = NodePath("../../Background/Backgrounds/BackgroundAvatars/BackgroundAvatarPreview")
+BackgroundAvatars = NodePath("../../Background/Backgrounds/BackgroundAvatars")
+BackgroundAvatarScene = ExtResource("3_3x5dk")
 
-[node name="SceneController" type="Node" parent="RootControl/Controllers" unique_id=1866509880 node_paths=PackedStringArray("Layouts", "Hideable", "Rainbows")]
+[node name="GoveeLightControllerCeiling" type="Node" parent="RootControl/Controllers" unique_id=373115940]
+script = ExtResource("2_l7qxh")
+
+[node name="GoveeLightControllerStanding" type="Node" parent="RootControl/Controllers" unique_id=456420672]
+script = ExtResource("3_6fqfh")
+
+[node name="SceneController" type="Node" parent="RootControl/Controllers" unique_id=1866509880 node_paths=PackedStringArray("Layouts", "Hideable", "Interaction")]
 script = ExtResource("2_niean")
-Layouts = [NodePath("../../LayoutDefault"), NodePath("../../LayoutCode")]
+Layouts = [NodePath("../../LayoutDefault"), NodePath("../../LayoutCode"), NodePath("../../LayoutMe"), NodePath("../../LayoutAvatars")]
 Hideable = NodePath("../../LayoutDefault/Hideable")
-Rainbows = NodePath("../../Background/Rainbows")
+Interaction = NodePath("../../LayoutDefault/Interaction")
 
 [node name="StreamEventsController" type="Node" parent="RootControl/Controllers" unique_id=1901395132]
 script = ExtResource("3_28isn")
@@ -250,19 +1609,21 @@ script = ExtResource("3_28isn")
 [node name="UserPresenceEventsController" type="Node" parent="RootControl/Controllers" unique_id=1106895097]
 script = ExtResource("5_d836i")
 
+[node name="VoiceController" type="Node" parent="RootControl/Controllers" unique_id=682356908]
+script = ExtResource("9_7e4xp")
+
 [node name="Background" type="Control" parent="RootControl" unique_id=1292257841]
 anchors_preset = 0
 
 [node name="Backgrounds" type="Control" parent="RootControl/Background" unique_id=1442796522]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="BackgroundStars" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=937994992]
 material = SubResource("ShaderMaterial_kabx6")
 layout_mode = 0
 offset_right = 3840.0
 offset_bottom = 2160.0
+script = ExtResource("7_uwk53")
 
 [node name="BackgroundKaleidoscope" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=473702730]
 material = SubResource("ShaderMaterial_xepxj")
@@ -271,21 +1632,616 @@ offset_right = 3840.0
 offset_bottom = 2160.0
 script = ExtResource("5_xepxj")
 
-[node name="BackgroundVaporwave" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=1232362221]
-material = SubResource("ShaderMaterial_fvku6")
-layout_mode = 0
-offset_left = -80.0
-offset_top = 1588.0
-offset_right = 3920.0
-offset_bottom = 2160.0
-script = ExtResource("6_lhe6f")
-
 [node name="BackgroundGodRays" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=2002475983]
 material = SubResource("ShaderMaterial_4r38b")
 layout_mode = 0
 offset_right = 3840.0
 offset_bottom = 2253.0
-script = ExtResource("12_4r38b")
+script = ExtResource("17_x002a")
+
+[node name="BackgroundEnvironmentSky" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=1683108356]
+material = SubResource("ShaderMaterial_mjpwu")
+layout_mode = 0
+offset_top = 2160.0
+offset_right = 3840.0
+offset_bottom = 4320.0
+rotation = 3.1415927
+scale = Vector2(-1, 1)
+script = ExtResource("23_03yed")
+
+[node name="BackgroundEnvironmentSun" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=1350752735]
+material = SubResource("ShaderMaterial_qpxcl")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("16_n3fnb")
+
+[node name="BackgroundEnvironmentClouds" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=2030134863]
+material = SubResource("ShaderMaterial_oktss")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("16_n3fnb")
+
+[node name="BackgroundEnvironmentRoad" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=1580770582]
+material = SubResource("ShaderMaterial_mjpwu")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("23_03yed")
+
+[node name="Control" type="Control" parent="RootControl/Background/Backgrounds/BackgroundEnvironmentRoad" unique_id=1141549135]
+anchors_preset = 0
+offset_left = 2008.0
+offset_top = 1538.0
+offset_right = 2048.0
+offset_bottom = 1578.0
+
+[node name="BackgroundEnvironmentTerrain" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=472985356]
+material = SubResource("ShaderMaterial_5iaad")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("16_n3fnb")
+
+[node name="BackgroundEnvironmentRocksAndTrees" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=790151256]
+material = SubResource("ShaderMaterial_ja342")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("16_n3fnb")
+
+[node name="BackgroundEnvironmentRailing" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=1126895018]
+material = SubResource("ShaderMaterial_x7gex")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("16_n3fnb")
+
+[node name="BackgroundAvatars" type="Control" parent="RootControl/Background/Backgrounds" unique_id=49720894]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackgroundAvatarPreview" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=1127815698 instance=ExtResource("28_x7gex")]
+visible = false
+layout_mode = 0
+offset_left = 1408.0
+offset_top = 1450.0
+offset_right = 2432.0
+offset_bottom = 2474.0
+
+[node name="Avatar00-09" type="Control" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=1297126879]
+visible = false
+anchors_preset = 0
+offset_top = 275.0
+offset_bottom = 275.0
+
+[node name="BackgroundAvatar00" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1395846122 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_5erhm")
+layout_mode = 0
+offset_left = 224.0
+offset_top = 1175.0
+offset_right = 1248.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar01" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1948391606 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_r4jpo")
+layout_mode = 0
+offset_left = 510.0
+offset_top = 1175.0
+offset_right = 1534.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar02" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=2017699155 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_5kfpy")
+layout_mode = 0
+offset_left = 796.0
+offset_top = 1175.0
+offset_right = 1820.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar03" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1326801274 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_sd5cl")
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 1175.0
+offset_right = 2076.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar04" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1317254615 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_0klbf")
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 1175.0
+offset_right = 2292.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar05" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=369195006 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_jyrlk")
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 1175.0
+offset_right = 2524.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar06" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=2008243823 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_drqvu")
+layout_mode = 0
+offset_left = 1708.0
+offset_top = 1175.0
+offset_right = 2732.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar07" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1523303629 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_dbowr")
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 1175.0
+offset_right = 2948.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar08" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1655900279 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_7yjvp")
+layout_mode = 0
+offset_left = 2144.0
+offset_top = 1175.0
+offset_right = 3168.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar09" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar00-09" unique_id=1003973555 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_uapsn")
+layout_mode = 0
+offset_left = 2380.0
+offset_top = 1175.0
+offset_right = 3404.0
+offset_bottom = 2199.0
+
+[node name="Avatar10-19" type="Control" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=1552337927]
+visible = false
+anchors_preset = 0
+offset_top = 275.0
+offset_bottom = 275.0
+
+[node name="BackgroundAvatar10" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=1273257974 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_86mdl")
+layout_mode = 0
+offset_left = 224.0
+offset_top = 1175.0
+offset_right = 1248.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar11" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=1978021254 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_r4jpo")
+layout_mode = 0
+offset_left = 510.0
+offset_top = 1175.0
+offset_right = 1534.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar12" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=1971295754 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_8pwbw")
+layout_mode = 0
+offset_left = 796.0
+offset_top = 1175.0
+offset_right = 1820.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar13" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=1960077065 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_a71v7")
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 1175.0
+offset_right = 2076.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar14" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=1308572694 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_uotug")
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 1175.0
+offset_right = 2292.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar15" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=448562803 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_kgp6b")
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 1175.0
+offset_right = 2524.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar16" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=470445488 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_mmwii")
+layout_mode = 0
+offset_left = 1708.0
+offset_top = 1175.0
+offset_right = 2732.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar17" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=963948645 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_3l75k")
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 1175.0
+offset_right = 2948.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar18" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=1424854994 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_bifa8")
+layout_mode = 0
+offset_left = 2144.0
+offset_top = 1175.0
+offset_right = 3168.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar19" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar10-19" unique_id=468384290 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_lciu5")
+layout_mode = 0
+offset_left = 2380.0
+offset_top = 1175.0
+offset_right = 3404.0
+offset_bottom = 2199.0
+
+[node name="Avatar20-29" type="Control" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=990274306]
+visible = false
+anchors_preset = 0
+offset_top = 275.0
+offset_bottom = 275.0
+
+[node name="BackgroundAvatar20" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=868570472 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_7p5cp")
+layout_mode = 0
+offset_left = 224.0
+offset_top = 1175.0
+offset_right = 1248.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar21" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=436581934 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_x2qkd")
+layout_mode = 0
+offset_left = 510.0
+offset_top = 1175.0
+offset_right = 1534.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar22" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=197240264 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_wctlf")
+layout_mode = 0
+offset_left = 796.0
+offset_top = 1175.0
+offset_right = 1820.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar23" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=234742753 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_ytcla")
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 1175.0
+offset_right = 2076.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar24" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=635319050 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_mh0yg")
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 1175.0
+offset_right = 2292.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar25" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=1586953877 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_w3wac")
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 1175.0
+offset_right = 2524.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar26" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=1567444758 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_d8v4o")
+layout_mode = 0
+offset_left = 1708.0
+offset_top = 1175.0
+offset_right = 2732.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar27" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=858609105 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_g21tj")
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 1175.0
+offset_right = 2948.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar28" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=1222963689 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_a56cv")
+layout_mode = 0
+offset_left = 2144.0
+offset_top = 1175.0
+offset_right = 3168.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar29" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar20-29" unique_id=811005078 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_wvo24")
+layout_mode = 0
+offset_left = 2380.0
+offset_top = 1175.0
+offset_right = 3404.0
+offset_bottom = 2199.0
+
+[node name="Avatar30-39" type="Control" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=618672284]
+visible = false
+anchors_preset = 0
+offset_top = 275.0
+offset_bottom = 275.0
+
+[node name="BackgroundAvatar30" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=1460237546 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_shs5r")
+layout_mode = 0
+offset_left = 224.0
+offset_top = 1175.0
+offset_right = 1248.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar31" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=34238739 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_kpe0k")
+layout_mode = 0
+offset_left = 510.0
+offset_top = 1175.0
+offset_right = 1534.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar32" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=100514197 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_yh3cc")
+layout_mode = 0
+offset_left = 796.0
+offset_top = 1175.0
+offset_right = 1820.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar33" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=532961625 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_4xbew")
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 1175.0
+offset_right = 2076.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar34" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=1829963663 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_8yq4a")
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 1175.0
+offset_right = 2292.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar35" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=973844521 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_iy0gs")
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 1175.0
+offset_right = 2524.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar36" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=1580430682 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_g64ef")
+layout_mode = 0
+offset_left = 1708.0
+offset_top = 1175.0
+offset_right = 2732.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar37" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=1115352576 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_ws3vl")
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 1175.0
+offset_right = 2948.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar38" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=1182913101 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_2nkhv")
+layout_mode = 0
+offset_left = 2144.0
+offset_top = 1175.0
+offset_right = 3168.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar39" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar30-39" unique_id=1641943254 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_tcnnk")
+layout_mode = 0
+offset_left = 2380.0
+offset_top = 1175.0
+offset_right = 3404.0
+offset_bottom = 2199.0
+
+[node name="Avatar40-49" type="Control" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=1719316892]
+visible = false
+anchors_preset = 0
+offset_top = 275.0
+offset_bottom = 275.0
+
+[node name="BackgroundAvatar40" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1530141551 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_8t55s")
+layout_mode = 0
+offset_left = 224.0
+offset_top = 1175.0
+offset_right = 1248.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar41" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1525469639 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_s8dhm")
+layout_mode = 0
+offset_left = 510.0
+offset_top = 1175.0
+offset_right = 1534.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar42" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=508586462 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_v3m11")
+layout_mode = 0
+offset_left = 796.0
+offset_top = 1175.0
+offset_right = 1820.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar43" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=136937096 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_2wkwy")
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 1175.0
+offset_right = 2076.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar44" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=966872272 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_smfks")
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 1175.0
+offset_right = 2292.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar45" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1460067621 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_yf3yg")
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 1175.0
+offset_right = 2524.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar46" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1609824162 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_ubg6j")
+layout_mode = 0
+offset_left = 1708.0
+offset_top = 1175.0
+offset_right = 2732.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar47" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1065478835 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_65p0y")
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 1175.0
+offset_right = 2948.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar48" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1460407386 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_jfs0i")
+layout_mode = 0
+offset_left = 2144.0
+offset_top = 1175.0
+offset_right = 3168.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar49" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar40-49" unique_id=1531650932 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_1omdk")
+layout_mode = 0
+offset_left = 2380.0
+offset_top = 1175.0
+offset_right = 3404.0
+offset_bottom = 2199.0
+
+[node name="Avatar50-59" type="Control" parent="RootControl/Background/Backgrounds/BackgroundAvatars" unique_id=2118643640]
+visible = false
+anchors_preset = 0
+offset_top = 275.0
+offset_bottom = 275.0
+
+[node name="BackgroundAvatar50" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=541345964 instance=ExtResource("3_3x5dk")]
+material = SubResource("ShaderMaterial_aed10")
+layout_mode = 0
+offset_left = 224.0
+offset_top = 1175.0
+offset_right = 1248.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar51" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=1719620321 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_r4jpo")
+layout_mode = 0
+offset_left = 510.0
+offset_top = 1175.0
+offset_right = 1534.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar52" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=1539415498 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_8pwbw")
+layout_mode = 0
+offset_left = 796.0
+offset_top = 1175.0
+offset_right = 1820.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar53" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=526100947 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_a71v7")
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 1175.0
+offset_right = 2076.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar54" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=129591924 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_uotug")
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 1175.0
+offset_right = 2292.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar55" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=469312995 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_kgp6b")
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 1175.0
+offset_right = 2524.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar56" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=593440652 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_mmwii")
+layout_mode = 0
+offset_left = 1708.0
+offset_top = 1175.0
+offset_right = 2732.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar57" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=1339535969 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_3l75k")
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 1175.0
+offset_right = 2948.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar58" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=398927170 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_bifa8")
+layout_mode = 0
+offset_left = 2144.0
+offset_top = 1175.0
+offset_right = 3168.0
+offset_bottom = 2199.0
+
+[node name="BackgroundAvatar59" parent="RootControl/Background/Backgrounds/BackgroundAvatars/Avatar50-59" unique_id=250555990 instance=ExtResource("3_3x5dk")]
+visible = false
+material = SubResource("ShaderMaterial_lciu5")
+layout_mode = 0
+offset_left = 2380.0
+offset_top = 1175.0
+offset_right = 3404.0
+offset_bottom = 2199.0
+
+[node name="BackgroundConfetti" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=967833472]
+material = SubResource("ShaderMaterial_j60v6")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+script = ExtResource("18_8gud7")
 
 [node name="BackgroundSnow" type="ColorRect" parent="RootControl/Background/Backgrounds" unique_id=1770013523]
 material = SubResource("ShaderMaterial_p0f6j")
@@ -300,7 +2256,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RainbowExtenderLeft" type="Control" parent="RootControl/Background/Rainbows" unique_id=1064391849 node_paths=PackedStringArray("ColorRectBorders", "ColorRectRainbows")]
+[node name="RainbowExtenderLeft" type="Control" parent="RootControl/Background/Rainbows" unique_id=1064391849 node_paths=PackedStringArray("ColorRectBorders", "ColorRectBurns", "ColorRectRainbows")]
 anchors_preset = 0
 offset_left = 1536.0
 offset_top = -512.0
@@ -309,18 +2265,29 @@ offset_bottom = -512.0
 rotation = 0.785398
 script = ExtResource("3_pkstr")
 ColorRectBorders = [NodePath("Stripe_White_Top"), NodePath("Stripe_White_Bottom")]
+ColorRectBurns = [NodePath("Stripe_White_Top_Burn"), NodePath("Stripe_White_Bottom_Burn")]
 ColorRectRainbows = [NodePath("Stripe_Red"), NodePath("Stripe_Yellow"), NodePath("Stripe_Green"), NodePath("Stripe_Cyan"), NodePath("Stripe_Blue"), NodePath("Stripe_Magenta")]
 
+[node name="Stripe_White_Top_Burn" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=931156605 groups=["BorderBurnUp"]]
+material = ExtResource("19_lutk6")
+layout_mode = 0
+offset_left = 1082.0
+offset_right = 3898.0
+offset_bottom = 1112.0
+rotation = 1.5707964
+script = ExtResource("19_jcb5f")
+
 [node name="Stripe_White_Top" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=230230091]
-material = SubResource("ShaderMaterial_7jueq")
+material = SubResource("ShaderMaterial_b1cm5")
 layout_mode = 0
 offset_left = 16.0
 offset_right = 2832.0
 offset_bottom = 16.0
 rotation = 1.5708
+script = ExtResource("19_jcb5f")
 
 [node name="Stripe_Red" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=315454265]
-material = SubResource("ShaderMaterial_ibhqp")
+material = SubResource("ShaderMaterial_mw7u5")
 layout_mode = 0
 offset_left = 80.0
 offset_right = 2896.0
@@ -329,151 +2296,185 @@ rotation = 1.5708
 script = ExtResource("5_4r38b")
 
 [node name="Stripe_Yellow" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=1985046085]
-material = SubResource("ShaderMaterial_1126b")
+material = SubResource("ShaderMaterial_n3fnb")
 layout_mode = 0
 offset_left = 144.0
 offset_right = 2960.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 1
+ColorIndex = 1
 
 [node name="Stripe_Green" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=2070838706]
-material = SubResource("ShaderMaterial_3baif")
+material = SubResource("ShaderMaterial_lex1t")
 layout_mode = 0
 offset_left = 208.0
 offset_right = 3024.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 2
+ColorIndex = 2
 
 [node name="Stripe_Cyan" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=2044945413]
-material = SubResource("ShaderMaterial_v51mv")
+material = SubResource("ShaderMaterial_h21eh")
 layout_mode = 0
 offset_left = 272.0
 offset_right = 3088.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 3
+ColorIndex = 3
 
 [node name="Stripe_Blue" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=1737094914]
-material = SubResource("ShaderMaterial_c5uns")
+material = SubResource("ShaderMaterial_3d1os")
 layout_mode = 0
 offset_left = 336.0
 offset_right = 3152.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 4
+ColorIndex = 4
 
 [node name="Stripe_Magenta" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=78155644]
-material = SubResource("ShaderMaterial_6oauf")
+material = SubResource("ShaderMaterial_wy6a4")
 layout_mode = 0
 offset_left = 400.0
 offset_right = 3216.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 5
+ColorIndex = 5
 
 [node name="Stripe_White_Bottom" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=1672998403]
-material = SubResource("ShaderMaterial_mvpnp")
+material = SubResource("ShaderMaterial_b1cm5")
 layout_mode = 0
 offset_left = 416.0
 offset_right = 3232.0
 offset_bottom = 16.0
 rotation = 1.5708
+script = ExtResource("19_jcb5f")
 
-[node name="RainbowExtenderCenter" type="Control" parent="RootControl/Background/Rainbows" unique_id=341163891 node_paths=PackedStringArray("ColorRectBorders", "ColorRectRainbows")]
+[node name="Stripe_White_Bottom_Burn" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderLeft" unique_id=1581700558 groups=["BorderBurnUp"]]
+material = ExtResource("19_lutk6")
+layout_mode = 0
+offset_left = -666.0
+offset_right = 2150.0
+offset_bottom = 1112.0
+rotation = 1.5707964
+scale = Vector2(1, -1)
+script = ExtResource("19_jcb5f")
+
+[node name="RainbowExtenderCenter" type="Control" parent="RootControl/Background/Rainbows" unique_id=341163891 node_paths=PackedStringArray("ColorRectBorders", "ColorRectBurns", "ColorRectRainbows")]
+visible = false
 anchors_preset = 0
 offset_left = 3731.0
 offset_top = -1025.0
 offset_right = 3731.0
 offset_bottom = -1025.0
 rotation = 0.785398
-scale = Vector2(1, 2)
 script = ExtResource("3_pkstr")
 ColorRectBorders = [NodePath("Stripe_White_Top"), NodePath("Stripe_White_Bottom")]
+ColorRectBurns = [NodePath("Stripe_White_Top_Burn"), NodePath("Stripe_White_Bottom_Burn")]
 ColorRectRainbows = [NodePath("Stripe_Red"), NodePath("Stripe_Yellow"), NodePath("Stripe_Green"), NodePath("Stripe_Cyan"), NodePath("Stripe_Blue"), NodePath("Stripe_Magenta")]
+
+[node name="Stripe_White_Top_Burn" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=1162980207 groups=["BorderBurnUp"]]
+material = ExtResource("19_lutk6")
+layout_mode = 0
+offset_left = 1082.0
+offset_right = 6714.0
+offset_bottom = 1112.0
+rotation = 1.5707964
+script = ExtResource("19_jcb5f")
 
 [node name="Stripe_White_Top" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=426229551]
 material = SubResource("ShaderMaterial_7jueq")
 layout_mode = 0
 offset_left = 16.0
-offset_right = 2832.0
+offset_right = 5648.0
 offset_bottom = 16.0
 rotation = 1.5708
+script = ExtResource("19_jcb5f")
 
 [node name="Stripe_Red" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=563140337]
-material = SubResource("ShaderMaterial_ibhqp")
+material = SubResource("ShaderMaterial_8kq02")
 layout_mode = 0
 offset_left = 80.0
-offset_right = 2896.0
+offset_right = 5712.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
 
 [node name="Stripe_Yellow" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=2102925569]
-material = SubResource("ShaderMaterial_1126b")
+material = SubResource("ShaderMaterial_k7hlt")
 layout_mode = 0
 offset_left = 144.0
-offset_right = 2960.0
+offset_right = 5776.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 1
+ColorIndex = 1
 
 [node name="Stripe_Green" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=905023528]
-material = SubResource("ShaderMaterial_3baif")
+material = SubResource("ShaderMaterial_03yed")
 layout_mode = 0
 offset_left = 208.0
-offset_right = 3024.0
+offset_right = 5840.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 2
+ColorIndex = 2
 
 [node name="Stripe_Cyan" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=1247743249]
-material = SubResource("ShaderMaterial_v51mv")
+material = SubResource("ShaderMaterial_jxmwp")
 layout_mode = 0
 offset_left = 272.0
-offset_right = 3088.0
+offset_right = 5904.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 3
+ColorIndex = 3
 
 [node name="Stripe_Blue" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=426278150]
-material = SubResource("ShaderMaterial_c5uns")
+material = SubResource("ShaderMaterial_7e4xp")
 layout_mode = 0
 offset_left = 336.0
-offset_right = 3152.0
+offset_right = 5968.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 4
+ColorIndex = 4
 
 [node name="Stripe_Magenta" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=665905917]
-material = SubResource("ShaderMaterial_6oauf")
+material = SubResource("ShaderMaterial_8vg18")
 layout_mode = 0
 offset_left = 400.0
-offset_right = 3216.0
+offset_right = 6032.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 5
+ColorIndex = 5
 
 [node name="Stripe_White_Bottom" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=1945564373]
 material = SubResource("ShaderMaterial_mvpnp")
 layout_mode = 0
 offset_left = 416.0
-offset_right = 3232.0
+offset_right = 6048.0
 offset_bottom = 16.0
 rotation = 1.5708
+script = ExtResource("19_jcb5f")
 
-[node name="RainbowExtenderRight" type="Control" parent="RootControl/Background/Rainbows" unique_id=934489536 node_paths=PackedStringArray("ColorRectBorders", "ColorRectRainbows")]
+[node name="Stripe_White_Bottom_Burn" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderCenter" unique_id=395220211 groups=["BorderBurnUp"]]
+material = ExtResource("19_lutk6")
+layout_mode = 0
+offset_left = -666.0
+offset_right = 4966.0
+offset_bottom = 1112.0
+rotation = 1.5707964
+scale = Vector2(1, -1)
+script = ExtResource("19_jcb5f")
+
+[node name="RainbowExtenderRight" type="Control" parent="RootControl/Background/Rainbows" unique_id=934489536 node_paths=PackedStringArray("ColorRectBorders", "ColorRectBurns", "ColorRectRainbows")]
+visible = false
 anchors_preset = 0
 offset_left = 4000.0
 offset_top = 388.0
@@ -482,7 +2483,17 @@ offset_bottom = 388.0
 rotation = 0.785398
 script = ExtResource("3_pkstr")
 ColorRectBorders = [NodePath("Stripe_White_Top"), NodePath("Stripe_White_Bottom")]
+ColorRectBurns = [NodePath("Stripe_White_Top_Burn"), NodePath("Stripe_White_Bottom_Burn")]
 ColorRectRainbows = [NodePath("Stripe_Red"), NodePath("Stripe_Yellow"), NodePath("Stripe_Green"), NodePath("Stripe_Cyan"), NodePath("Stripe_Blue"), NodePath("Stripe_Magenta")]
+
+[node name="Stripe_White_Top_Burn" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=2057607758 groups=["BorderBurnUp"]]
+material = ExtResource("19_lutk6")
+layout_mode = 0
+offset_left = 1082.0
+offset_right = 3898.0
+offset_bottom = 1112.0
+rotation = 1.5707964
+script = ExtResource("19_jcb5f")
 
 [node name="Stripe_White_Top" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=1359541491]
 material = SubResource("ShaderMaterial_7jueq")
@@ -491,6 +2502,7 @@ offset_left = 16.0
 offset_right = 2832.0
 offset_bottom = 16.0
 rotation = 1.5708
+script = ExtResource("19_jcb5f")
 
 [node name="Stripe_Red" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=1071135006]
 material = SubResource("ShaderMaterial_ibhqp")
@@ -509,7 +2521,7 @@ offset_right = 2960.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 1
+ColorIndex = 1
 
 [node name="Stripe_Green" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=2026506352]
 material = SubResource("ShaderMaterial_3baif")
@@ -519,7 +2531,7 @@ offset_right = 3024.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 2
+ColorIndex = 2
 
 [node name="Stripe_Cyan" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=1858906231]
 material = SubResource("ShaderMaterial_v51mv")
@@ -529,7 +2541,7 @@ offset_right = 3088.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 3
+ColorIndex = 3
 
 [node name="Stripe_Blue" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=1767273062]
 material = SubResource("ShaderMaterial_c5uns")
@@ -539,7 +2551,7 @@ offset_right = 3152.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 4
+ColorIndex = 4
 
 [node name="Stripe_Magenta" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=2104984311]
 material = SubResource("ShaderMaterial_6oauf")
@@ -549,7 +2561,7 @@ offset_right = 3216.0
 offset_bottom = 64.0
 rotation = 1.5708
 script = ExtResource("5_4r38b")
-RainbowColorIndex = 5
+ColorIndex = 5
 
 [node name="Stripe_White_Bottom" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=846896671]
 material = SubResource("ShaderMaterial_mvpnp")
@@ -558,11 +2570,20 @@ offset_left = 416.0
 offset_right = 3232.0
 offset_bottom = 16.0
 rotation = 1.5708
+script = ExtResource("19_jcb5f")
+
+[node name="Stripe_White_Bottom_Burn" type="ColorRect" parent="RootControl/Background/Rainbows/RainbowExtenderRight" unique_id=2138610761 groups=["BorderBurnUp"]]
+material = ExtResource("19_lutk6")
+layout_mode = 0
+offset_left = -666.0
+offset_right = 2150.0
+offset_bottom = 1112.0
+rotation = 1.5707964
+scale = Vector2(1, -1)
+script = ExtResource("19_jcb5f")
 
 [node name="LayoutDefault" type="Control" parent="RootControl" unique_id=264390359]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Interaction" type="Control" parent="RootControl/LayoutDefault" unique_id=383201011]
 anchors_preset = 0
@@ -585,6 +2606,7 @@ offset_left = -16.0
 offset_top = -16.0
 offset_right = 1200.0
 offset_bottom = 496.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderChatBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat" unique_id=1856260383 groups=["BorderBurnDown"]]
@@ -593,6 +2615,7 @@ layout_mode = 0
 offset_top = 15.0
 offset_right = 1216.0
 offset_bottom = 527.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderChatBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat" unique_id=316093192 groups=["BorderBurnLeft"]]
@@ -601,6 +2624,7 @@ layout_mode = 0
 offset_left = -31.0
 offset_right = 1201.0
 offset_bottom = 512.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderChatBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat" unique_id=1105231861 groups=["BorderBurnRight"]]
@@ -609,6 +2633,7 @@ layout_mode = 0
 offset_left = 15.0
 offset_right = 1247.0
 offset_bottom = 512.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderChatBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat/BorderChat" unique_id=1395802778 groups=["BorderBurnUp"]]
@@ -617,6 +2642,7 @@ layout_mode = 0
 offset_top = -15.0
 offset_right = 1216.0
 offset_bottom = 497.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="Background" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Chat" unique_id=1237288206]
@@ -647,6 +2673,7 @@ offset_left = -16.0
 offset_top = -16.0
 offset_right = 1008.0
 offset_bottom = 496.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier" unique_id=1968109724 groups=["BorderBurnDown"]]
@@ -654,14 +2681,16 @@ material = ExtResource("25_2xh08")
 layout_mode = 0
 offset_right = 1024.0
 offset_bottom = 528.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier" unique_id=1391808908 groups=["BorderBurnLeft"]]
 material = ExtResource("26_0b5xl")
 layout_mode = 0
 offset_left = -32.0
-offset_right = 1008.0
+offset_right = 1024.0
 offset_bottom = 512.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier" unique_id=271448097 groups=["BorderBurnRight"]]
@@ -669,6 +2698,7 @@ material = ExtResource("27_qm20r")
 layout_mode = 0
 offset_right = 1056.0
 offset_bottom = 512.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderNotifierBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier/BorderNotifier" unique_id=2061144114 groups=["BorderBurnUp"]]
@@ -677,6 +2707,7 @@ layout_mode = 0
 offset_top = -16.0
 offset_right = 1024.0
 offset_bottom = 512.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="Background" type="ColorRect" parent="RootControl/LayoutDefault/Interaction/Notifier" unique_id=136281621]
@@ -1087,16 +3118,18 @@ offset_bottom = 40.0
 material = SubResource("ShaderMaterial_rss2l")
 layout_mode = 0
 offset_left = 2544.0
-offset_top = 1136.0
+offset_top = 1128.0
 offset_right = 3728.0
 offset_bottom = 2048.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1BurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1" unique_id=547244417 groups=["BorderBurnDown"]]
 material = ExtResource("8_62sso")
 layout_mode = 0
 offset_right = 1184.0
-offset_bottom = 944.0
+offset_bottom = 952.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1BurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1" unique_id=2119239536 groups=["BorderBurnLeft"]]
@@ -1104,14 +3137,16 @@ material = ExtResource("9_niean")
 layout_mode = 0
 offset_left = -32.0
 offset_right = 1184.0
-offset_bottom = 912.0
+offset_bottom = 920.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1BurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1" unique_id=1829321119 groups=["BorderBurnRight"]]
 material = ExtResource("10_tjdmb")
 layout_mode = 0
 offset_right = 1216.0
-offset_bottom = 912.0
+offset_bottom = 920.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1BurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderWebcam1" unique_id=716377587 groups=["BorderBurnUp"]]
@@ -1119,7 +3154,8 @@ material = ExtResource("11_xepxj")
 layout_mode = 0
 offset_top = -32.0
 offset_right = 1184.0
-offset_bottom = 912.0
+offset_bottom = 920.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCapture" type="ColorRect" parent="RootControl/LayoutDefault/Hideable" unique_id=2068418787]
@@ -1129,6 +3165,7 @@ offset_left = 112.0
 offset_top = 112.0
 offset_right = 2448.0
 offset_bottom = 1440.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnDown" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture" unique_id=1432566390 groups=["BorderBurnDown"]]
@@ -1137,6 +3174,7 @@ layout_mode = 0
 offset_top = 32.0
 offset_right = 2336.0
 offset_bottom = 1360.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture" unique_id=1018022501 groups=["BorderBurnLeft"]]
@@ -1145,14 +3183,17 @@ layout_mode = 0
 offset_left = -32.0
 offset_right = 2304.0
 offset_bottom = 1328.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnRight" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture" unique_id=349665118 groups=["BorderBurnRight"]]
 material = ExtResource("10_tjdmb")
 layout_mode = 0
-offset_left = 32.0
-offset_right = 2368.0
-offset_bottom = 1328.0
+offset_left = 36.0
+offset_top = -2.0
+offset_right = 2372.0
+offset_bottom = 1326.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnUp" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/BorderScreenCapture" unique_id=1605872578 groups=["BorderBurnUp"]]
@@ -1161,6 +3202,7 @@ layout_mode = 0
 offset_top = -32.0
 offset_right = 2336.0
 offset_bottom = 1296.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="MockUp" type="Control" parent="RootControl/LayoutDefault/Hideable" unique_id=102550338]
@@ -1171,7 +3213,7 @@ offset_bottom = 40.0
 [node name="Webcam1" type="ColorRect" parent="RootControl/LayoutDefault/Hideable/MockUp" unique_id=1591532844]
 layout_mode = 0
 offset_left = 2560.0
-offset_top = 1152.0
+offset_top = 1144.0
 offset_right = 3712.0
 offset_bottom = 2032.0
 color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -1219,14 +3261,16 @@ layout_mode = 0
 offset_left = 2544.0
 offset_top = 112.0
 offset_right = 3728.0
-offset_bottom = 1024.0
+offset_bottom = 1032.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam0BurnDown" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0" unique_id=2052031551 groups=["BorderBurnDown"]]
 material = ExtResource("8_62sso")
 layout_mode = 0
 offset_right = 1184.0
-offset_bottom = 944.0
+offset_bottom = 952.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam0BurnLeft" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0" unique_id=1234511440 groups=["BorderBurnLeft"]]
@@ -1234,14 +3278,16 @@ material = ExtResource("9_niean")
 layout_mode = 0
 offset_left = -32.0
 offset_right = 1184.0
-offset_bottom = 912.0
+offset_bottom = 920.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0" unique_id=332761806 groups=["BorderBurnRight"]]
 material = ExtResource("10_tjdmb")
 layout_mode = 0
 offset_right = 1216.0
-offset_bottom = 912.0
+offset_bottom = 920.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutDefault/BorderWebcam0" unique_id=996345249 groups=["BorderBurnUp"]]
@@ -1249,7 +3295,8 @@ material = ExtResource("11_xepxj")
 layout_mode = 0
 offset_top = -32.0
 offset_right = 1184.0
-offset_bottom = 912.0
+offset_bottom = 920.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="MockUp" type="Control" parent="RootControl/LayoutDefault" unique_id=572214552]
@@ -1262,7 +3309,7 @@ layout_mode = 0
 offset_left = 2560.0
 offset_top = 128.0
 offset_right = 3712.0
-offset_bottom = 1008.0
+offset_bottom = 1016.0
 color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutDefault/MockUp/Webcam0" unique_id=511368954]
@@ -1277,6 +3324,570 @@ text = "[color=#ffffff][font_size=48]
 
 
 [center]WEBCAM 0"
+
+[node name="LayoutAvatars" type="Control" parent="RootControl" unique_id=48544266]
+visible = false
+anchors_preset = 0
+
+[node name="Nameplate" type="Control" parent="RootControl/LayoutAvatars" unique_id=1426515716]
+anchors_preset = 0
+offset_left = 2560.0
+offset_top = 1144.0
+offset_right = 2560.0
+offset_bottom = 1144.0
+
+[node name="BorderNameplate" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate" unique_id=274377359]
+material = SubResource("ShaderMaterial_w5agf")
+layout_mode = 0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 1168.0
+offset_bottom = 296.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderNameplateBurnDown" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/BorderNameplate" unique_id=2011430002 groups=["BorderBurnUp"]]
+material = SubResource("ShaderMaterial_28rll")
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 344.0
+offset_right = 2368.0
+offset_bottom = 688.0
+rotation = 3.1415927
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderNameplateBurnLeft" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/BorderNameplate" unique_id=483204160 groups=["BorderBurnLeft"]]
+material = SubResource("ShaderMaterial_kdko4")
+layout_mode = 0
+offset_left = -32.0
+offset_right = 1184.0
+offset_bottom = 312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderNameplateBurnRight" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/BorderNameplate" unique_id=1632582952 groups=["BorderBurnRight"]]
+material = SubResource("ShaderMaterial_lhoom")
+layout_mode = 0
+offset_right = 1216.0
+offset_bottom = 312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderNameplateBurnUp" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/BorderNameplate" unique_id=1169220372 groups=["BorderBurnUp"]]
+material = SubResource("ShaderMaterial_uupol")
+layout_mode = 0
+offset_top = -32.0
+offset_right = 1184.0
+offset_bottom = 312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="Background" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate" unique_id=1607994321]
+material = SubResource("ShaderMaterial_2gewe")
+layout_mode = 0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 1153.0
+offset_bottom = 282.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="Nameplate" type="Control" parent="RootControl/LayoutAvatars/Nameplate" unique_id=152279707]
+anchors_preset = 0
+offset_left = 42.0
+offset_top = 32.0
+offset_right = 950.0
+offset_bottom = 116.0
+script = ExtResource("26_525sr")
+
+[node name="S" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1329007666]
+clip_contents = false
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]S
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="M" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1191374481]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 108.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]M
+"
+fit_content = true
+
+[node name="O" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1067275926]
+layout_mode = 0
+offset_left = 108.0
+offset_right = 158.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]O
+"
+fit_content = true
+
+[node name="O2" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=809795795]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 208.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]O
+"
+fit_content = true
+
+[node name="T" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1356057380]
+layout_mode = 0
+offset_left = 208.0
+offset_right = 253.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]T
+"
+fit_content = true
+
+[node name="H" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=216844131]
+layout_mode = 0
+offset_left = 253.0
+offset_right = 304.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]H
+"
+fit_content = true
+
+[node name="D" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=665499962]
+layout_mode = 0
+offset_left = 304.0
+offset_right = 351.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]D
+"
+fit_content = true
+
+[node name="A" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1333816572]
+layout_mode = 0
+offset_left = 351.0
+offset_right = 400.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]A
+"
+fit_content = true
+
+[node name="G" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1365241688]
+layout_mode = 0
+offset_left = 400.0
+offset_right = 449.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]G
+"
+fit_content = true
+
+[node name="G2" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1521951326]
+layout_mode = 0
+offset_left = 449.0
+offset_right = 498.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]G
+"
+fit_content = true
+
+[node name="E" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=2098638518]
+layout_mode = 0
+offset_left = 498.0
+offset_right = 538.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]E
+"
+fit_content = true
+
+[node name="R" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/Nameplate" unique_id=1533945344]
+layout_mode = 0
+offset_left = 538.0
+offset_right = 585.0
+offset_bottom = 85.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=72][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]R
+"
+fit_content = true
+
+[node name="NameplateMessage" type="Control" parent="RootControl/LayoutAvatars/Nameplate" unique_id=1865872341 node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 138.0
+offset_top = 198.0
+offset_right = 138.0
+offset_bottom = 198.0
+script = ExtResource("107_24xeb")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage" unique_id=1688075156]
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage" unique_id=344036911]
+material = ExtResource("36_64mo1")
+layout_mode = 0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(24, 24)
+script = ExtResource("33_tfyti")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage" unique_id=1426203581]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage/SubViewportContainer" unique_id=1122924569]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(480, 34)
+render_target_update_mode = 0
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage/SubViewportContainer/SubViewport" unique_id=942330882]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage/SubViewportContainer/SubViewport" unique_id=1378162669]
+visible = false
+clip_contents = false
+offset_right = 480.0
+offset_bottom = 34.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Thank you for hanging out here 😊"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="NameplateLatestFollower" type="Control" parent="RootControl/LayoutAvatars/Nameplate" unique_id=1107970602 node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 720.0
+offset_top = 102.0
+offset_right = 720.0
+offset_bottom = 102.0
+script = ExtResource("32_usuop")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+ScrollDistance = 390.0
+SendDatabaseUpdate = false
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower" unique_id=1062760016]
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower" unique_id=638387347]
+visible = false
+material = ExtResource("32_ifwfs")
+layout_mode = 0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+pivot_offset = Vector2(24, 24)
+script = ExtResource("33_tfyti")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower" unique_id=2040123811]
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower/SubViewportContainer" unique_id=1766430511]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(390, 34)
+render_target_update_mode = 0
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower/SubViewportContainer/SubViewport" unique_id=1805011988]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 390.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower/SubViewportContainer/SubViewport" unique_id=1686132150]
+visible = false
+clip_contents = false
+offset_right = 390.0
+offset_bottom = 34.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=28
+][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Follower"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="NameplateLatestSubscriber" type="Control" parent="RootControl/LayoutAvatars/Nameplate" unique_id=1063910769 node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 720.0
+offset_top = 150.0
+offset_right = 720.0
+offset_bottom = 150.0
+script = ExtResource("35_ifwfs")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+ScrollDistance = 390.0
+SendDatabaseUpdate = false
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber" unique_id=36758498]
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber" unique_id=183722551]
+visible = false
+material = ExtResource("34_usuop")
+layout_mode = 0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+pivot_offset = Vector2(24, 24)
+script = ExtResource("33_tfyti")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber" unique_id=14963301]
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber/SubViewportContainer" unique_id=1932679065]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(390, 34)
+render_target_update_mode = 0
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber/SubViewportContainer/SubViewport" unique_id=18377081]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 390.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber/SubViewportContainer/SubViewport" unique_id=1272851786]
+visible = false
+clip_contents = false
+offset_right = 390.0
+offset_bottom = 34.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Subscriber"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="NameplateLatestTipper" type="Control" parent="RootControl/LayoutAvatars/Nameplate" unique_id=428978905 node_paths=PackedStringArray("RichTextLabelSampler", "ColorRectIcon", "ControlPivot")]
+anchors_preset = 0
+offset_left = 720.0
+offset_top = 198.0
+offset_right = 720.0
+offset_bottom = 198.0
+script = ExtResource("37_usuop")
+RichTextLabelSampler = NodePath("RichTextLabelSampler")
+ColorRectIcon = NodePath("Icon")
+ControlPivot = NodePath("SubViewportContainer/SubViewport/Pivot")
+ScrollDistance = 390.0
+SendDatabaseUpdate = false
+
+[node name="RichTextLabelSampler" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper" unique_id=1960209172]
+anchors_preset = 0
+script = ExtResource("32_00c1p")
+Letters = Array[PackedScene]([ExtResource("59_3d1os"), ExtResource("60_wy6a4"), ExtResource("61_8kq02"), ExtResource("62_k7hlt"), ExtResource("63_03yed"), ExtResource("64_jxmwp"), ExtResource("65_7e4xp"), ExtResource("66_8vg18"), ExtResource("67_qpxcl"), ExtResource("68_x7gex"), ExtResource("69_ja342"), ExtResource("70_5iaad"), ExtResource("71_oktss"), ExtResource("72_mjpwu"), ExtResource("73_w5agf"), ExtResource("74_28rll"), ExtResource("75_5erhm"), ExtResource("76_kdko4"), ExtResource("77_r4jpo"), ExtResource("78_lhoom"), ExtResource("79_5kfpy"), ExtResource("80_sd5cl"), ExtResource("81_0klbf"), ExtResource("82_jyrlk"), ExtResource("83_drqvu"), ExtResource("84_dbowr"), ExtResource("85_7yjvp"), ExtResource("86_uapsn"), ExtResource("87_86mdl"), ExtResource("88_8pwbw"), ExtResource("89_uupol"), ExtResource("90_a71v7"), ExtResource("91_uotug"), ExtResource("92_kgp6b"), ExtResource("93_mmwii"), ExtResource("94_3l75k"), ExtResource("95_bifa8"), ExtResource("96_lciu5"), ExtResource("97_7p5cp"), ExtResource("98_x2qkd"), ExtResource("99_wctlf"), ExtResource("33_jlwvh"), ExtResource("34_rfl27"), ExtResource("35_b3hb5"), ExtResource("36_24xeb"), ExtResource("37_2ta7e"), ExtResource("38_vnub1"), ExtResource("39_c8jl6"), ExtResource("40_iwrga"), ExtResource("41_d836i"), ExtResource("42_lutk6"), ExtResource("43_uwk53"), ExtResource("44_jcb5f"), ExtResource("45_6q0ck"), ExtResource("46_b1cm5"), ExtResource("47_l7qxh"), ExtResource("48_6fqfh"), ExtResource("49_j60v6"), ExtResource("50_8gud7"), ExtResource("51_fayw6"), ExtResource("52_774et"), ExtResource("53_x002a"), ExtResource("54_3x5dk"), ExtResource("55_mw7u5"), ExtResource("56_n3fnb"), ExtResource("57_lex1t"), ExtResource("58_h21eh"), ExtResource("101_2ta7e"), ExtResource("102_vnub1")])
+
+[node name="Icon" type="ColorRect" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper" unique_id=1173271558]
+visible = false
+material = ExtResource("35_rd3ou")
+layout_mode = 0
+offset_left = -64.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = 40.0
+pivot_offset = Vector2(24, 24)
+script = ExtResource("33_tfyti")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper" unique_id=2034460704]
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 34.0
+
+[node name="SubViewport" type="SubViewport" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper/SubViewportContainer" unique_id=346979295]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(390, 34)
+render_target_update_mode = 0
+
+[node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper/SubViewportContainer/SubViewport" unique_id=920347414]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 390.0
+offset_bottom = 34.0
+
+[node name="Text" type="RichTextLabel" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper/SubViewportContainer/SubViewport" unique_id=1714496678]
+visible = false
+clip_contents = false
+offset_right = 390.0
+offset_bottom = 34.0
+bbcode_enabled = true
+text = "[outline_size=2][outline_color=#202020FF][font_size=28][font=res://Resources/Fonts/Roboto-Black.ttf][color=#F2F2F2FF]Latest Tipper"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="BorderWebcam0" type="ColorRect" parent="RootControl/LayoutAvatars" unique_id=2064435917]
+material = SubResource("ShaderMaterial_qaq0q")
+layout_mode = 0
+offset_left = 2544.0
+offset_top = 112.0
+offset_right = 3728.0
+offset_bottom = 1032.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnDown" type="ColorRect" parent="RootControl/LayoutAvatars/BorderWebcam0" unique_id=1202880674 groups=["BorderBurnDown"]]
+material = ExtResource("8_62sso")
+layout_mode = 0
+offset_right = 1184.0
+offset_bottom = 944.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnLeft" type="ColorRect" parent="RootControl/LayoutAvatars/BorderWebcam0" unique_id=2039733651 groups=["BorderBurnLeft"]]
+material = ExtResource("9_niean")
+layout_mode = 0
+offset_left = -32.0
+offset_right = 1184.0
+offset_bottom = 912.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutAvatars/BorderWebcam0" unique_id=308313952 groups=["BorderBurnRight"]]
+material = ExtResource("10_tjdmb")
+layout_mode = 0
+offset_right = 1216.0
+offset_bottom = 912.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutAvatars/BorderWebcam0" unique_id=175987242 groups=["BorderBurnUp"]]
+material = ExtResource("11_xepxj")
+layout_mode = 0
+offset_top = -32.0
+offset_right = 1184.0
+offset_bottom = 912.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderScreenCapture" type="ColorRect" parent="RootControl/LayoutAvatars" unique_id=1434441135]
+material = SubResource("ShaderMaterial_28i0m")
+layout_mode = 0
+offset_left = 112.0
+offset_top = 112.0
+offset_right = 2448.0
+offset_bottom = 1440.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderScreenCaptureBurnDown" type="ColorRect" parent="RootControl/LayoutAvatars/BorderScreenCapture" unique_id=1629453427 groups=["BorderBurnDown"]]
+material = ExtResource("8_62sso")
+layout_mode = 0
+offset_top = 32.0
+offset_right = 2336.0
+offset_bottom = 1360.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderScreenCaptureBurnLeft" type="ColorRect" parent="RootControl/LayoutAvatars/BorderScreenCapture" unique_id=457538257 groups=["BorderBurnLeft"]]
+material = ExtResource("9_niean")
+layout_mode = 0
+offset_left = -32.0
+offset_right = 2304.0
+offset_bottom = 1328.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderScreenCaptureBurnRight" type="ColorRect" parent="RootControl/LayoutAvatars/BorderScreenCapture" unique_id=757004609 groups=["BorderBurnRight"]]
+material = ExtResource("10_tjdmb")
+layout_mode = 0
+offset_left = 36.0
+offset_top = -2.0
+offset_right = 2372.0
+offset_bottom = 1326.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderScreenCaptureBurnUp" type="ColorRect" parent="RootControl/LayoutAvatars/BorderScreenCapture" unique_id=1784386367 groups=["BorderBurnUp"]]
+material = ExtResource("11_xepxj")
+layout_mode = 0
+offset_top = -32.0
+offset_right = 2336.0
+offset_bottom = 1296.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="MockUp" type="Control" parent="RootControl/LayoutAvatars" unique_id=484546126]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Webcam0" type="ColorRect" parent="RootControl/LayoutAvatars/MockUp" unique_id=94720771]
+layout_mode = 0
+offset_left = 2560.0
+offset_top = 128.0
+offset_right = 3712.0
+offset_bottom = 1016.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutAvatars/MockUp/Webcam0" unique_id=1479910494]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 880.0
+bbcode_enabled = true
+text = "[color=#ffffff][font_size=48]
+
+
+
+
+
+[center]WEBCAM 0"
+
+[node name="ScreenCapture" type="ColorRect" parent="RootControl/LayoutAvatars/MockUp" unique_id=1009815773]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 2432.0
+offset_bottom = 1424.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutAvatars/MockUp/ScreenCapture" unique_id=866820594]
+layout_mode = 0
+offset_right = 2304.0
+offset_bottom = 1296.0
+bbcode_enabled = true
+text = "[color=#ffffff][font_size=48]
+
+
+
+
+
+
+
+
+[center]SCREEN CAPTURE"
 
 [node name="LayoutCode" type="Control" parent="RootControl" unique_id=35006103]
 visible = false
@@ -1295,6 +3906,7 @@ layout_mode = 0
 offset_top = 1504.0
 offset_right = 868.0
 offset_bottom = 2160.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderWebcam0" unique_id=1702649446 groups=["BorderBurnRight"]]
@@ -1303,6 +3915,7 @@ layout_mode = 0
 offset_top = 16.0
 offset_right = 900.0
 offset_bottom = 656.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderWebcam0" unique_id=668235920 groups=["BorderBurnUp"]]
@@ -1311,6 +3924,7 @@ layout_mode = 0
 offset_top = -32.0
 offset_right = 852.0
 offset_bottom = 656.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1" type="ColorRect" parent="RootControl/LayoutCode/OBS" unique_id=103124621]
@@ -1320,6 +3934,7 @@ offset_left = 2972.0
 offset_top = 1504.0
 offset_right = 3840.0
 offset_bottom = 2160.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1BurnLeft" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderWebcam1" unique_id=1280579143 groups=["BorderBurnLeft"]]
@@ -1329,6 +3944,7 @@ offset_left = -32.0
 offset_top = 16.0
 offset_right = 868.0
 offset_bottom = 656.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderWebcam1BurnUp" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderWebcam1" unique_id=1459524163 groups=["BorderBurnUp"]]
@@ -1337,6 +3953,7 @@ layout_mode = 0
 offset_top = -32.0
 offset_right = 868.0
 offset_bottom = 656.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCapture" type="ColorRect" parent="RootControl/LayoutCode/OBS" unique_id=75558538]
@@ -1346,6 +3963,7 @@ offset_left = 212.0
 offset_top = 112.0
 offset_right = 3628.0
 offset_bottom = 2048.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnDown" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderScreenCapture" unique_id=2066371123 groups=["BorderBurnDown"]]
@@ -1354,6 +3972,7 @@ layout_mode = 0
 offset_top = 32.0
 offset_right = 3416.0
 offset_bottom = 1968.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnLeft" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderScreenCapture" unique_id=1182602968 groups=["BorderBurnLeft"]]
@@ -1362,6 +3981,7 @@ layout_mode = 0
 offset_left = -32.0
 offset_right = 3384.0
 offset_bottom = 1936.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnRight" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderScreenCapture" unique_id=129668315 groups=["BorderBurnRight"]]
@@ -1370,6 +3990,7 @@ layout_mode = 0
 offset_left = 32.0
 offset_right = 3448.0
 offset_bottom = 1936.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="BorderScreenCaptureBurnUp" type="ColorRect" parent="RootControl/LayoutCode/OBS/BorderScreenCapture" unique_id=583026104 groups=["BorderBurnUp"]]
@@ -1378,6 +3999,7 @@ layout_mode = 0
 offset_top = -32.0
 offset_right = 3416.0
 offset_bottom = 1904.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 script = ExtResource("7_mjhir")
 
 [node name="MockUp" type="Control" parent="RootControl/LayoutCode/OBS" unique_id=2137483011]
@@ -1439,3 +4061,150 @@ bbcode_enabled = true
 text = "[color=#ffffff][font_size=96]
 
 [center]WEBCAM 1"
+
+[node name="LayoutMe" type="Control" parent="RootControl" unique_id=589585391]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OBS" type="Control" parent="RootControl/LayoutMe" unique_id=639804624]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BorderWebcam0" type="ColorRect" parent="RootControl/LayoutMe/OBS" unique_id=1201886867]
+material = SubResource("ShaderMaterial_62sso")
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 1864.0
+offset_bottom = 1440.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnDown" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam0" unique_id=635628734 groups=["BorderBurnDown"]]
+material = ExtResource("8_62sso")
+layout_mode = 0
+offset_right = 1736.0
+offset_bottom = 1344.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnLeft" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam0" unique_id=1518860125 groups=["BorderBurnLeft"]]
+material = ExtResource("9_niean")
+layout_mode = 0
+offset_left = -32.0
+offset_right = 1736.0
+offset_bottom = 1312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam0" unique_id=81535394 groups=["BorderBurnRight"]]
+material = ExtResource("10_tjdmb")
+layout_mode = 0
+offset_right = 1768.0
+offset_bottom = 1312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam0" unique_id=123762255 groups=["BorderBurnUp"]]
+material = ExtResource("11_xepxj")
+layout_mode = 0
+offset_top = -32.0
+offset_right = 1736.0
+offset_bottom = 1312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam1" type="ColorRect" parent="RootControl/LayoutMe/OBS" unique_id=338391207]
+material = SubResource("ShaderMaterial_62sso")
+layout_mode = 0
+offset_left = 1976.0
+offset_top = 128.0
+offset_right = 3712.0
+offset_bottom = 1440.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnDown" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam1" unique_id=1186894584 groups=["BorderBurnDown"]]
+material = ExtResource("8_62sso")
+layout_mode = 0
+offset_right = 1736.0
+offset_bottom = 1344.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnLeft" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam1" unique_id=1080098595 groups=["BorderBurnLeft"]]
+material = ExtResource("9_niean")
+layout_mode = 0
+offset_left = -32.0
+offset_right = 1736.0
+offset_bottom = 1312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnRight" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam1" unique_id=550186432 groups=["BorderBurnRight"]]
+material = ExtResource("10_tjdmb")
+layout_mode = 0
+offset_right = 1768.0
+offset_bottom = 1312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="BorderWebcam0BurnUp" type="ColorRect" parent="RootControl/LayoutMe/OBS/BorderWebcam1" unique_id=1754865678 groups=["BorderBurnUp"]]
+material = ExtResource("11_xepxj")
+layout_mode = 0
+offset_top = -32.0
+offset_right = 1736.0
+offset_bottom = 1312.0
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+script = ExtResource("7_mjhir")
+
+[node name="MockUp" type="Control" parent="RootControl/LayoutMe/OBS" unique_id=868218745]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Webcam0" type="ColorRect" parent="RootControl/LayoutMe/OBS/MockUp" unique_id=1180502035]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 144.0
+offset_right = 1848.0
+offset_bottom = 1424.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutMe/OBS/MockUp/Webcam0" unique_id=1518439237]
+layout_mode = 0
+offset_right = 1704.0
+offset_bottom = 1280.0
+bbcode_enabled = true
+text = "[color=#ffffff][font_size=96]
+
+
+
+[center]WEBCAM 0"
+
+[node name="Webcam1" type="ColorRect" parent="RootControl/LayoutMe/OBS/MockUp" unique_id=145436641]
+layout_mode = 0
+offset_left = 1992.0
+offset_top = 144.0
+offset_right = 3696.0
+offset_bottom = 1424.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RootControl/LayoutMe/OBS/MockUp/Webcam1" unique_id=2012340811]
+layout_mode = 0
+offset_right = 1704.0
+offset_bottom = 1280.0
+bbcode_enabled = true
+text = "[color=#ffffff][font_size=96]
+
+
+
+[center]WEBCAM 1"
+
+[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="RootControl" unique_id=1076096524]
+stream = SubResource("AudioStreamMicrophone_d836i")
+autoplay = true
+bus = &"Record"

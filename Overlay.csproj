@@ -3,6 +3,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+
+<ItemGroup>
+  <None Include="/home/smoothdagger/.nuget/packages/vosk/0.3.38/build/lib/linux-x64/libvosk.so">
+    <Link>libvosk.so</Link>
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Buttplug" Version="5.0.0" />
     <PackageReference Include="Emgu.CV" Version="4.10.0.5680" />

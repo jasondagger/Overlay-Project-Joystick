@@ -1,6 +1,5 @@
 
 using Npgsql;
-using System.ComponentModel.DataAnnotations;
 
 namespace Overlay.Core.Services.Databases.Models;
 

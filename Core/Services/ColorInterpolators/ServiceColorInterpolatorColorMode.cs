@@ -1,0 +1,43 @@
+
+namespace Overlay.Core.Services.ColorInterpolators;
+
+public enum ServiceColorInterpolatorColorMode :
+	uint
+{
+	BananaShake,
+	Blue,
+	BlueRaspberry,
+	CreamsicleBanana,
+	CreamsicleBlueberry,
+	CreamsicleDragonfruit,
+	CreamsicleLime,
+	CreamsicleOrange,
+	CreamsicleStrawberry,
+	Cyan,
+	Cyberpunk,
+	Dinner,
+	ForestSunset,
+	Green,
+	Heatwave,
+	Icy,
+	Magenta,
+	Orange,
+	OrangePurple,
+	PoweradeSlushie,
+	Purple,
+	Rainbow,
+	Red,
+	RedWhiteBlue,
+	ShowinSomeLove,
+	TeamFortress2KillStreak5,
+	TeamFortress2KillStreak10,
+	TeamFortress2KillStreak15,
+	TeamFortress2KillStreak20,
+	TokeUp,
+	Toxic,
+	Transition,
+	Vaporwave,
+	Watermelon,
+	White,
+	Yellow,
+}

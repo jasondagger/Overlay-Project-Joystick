@@ -37,7 +37,9 @@ internal sealed partial class NameplateLatestSubscriber() :
             );
         }
         
-        this.PlayNotification();
+        this.CallDeferred(
+            method: $"{nameof(NameplateLatestSubscriber.Play)}"
+        );
     }
     
     private void HandleWebSocketPayloadStreamEventSubscribed(
@@ -45,17 +47,20 @@ internal sealed partial class NameplateLatestSubscriber() :
     )
     {
         var name = messageMetadata.Who;
-        
-        ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.AddJoystickLatestSubscriber,
-            serviceDatabaseTaskSqlParameters: 
-            [
-                new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: $"{nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}",
-                    value:         name
-                )
-            ]
-        );
+
+        if (this.SendDatabaseUpdate is true)
+        {
+            ServiceDatabase.ExecuteTaskNonQuery(
+                serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.AddJoystickLatestSubscriber,
+                serviceDatabaseTaskSqlParameters: 
+                [
+                    new ServiceDatabaseTaskNpgsqlParameter(
+                        parameterName: $"{nameof(ServiceDatabaseJoystickLatestSubscriber.JoystickLatest_Latest_Subscriber)}",
+                        value:         name
+                    )
+                ]
+            );
+        }
         
         this.m_pendingNames.Enqueue(
             item: name

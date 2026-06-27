@@ -1,7 +1,6 @@
 
 using Godot;
-using Overlay.Core.Services.PastelInterpolators;
-using Overlay.Core.Tools;
+using Overlay.Core.Services.ColorInterpolators;
 
 namespace Overlay.Core.Contents.OBS;
 
@@ -21,34 +20,41 @@ public sealed partial class OBSBorderFrame() :
         this.SetShaderMaterial();
     }
     
-    private ServicePastelInterpolator m_servicePastelInterpolator = null;
-    private ShaderMaterial            m_material                  = null;
+    private ServiceColorInterpolatorNormal m_serviceColorInterpolatorNormal = null;
+    private ShaderMaterial                 m_material                       = null;
+    private readonly Color                 m_color                          = new(
+        code: "F2F2F2"
+    );
     
     private void RetrieveResources()
     {
-        _ = this.m_servicePastelInterpolator = _ = Services.Services.GetService<ServicePastelInterpolator>();
+        this.m_serviceColorInterpolatorNormal = Services.Services.GetService<ServiceColorInterpolatorNormal>();
     }
     
     private void SetShaderMaterial()
     {
-        _ = this.m_material = _ = (ShaderMaterial)this.Get(
-            property: _ = $"material"
+        this.m_material = (ShaderMaterial)this.Get(
+            property: $"material"
         );
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0	
-            )
+            param: $"alt_color",
+            value: this.m_color
+        );
+        this.m_material.SetShaderParameter(
+            param: $"color",
+            value: this.m_color
         );
     }
     
     private void UpdateShaderResources()
     {
         this.m_material.SetShaderParameter(
-            param: _ = $"color",
-            value: _ = this.m_servicePastelInterpolator.GetColor(
-                rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0	
-            )
+            param: $"alt_color",
+            value: this.m_color
+        );
+        this.m_material.SetShaderParameter(
+            param: $"color",
+            value: this.m_color
         );
     }
 }

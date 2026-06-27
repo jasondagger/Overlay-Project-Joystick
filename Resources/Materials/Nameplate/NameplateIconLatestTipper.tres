@@ -1,7 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ljjack0wpijs"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ljjack0wpijs"]
 
 [ext_resource type="Shader" uid="uid://b48wjopki15ok" path="res://Resources/Shaders/Texture.gdshader" id="1_ye8fd"]
-[ext_resource type="Texture2D" uid="uid://b3d2v6vahq11i" path="res://Resources/Textures/Icons/Icon_Tip.png" id="2_ftfcg"]
+[ext_resource type="Texture2D" uid="uid://b3d2v6vahq11i" path="res://Resources/Textures/Icons/Icon_MoneyBag.png" id="2_ftfcg"]
 
 [resource]
 shader = ExtResource("1_ye8fd")

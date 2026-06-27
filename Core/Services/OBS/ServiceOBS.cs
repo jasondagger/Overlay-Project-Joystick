@@ -1,15 +1,14 @@
 
+using Overlay.Core.Tools;
 using System;
 using System.Net.WebSockets;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Overlay.Core.Tools;
 
 namespace Overlay.Core.Services.OBS;
 
-internal sealed partial class ServiceOBS() :
+internal sealed class ServiceOBS() :
     IService
 {
     Task IService.Setup()
@@ -41,7 +40,7 @@ internal sealed partial class ServiceOBS() :
 			    }
 			    
 			    var buffer      = Encoding.UTF8.GetBytes(
-				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"SetCurrentProgramScene\",  \"requestId\": \"f819dcf0-89cc-11eb-8f0e-382c4ac93b9c\",  \"requestData\": {{\"sceneName\": \"{sceneName}\"}}}}}}"
+				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"SetCurrentProgramScene\",  \"requestId\": \"1\",  \"requestData\": {{\"sceneName\": \"{sceneName}\"}}}}}}"
 				);
 			    var segment     = new ArraySegment<byte>(
 				    array: buffer
@@ -68,6 +67,246 @@ internal sealed partial class ServiceOBS() :
 			    }
 		    }
 		);
+    }
+    
+    internal void MuteMicrophone()
+    {
+	    Task.Run(
+		    function: async () =>
+		    {
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
+			    {
+				    return;
+			    }
+			    
+			    var buffer  = Encoding.UTF8.GetBytes(
+				    s: $"{{ \"op\": 6, \"d\": {{ \"requestType\": \"SetInputMute\", \"requestId\": \"7\", \"requestData\": {{ \"inputName\": \"Mic/Aux\", \"inputMuted\": true }}}}}} "
+			    );
+			    var segment = new ArraySegment<byte>(
+				    array: buffer
+			    );
+
+			    try
+			    {
+				    await this.m_clientWebSocket.SendAsync(
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
+				    );
+			    }
+			    catch (WebSocketException exception)
+			    {
+				    ConsoleLogger.LogMessageError(
+					    messageError: 
+					    $"EXCEPTION: " +
+					    $"{nameof(ServiceOBS)}." +
+					    $"{nameof(ServiceOBS.MuteMicrophone)}() - " +
+					    $"{exception.Message}"
+				    );
+			    }
+		    }
+	    );
+    }
+    
+    internal void StartRecord()
+    {
+	    Task.Run(
+		    function: async () =>
+		    {
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
+			    {
+				    return;
+			    }
+			    
+			    var buffer  = Encoding.UTF8.GetBytes(
+				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"StartRecord\",  \"requestId\": \"5\"}}}}"
+			    );
+			    var segment = new ArraySegment<byte>(
+				    array: buffer
+			    );
+        	
+			    try
+			    {
+				    await this.m_clientWebSocket.SendAsync(
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
+				    );
+			    }
+			    catch (WebSocketException exception)
+			    {
+				    ConsoleLogger.LogMessageError(
+					    messageError: 
+					    $"EXCEPTION: " +
+					    $"{nameof(ServiceOBS)}." +
+					    $"{nameof(ServiceOBS.StartRecord)}() - " +
+					    $"{exception.Message}"
+				    );
+			    }
+		    }
+	    );
+    }
+    
+    internal void StartStream()
+    {
+	    Task.Run(
+		    function: async () =>
+	    	{
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
+			    {
+				    return;
+			    }
+			    
+			    var buffer      = Encoding.UTF8.GetBytes(
+				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"StartStream\",  \"requestId\": \"3\"}}}}"
+			    );
+			    var segment     = new ArraySegment<byte>(
+				    array: buffer
+			    );
+        	
+			    try
+			    {
+				    await this.m_clientWebSocket.SendAsync(
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
+				    );
+			    }
+			    catch (WebSocketException exception)
+			    {
+				    ConsoleLogger.LogMessageError(
+					    messageError: 
+					    $"EXCEPTION: " +
+					    $"{nameof(ServiceOBS)}." +
+					    $"{nameof(ServiceOBS.StartStream)}() - " +
+					    $"{exception.Message}"
+				    );
+			    }
+	    	}
+		);
+    }
+    
+    internal void StopRecord()
+    {
+	    Task.Run(
+		    function: async () =>
+		    {
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
+			    {
+				    return;
+			    }
+			    
+			    var buffer  = Encoding.UTF8.GetBytes(
+				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"StopRecord\",  \"requestId\": \"4\"}}}}"
+			    );
+			    var segment = new ArraySegment<byte>(
+				    array: buffer
+			    );
+
+			    try
+			    {
+				    await this.m_clientWebSocket.SendAsync(
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
+				    );
+			    }
+			    catch (WebSocketException exception)
+			    {
+				    ConsoleLogger.LogMessageError(
+					    messageError: 
+					    $"EXCEPTION: " +
+					    $"{nameof(ServiceOBS)}." +
+					    $"{nameof(ServiceOBS.StopRecord)}() - " +
+					    $"{exception.Message}"
+				    );
+			    }
+		    }
+	    );
+    }
+
+    internal void StopStream()
+    {
+	    Task.Run(
+		    function: async () =>
+		    {
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
+			    {
+				    return;
+			    }
+			    
+			    var buffer  = Encoding.UTF8.GetBytes(
+				    s: $"{{  \"op\": 6,  \"d\": {{ \"requestType\": \"StopStream\",  \"requestId\": \"2\"}}}}"
+			    );
+			    var segment = new ArraySegment<byte>(
+				    array: buffer
+			    );
+
+			    try
+			    {
+				    await this.m_clientWebSocket.SendAsync(
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
+				    );
+			    }
+			    catch (WebSocketException exception)
+			    {
+				    ConsoleLogger.LogMessageError(
+					    messageError: 
+					    $"EXCEPTION: " +
+					    $"{nameof(ServiceOBS)}." +
+					    $"{nameof(ServiceOBS.StopStream)}() - " +
+					    $"{exception.Message}"
+				    );
+			    }
+		    }
+	    );
+    }
+
+    internal void UnmuteMicrophone()
+    {
+	    Task.Run(
+		    function: async () =>
+		    {
+			    if (this.m_clientWebSocket.State is not WebSocketState.Open)
+			    {
+				    return;
+			    }
+			    
+			    var buffer  = Encoding.UTF8.GetBytes(
+				    s: $"{{ \"op\": 6, \"d\": {{ \"requestType\": \"SetInputMute\", \"requestId\": \"8\", \"requestData\": {{ \"inputName\": \"Mic/Aux\", \"inputMuted\": false }}}}}} "
+			    );
+			    var segment = new ArraySegment<byte>(
+				    array: buffer
+			    );
+
+			    try
+			    {
+				    await this.m_clientWebSocket.SendAsync(
+					    buffer:            segment,
+					    messageType:       WebSocketMessageType.Text,
+					    endOfMessage:      true, 
+					    cancellationToken: CancellationToken.None
+				    );
+			    }
+			    catch (WebSocketException exception)
+			    {
+				    ConsoleLogger.LogMessageError(
+					    messageError: 
+					    $"EXCEPTION: " +
+					    $"{nameof(ServiceOBS)}." +
+					    $"{nameof(ServiceOBS.UnmuteMicrophone)}() - " +
+					    $"{exception.Message}"
+				    );
+			    }
+		    }
+	    );
     }
     
     private const string    c_obsWebSocketAddress = "ws://localhost";
@@ -144,6 +383,10 @@ internal sealed partial class ServiceOBS() :
 							bytes:  bytes,
 							result: result
 						);
+
+						await Task.Delay(
+							millisecondsDelay: 16
+						);
 					}
 					catch (Exception exception)
 					{
@@ -186,9 +429,11 @@ internal sealed partial class ServiceOBS() :
 			) is true
 		)
 		{
+#if !DEBUG
 			this.ChangeScene(
 				sceneName: "Main"
 			);
+#endif
 		}
 	}
 }

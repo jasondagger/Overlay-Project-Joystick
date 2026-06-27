@@ -16,17 +16,22 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Overlay"
 run/main_scene="res://Main.tscn"
+run/print_header=false
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+run/flush_stdout_on_print.debug=false
+run/max_fps=60
+run/low_processor_mode_sleep_usec=10000
 
 [audio]
 
+buses/default_bus_layout="uid://biwb74lcug682"
 general/text_to_speech=true
+driver/enable_input=true
 
 [display]
 
-window/size/viewport_width=3840
-window/size/viewport_height=2160
-window/size/mode=3
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/resizable=false
 window/size/borderless=true
 
@@ -40,6 +45,11 @@ BorderBurnDown=""
 BorderBurnLeft=""
 BorderBurnRight=""
 BorderBurnUp=""
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 
 [shader_globals]
 

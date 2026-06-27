@@ -16,7 +16,7 @@ internal sealed partial class RichTextLabelSampler() :
     )
     {
         this.LoadRichTextLabelsAtPathAndAttachToParent(
-            _ = parent
+            parent
         );
     }
 
@@ -24,11 +24,11 @@ internal sealed partial class RichTextLabelSampler() :
         char letter
     )
     {
-        lock (_ = this.m_lock)
+        lock (this.m_lock)
         {
-            var textLetter = _ = this.m_richTextLabelCache[letter].Dequeue();
+            var textLetter = this.m_richTextLabelCache[letter].Dequeue();
             this.m_richTextLabelsInUse[letter].Enqueue(
-                item: _ = textLetter
+                item: textLetter
             );
 
             return textLetter;
@@ -39,11 +39,11 @@ internal sealed partial class RichTextLabelSampler() :
         char letter
     )
     {
-        lock (_ = this.m_lock)
+        lock (this.m_lock)
         {
-            var textLetter = _ = this.m_richTextLabelsInUse[letter].Dequeue();
+            var textLetter = this.m_richTextLabelsInUse[letter].Dequeue();
             this.m_richTextLabelCache[letter].Enqueue(
-                item: _ = textLetter
+                item: textLetter
             );
         }
     }
@@ -65,44 +65,44 @@ internal sealed partial class RichTextLabelSampler() :
         Node parent
     )
     {
-        foreach (var packedScene in _ = this.Letters)
+        foreach (var packedScene in this.Letters)
         {
-            var fileName = _ = Path.GetFileNameWithoutExtension(
-                path: _ = packedScene.ResourcePath
+            var fileName = Path.GetFileNameWithoutExtension(
+                path: packedScene.ResourcePath
             );
             if (fileName is null)
             {
                 continue;
             }
             
-            var key = _ = RichTextLabelSampler.s_specialNames.TryGetValue(
-                key:    _ = fileName, 
+            var key = RichTextLabelSampler.s_specialNames.TryGetValue(
+                key:    fileName, 
                 out var value
             ) ? value : fileName[0];
             
             this.m_richTextLabelCache.Add(
-                key:   _ = key,
-                value: _ = new Queue<RichTextLabel>()
+                key:   key,
+                value: new Queue<RichTextLabel>()
             );
             this.m_richTextLabelsInUse.Add(
-                key:   _ = key,
-                value: _ = new Queue<RichTextLabel>()
+                key:   key,
+                value: new Queue<RichTextLabel>()
             );
             
-            for (var i = _ = 0u; _ = i < RichTextLabelSampler.c_maxNameLength; _ = i++)
+            for (var i = 0u; i < RichTextLabelSampler.c_maxNameLength; i++)
             {
-                var richTextLabel = _ = packedScene.Instantiate<RichTextLabel>();
-                _ = richTextLabel.Visible = _ = false;
+                var richTextLabel = packedScene.Instantiate<RichTextLabel>();
+                richTextLabel.Visible = false;
 
                 parent.AddChild(
-                    node: _ = richTextLabel
+                    node: richTextLabel
                 );
                 richTextLabel.SetPosition(
-                    position: _ = Vector2.Zero
+                    position: Vector2.Zero
                 );
 
                 this.m_richTextLabelCache[key].Enqueue(
-                    item: _ = richTextLabel
+                    item: richTextLabel
                 );
             }
         }

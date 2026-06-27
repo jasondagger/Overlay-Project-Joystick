@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bfgemqgjickin"]
+
+[ext_resource type="FontFile" uid="uid://bxwrkwhccsv0u" path="res://Resources/Fonts/Roboto-Black.ttf" id="1_irovg"]
+[ext_resource type="FontFile" uid="uid://4b6pi6wr66qo" path="res://Resources/Fonts/NotoColorEmoji-Regular.ttf" id="2_3jbsy"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_3jbsy")])
+base_font = ExtResource("1_irovg")

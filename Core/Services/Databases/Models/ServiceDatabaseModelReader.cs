@@ -18,24 +18,24 @@ internal static class ServiceDatabaseModelReader
 		ServiceDatabaseModel,
 		new()
 	{
-		var serviceDatabaseModels = _ = new List<TServiceDatabaseModel>();
+		var serviceDatabaseModels = new List<TServiceDatabaseModel>();
 
 		while (true)
 		{
-			var hasRecordAvailable = _ = await npgsqlDataReader.ReadAsync();
-			if (_ = hasRecordAvailable is false)
+			var hasRecordAvailable = await npgsqlDataReader.ReadAsync();
+			if (hasRecordAvailable is false)
 			{
 				break;
 			}
 
 			serviceDatabaseModels.Add(
-				item: _ = ServiceDatabaseModelReader.CreateServiceDatabaseModelFromSqlDataReader<TServiceDatabaseModel>(
-					npgsqlDataReader: _ = npgsqlDataReader
+				item: ServiceDatabaseModelReader.CreateServiceDatabaseModelFromSqlDataReader<TServiceDatabaseModel>(
+					npgsqlDataReader: npgsqlDataReader
 				)
 			);
 		}
 
-		return _ = serviceDatabaseModels;
+		return serviceDatabaseModels;
 	}
 
 	internal static TServiceDatabaseModel ReadServiceDatabaseModelFromSqlDataReader<TServiceDatabaseModel>(
@@ -44,11 +44,11 @@ internal static class ServiceDatabaseModelReader
 		ServiceDatabaseModel,
 		new()
 	{
-		var hasRecordAvailable = _ = npgsqlDataReader.Read();
-		if (_ = hasRecordAvailable is true)
+		var hasRecordAvailable = npgsqlDataReader.Read();
+		if (hasRecordAvailable is true)
 		{
-			return _ = ServiceDatabaseModelReader.CreateServiceDatabaseModelFromSqlDataReader<TServiceDatabaseModel>(
-				npgsqlDataReader: _ = npgsqlDataReader
+			return ServiceDatabaseModelReader.CreateServiceDatabaseModelFromSqlDataReader<TServiceDatabaseModel>(
+				npgsqlDataReader: npgsqlDataReader
 			);
 		}
 
@@ -61,12 +61,12 @@ internal static class ServiceDatabaseModelReader
 		ServiceDatabaseModel,
 		new()
 	{
-		var serviceDatabaseModel = _ = new TServiceDatabaseModel();
+		var serviceDatabaseModel = new TServiceDatabaseModel();
 
 		serviceDatabaseModel.CreateFromNpgsqlDataReader(
-			npgsqlDataReader: _ = npgsqlDataReader
+			npgsqlDataReader: npgsqlDataReader
 		);
 
-		return _ = serviceDatabaseModel;
+		return serviceDatabaseModel;
 	}
 }

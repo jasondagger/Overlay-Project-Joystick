@@ -16,21 +16,21 @@ internal sealed partial class ServiceGodotInput() :
         {
             case InputEventMouseButton inputEventMouseButton:
             {
-                var mouseButton  = _ = inputEventMouseButton.ButtonIndex;
-                var pressedState = _ = inputEventMouseButton.Pressed;
+                var mouseButton  = inputEventMouseButton.ButtonIndex;
+                var pressedState = inputEventMouseButton.Pressed;
 
                 this.HandleInputEventMouseButton(
-                    mouseButton:  _ = mouseButton,
-                    pressedState: _ = pressedState
+                    mouseButton:  mouseButton,
+                    pressedState: pressedState
                 );
                 break;
             }
             case InputEventMouseMotion inputEventMouseMotion:
             {
-                var mousePosition  = _ = inputEventMouseMotion.Relative;
-                var velocityVector = _ = this.m_lastMousePosition - mousePosition;
+                var mousePosition  = inputEventMouseMotion.Relative;
+                var velocityVector = this.m_lastMousePosition - mousePosition;
                 this.MouseMoved?.Invoke(
-                    obj: _ = velocityVector
+                    obj: velocityVector
                 );
                 break;
             }
@@ -54,7 +54,7 @@ internal sealed partial class ServiceGodotInput() :
         ServiceGodotInputActionType inputActionType
     )
     {
-        return _ = this.m_inputActionBinds[key: _ = inputActionType];
+        return this.m_inputActionBinds[key: inputActionType];
     }
 
     internal void SetInputActionBind(
@@ -62,21 +62,21 @@ internal sealed partial class ServiceGodotInput() :
         ServiceGodotInputBind       inputBind
     )
     {
-        var key         = _ = inputBind.Key;
-        var mouseButton = _ = inputBind.MouseButton;
+        var key         = inputBind.Key;
+        var mouseButton = inputBind.MouseButton;
 
         if (
             this.m_inputActionKeys.TryGetValue(
-                key:   _ = key,
+                key:   key,
                 value: out var oldInputActionType
             )
         )
         {
             this.UnbindInputAction(
-                inputActionType: _ = oldInputActionType
+                inputActionType: oldInputActionType
             );
-            _ = this.m_inputActionKeys.Remove(
-                key: _ = key
+            this.m_inputActionKeys.Remove(
+                key: key
             );
         }
         else if (
@@ -87,58 +87,58 @@ internal sealed partial class ServiceGodotInput() :
         )
         {
             this.UnbindInputAction(
-                inputActionType: _ = oldInputActionType
+                inputActionType: oldInputActionType
             );
-            _ = m_inputActionMouseButtons.Remove(
-                key: _ = mouseButton
+            m_inputActionMouseButtons.Remove(
+                key: mouseButton
             );
         }
 
-        this.m_inputActionBinds[key: _ = inputActionType]  = _ = inputBind;
-        this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Released;
+        this.m_inputActionBinds[key: inputActionType]  = inputBind;
+        this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Released;
     }
     
     internal void SetStoredInputActionBinds(
         Dictionary<ServiceGodotInputActionType, ServiceGodotInputBind> storedInputActionBinds
     )
     {
-        foreach (var inputActionBind in _ = storedInputActionBinds)
+        foreach (var inputActionBind in storedInputActionBinds)
         {
-            var inputActionType = _ = inputActionBind.Key;
-            var inputBind       = _ = inputActionBind.Value;
+            var inputActionType = inputActionBind.Key;
+            var inputBind       = inputActionBind.Value;
 
-            var inputBindKey         = _ = inputBind.Key;
-            var inputBindMouseButton = _ = inputBind.MouseButton;
+            var inputBindKey         = inputBind.Key;
+            var inputBindMouseButton = inputBind.MouseButton;
 
-            var isInputActionBound = _ = false;
+            var isInputActionBound = false;
             if (inputBindKey is not Key.None)
             {
-                _ = isInputActionBound = _ = this.m_inputActionKeys.TryAdd(
-                    key:   _ = inputBindKey,
-                    value: _ = inputActionType
+                isInputActionBound = this.m_inputActionKeys.TryAdd(
+                    key:   inputBindKey,
+                    value: inputActionType
                 );
                 if (isInputActionBound is true)
                 {
-                    _ = inputBind.MouseButton = _ = MouseButton.None;
+                    inputBind.MouseButton = MouseButton.None;
                 }
             }
             else if (inputBindMouseButton is not MouseButton.None)
             {
-                _ = isInputActionBound = _ = this.m_inputActionMouseButtons.TryAdd(
-                    key:   _ = inputBindMouseButton,
-                    value: _ = inputActionType
+                isInputActionBound = this.m_inputActionMouseButtons.TryAdd(
+                    key:   inputBindMouseButton,
+                    value: inputActionType
                 );
             }
 
             if (isInputActionBound)
             {
-                _ = this.m_inputActionBinds[key:  _ = inputActionType] = _ = inputBind;
-                _ = this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Released;
+                this.m_inputActionBinds[key:  inputActionType] = inputBind;
+                this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Released;
             }
             else
             {
                 this.UnbindInputAction(
-                    inputActionType: _ = inputActionType
+                    inputActionType: inputActionType
                 );
             }
         }
@@ -157,29 +157,29 @@ internal sealed partial class ServiceGodotInput() :
         {
             ServiceGodotInputActionType.ChangeLayoutToAfk,       
             new ServiceGodotInputBind(
-                key:         _ = Key.Kp2,
-                mouseButton: _ = MouseButton.None
+                key:         Key.Kp2,
+                mouseButton: MouseButton.None
             )
         },
         {
             ServiceGodotInputActionType.ChangeLayoutToCode,       
             new ServiceGodotInputBind(
-                key:         _ = Key.Kp1,
-                mouseButton: _ = MouseButton.None
+                key:         Key.Kp1,
+                mouseButton: MouseButton.None
             )
         },
         {
             ServiceGodotInputActionType.ChangeLayoutToDefault,       
             new ServiceGodotInputBind(
-                key:         _ = Key.Kp0,
-                mouseButton: _ = MouseButton.None
+                key:         Key.Kp0,
+                mouseButton: MouseButton.None
             )
         },
         {
             ServiceGodotInputActionType.CloseApplication,       
             new ServiceGodotInputBind(
-                key:         _ = Key.F2,
-                mouseButton: _ = MouseButton.None
+                key:         Key.F2,
+                mouseButton: MouseButton.None
             )
         },
     };
@@ -200,23 +200,23 @@ internal sealed partial class ServiceGodotInput() :
     private readonly Dictionary<Key, ServiceGodotInputActionType>                          m_inputActionKeys         = new();
     private readonly Dictionary<MouseButton, ServiceGodotInputActionType>                  m_inputActionMouseButtons = new();
 
-    private Vector2 m_lastMousePosition = _ = Vector2.Zero;
+    private Vector2 m_lastMousePosition = Vector2.Zero;
 
     private void AddInputActionEvents()
     {
-        var inputActionTypes = _ = Enum.GetValues<ServiceGodotInputActionType>();
-        foreach (var inputActionType in _ = inputActionTypes)
+        var inputActionTypes = Enum.GetValues<ServiceGodotInputActionType>();
+        foreach (var inputActionType in inputActionTypes)
         {
             this.InputActionPressed.Add(
-                key:   _ = inputActionType,
+                key:   inputActionType,
                 value: null
             );
             this.InputActionPressing.Add(
-                key:   _ = inputActionType,
+                key:   inputActionType,
                 value: null
             );
             this.InputActionReleased.Add(
-                key:   _ = inputActionType,
+                key:   inputActionType,
                 value: null
             );
         }
@@ -226,7 +226,7 @@ internal sealed partial class ServiceGodotInput() :
         ServiceGodotInputActionType inputActionType
     )
     {
-        return _ = this.m_inputActionStates[key: _ = inputActionType];
+        return this.m_inputActionStates[key: inputActionType];
     }
 
     private void HandleInputEventMouseButton(
@@ -236,7 +236,7 @@ internal sealed partial class ServiceGodotInput() :
     {
         if (
             this.m_inputActionMouseButtons.TryGetValue(
-                key:   _ = mouseButton,
+                key:   mouseButton,
                 value: out var inputActionType
             ) is false
         )
@@ -244,11 +244,11 @@ internal sealed partial class ServiceGodotInput() :
             return;
         }
         
-        var inputStateType = _ = m_inputActionStates[key: _ = inputActionType];
+        var inputStateType = m_inputActionStates[key: inputActionType];
         this.HandleInputState(
-            inputActionType: _ = inputActionType,
-            inputStateType:  _ = inputStateType,
-            pressedState:    _ = pressedState
+            inputActionType: inputActionType,
+            inputStateType:  inputStateType,
+            pressedState:    pressedState
         );
     }
 
@@ -258,26 +258,26 @@ internal sealed partial class ServiceGodotInput() :
         bool                        pressedState
     )
     {
-        switch (_ = inputStateType)
+        switch (inputStateType)
         {
             case ServiceGodotInputStateType.Pressed:
                 this.HandleInputStatePressed(
-                    inputActionType: _ = inputActionType,
-                    pressedState:    _ = pressedState
+                    inputActionType: inputActionType,
+                    pressedState:    pressedState
                 );
                 break;
 
             case ServiceGodotInputStateType.Pressing:
                 this.HandleInputStatePressing(
-                    inputActionType: _ = inputActionType,
-                    pressedState:    _ = pressedState
+                    inputActionType: inputActionType,
+                    pressedState:    pressedState
                 );
                 break;
 
             case ServiceGodotInputStateType.Released:
                 this.HandleInputStateReleased(
-                    inputActionType: _ = inputActionType,
-                    pressedState:    _ = pressedState
+                    inputActionType: inputActionType,
+                    pressedState:    pressedState
                 );
                 break;
 
@@ -294,16 +294,16 @@ internal sealed partial class ServiceGodotInput() :
     {
         if (pressedState)
         {
-            this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Pressing;
-            this.InputActionPressing[key: _ = inputActionType]?.Invoke(
+            this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Pressing;
+            this.InputActionPressing[key: inputActionType]?.Invoke(
                 obj: ServiceGodotInputStateType.Pressing
             );
         }
         else
         {
-            this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Released;
-            this.InputActionReleased[key: _ = inputActionType]?.Invoke(
-                obj: _ = ServiceGodotInputStateType.Released
+            this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Released;
+            this.InputActionReleased[key: inputActionType]?.Invoke(
+                obj: ServiceGodotInputStateType.Released
             );
         }
     }
@@ -315,15 +315,15 @@ internal sealed partial class ServiceGodotInput() :
     {
         if (pressedState)
         {
-            this.InputActionPressing[key: _ = inputActionType]?.Invoke(
-                obj: _ = ServiceGodotInputStateType.Pressing
+            this.InputActionPressing[key: inputActionType]?.Invoke(
+                obj: ServiceGodotInputStateType.Pressing
             );
         }
         else
         {
-            this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Released;
-            this.InputActionReleased[key: _ = inputActionType]?.Invoke(
-                obj: _ = ServiceGodotInputStateType.Released
+            this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Released;
+            this.InputActionReleased[key: inputActionType]?.Invoke(
+                obj: ServiceGodotInputStateType.Released
             );
         }
     }
@@ -338,59 +338,59 @@ internal sealed partial class ServiceGodotInput() :
             return;
         }
         
-        this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Pressed;
-        this.InputActionPressed[key: _ = inputActionType]?.Invoke(
-            obj: _ = ServiceGodotInputStateType.Pressed
+        this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Pressed;
+        this.InputActionPressed[key: inputActionType]?.Invoke(
+            obj: ServiceGodotInputStateType.Pressed
         );
     }
 
     private void ProcessInputActionKeys()
     {
-        foreach (var inputActionKey in _ = this.m_inputActionKeys)
+        foreach (var inputActionKey in this.m_inputActionKeys)
         {
-            var key          = _ = inputActionKey.Key;
-            var pressedState = _ = Input.IsPhysicalKeyPressed(
-                keycode: _ = key
+            var key          = inputActionKey.Key;
+            var pressedState = Input.IsPhysicalKeyPressed(
+                keycode: key
             );
 
-            var inputActionType = _ = inputActionKey.Value;
-            var inputStateType  = _ = this.m_inputActionStates[key: _ = inputActionType];
+            var inputActionType = inputActionKey.Value;
+            var inputStateType  = this.m_inputActionStates[key: inputActionType];
 
             this.HandleInputState(
-                inputActionType: _ = inputActionType,
-                inputStateType:  _ = inputStateType,
-                pressedState:    _ = pressedState
+                inputActionType: inputActionType,
+                inputStateType:  inputStateType,
+                pressedState:    pressedState
             );
         }
     }
 
     private void SetDefaultInputActionBinds()
     {
-        foreach (var inputActionBind in _ = ServiceGodotInput.s_defaultInputActionBinds)
+        foreach (var inputActionBind in ServiceGodotInput.s_defaultInputActionBinds)
         {
-            var inputAction = _ = inputActionBind.Key;
-            var inputBind   = _ = inputActionBind.Value;
+            var inputAction = inputActionBind.Key;
+            var inputBind   = inputActionBind.Value;
 
-            var inputBindKey         = _ = inputBind.Key;
-            var inputBindMouseButton = _ = inputBind.MouseButton;
+            var inputBindKey         = inputBind.Key;
+            var inputBindMouseButton = inputBind.MouseButton;
 
             if (inputBindKey is not Key.None)
             {
                 this.m_inputActionKeys.Add(
-                    key:   _ = inputBindKey,
-                    value: _ = inputAction
+                    key:   inputBindKey,
+                    value: inputAction
                 );
             }
             else if (inputBindMouseButton is not MouseButton.None)
             {
                 this.m_inputActionMouseButtons.Add(
-                    key:   _ = inputBindMouseButton,
-                    value: _ = inputAction
+                    key:   inputBindMouseButton,
+                    value: inputAction
                 );
             }
 
-            _ = this.m_inputActionBinds[key: _ = inputAction]  = _ = inputBind;
-            _ = this.m_inputActionStates[key: _ = inputAction] = _ = ServiceGodotInputStateType.Released;
+            this.m_inputActionBinds[key: inputAction]  = inputBind;
+            this.m_inputActionStates[key: inputAction] = ServiceGodotInputStateType.Released;
         }
     }
 
@@ -398,10 +398,10 @@ internal sealed partial class ServiceGodotInput() :
         ServiceGodotInputActionType inputActionType
     )
     {
-        _ = this.m_inputActionBinds[key: _ = inputActionType] = new ServiceGodotInputBind(
-            key:         _ = Key.None,
-            mouseButton: _ = MouseButton.None
+        this.m_inputActionBinds[key: inputActionType] = new ServiceGodotInputBind(
+            key:         Key.None,
+            mouseButton: MouseButton.None
         );
-        _ = this.m_inputActionStates[key: _ = inputActionType] = _ = ServiceGodotInputStateType.Unbound;
+        this.m_inputActionStates[key: inputActionType] = ServiceGodotInputStateType.Unbound;
     }
 }

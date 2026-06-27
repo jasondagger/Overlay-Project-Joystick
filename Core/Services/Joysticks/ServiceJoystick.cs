@@ -1,26 +1,29 @@
 
 using Godot;
+using Overlay.Core.Services.Databases.Models;
 using Overlay.Core.Services.Databases.Tasks;
 using Overlay.Core.Services.Databases.Tasks.Retrieves;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Https;
 using Overlay.Core.Services.Joysticks.Payloads;
+using Overlay.Core.Services.Joysticks.Requests;
 using Overlay.Core.Tools;
 using System;
+using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Overlay.Core.Services.Joysticks.Requests;
 
 namespace Overlay.Core.Services.Joysticks;
 
-public sealed class ServiceJoystick() :
+internal sealed class ServiceJoystick() :
 	IService
 {
 	Task IService.Setup()
 	{
 		this.RegisterForRetrievedJoystickData();
+		ServiceJoystickWebSocketPayloadChatHandler.RegisterForEvents();
 		return Task.CompletedTask;
 	}
 
@@ -33,6 +36,15 @@ public sealed class ServiceJoystick() :
 	{
 		this.Shutdown();
 		return Task.CompletedTask;
+	}
+
+	internal bool IsSubscriber(
+		string username
+	)
+	{
+		return this.m_subscribers.ContainsKey(
+			key: username
+		);
 	}
 
 	internal void SendRequest(
@@ -53,17 +65,21 @@ public sealed class ServiceJoystick() :
 		);
 	}
 	
-	private const string         c_joystickWebSocketAddress     = "wss://joystick.tv/cable";
-	private const string         c_joystickSubscribeMessage     = "{\n  \"command\": \"subscribe\",\n  \"identifier\": \"{\\\"channel\\\":\\\"GatewayChannel\\\"}\"\n}";
-	private const int            c_reconnectDelayInMilliseconds = 100;
+	private const string                                           c_joystickWebSocketAddress     = "wss://api.joystick.tv/cable";
+	private const string                                           c_joystickSubscribeMessage     = "{\n  \"command\": \"subscribe\",\n  \"identifier\": \"{\\\"channel\\\":\\\"GatewayChannel\\\"}\"\n}";
+	private const int                                              c_reconnectDelayInMilliseconds = 100;
 	
-	private ServiceJoystickToken m_joystickToken                = null;
-	private ClientWebSocket      m_clientWebSocket              = null;
+	private ServiceJoystickToken                                   m_joystickToken                = null;
+	private ClientWebSocket                                        m_clientWebSocket              = null;
 	
-	private string               m_joystickAuthorizationCode    = string.Empty;
-	private string               m_joystickClientId             = string.Empty;
-	private string               m_joystickClientSecret         = string.Empty;
-	private bool                 m_shutdownRequested            = false;
+	private string                                                 m_joystickAuthorizationCode    = string.Empty;
+	private string                                                 m_joystickClientId             = string.Empty;
+	private string                                                 m_joystickClientSecret         = string.Empty;
+	private bool                                                   m_shutdownRequested            = false;
+	private readonly Dictionary<string, ServiceJoystickSubscriber> m_subscribers                  = [];
+	private readonly DateTime                                      m_subscriptionCutoffDate       = DateTime.UtcNow.AddDays(
+		value: -30
+	);
 	
 	private void ConnectWebSocket()
 	{
@@ -116,12 +132,16 @@ public sealed class ServiceJoystick() :
 						ServiceJoystick.HandleWebSocketPayloadMessage(
 							payloadMessage: webSocketPayloadMessage
 						);
+
+						await Task.Delay(
+							millisecondsDelay: 16
+						);
 					}
 				}
 				catch (Exception exception)
 				{
 					ConsoleLogger.LogMessageError(
-						messageError: 
+						messageError:
 							$"EXCEPTION: " +
 							$"{nameof(ServiceJoystick)}." +
 							$"{nameof(ServiceJoystick.ConnectWebSocket)}() - " +
@@ -140,6 +160,32 @@ public sealed class ServiceJoystick() :
 						}
 					);
 				}
+			}
+		);
+	}
+	
+	private static void ExecuteUpdateTipLimitForSubscriber(
+		string targetUser
+	)
+	{
+		var serviceDatabaseTaskNpgsqlParameters = new List<ServiceDatabaseTaskNpgsqlParameter> {
+			new(
+				parameterName: nameof(ServiceDatabaseBankUser.BankUser_Joystick_Username), 
+				value:         targetUser
+			),
+			new(
+				parameterName: nameof(ServiceDatabaseBankUser.BankUser_Joystick_Tip_Threshold_For_Gush_Control_Link_Minute), 
+				value:         500
+			)
+		};
+        
+		Task.Run(
+			function: async () =>
+			{
+				await ServiceDatabaseTaskNonQueries.ExecuteAsyncNonQuery(
+					serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.UpdateTipLimitForBankUser, 
+					serviceDatabaseTaskSqlParameters: serviceDatabaseTaskNpgsqlParameters
+				);
 			}
 		);
 	}
@@ -265,14 +311,82 @@ public sealed class ServiceJoystick() :
 		ServiceDatabaseTaskEvents.RetrievedJoystickData += this.HandleRetrievedJoystickData;
 	}
 	
+	private void RetrieveJoystickSubscriptions(
+		int page    = 1, 
+		int perPage = 10
+	)
+	{
+		var serviceGodots    = Services.GetService<ServiceGodots>();
+		var serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+		
+		serviceGodotHttp.SendHttpRequest(
+			url:                     $"https://api.joystick.tv/api/users/subscriptions?page={page}&per_page={perPage}",
+			headers:                 [
+				$"Authorization: Bearer {this.m_joystickToken.AccessToken}",
+				$"Content-Type: application/json",
+				$"Accept: application/json"
+			],
+			method:                  HttpClient.Method.Get,
+			json:                    string.Empty,
+			requestCompletedHandler: (
+				long     result,
+				long     responseCode,
+				string[] headers,
+				byte[]   body
+			) =>
+			{
+				var bodyAsString = Encoding.UTF8.GetString(
+					bytes: body
+				);
+				var response     = JsonHelper.Deserialize<ServiceJoystickSubscriptionResponse>(
+					json: bodyAsString
+				);
+				
+				foreach (var item in response.Items) { 
+					if (
+						DateTime.TryParse(
+							s:      item.ExpiresAt,
+							result: out var expiry
+						) is true && 
+						expiry >= this.m_subscriptionCutoffDate
+					)
+					{
+						this.m_subscribers.Add(
+							key:   item.Username,
+							value: item
+						);
+					}
+				}
+
+				var pagination = response.Pagination;
+				if (page < pagination.TotalPages)
+				{
+					this.RetrieveJoystickSubscriptions(
+						page:    page + 1, 
+						perPage: perPage
+					);
+				}
+				else
+				{
+					foreach (var subscriber in this.m_subscribers)
+					{
+						ServiceJoystick.ExecuteUpdateTipLimitForSubscriber(
+							targetUser: subscriber.Key
+						);
+					}
+				}
+			}
+		);
+	}
+	
 	private void RetrieveJoystickToken()
 	{
 		var serviceGodots    = Services.GetService<ServiceGodots>();
 		var serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 		
 		serviceGodotHttp.SendHttpRequest(
-			url: _ =
-				$"https://joystick.tv/api/oauth/token?" +
+			url:
+				$"https://api.joystick.tv/api/oauth/token?" +
 				$"redirect_uri=unused&" +
 				$"code={this.m_joystickAuthorizationCode}&" +
 				$"grant_type=authorization_code",
@@ -297,7 +411,17 @@ public sealed class ServiceJoystick() :
 					json: bodyAsString
 				);
 
-				// todo: if joystick adds rest calls, implement refresh token loop
+				Task.Run(
+					function: async () =>
+					{
+						await ServiceDatabaseTaskNonQueries.ExecuteAsyncNonQuery(
+							serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.ResetTipLimitForBankUsers, 
+							serviceDatabaseTaskSqlParameters: []
+						);
+						
+						this.RetrieveJoystickSubscriptions();
+					}
+				);
 			}
 		);
 	}
@@ -310,8 +434,8 @@ public sealed class ServiceJoystick() :
 		var serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 		
 		serviceGodotHttp.SendHttpRequest(
-			url: _ =
-				$"https://joystick.tv/echo",
+			url:
+				$"https://api.joystick.tv/echo",
 			headers: [
 				$"Authorization: Basic {this.GetClientDataAsBase64String()}",
 				$"Content-Type: application/json"

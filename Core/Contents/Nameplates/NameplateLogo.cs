@@ -15,10 +15,10 @@ public sealed partial class NameplateLogo() :
     )
     {
         this.HandleMove(
-            delta: _ = (float) delta
+            delta: (float) delta
         );
         this.HandleScale(
-            delta: _ = (float) delta
+            delta: (float) delta
         );
     }
 
@@ -55,35 +55,35 @@ public sealed partial class NameplateLogo() :
     private const float           c_targetScaleMinY                       = 1f;
 
     private RandomNumberGenerator m_random                                = new();
-    private float                 m_moveElapsed                           = _ = 0f;
-    private float                 m_moveMiddleDurationInSeconds           = _ = 8f;
-    private MoveState             m_moveState                             = _ = MoveState.MoveWaitingAtMiddle;
-    private float                 m_scaleElapsed                          = _ = 0f;
-    private ScaleState            m_scaleState                            = _ = ScaleState.ScaleLingering;
-    private float                 m_scaleWaitingDurationInSeconds         = _ = 4f;
+    private float                 m_moveElapsed                           = 0f;
+    private float                 m_moveMiddleDurationInSeconds           = 8f;
+    private MoveState             m_moveState                             = MoveState.MoveWaitingAtMiddle;
+    private float                 m_scaleElapsed                          = 0f;
+    private ScaleState            m_scaleState                            = ScaleState.ScaleLingering;
+    private float                 m_scaleWaitingDurationInSeconds         = 4f;
 
 
     private void HandleMove(
         float delta
     )
     {
-        switch (_ = this.m_moveState)
+        switch (this.m_moveState)
         {
             case MoveState.MoveWaitingAtMiddle:
                 this.HandleMoveWaitingAtMiddle(
-                    delta: _ = delta
+                    delta: delta
                 );
                 break;
             
             case MoveState.MoveToBottom:
                 this.HandleMoveToBottom(
-                    delta: _ = delta
+                    delta: delta
                 );
                 break;
             
             case MoveState.MoveToMiddle:
                 this.HandleMoveToMiddle(
-                    delta: _ = delta
+                    delta: delta
                 );
                 break;
             
@@ -97,104 +97,104 @@ public sealed partial class NameplateLogo() :
         float delta
     )
     {
-        _ = this.m_moveElapsed += _ = delta;
+        this.m_moveElapsed += delta;
         
-        if (_ = this.m_moveElapsed < this.m_moveMiddleDurationInSeconds)
+        if (this.m_moveElapsed < this.m_moveMiddleDurationInSeconds)
         {
             return;
         }
         
-        _ = this.m_moveState   = _ = MoveState.MoveToBottom;
-        _ = this.m_moveElapsed = _ = 0f;
+        this.m_moveState   = MoveState.MoveToBottom;
+        this.m_moveElapsed = 0f;
     }
     
     private void HandleMoveToBottom(
         float delta
     )
     {
-        var position    = _ = this.Pivot.Position;
-        _ = position.Y += _ = NameplateLogo.c_moveVelocity * delta;
+        var position    = this.Pivot.Position;
+        position.Y += NameplateLogo.c_moveVelocity * delta;
 
-        if (_ = position.Y >= NameplateLogo.c_targetMoveToBottomY)
+        if (position.Y >= NameplateLogo.c_targetMoveToBottomY)
         {
-            _ = position.Y       = _ = NameplateLogo.c_targetMoveToIdleStartY;
-            _ = this.m_moveState = _ = MoveState.MoveWaitingAtTop;
+            position.Y       = NameplateLogo.c_targetMoveToIdleStartY;
+            this.m_moveState = MoveState.MoveWaitingAtTop;
 
             Task.Run(
                 function:
                 async () =>
                 {
-                    var delay = _ = this.m_random.RandiRange(
-                        from: _ = NameplateLogo.c_entryLengthInMillisecondsMin,
-                        to:   _ = NameplateLogo.c_entryLengthInMillisecondsMax
+                    var delay = this.m_random.RandiRange(
+                        from: NameplateLogo.c_entryLengthInMillisecondsMin,
+                        to:   NameplateLogo.c_entryLengthInMillisecondsMax
                     );
                     await Task.Delay(
-                        millisecondsDelay: _ = delay
+                        millisecondsDelay: delay
                     );
                     
-                    _ = this.m_moveState = _ = MoveState.MoveToMiddle;
+                    this.m_moveState = MoveState.MoveToMiddle;
                 }
             );
         }
         
-        _ = this.Pivot.Position = _ = position;
+        this.Pivot.Position = position;
     }
     
     private void HandleMoveToMiddle(
         float delta
     )
     {
-        var position    = _ = this.Pivot.Position;
-        _ = position.Y += _ = NameplateLogo.c_moveVelocity * delta;
+        var position    = this.Pivot.Position;
+        position.Y += NameplateLogo.c_moveVelocity * delta;
 
-        if (_ = position.Y >= NameplateLogo.c_targetMoveToIdleY)
+        if (position.Y >= NameplateLogo.c_targetMoveToIdleY)
         {
-            _ = position.Y       = _ = NameplateLogo.c_targetMoveToIdleY;
-            _ = this.m_moveState = _ = MoveState.MoveWaitingAtMiddle;
+            position.Y       = NameplateLogo.c_targetMoveToIdleY;
+            this.m_moveState = MoveState.MoveWaitingAtMiddle;
 
-            var durationInMilliseconds = _ = this.m_random.RandiRange(
-                from: _ = NameplateLogo.c_middleDurationInMillisecondsMin,
-                to:   _ = NameplateLogo.c_middleDurationInMillisecondsMax
+            var durationInMilliseconds = this.m_random.RandiRange(
+                from: NameplateLogo.c_middleDurationInMillisecondsMin,
+                to:   NameplateLogo.c_middleDurationInMillisecondsMax
             );
-            _ = this.m_moveMiddleDurationInSeconds = _ =  durationInMilliseconds / 1000f;
+            this.m_moveMiddleDurationInSeconds =  durationInMilliseconds / 1000f;
 
-            _ = Task.Run(
+            Task.Run(
                 function:
                 async () =>
                 {
                     await Task.Delay(
-                        millisecondsDelay: _ = durationInMilliseconds
+                        millisecondsDelay: durationInMilliseconds
                     );
                     
-                    this.m_scaleState = _ = ScaleState.ScaleWaiting;
+                    this.m_scaleState = ScaleState.ScaleWaiting;
                 }
             );
         }
         
-        _ = this.Pivot.Position = _ = position;
+        this.Pivot.Position = position;
     }
 
     private void HandleScale(
         float delta
     )
     {
-        switch (_ = this.m_scaleState)
+        switch (this.m_scaleState)
         {
             case ScaleState.ScaleDown:
                 this.HandleScaleDown(
-                    delta: _ = delta
+                    delta: delta
                 );
                 break;
             
             case ScaleState.ScaleUp:
                 this.HandleScaleUp(
-                    delta: _ = delta
+                    delta: delta
                 );
                 break;
                 
             case ScaleState.ScaleWaiting:
                 this.HandleScaleWaiting(
-                    delta: _ = delta
+                    delta: delta
                 );
                 break;
             
@@ -208,52 +208,52 @@ public sealed partial class NameplateLogo() :
         float delta
     )
     {
-        var scale    = _ = this.Icon.Scale;
-        _ = scale.Y -= _ = NameplateLogo.c_scaleVelocity * delta;
+        var scale    = this.Icon.Scale;
+        scale.Y -= NameplateLogo.c_scaleVelocity * delta;
 
-        if (_ = scale.Y <= NameplateLogo.c_targetScaleMinY)
+        if (scale.Y <= NameplateLogo.c_targetScaleMinY)
         {
-            _ = scale.Y           = _ = NameplateLogo.c_targetScaleMinY;
-            _ = this.m_scaleState = _ = ScaleState.ScaleLingering;
+            scale.Y           = NameplateLogo.c_targetScaleMinY;
+            this.m_scaleState = ScaleState.ScaleLingering;
         }
 
-        _ = scale.X         = _ = scale.Y;
-        _ = this.Icon.Scale = _ = scale;
+        scale.X         = scale.Y;
+        this.Icon.Scale = scale;
     }
 
     private void HandleScaleUp(
         float delta
     )
     {
-        var scale    = _ = this.Icon.Scale;
-        _ = scale.Y += _ = NameplateLogo.c_scaleVelocity * delta;
+        var scale    = this.Icon.Scale;
+        scale.Y += NameplateLogo.c_scaleVelocity * delta;
 
-        if (_ = scale.Y >= NameplateLogo.c_targetScaleMaxY)
+        if (scale.Y >= NameplateLogo.c_targetScaleMaxY)
         {
-            _ = scale.Y           = _ = NameplateLogo.c_targetScaleMaxY;
-            _ = this.m_scaleState = _ = ScaleState.ScaleDown;
+            scale.Y           = NameplateLogo.c_targetScaleMaxY;
+            this.m_scaleState = ScaleState.ScaleDown;
         }
 
-        _ = scale.X         = _ = scale.Y;
-        _ = this.Icon.Scale = _ = scale;
+        scale.X         = scale.Y;
+        this.Icon.Scale = scale;
     }
 
     private void HandleScaleWaiting(
         float delta
     )
     {
-        _ = this.m_scaleElapsed += _ = delta;
+        this.m_scaleElapsed += delta;
         
-        if (_ = this.m_scaleElapsed < this.m_scaleWaitingDurationInSeconds)
+        if (this.m_scaleElapsed < this.m_scaleWaitingDurationInSeconds)
         {
             return;
         }
         
-        _ = this.m_scaleState   = _ = ScaleState.ScaleUp;
-        _ = this.m_scaleElapsed = _ = 0f;
-        _ = this.m_scaleWaitingDurationInSeconds = _ = this.m_random.RandiRange(
-            from: _ = NameplateLogo.c_scaleWaitingDurationInMillisecondsMin,
-            to:   _ = NameplateLogo.c_scaleWaitingDurationInMillisecondsMax
+        this.m_scaleState   = ScaleState.ScaleUp;
+        this.m_scaleElapsed = 0f;
+        this.m_scaleWaitingDurationInSeconds = this.m_random.RandiRange(
+            from: NameplateLogo.c_scaleWaitingDurationInMillisecondsMin,
+            to:   NameplateLogo.c_scaleWaitingDurationInMillisecondsMax
         ) / 1000f;
     }
 }

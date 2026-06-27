@@ -15,7 +15,7 @@ uniform float cutoff : hint_range(-1.0, 1.0) = 0.1;
 uniform float falloff : hint_range(0.0, 1.0) = 0.2;
 uniform float edge_fade : hint_range(0.0, 1.0) = 0.15;
 
-uniform float speed = 1.0;
+uniform float at_time;
 uniform float ray1_density = 8.0;
 uniform float ray2_density = 30.0;
 uniform float ray2_intensity : hint_range(0.0, 1.0) = 0.3;
@@ -72,8 +72,8 @@ void fragment()
 	vec2 transformed_uv = ( rotate(angle) * (UV - position) )  / ( (UV.y + spread) - (UV.y * spread) );
 
 	// Animate the ray according the the new transformed UVs
-	vec2 ray1 = vec2(transformed_uv.x * ray1_density + sin(TIME * 0.1 * speed) * (ray1_density * 0.2) + seed, 1.0);
-	vec2 ray2 = vec2(transformed_uv.x * ray2_density + sin(TIME * 0.2 * speed) * (ray1_density * 0.2) + seed, 1.0);
+	vec2 ray1 = vec2(transformed_uv.x * ray1_density + sin(at_time * 0.1) * (ray1_density * 0.2) + seed, 1.0);
+	vec2 ray2 = vec2(transformed_uv.x * ray2_density + sin(at_time * 0.2) * (ray1_density * 0.2) + seed, 1.0);
 
 	// Cut off the ray's edges
 	float cut = step(cutoff, transformed_uv.x) * step(cutoff, 1.0 - transformed_uv.x);

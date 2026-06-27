@@ -1,7 +1,11 @@
 
 using Godot;
+using Overlay.Core.Services.ColorInterpolators;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Overlay.Core.Contents.Chats;
 
@@ -13,6 +17,7 @@ internal sealed partial class Chat() :
 		base._EnterTree();
 		
 		this.RetrieveResources();
+		Chat.StartBadgeColorUpdater();
 	}
 	
 	public override void _Process(
@@ -35,25 +40,33 @@ internal sealed partial class Chat() :
     }
     
     internal static void AddChatMessageToInstances(
-        string             username,
-        string             usernameColor,
-        string             message,
-        ChatMessageEmote[] chatMessageEmotes,
-        bool               isModerator,
-        bool               isStreamer,
-        bool               isSubscriber
+        string                            username,
+        bool                              hasCustomBadgeColor,
+        ServiceColorInterpolatorColorMode customBadgeColor,
+        bool                              hasCustomNameColor,
+        ServiceColorInterpolatorColorMode customNameColor,
+        string                            message,
+        ChatMessageEmote[]                chatMessageEmotes,
+        bool                              isModerator,
+        bool                              isStreamer,
+        bool                              isSubscriber,
+        bool                              isBot
     )
     {
 	    foreach (var instance in Chat.s_instances)
 	    {
 		    instance.AddChatMessage(
-			    username:          username,
-			    usernameColor:     usernameColor,
-			    message:           message,
-			    chatMessageEmotes: chatMessageEmotes,
-			    isModerator:       isModerator,
-			    isStreamer:        isStreamer,
-			    isSubscriber:      isSubscriber
+			    username:            username,
+			    hasCustomBadgeColor: hasCustomBadgeColor,
+			    customBadgeColor:    customBadgeColor,
+			    hasCustomNameColor:  hasCustomNameColor,
+			    customNameColor:     customNameColor,
+			    message:             message,
+			    chatMessageEmotes:   chatMessageEmotes,
+			    isModerator:         isModerator,
+			    isStreamer:          isStreamer,
+			    isSubscriber:        isSubscriber,
+			    isBot:               isBot
 		    );
 	    }
     }
@@ -69,38 +82,91 @@ internal sealed partial class Chat() :
 			);
 	    }
     }
-    
-    private readonly struct ChatMessageData
+
+    internal static void UpdateChatMessageBadgeColorForInstances(
+        string                            username,
+	    bool                              hasCustomColor,
+	    ServiceColorInterpolatorColorMode customColor
+	)
     {
-	    internal readonly string             Username          = string.Empty;
-	    internal readonly string             UsernameColor     = string.Empty;
-	    internal readonly string             Message           = string.Empty;
-	    internal readonly ChatMessageEmote[] ChatMessageEmotes = null;
-	    internal readonly bool               IsModerator       = false;
-	    internal readonly bool               IsStreamer        = false;
-	    internal readonly bool               IsSubscriber      = false;
+	    foreach (var instance in Chat.s_instances)
+	    {
+		    instance.UpdateChatMessageBadgeColor(
+			    username:       username,
+			    hasCustomColor: hasCustomColor,
+			    customColor:    customColor
+		    );
+	    }
+    }
+
+    internal static void UpdateChatMessageNameColorForInstances(
+	    string                            username,
+	    bool                              hasCustomColor,
+	    ServiceColorInterpolatorColorMode customColor
+	)
+    {
+	    foreach (var instance in Chat.s_instances)
+	    {
+		    instance.UpdateChatMessageNameColor(
+			    username:       username,
+			    hasCustomColor: hasCustomColor,
+			    customColor:    customColor
+		    );
+	    }
+    }
+    
+    private sealed class ChatMessageData
+    {
+	    internal readonly string                    Username;
+	    internal readonly string                    Message;
+	    internal readonly ChatMessageEmote[]        ChatMessageEmotes   = null;
+	    internal readonly bool                      IsModerator         = false;
+	    internal readonly bool                      IsStreamer          = false;
+	    internal readonly bool                      IsSubscriber        = false;
+	    internal readonly bool                      IsBot               = false;
+	    
+	    internal  bool                              HasCustomNameColor  = false;
+	    internal  ServiceColorInterpolatorColorMode CustomNameColor;
+	    internal  bool                              HasCustomBadgeColor = false;
+	    internal  ServiceColorInterpolatorColorMode CustomBadgeColor;
 
 	    public ChatMessageData(
-		    string             username,
-		    string             usernameColor,
-		    string             message,
-		    ChatMessageEmote[] chatMessageEmotes,
-		    bool               isModerator,
-		    bool               isStreamer,
-			bool               isSubscriber
+		    string                            username,
+		    bool                              hasCustomBadgeColor,
+		    ServiceColorInterpolatorColorMode customBadgeColor,
+		    bool                              hasCustomNameColor,
+		    ServiceColorInterpolatorColorMode customNameColor,
+		    string                            message,
+		    ChatMessageEmote[]                chatMessageEmotes,
+		    bool                              isModerator,
+		    bool                              isStreamer,
+			bool                              isSubscriber,
+		    bool                              isBot
 	    )
 	    {
-		    this.Username          = username;
-		    this.UsernameColor     = usernameColor;
-		    this.Message           = message;
-		    this.ChatMessageEmotes = chatMessageEmotes;
-		    this.IsModerator       = isModerator;
-		    this.IsStreamer        = isStreamer;
-		    this.IsSubscriber      = isSubscriber;
+		    this.Username            = username;
+		    this.HasCustomBadgeColor = hasCustomBadgeColor;
+		    this.CustomBadgeColor    = customBadgeColor;
+		    this.HasCustomNameColor  = hasCustomNameColor;
+		    this.CustomNameColor     = customNameColor;
+		    this.Message             = message;
+		    this.ChatMessageEmotes   = chatMessageEmotes;
+		    this.IsModerator         = isModerator;
+		    this.IsStreamer          = isStreamer;
+		    this.IsSubscriber        = isSubscriber;
+		    this.IsBot               = isBot;
 	    }
     };
 
-    private const int    c_chatMessageCacheSize = 11;
+    private enum BadgeType
+    {
+	    Bot,
+	    Moderator,
+	    Streamer,
+	    Subscriber,
+    }
+	
+    private const int    c_chatMessageCacheSize = 20;
     private const int    c_maxPixelCount        = 400;
     private const int    c_pixelSpacing         = 2;
     private const string c_illegalBbCodePattern =
@@ -157,39 +223,69 @@ internal sealed partial class Chat() :
         $"|zwnj" +
         $@")[^\]]*\]";
 
-    private static readonly List<Chat>      s_instances                   = [];
-
-    private readonly Queue<ChatMessage>     m_availableChatMessages       = new();
-    private readonly Queue<ChatMessage>     m_displayedChatMessages       = new();
-    private readonly Queue<ChatMessage>     m_queuedChatMessages          = new();
-    private readonly Queue<ChatMessageData> m_pendingChatMessageDatas     = new();
-
-    private readonly object                 m_availableChatMessagesLock   = new();
-    private readonly object                 m_displayedChatMessagesLock   = new();
-    private readonly object                 m_pendingChatMessageDatasLock = new();
-    private readonly object                 m_queuedChatMessagesLock      = new();
-
-    private Control                         m_chatPivot                   = null;
-    private int                             m_currentPixel                = 0;
+    private static readonly List<Chat>                                                               s_instances                   = [];
+    private static readonly Dictionary<BadgeType, string>                                            s_badgePaths                  = new()
+    {
+	    {
+		    BadgeType.Bot,
+		    "res://Resources/Textures/Icons/Icon_Joystick_Bot.png"
+	    },
+	    {
+		    BadgeType.Moderator,
+		    "res://Resources/Textures/Icons/Icon_Joystick_Moderator.png"
+	    },
+	    {
+		    BadgeType.Streamer,
+		    "res://Resources/Textures/Icons/Icon_Joystick_Streamer.png"
+	    },
+	    {
+		    BadgeType.Subscriber,
+		    "res://Resources/Textures/Icons/Icon_Joystick_Subscriber.png"
+	    },
+    };
+    private static readonly Dictionary<BadgeType, ImageTexture>                                      s_dynamicTexturesBadge        = new();
+    private static readonly Dictionary<(BadgeType, ServiceColorInterpolatorColorMode), ImageTexture> s_dynamicTexturesBadgeColor   = new();
+    private static readonly Dictionary<BadgeType, byte[]>                                            s_basePixelData               = new();
+    
+    private readonly Queue<ChatMessage>                                                              m_availableChatMessages       = new();
+    private readonly Queue<ChatMessage>                                                              m_displayedChatMessages       = new();
+    private readonly Queue<ChatMessage>                                                              m_queuedChatMessages          = new();
+    private readonly Queue<ChatMessageData>                                                          m_pendingChatMessageDatas     = new();
+    
+    private readonly object                                                                          m_availableChatMessagesLock   = new();
+    private readonly object                                                                          m_displayedChatMessagesLock   = new();
+    private readonly object                                                                          m_pendingChatMessageDatasLock = new();
+    private readonly object                                                                          m_queuedChatMessagesLock      = new();
+    
+    private Control                                                                                  m_chatPivot                   = null;
+    private int                                                                                      m_currentPixel                = 0;
     
     private void AddChatMessage(
-	    string             username,
-	    string             usernameColor,
-	    string             message,
-	    ChatMessageEmote[] chatMessageEmotes,
-	    bool               isModerator,
-	    bool               isStreamer,
-	    bool               isSubscriber
+	    string                            username,
+	    bool                              hasCustomBadgeColor,
+	    ServiceColorInterpolatorColorMode customBadgeColor,
+	    bool                              hasCustomNameColor,
+	    ServiceColorInterpolatorColorMode customNameColor,
+	    string                            message,
+	    ChatMessageEmote[]                chatMessageEmotes,
+	    bool                              isModerator,
+	    bool                              isStreamer,
+	    bool                              isSubscriber,
+	    bool                              isBot
     )
     {
 	    var chatMessageData = new ChatMessageData(
-		    username:          username,
-		    usernameColor:     usernameColor,
-		    message:           message,
-		    chatMessageEmotes: chatMessageEmotes,
-		    isModerator:       isModerator,
-		    isStreamer:        isStreamer,
-		    isSubscriber:      isSubscriber
+		    username:            username,
+		    hasCustomBadgeColor: hasCustomBadgeColor,
+		    customBadgeColor:    customBadgeColor,
+		    hasCustomNameColor:  hasCustomNameColor,
+		    customNameColor:     customNameColor,
+		    message:             message,
+		    chatMessageEmotes:   chatMessageEmotes,
+		    isModerator:         isModerator,
+		    isStreamer:          isStreamer,
+		    isSubscriber:        isSubscriber,
+		    isBot:               isBot
 	    );
 	    lock (this.m_pendingChatMessageDatasLock)
 	    {
@@ -204,13 +300,17 @@ internal sealed partial class Chat() :
     )
     {
 	    var chatMessageData = new ChatMessageData(
-		    username:          "SmoothBot",
-		    usernameColor:     string.Empty,
-		    message:           message,
-		    chatMessageEmotes: null,
-		    isModerator:       true,
-		    isStreamer:        false,
-		    isSubscriber:      true
+		    username:            "SmoothBot",
+		    hasCustomBadgeColor: true,
+		    customBadgeColor:    ServiceColorInterpolatorColorMode.White,
+		    hasCustomNameColor:  true,
+		    customNameColor:     ServiceColorInterpolatorColorMode.TeamFortress2KillStreak20,
+		    message:             message,
+		    chatMessageEmotes:   null,
+		    isModerator:         true,
+		    isStreamer:          false,
+		    isSubscriber:        true,
+		    isBot:               true
 	    );
 	    lock (this.m_pendingChatMessageDatasLock)
 	    {
@@ -218,6 +318,27 @@ internal sealed partial class Chat() :
 			    item: chatMessageData
 		    );
 	    }
+    }
+    
+    private static void ApplyUpdateBase(
+	    BadgeType                         type,
+	    Image                             image
+    )
+    {
+	    Chat.s_dynamicTexturesBadge[key: type].Update(
+		    image: image
+	    );
+    }
+    
+    private static void ApplyUpdateColor(
+	    BadgeType                         type,
+	    ServiceColorInterpolatorColorMode color,
+	    Image                             image
+	)
+    {
+	    Chat.s_dynamicTexturesBadgeColor[key: (type, color)].Update(
+		    image: image
+		);
     }
     
     private static bool IsChatMessageIllegal(
@@ -288,9 +409,12 @@ internal sealed partial class Chat() :
 			    node: chatMessage
 			);
 
-			this.m_availableChatMessages.Enqueue(
-				item: chatMessage	
-			);
+			lock (this.m_availableChatMessagesLock)
+			{
+				this.m_availableChatMessages.Enqueue(
+					item: chatMessage	
+				);
+			}
         }
 	}
 
@@ -322,7 +446,7 @@ internal sealed partial class Chat() :
             );
         }
 
-		var labelHeight         = chatMessage.GetLabelHeightInPixels();
+		var labelHeight     = chatMessage.GetLabelHeightInPixels();
 		this.m_currentPixel = this.m_currentPixel + labelHeight + Chat.c_pixelSpacing;
 		while (this.m_currentPixel > Chat.c_maxPixelCount)
 		{
@@ -332,8 +456,8 @@ internal sealed partial class Chat() :
 				oldestChatMessage = this.m_displayedChatMessages.Dequeue();
             }
 
-			var oldestLabelHeight    = oldestChatMessage.GetLabelHeightInPixels() + Chat.c_pixelSpacing;
-			this.m_currentPixel -= oldestLabelHeight;
+			var oldestLabelHeight  = oldestChatMessage.GetLabelHeightInPixels() + Chat.c_pixelSpacing;
+			this.m_currentPixel   -= oldestLabelHeight;
 
 			var offset = new Vector2(
 				x: 0u,
@@ -376,13 +500,17 @@ internal sealed partial class Chat() :
         }
 
         chatMessage.Generate(
-            username:          chatMessageData.Username,
-            usernameColor:     chatMessageData.UsernameColor,
-            message:           chatMessageData.Message,
-            chatMessageEmotes: chatMessageData.ChatMessageEmotes,
-            isModerator:       chatMessageData.IsModerator,
-            isStreamer:        chatMessageData.IsStreamer,
-            isSubscriber:      chatMessageData.IsSubscriber
+            username:            chatMessageData.Username,
+            hasCustomBadgeColor: chatMessageData.HasCustomBadgeColor,
+            customBadgeColor:    chatMessageData.CustomBadgeColor,
+            hasCustomNameColor:  chatMessageData.HasCustomNameColor,
+            customNameColor:     chatMessageData.CustomNameColor,
+            message:             chatMessageData.Message,
+            chatMessageEmotes:   chatMessageData.ChatMessageEmotes,
+            isModerator:         chatMessageData.IsModerator,
+            isStreamer:          chatMessageData.IsStreamer,
+            isSubscriber:        chatMessageData.IsSubscriber,
+            isBot:               chatMessageData.IsBot
         );
     }
 
@@ -407,5 +535,216 @@ internal sealed partial class Chat() :
 		this.m_chatPivot = this.GetNode<Control>(
 			path: $"ChatPivot"
 		);
+	}
+
+	private static void StartBadgeColorUpdater()
+	{
+		var badges = Enum.GetValues<BadgeType>();
+		var colors = Enum.GetValues<ServiceColorInterpolatorColorMode>();
+		foreach (var badge in badges)
+		{
+			var textureOriginalPath = Chat.s_badgePaths[key: badge];
+			var textureOriginal     = GD.Load<Texture2D>(
+				path: textureOriginalPath
+			);
+			var textureImage        = textureOriginal.GetImage();
+			textureImage.Convert(
+				format: Image.Format.Rgba8
+			);
+					
+			Chat.s_basePixelData[key: badge]        = textureImage.GetData();
+			var dynamicTexture                      = ImageTexture.CreateFromImage(
+				image: textureImage
+			);
+			dynamicTexture.ResourcePath             = $"user://dynamic_{badge}_Default.res";
+			Chat.s_dynamicTexturesBadge[key: badge] = dynamicTexture;
+
+			foreach (var color in colors)
+			{
+				dynamicTexture                                        = ImageTexture.CreateFromImage(
+					image: textureImage
+				);
+				dynamicTexture.ResourcePath                           = $"user://dynamic_{badge}_{color}.res";
+				Chat.s_dynamicTexturesBadgeColor[key: (badge, color)] = dynamicTexture;
+			}
+		}
+		
+		Task.Run(
+			function: async () =>
+			{
+				var serviceColorInterpolator = Services.Services.GetService<ServiceColorInterpolatorInverse>();
+				while (true)
+				{
+					if (
+						Chat.s_instances.Count is 0 || 
+						GodotObject.IsInstanceValid(
+							instance: Chat.s_instances[0]
+						) is false
+					) 
+					{
+						await Task.Delay(
+							millisecondsDelay: 16
+						);
+						continue;
+					}
+					
+					var color = serviceColorInterpolator.GetColorByCurrentMode(
+						colorIndexType: IServiceColorInterpolatorDefinition.ColorIndexType.Color0
+					);
+					foreach (var badge in Chat.s_dynamicTexturesBadge.Keys)
+					{
+						var baseData = Chat.s_basePixelData[key: badge];
+						var newData  = new byte[baseData.Length];
+
+						for (var i = 0; i < baseData.Length; i += 4)
+						{
+							newData[i]     = (byte)(baseData[i]     * color.R);
+							newData[i + 1] = (byte)(baseData[i + 1] * color.G);
+							newData[i + 2] = (byte)(baseData[i + 2] * color.B);
+							newData[i + 3] = baseData[i + 3];
+						}
+
+						var updatedImage = Image.CreateFromData(
+							width:      32,
+							height:     32,
+							useMipmaps: false,
+							format:     Image.Format.Rgba8, 
+							data:       newData
+						);
+                
+						var callable = new Callable(
+							target: Chat.s_instances[0],
+							method: MethodName.ApplyUpdateBase
+						);
+						callable.CallDeferred(
+							args: [
+								Variant.From(
+									from: badge
+								),
+								updatedImage
+							]
+						);
+					}
+					
+					foreach (var badgeColor in Chat.s_dynamicTexturesBadgeColor.Keys)
+					{
+						var baseData = Chat.s_basePixelData[key: badgeColor.Item1];
+						var newData  = new byte[baseData.Length];
+
+						color = serviceColorInterpolator.GetColorByMode(
+							colorMode:      badgeColor.Item2,
+							colorIndexType: IServiceColorInterpolatorDefinition.ColorIndexType.Color0
+						);
+						for (var i = 0; i < baseData.Length; i += 4)
+						{
+							newData[i]     = (byte)(baseData[i]     * color.R);
+							newData[i + 1] = (byte)(baseData[i + 1] * color.G);
+							newData[i + 2] = (byte)(baseData[i + 2] * color.B);
+							newData[i + 3] = baseData[i + 3];
+						}
+
+						var updatedImage = Image.CreateFromData(
+							width:      32,
+							height:     32,
+							useMipmaps: false,
+							format:     Image.Format.Rgba8, 
+							data:       newData
+						);
+                
+						var callable = new Callable(
+							target: Chat.s_instances[0],
+							method: MethodName.ApplyUpdateColor
+						);
+						callable.CallDeferred(
+							args: [
+								Variant.From(
+									from: badgeColor.Item1
+								),
+								Variant.From(
+									from: badgeColor.Item2
+								),
+								updatedImage
+							]
+						);
+					}
+					
+					await Task.Delay(
+						millisecondsDelay: 16
+					);
+				}
+			}
+		);
+	}
+	
+	internal void UpdateChatMessageBadgeColor(
+		string                            username,
+		bool                              hasCustomColor,
+		ServiceColorInterpolatorColorMode customColor
+	)
+	{
+		lock (this.m_displayedChatMessagesLock)
+		{
+			foreach (
+				var displayedChatMessage in from displayedChatMessage in this.m_displayedChatMessages 
+					let hasUsername = displayedChatMessage.HasUsername(
+				         username: username
+			        ) where hasUsername is true select displayedChatMessage
+			)
+			{
+				displayedChatMessage.UpdateBadgeColor(
+					hasCustomColor: hasCustomColor,
+					customColor:    customColor
+				);
+			}
+		}
+		
+		lock (this.m_pendingChatMessageDatasLock)
+		{
+			foreach (
+				var pendingChatMessageData in this.m_pendingChatMessageDatas.Where(
+					predicate: pendingChatMessageData => pendingChatMessageData.Username == username
+				)
+			)
+			{
+				pendingChatMessageData.HasCustomBadgeColor = hasCustomColor;
+				pendingChatMessageData.CustomBadgeColor    = customColor;
+			}
+		}
+	}
+	
+	internal void UpdateChatMessageNameColor(
+		string                            username,
+		bool                              hasCustomColor,
+		ServiceColorInterpolatorColorMode customColor
+	)
+	{
+		lock (this.m_displayedChatMessagesLock)
+		{
+			foreach (
+				var displayedChatMessage in from displayedChatMessage in this.m_displayedChatMessages 
+				let hasUsername = displayedChatMessage.HasUsername(
+					username: username
+				) where hasUsername is true select displayedChatMessage
+			)
+			{
+				displayedChatMessage.UpdateNameColor(
+					hasCustomColor: hasCustomColor,
+					customColor:    customColor
+				);
+			}
+		}
+
+		lock (this.m_pendingChatMessageDatasLock)
+		{
+			foreach (
+				var pendingChatMessageData in this.m_pendingChatMessageDatas.Where(
+					predicate: pendingChatMessageData => pendingChatMessageData.Username == username
+				)
+			)
+			{
+				pendingChatMessageData.HasCustomNameColor = hasCustomColor;
+				pendingChatMessageData.CustomNameColor    = customColor;
+			}
+		}
 	}
 }

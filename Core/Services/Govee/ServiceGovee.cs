@@ -1,5 +1,8 @@
 
+using System;
 using Godot;
+using Overlay.Core.Contents;
+using Overlay.Core.Services.ColorInterpolators;
 using Overlay.Core.Services.Databases.Tasks;
 using Overlay.Core.Services.Databases.Tasks.Retrieves;
 using Overlay.Core.Services.Godots;
@@ -13,7 +16,7 @@ using System.Text.Json;
 
 namespace Overlay.Core.Services.Govee;
 
-internal sealed class ServiceGovee() :
+public sealed class ServiceGovee() :
     IService
 {
     Task IService.Setup()
@@ -33,7 +36,24 @@ internal sealed class ServiceGovee() :
         return Task.CompletedTask;
     }
     
-    internal void SetLightColor(
+    internal void SetLightColorForCeilingLights(
+        Color color
+    )
+    {
+        var rgbValue = ServiceGovee.ConvertColorToInt(
+            color: color
+        );
+        
+        var serviceGoveePayload = new ServiceGoveePayload();
+        serviceGoveePayload.Payload.Capability.Value = rgbValue;
+        
+        this.SendPayloads(
+            payload:       serviceGoveePayload,
+            ceilingLights: true
+        );
+    }
+    
+    internal void SetLightColorForStandingLights(
         Color color
     )
     {
@@ -48,11 +68,52 @@ internal sealed class ServiceGovee() :
             payload:       serviceGoveePayload,
             ceilingLights: false
         );
+    }
+    
+    internal void SetLightSceneForCeilingLights(
+        string sceneName
+    )
+    {
+        if (
+            this.m_scenesCeilingLights.TryGetValue(
+                key:   sceneName, 
+                value: out var light
+            ) is true
+        )
+        {
+            var serviceGoveePayloadLightsCeiling = new ServiceGoveePayload();
+            serviceGoveePayloadLightsCeiling.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
+            serviceGoveePayloadLightsCeiling.Payload.Capability.Instance = $"diyScene";
+            serviceGoveePayloadLightsCeiling.Payload.Capability.Value    = light;
         
-        this.SendPayloads(
-            payload:       serviceGoveePayload,
-            ceilingLights: true
-        );
+            this.SendPayloads(
+                payload:       serviceGoveePayloadLightsCeiling,
+                ceilingLights: true
+            );
+        }
+    }
+
+    internal void SetLightSceneForStandingLights(
+        string sceneName
+    )
+    {
+        if (
+            this.m_scenesStandingLights.TryGetValue(
+                key:   sceneName, 
+                value: out var light
+            ) is true
+        )
+        {
+            var serviceGoveePayloadLightsStanding = new ServiceGoveePayload();
+            serviceGoveePayloadLightsStanding.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
+            serviceGoveePayloadLightsStanding.Payload.Capability.Instance = $"diyScene";
+            serviceGoveePayloadLightsStanding.Payload.Capability.Value    = light;
+        
+            this.SendPayloads(
+                payload:       serviceGoveePayloadLightsStanding,
+                ceilingLights: false
+            );
+        }
     }
     
     internal void TurnOffLights()
@@ -71,51 +132,17 @@ internal sealed class ServiceGovee() :
             ceilingLights: true
         );
     }
-
-    internal void SetLightScene(
-        string sceneName
-    )
-    {
-        if (
-            this.m_scenesStandingLights.TryGetValue(sceneName, out var light) is true
-        )
-        {
-            var serviceGoveePayloadLightsStanding = new ServiceGoveePayload();
-            serviceGoveePayloadLightsStanding.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
-            serviceGoveePayloadLightsStanding.Payload.Capability.Instance = $"diyScene";
-            serviceGoveePayloadLightsStanding.Payload.Capability.Value    = light;
-        
-            this.SendPayloads(
-                payload:       serviceGoveePayloadLightsStanding,
-                ceilingLights: false
-            );
-        }
-        
-        if (
-            this.m_scenesCeilingLights.TryGetValue(sceneName, out light) is true
-        )
-        {
-            var serviceGoveePayloadLightsCeiling = new ServiceGoveePayload();
-            serviceGoveePayloadLightsCeiling.Payload.Capability.Type     = $"devices.capabilities.dynamic_scene";
-            serviceGoveePayloadLightsCeiling.Payload.Capability.Instance = $"diyScene";
-            serviceGoveePayloadLightsCeiling.Payload.Capability.Value    = this.m_scenesCeilingLights[key: sceneName];
-        
-            this.SendPayloads(
-                payload:       serviceGoveePayloadLightsCeiling,
-                ceilingLights: true
-            );
-        }
-    }
     
     private const string                     c_goveeAddress          = "https://openapi.api.govee.com/";
     private const string                     c_goveeLightSkuCeiling  = "H6008";
     private const string                     c_goveeLightSkuStanding = "H607C";
-
     private readonly Dictionary<string, int> m_scenesStandingLights  = [];
     private readonly Dictionary<string, int> m_scenesCeilingLights   = [];
     private string                           m_apiKey                = string.Empty;
     private readonly List<string>            m_hardwareIds           = [];
     private ServiceGodotHttp                 m_serviceGodotHttp      = null;
+    private bool                             m_fetchedCeilingLights  = false;
+    private bool                             m_fetchedStandingLights = false;
 
     private enum GoveeLights
     {
@@ -132,6 +159,20 @@ internal sealed class ServiceGovee() :
     )
     {
         return ((color.R8 & 0xFF) << 16) | ((color.G8 & 0xFF) << 8) | ((color.B8 & 0xFF) << 0);
+    }
+    
+    private static (IServiceColorInterpolatorDefinition.ColorType? color, string scene) GetRandomLightState()
+    {
+        if (
+            Random.Shared.Next(
+                maxValue: 2
+            ) is 0
+        )
+        {
+            return (ServiceColorInterpolatorColorRandomizer.GetRandomColorType(), null);
+        }
+        
+        return (null, ServiceGoveeSceneRandomizer.GetRandomSceneName());
     }
     
     private void HandleServiceDatabaseRetrievedListGoveeLights(
@@ -161,7 +202,7 @@ internal sealed class ServiceGovee() :
     
     private void RetrieveResources()
     {
-        var serviceGodots           = Services.GetService<ServiceGodots>();
+        var serviceGodots       = Services.GetService<ServiceGodots>();
         this.m_serviceGodotHttp = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
     }
     
@@ -171,8 +212,12 @@ internal sealed class ServiceGovee() :
         {
             Payload =
             {
-                Device = this.m_hardwareIds[(int) GoveeLights.StandingLight1],
-                Sku    = ServiceGovee.c_goveeLightSkuStanding
+                Device     = this.m_hardwareIds[(int) GoveeLights.StandingLight1],
+                Sku        = ServiceGovee.c_goveeLightSkuStanding,
+                Pagination = new ServiceGoveePayloadDataPagination
+                {
+                    PageSize = 50
+                }
             }
         };
 
@@ -225,6 +270,12 @@ internal sealed class ServiceGovee() :
                         );
                     }
                 }
+                
+                this.m_fetchedStandingLights = true;
+                
+#if !DEBUG
+                    this.SetInitialLightColor();
+#endif
             }
         );
     }
@@ -289,6 +340,12 @@ internal sealed class ServiceGovee() :
                             );
                         }
                     }
+
+                    this.m_fetchedCeilingLights = true;
+                    
+#if !DEBUG
+                    this.SetInitialLightColor();
+#endif
                 }
             );
         }
@@ -371,6 +428,63 @@ internal sealed class ServiceGovee() :
                     );
                 }
             );
+        }
+    }
+
+    private void SetInitialLightColor()
+    {
+        if (
+            this.m_fetchedCeilingLights is true && 
+            this.m_fetchedStandingLights is true
+        )
+        {
+            var useSameValue = Random.Shared.Next(
+                maxValue: 5
+            ) is not 0;
+            
+            if (useSameValue)
+            {
+                if (
+                    Random.Shared.Next(
+                        maxValue: 5
+                    ) is not 0
+                )
+                {
+                    var color = ServiceColorInterpolatorColorRandomizer.GetRandomColorType();
+                    GoveeLightControllers.SetGoveeLightControllers(
+                        lightsCeiling:  (color, null),
+                        lightsStanding: (color, null)
+                    );
+                    GoveeLightControllerCeiling.Instance.SetAndStoreLightColor(
+                        colorType:           color, 
+                        delayInMilliseconds: GoveeLightControllers.DelayInColorCycleInShortMilliseconds
+                    );
+                    GoveeLightControllerStanding.Instance.SetAndStoreLightColor(
+                        colorType:           color, 
+                        delayInMilliseconds: GoveeLightControllers.DelayInColorCycleInShortMilliseconds
+                    );
+                }
+                else
+                {
+                    var sceneName = ServiceGoveeSceneRandomizer.GetRandomSceneName();
+                    GoveeLightControllers.SetGoveeLightControllers(
+                        lightsCeiling:  (null, sceneName),
+                        lightsStanding: (null, sceneName)
+                    );
+                }
+            }
+            else
+            {
+                var lightStateA = ServiceGovee.GetRandomLightState();
+                var lightStateB = ServiceGovee.GetRandomLightState();
+                var swap        = new Random().Next(
+                    maxValue: 2
+                ) is 0;
+                GoveeLightControllers.SetGoveeLightControllers(
+                    lightsCeiling:  swap ? lightStateA : lightStateB,
+                    lightsStanding: swap ? lightStateB : lightStateA
+                );
+            }
         }
     }
     

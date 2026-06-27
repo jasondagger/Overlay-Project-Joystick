@@ -12,34 +12,57 @@ public sealed class ServiceJoystickRequest()
     [JsonPropertyName(
         name: "command"
     )]
-    public string           Command    { get; set; } = _ = $"message";
+    public string           Command    { get; set; } = $"message";
     
     [JsonPropertyName(
         name: "identifier"
     )]
-    public string           Identifier { get; set; } = _ = "{\"channel\":\"GatewayChannel\"}";
+    public string           Identifier { get; set; } = "{\"channel\":\"GatewayChannel\"}";
     
     [JsonPropertyName(
         name: "data"
     )]
-    public string           Data       { get; set; } = _ = string.Empty;
+    public string           Data       { get; set; } = string.Empty;
 
-    public static ServiceJoystickRequest CreateServiceJoystickRequestChatMessage(
+    public static ServiceJoystickRequest CreateServiceJoystickRequestSendMessage(
         string text,
         string channelId
     )
     {
-        var serviceJoystickRequest     = _ = new ServiceJoystickRequest();
-        var serviceJoystickRequestData = _ = new ServiceJoystickRequestData();
-        
-        serviceJoystickRequestData.Action    = _ = $"send_message";
-        serviceJoystickRequestData.Text      = _ = $"{_ = text}";
-        serviceJoystickRequestData.ChannelId = _ = $"{_ = channelId}";
-        
-        serviceJoystickRequest.Data = _ = JsonHelper.Serialize(
-            @object: _ = serviceJoystickRequestData
+        var serviceJoystickRequest     = new ServiceJoystickRequest();
+        var serviceJoystickRequestData = new ServiceJoystickRequestData
+        {
+            Action    = $"send_message",
+            Text      = $"{text}",
+            ChannelId = $"{channelId}"
+        };
+
+        serviceJoystickRequest.Data = JsonHelper.Serialize(
+            @object: serviceJoystickRequestData
         );
         
-        return _ = serviceJoystickRequest;
+        return serviceJoystickRequest;
+    }
+    
+    public static ServiceJoystickRequest CreateServiceJoystickRequestSendWhisper(
+        string username,
+        string text,
+        string channelId
+    )
+    {
+        var serviceJoystickRequest     = new ServiceJoystickRequest();
+        var serviceJoystickRequestData = new ServiceJoystickRequestData
+        {
+            Action    = $"send_whisper",
+            Username  = $"{username}",
+            Text      = $"{text}",
+            ChannelId = $"{channelId}"
+        };
+
+        serviceJoystickRequest.Data = JsonHelper.Serialize(
+            @object: serviceJoystickRequestData
+        );
+        
+        return serviceJoystickRequest;
     }
 }

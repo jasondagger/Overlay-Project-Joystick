@@ -1,10 +1,10 @@
 
+using Godot;
+using Overlay.Core.Contents.Effects;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using Godot;
-using Overlay.Core.Contents.Chats;
-using Overlay.Core.Contents.Effects;
 using Vector2 = Godot.Vector2;
 
 namespace Overlay.Core.Contents.Nameplates;
@@ -15,37 +15,39 @@ internal abstract partial class NameplateLatestEvent() :
     [Export] public RichTextLabelSampler RichTextLabelSampler = null;
     [Export] public ColorRect            ColorRectIcon        = null;
     [Export] public Control              ControlPivot         = null;
+    [Export] public float                ScrollDistance       = 480f;
+    [Export] public bool                 SendDatabaseUpdate   = true;
 
     public override void _Process(
         double elapsed
     )
     {
-        if (_ = this.m_move)
+        if (this.m_move)
         {
-            var position    = _ = this.ControlPivot.Position;
-            _ = position.X -= _ = NameplateLatestEvent.c_velocityScrollControl * (float)elapsed;
+            var position    = this.ControlPivot.Position;
+            position.X -= NameplateLatestEvent.c_velocityScrollControl * (float)elapsed;
 
-            if (_ = position.X <= this.m_targetX)
+            if (position.X <= this.m_targetX)
             {
-                _ = position.X  = _ = this.m_targetX;
-                _ = this.m_move = _ = false;
+                position.X  = this.m_targetX;
+                this.m_move = false;
             }
 
-            _ = this.ControlPivot.Position = _ = position;
+            this.ControlPivot.Position = position;
         }
 
-        if (_ = this.m_isRichTextLabelScrolling)
+        if (this.m_isRichTextLabelScrolling)
         {
             this.AnimateScroll(
-                elapsed: _ = (float)elapsed
+                elapsed: (float)elapsed
             );
         }
 
         this.AnimateIcon(
-            elapsed: _ = (float)elapsed
+            elapsed: (float)elapsed
         );
 
-        if (_ = this.m_reset)
+        if (this.m_reset)
         {
             this.ResetToInitialPosition();
         }
@@ -57,100 +59,16 @@ internal abstract partial class NameplateLatestEvent() :
         
         this.RegisterForJoystickEvents();
         this.RichTextLabelSampler.LoadRichTextLabelsAndAttachToParentNode(
-            parent: _ = this.ControlPivot
+            parent: this.ControlPivot
         );
     }
     
-    protected Queue<string>          m_names        = new();
+    protected readonly Queue<string> m_names        = new();
     protected readonly Queue<string> m_pendingNames = new();
 
-    protected void PlayNotification() 
+    protected void Play()
     {
-        Task.Run(
-            function:
-            async () =>
-            {
-                for (var i = _ = 0; _ = i < this.m_names.Count; _ = i++)
-                {
-                    _ = this.Text = _ = this.m_names.ElementAt(
-                        index: _ = i
-                    );
-                    
-                    this.CallDeferred(
-                        method: _ = $"{_ = nameof(NameplateLatestEvent.CreateTextLetters)}"
-                    );
-
-                    await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestEvent.c_richTextLabelTitleDelayInMilliseconds
-                    );
-
-                    this.StartScrollToCenter();
-                    this.SetImageIconState(
-                        imageIconAnimationState: _ = ImageIconAnimationState.Showing
-                    );
- 
-                    if (_ = this.m_distanceOffScreen > 0f)
-                    {
-                        var animationDelay = Mathf.RoundToInt(
-                            s: _ = this.m_distanceOffScreen / NameplateLatestEvent.c_velocityScrollControlInMilliseconds
-                        );
-                        var remainingScreenDuration = _ = NameplateLatestEvent.c_richTextLabelOnScreenDurationMax - animationDelay;
-                        var halfDelay = _ = Mathf.RoundToInt(
-                            s: _ = remainingScreenDuration / 2f
-                        );
-
-                        await Task.Delay(
-                            millisecondsDelay: _ = halfDelay
-                        );
-
-                        _ = this.m_move = _ = true;
-
-                        await Task.Delay(
-                            millisecondsDelay: _ = halfDelay
-                        );
-                    }
-                    else
-                    {
-                        await Task.Delay(
-                            millisecondsDelay: _ = NameplateLatestEvent.c_richTextLabelOnScreenDurationMax
-                        );
-                    }
-                    
-                    await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestEvent.c_richTextLabelTitleDelayInMilliseconds
-                    );
-                    
-                    this.StartScrollToEnd();
-                    this.SetImageIconState(
-                        imageIconAnimationState: _ = ImageIconAnimationState.Hiding
-                    );
-
-                    await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestEvent.c_richTextLabelTitleDelayInMillisecondsCompletion
-                    );
-
-                    this.DestroyTextLetters();
-                    this.Reset();
-                }
-
-                if (_ = this.m_pendingNames.Count > 0u)
-                {
-                    var names = _ = new Queue<string>();
-                    names.Enqueue(
-                        item: _ = this.m_pendingNames.Dequeue()
-                    );
-                    while (_ = this.m_names.Count > 1u)
-                    {
-                        names.Enqueue(
-                            item: _ = this.m_names.Dequeue()
-                        );
-                    }
-                    _ = this.m_names = _ = names;
-                }
-                
-                this.QueueNotification();
-            }
-        );
+        _ = this.PlayNotification();
     }
 
     protected abstract void RegisterForJoystickEvents();
@@ -179,16 +97,13 @@ internal abstract partial class NameplateLatestEvent() :
         float                 end
     )
     {
-        public readonly RichTextLabel RichTextLabel         = _ = richTextLabel;
-        public TextLetterScrollState  TextLetterScrollState = _ = textLetterScrollState;
-        public readonly float         Center                = _ = center;
-        public readonly float         Start                 = _ = start;
-        public readonly float         End                   = _ = end;
+        public readonly RichTextLabel RichTextLabel         = richTextLabel;
+        public TextLetterScrollState  TextLetterScrollState = textLetterScrollState;
+        public readonly float         Center                = center;
+        public readonly float         Start                 = start;
+        public readonly float         End                   = end;
     }
     
-    private const float                          c_scrollDistance                                  = 480f;
-    private const uint                           c_maxNameCount                                    = 5u;
-
     private const int                            c_richTextLabelOnScreenDurationMax                = 8000;
     private const int                            c_richTextLabelTitleDelayInMilliseconds           = 500;
     private const int                            c_richTextLabelTitleDelayInMillisecondsCompletion = 2000;
@@ -218,21 +133,30 @@ internal abstract partial class NameplateLatestEvent() :
         float elapsed
     )
     {
-        for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
+        for (var i = 0; i < this.m_textLetters.Count; i++)
         {
-            var textLetter = _ = this.m_textLetters[i];
-            switch (_ = textLetter.TextLetterScrollState)
+            if (
+                this.m_textLetters.TryGetValue(
+                    key:   i,
+                    value: out var textLetter
+                ) is false
+            )
+            {
+                continue;
+            }
+                
+            switch (textLetter.TextLetterScrollState)
             {
                 case TextLetterScrollState.ScrollCenterToEnd:
                     this.ScrollCenterToEnd(
-                        index:   _ = i,
-                        elapsed: _ = elapsed
+                        index:   i,
+                        elapsed: elapsed
                     );
                     break;
                 case TextLetterScrollState.ScrollStartToCenter:
                     this.ScrollStartToCenter(
-                        index:   _ = i,
-                        elapsed: _ = elapsed
+                        index:   i,
+                        elapsed: elapsed
                     );
                     break;
 
@@ -243,13 +167,13 @@ internal abstract partial class NameplateLatestEvent() :
         }
 
         if (
-            _ = this.m_textLetters.All(
+            this.m_textLetters.Values.All(
                 predicate: x => 
-                    x.Value.TextLetterScrollState is TextLetterScrollState.Idle
+                    x.TextLetterScrollState is TextLetterScrollState.Idle
             ) is true
         )
         {
-            _ = this.m_isRichTextLabelScrolling = _ = false;
+            this.m_isRichTextLabelScrolling = false;
         }
     }
     
@@ -257,7 +181,7 @@ internal abstract partial class NameplateLatestEvent() :
         float elapsed
     )
     {
-        switch (_ = this.m_imageIconAnimationState)
+        switch (this.m_imageIconAnimationState)
         {
             case ImageIconAnimationState.Showing:
                 this.ShowIcon(
@@ -297,8 +221,8 @@ internal abstract partial class NameplateLatestEvent() :
                     richTextLabel: richTextLabel,
                     textLetterScrollState: TextLetterScrollState.Idle,
                     center: richTextLabel.Position.X,
-                    start: richTextLabel.Position.X + c_scrollDistance,
-                    end: richTextLabel.Position.X - c_scrollDistance - positionX
+                    start: richTextLabel.Position.X + ScrollDistance,
+                    end: richTextLabel.Position.X - ScrollDistance - positionX
                 )
             );
 
@@ -309,16 +233,16 @@ internal abstract partial class NameplateLatestEvent() :
             positionX += richTextLabel.GetContentWidth();
         }
 
-        m_distanceOffScreen = positionX - c_scrollDistance;
+        m_distanceOffScreen = positionX - ScrollDistance;
         m_targetX = m_initialPosition.X - m_distanceOffScreen;
     }
     
     private void DestroyTextLetters()
     {
-        foreach (var t in _ = Text)
+        foreach (var t in Text)
         {
             this.RichTextLabelSampler.RequeueRichTextLabel(
-                letter: _ = t
+                letter: t
             );
         }
 
@@ -368,21 +292,120 @@ internal abstract partial class NameplateLatestEvent() :
 
     private void QueueNotification()
     {
-        Task.Run(
-            function:
-            async () =>
+        this.RunSafe(            
+            taskFactory: async () =>
             {
-                var duration = _ = this.m_random.RandiRange(
-                    from: _ = 1000,
-                    to: _ = 2000
+                var duration = this.m_random.RandiRange(
+                    from: 1000,
+                    to: 2000
+                );
+    
+                var tree  = this.GetTree();
+                var timer = tree.CreateTimer(
+                    timeSec: duration / 1000f
+                );
+                await this.ToSignal(
+                    source: timer,
+                    signal: "timeout"
                 );
 
-                await Task.Delay(
-                    millisecondsDelay: _ = duration
-                );
-                this.PlayNotification();
+                this.Play();
             }
         );
+    }
+    
+    private async Task PlayNotification() 
+    {
+        var tree  = this.GetTree();
+        for (var i = 0; i < this.m_names.Count; i++)
+        {
+            this.Text = this.m_names.ElementAt(
+                index: i
+            );
+
+            this.CreateTextLetters();
+
+            var timer = tree.CreateTimer(
+                timeSec: NameplateLatestEvent.c_richTextLabelTitleDelayInMilliseconds / 1000f
+            );
+            await this.ToSignal(
+                source: timer,
+                signal: "timeout"
+            );
+
+            await this.StartScrollToCenter();
+            this.SetImageIconState(
+                imageIconAnimationState: ImageIconAnimationState.Showing
+            );
+
+            if (this.m_distanceOffScreen > 0f)
+            {
+                var animationDelay = Mathf.RoundToInt(
+                    s: this.m_distanceOffScreen / NameplateLatestEvent.c_velocityScrollControlInMilliseconds
+                );
+                var remainingScreenDuration = NameplateLatestEvent.c_richTextLabelOnScreenDurationMax - animationDelay;
+                var halfDelay = remainingScreenDuration / 2000f;
+
+                timer = tree.CreateTimer(
+                    timeSec: halfDelay
+                );
+                await this.ToSignal(
+                    source: timer,
+                    signal: "timeout"
+                );
+
+                this.m_move = true;
+
+                timer = tree.CreateTimer(
+                    timeSec: halfDelay
+                );
+                await this.ToSignal(
+                    source: timer,
+                    signal: "timeout"
+                );
+            }
+            else
+            {
+                timer = tree.CreateTimer(
+                    timeSec: NameplateLatestEvent.c_richTextLabelOnScreenDurationMax / 1000f
+                );
+                await this.ToSignal(
+                    source: timer,
+                    signal: "timeout"
+                );
+            }
+
+            timer = tree.CreateTimer(
+                timeSec: NameplateLatestEvent.c_richTextLabelTitleDelayInMilliseconds / 1000f
+            );
+            await this.ToSignal(
+                source: timer,
+                signal: "timeout"
+            );
+            
+            await this.StartScrollToEnd();
+            this.SetImageIconState(
+                imageIconAnimationState: ImageIconAnimationState.Hiding
+            );
+
+            timer = tree.CreateTimer(
+                timeSec: NameplateLatestEvent.c_richTextLabelTitleDelayInMillisecondsCompletion / 1000f
+            );
+            await this.ToSignal(
+                source: timer,
+                signal: "timeout"
+            );
+
+            this.DestroyTextLetters();
+            this.Reset();
+        }
+
+        while (this.m_pendingNames.Count > 0)
+        {
+            this.m_names.Enqueue(this.m_pendingNames.Dequeue());
+        }
+        
+        this.QueueNotification();
     }
     
     private void ResetToInitialPosition()
@@ -395,6 +418,23 @@ internal abstract partial class NameplateLatestEvent() :
     {
         m_reset = true;
     }
+    
+    private async void RunSafe(
+        System.Func<Task> taskFactory
+    )
+    {
+        try
+        {
+            await taskFactory();
+        }
+        catch
+        {
+            this.m_isRichTextLabelScrolling = false;
+            this.m_move = false;
+            this.DestroyTextLetters();
+        }
+    }
+    
     private void ScrollCenterToEnd(
         int index,
         float elapsed
@@ -476,47 +516,45 @@ internal abstract partial class NameplateLatestEvent() :
         }
     }
     
-    private void StartScrollToCenter()
+    private async Task StartScrollToCenter()
     {
-        Task.Run(
-            function:
-            async () =>
-            {
-                _ = this.m_isRichTextLabelScrolling = _ = true;
+        this.m_isRichTextLabelScrolling = true;
                 
-                for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
-                {
-                    var textLetter                       = _ = this.m_textLetters[i];
-                    _ = textLetter.TextLetterScrollState = _ = TextLetterScrollState.ScrollStartToCenter;
-                    _ = this.m_textLetters[i]            = _ = textLetter;
-                    
-                    await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestEvent.c_richTextLabelTitleDelayInMillisecondsScroll
-                    );
-                }
-            }
-        );
+        for (var i = 0; i < this.m_textLetters.Count; i++)
+        {
+            var textLetter                   = this.m_textLetters[i];
+            textLetter.TextLetterScrollState = TextLetterScrollState.ScrollStartToCenter;
+            this.m_textLetters[i]            = textLetter;
+
+            var tree  = this.GetTree();
+            var timer = tree.CreateTimer(
+                timeSec: NameplateLatestEvent.c_richTextLabelTitleDelayInMillisecondsScroll / 1000f
+            );
+            await this.ToSignal(
+                source: timer, 
+                signal: "timeout"
+            );
+        }
     }
     
-    private void StartScrollToEnd()
+    private async Task StartScrollToEnd()
     {
-        Task.Run(
-            function:
-            async () =>
-            {
-                _ = this.m_isRichTextLabelScrolling = _ = true;
+        this.m_isRichTextLabelScrolling = true;
 
-                for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
-                {
-                    var textLetter                       = _ = this.m_textLetters[i];
-                    _ = textLetter.TextLetterScrollState = _ = TextLetterScrollState.ScrollCenterToEnd;
-                    _ = this.m_textLetters[i]            = _ = textLetter;
+        for (var i = 0; i < this.m_textLetters.Count; i++)
+        {
+            var textLetter                   = this.m_textLetters[i];
+            textLetter.TextLetterScrollState = TextLetterScrollState.ScrollCenterToEnd;
+            this.m_textLetters[i]            = textLetter;
                     
-                    await Task.Delay(
-                        millisecondsDelay: c_richTextLabelTitleDelayInMillisecondsScroll
-                    );
-                }
-            }
-        );
+            var tree  = this.GetTree();
+            var timer = tree.CreateTimer(
+                timeSec: NameplateLatestEvent.c_richTextLabelTitleDelayInMillisecondsScroll / 1000f
+            );
+            await this.ToSignal(
+                source: timer, 
+                signal: "timeout"
+            );
+        }
     }
 }

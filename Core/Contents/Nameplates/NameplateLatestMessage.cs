@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Godot;
 using Overlay.Core.Contents.Chats;
@@ -20,32 +21,32 @@ internal sealed partial class NameplateLatestMessage() :
         double elapsed
     )
     {
-        if (_ = this.m_move)
+        if (this.m_move)
         {
-            var position    = _ = this.ControlPivot.Position;
-            _ = position.X -= _ = NameplateLatestMessage.c_velocityScrollControl * (float)elapsed;
+            var position    = this.ControlPivot.Position;
+            position.X -= NameplateLatestMessage.c_velocityScrollControl * (float)elapsed;
 
-            if (_ = position.X <= this.m_targetX)
+            if (position.X <= this.m_targetX)
             {
-                _ = position.X  = _ = this.m_targetX;
-                _ = this.m_move = _ = false;
+                position.X  = this.m_targetX;
+                this.m_move = false;
             }
 
-            _ = this.ControlPivot.Position = _ = position;
+            this.ControlPivot.Position = position;
         }
 
-        if (_ = this.m_isRichTextLabelScrolling)
+        if (this.m_isRichTextLabelScrolling)
         {
             this.AnimateScroll(
-                elapsed: _ = (float)elapsed
+                elapsed: (float)elapsed
             );
         }
 
         this.AnimateIcon(
-            elapsed: _ = (float)elapsed
+            elapsed: (float)elapsed
         );
 
-        if (_ = this.m_reset)
+        if (this.m_reset)
         {
             this.ResetToInitialPosition();
         }
@@ -56,9 +57,17 @@ internal sealed partial class NameplateLatestMessage() :
         base._EnterTree();
 
         this.RichTextLabelSampler.LoadRichTextLabelsAndAttachToParentNode(
-            parent: _ = this.ControlPivot
+            parent: this.ControlPivot
         );
         this.PlayNotification();
+    }
+    
+    public override void _ExitTree()
+    {
+        this.m_cancellationTokenSourceScroll.Cancel();
+        this.m_cancellationTokenSourceScroll.Dispose();
+        
+        base._ExitTree();
     }
 
     private enum ImageIconAnimationState :
@@ -85,28 +94,28 @@ internal sealed partial class NameplateLatestMessage() :
         float                 end
     )
     {
-        public readonly RichTextLabel RichTextLabel         = _ = richTextLabel;
-        public TextLetterScrollState  TextLetterScrollState = _ = textLetterScrollState;
-        public readonly float         Center                = _ = center;
-        public readonly float         Start                 = _ = start;
-        public readonly float         End                   = _ = end;
+        public readonly RichTextLabel RichTextLabel         = richTextLabel;
+        public TextLetterScrollState  TextLetterScrollState = textLetterScrollState;
+        public readonly float         Center                = center;
+        public readonly float         Start                 = start;
+        public readonly float         End                   = end;
     }
     
-    private const float                          c_scrollDistance                                  = 480f;
+    private const float                          c_scrollDistance                                                = 480f;
 
-    private const int                            c_richTextLabelOnScreenDurationMax                = 8000;
-    private const int                            c_richTextLabelTitleDelayInMilliseconds           = 500;
-    private const int                            c_richTextLabelTitleDelayInMillisecondsCompletion = 2000;
-    private const float                          c_velocityScrollControl                           = 250f;
-    private const float                          c_velocityScrollControlInMilliseconds             = NameplateLatestMessage.c_velocityScrollControl * 1000f;
+    private const int                            c_richTextLabelOnScreenDurationMax                              = 8000;
+    private const int                            c_richTextLabelTitleDelayInMilliseconds                         = 500;
+    private const int                            c_richTextLabelTitleDelayInMillisecondsCompletion               = 2000;
+    private const float                          c_velocityScrollControl                                         = 250f;
+    private const float                          c_velocityScrollControlInMilliseconds                           = NameplateLatestMessage.c_velocityScrollControl * 1000f;
 
-    private const int                            c_richTextLabelTitleDelayInMillisecondsScroll     = 35;
-    private const float                          c_velocityScrollLetter                            = 900f;
+    private const int                            c_richTextLabelTitleDelayInMillisecondsScroll                   = 35;
+    private const float                          c_velocityScrollLetter                                          = 900f;
 
-    private const float                          c_imageIconSpeed                                  = 2f;
-    private const float                          c_imageIconRotation                               = -2160f;
+    private const float                          c_imageIconSpeed                                                = 2f;
+    private const float                          c_imageIconRotation                                             = -2160f;
 
-    private static readonly string[]             s_messages                                        =
+    private static readonly string[]             s_messages                                                      =
     [
         $"Thank you for hanging out here!",
         $"Feel free to lurk or chat!",
@@ -115,45 +124,49 @@ internal sealed partial class NameplateLatestMessage() :
         $"Stay hydrated!",
     ];
     
-    private bool                                 m_isRichTextLabelScrolling                        = false;
-    private ImageIconAnimationState              m_imageIconAnimationState                         = ImageIconAnimationState.Idle;
-    private float                                m_imageIconElapsed                                = 0f;
+    private bool                                 m_isRichTextLabelScrolling                                      = false;
+    private ImageIconAnimationState              m_imageIconAnimationState                                       = ImageIconAnimationState.Idle;
+    private float                                m_imageIconElapsed                                              = 0f;
     
     private string                               Text                                              { get; set; } = string.Empty;
-    private readonly Dictionary<int, TextLetter> m_textLetters                                     = new();
-    private Vector2                              m_initialPosition                                 = Vector2.Zero;
-    private RandomNumberGenerator                m_random                                          = new();
-    private bool                                 m_reset                                           = false;
-    private bool                                 m_move                                            = false;
-    private float                                m_distanceOffScreen                               = 0f;
-    private float                                m_targetX                                         = 0f;
-    private int                                  m_lastMessageIndex                                = -1;
+    private readonly Dictionary<int, TextLetter> m_textLetters                                                   = new();
+    private Vector2                              m_initialPosition                                               = Vector2.Zero;
+    private RandomNumberGenerator                m_random                                                        = new();
+    private bool                                 m_reset                                                         = false;
+    private bool                                 m_move                                                          = false;
+    private float                                m_distanceOffScreen                                             = 0f;
+    private float                                m_targetX                                                       = 0f;
+    private int                                  m_lastMessageIndex                                              = -1;
+    private CancellationTokenSource              m_cancellationTokenSourceScroll                                 = new();
 
     private void AnimateScroll(
         float elapsed
     )
     {
-        for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
+        var isStillScrolling = false;
+        for (var i = 0; i < this.m_textLetters.Count; i++)
         {
-            var hasValue = _ = this.m_textLetters.TryGetValue(
-                key:   _ = i, 
+            var hasValue = this.m_textLetters.TryGetValue(
+                key:   i, 
                 value: out var textLetter
             );
-            if (_ = hasValue)
+            if (hasValue)
             {
-                switch (_ = textLetter.TextLetterScrollState)
+                switch (textLetter.TextLetterScrollState)
                 {
                     case TextLetterScrollState.ScrollCenterToEnd:
                         this.ScrollCenterToEnd(
-                            index:   _ = i,
-                            elapsed: _ = elapsed
+                            index:   i,
+                            elapsed: elapsed
                         );
+                        isStillScrolling = true;
                         break;
                     case TextLetterScrollState.ScrollStartToCenter:
                         this.ScrollStartToCenter(
-                            index:   _ = i,
-                            elapsed: _ = elapsed
+                            index:   i,
+                            elapsed: elapsed
                         );
+                        isStillScrolling = true;
                         break;
 
                     case TextLetterScrollState.Idle:
@@ -163,22 +176,14 @@ internal sealed partial class NameplateLatestMessage() :
             }
         }
 
-        if (
-            _ = this.m_textLetters.All(
-                predicate: x => 
-                    x.Value.TextLetterScrollState is TextLetterScrollState.Idle
-            ) is true
-        )
-        {
-            _ = this.m_isRichTextLabelScrolling = _ = false;
-        }
+        this.m_isRichTextLabelScrolling = isStillScrolling;
     }
     
     private void AnimateIcon(
         float elapsed
     )
     {
-        switch (_ = this.m_imageIconAnimationState)
+        switch (this.m_imageIconAnimationState)
         {
             case ImageIconAnimationState.Showing:
                 this.ShowIcon(
@@ -201,16 +206,20 @@ internal sealed partial class NameplateLatestMessage() :
     private void CreateTextLetters()
     {
         var positionX = 0f;
-        for (var i = 0; i < Text.Length; i++)
+        for (var i = 0; i < this.Text.Length; i++)
         {
-            var letter = Text[i];
-            var richTextLabel = RichTextLabelSampler.DequeueRichTextLabel(
+            var letter        = this.Text[i];
+            var richTextLabel = this.RichTextLabelSampler.DequeueRichTextLabel(
                 letter: letter
             );
             
             richTextLabel.Position = new Vector2(
                 x: positionX,
                 y: 0f
+            );
+            
+            this.m_textLetters.Remove(
+                key: i
             );
 
             this.m_textLetters.Add(
@@ -224,23 +233,26 @@ internal sealed partial class NameplateLatestMessage() :
                 )
             );
 
-            var position = m_textLetters[i].RichTextLabel.Position;
-            position.X = m_textLetters[i].Start;
-            m_textLetters[i].RichTextLabel.Position = position;
+            var position                                 = this.m_textLetters[i].RichTextLabel.Position;
+            position.X                                   = this.m_textLetters[i].Start;
+            this.m_textLetters[i].RichTextLabel.Position = position;
 
             positionX += richTextLabel.GetContentWidth();
         }
 
         this.m_distanceOffScreen = positionX - NameplateLatestMessage.c_scrollDistance;
-        this.m_targetX = this.m_initialPosition.X - this.m_distanceOffScreen;
+        this.m_targetX           = this.m_initialPosition.X - this.m_distanceOffScreen;
     }
     
     private void DestroyTextLetters()
     {
-        foreach (var t in _ = Text)
+        this.m_cancellationTokenSourceScroll.Cancel();
+        this.m_cancellationTokenSourceScroll = new CancellationTokenSource();
+        
+        foreach (var t in Text)
         {
             this.RichTextLabelSampler.RequeueRichTextLabel(
-                letter: _ = t
+                letter: t
             );
         }
 
@@ -252,113 +264,109 @@ internal sealed partial class NameplateLatestMessage() :
     )
     {
         const float startRotation = NameplateLatestMessage.c_imageIconRotation;
-        const float endRotation = 0f;
+        const float endRotation   = 0f;
 
-        m_imageIconElapsed += c_imageIconSpeed * delta;
-        ColorRectIcon.RotationDegrees = Mathf.Lerp(
-            from: startRotation,
-            to: endRotation,
-            weight: m_imageIconElapsed
+        this.m_imageIconElapsed += NameplateLatestMessage.c_imageIconSpeed * delta;
+        this.ColorRectIcon.RotationDegrees = Mathf.Lerp(
+            from:   startRotation,
+            to:     endRotation,
+            weight: this.m_imageIconElapsed
         );
-        ColorRectIcon.Scale = Vector2.One.Lerp(
-            to: Vector2.Zero,
-            weight: m_imageIconElapsed
+        this.ColorRectIcon.Scale = Vector2.One.Lerp(
+            to:     Vector2.Zero,
+            weight: this.m_imageIconElapsed
         );
 
-        if (m_imageIconElapsed >= 1f)
+        if (this.m_imageIconElapsed >= 1f)
         {
-            m_imageIconAnimationState = ImageIconAnimationState.Idle;
-            ColorRectIcon.RotationDegrees = endRotation;
-            ColorRectIcon.Scale = Vector2.Zero;
-            ColorRectIcon.Visible = false;
-            m_imageIconElapsed = 0f;
+            this.m_imageIconAnimationState     = ImageIconAnimationState.Idle;
+            this.ColorRectIcon.RotationDegrees = endRotation;
+            this.ColorRectIcon.Scale           = Vector2.Zero;
+            this.ColorRectIcon.Visible         = false;
+            this.m_imageIconElapsed            = 0f;
         }
     }
     
     private bool IsFooterTextCentered()
     {
-        foreach (var footerTextLetter in m_textLetters)
-        {
-            var textLetter = footerTextLetter.Value;
-            if (textLetter.TextLetterScrollState is not TextLetterScrollState.Idle)
-            {
-                return false;
-            }
-        }
-        return true;
+        return this.m_textLetters.Select(
+            selector: footerTextLetter => footerTextLetter.Value
+        ).All(
+            predicate: textLetter => textLetter.TextLetterScrollState is TextLetterScrollState.Idle
+        );
     }
     
-        private void PlayNotification() 
+    private void PlayNotification() 
     {
         Task.Run(
             function:
             async () =>
             {
-                var index = _ = this.m_lastMessageIndex;
-                while (_ = index == this.m_lastMessageIndex)
+                var index = this.m_lastMessageIndex;
+                while (index == this.m_lastMessageIndex)
                 {
-                    _ = index = _ = this.m_random.RandiRange(
-                        from: _ = 0,
-                        to:   _ = NameplateLatestMessage.s_messages.Length - 1
+                    index = this.m_random.RandiRange(
+                        from: 0,
+                        to:   NameplateLatestMessage.s_messages.Length - 1
                     );
                 }
-                _ = this.m_lastMessageIndex = _ = index;
+                this.m_lastMessageIndex = index;
                 
-                _ = this.Text = _ = NameplateLatestMessage.s_messages.ElementAt(
-                    index: _ = index
+                this.Text = NameplateLatestMessage.s_messages.ElementAt(
+                    index: index
                 );
                 
                 this.CallDeferred(
-                    method: _ = $"{_ = nameof(NameplateLatestMessage.CreateTextLetters)}"
+                    method: $"{nameof(NameplateLatestMessage.CreateTextLetters)}"
                 );
 
                 await Task.Delay(
-                    millisecondsDelay: _ = NameplateLatestMessage.c_richTextLabelTitleDelayInMilliseconds
+                    millisecondsDelay: NameplateLatestMessage.c_richTextLabelTitleDelayInMilliseconds
                 );
 
                 this.StartScrollToCenter();
                 this.SetImageIconState(
-                    imageIconAnimationState: _ = ImageIconAnimationState.Showing
+                    imageIconAnimationState: ImageIconAnimationState.Showing
                 );
 
-                if (_ = this.m_distanceOffScreen > 0f)
+                if (this.m_distanceOffScreen > 0f)
                 {
-                    var animationDelay = _ = Mathf.RoundToInt(
-                        s: _ = this.m_distanceOffScreen / NameplateLatestMessage.c_velocityScrollControlInMilliseconds
+                    var animationDelay = Mathf.RoundToInt(
+                        s: this.m_distanceOffScreen / NameplateLatestMessage.c_velocityScrollControlInMilliseconds
                     );
-                    var remainingScreenDuration = _ = NameplateLatestMessage.c_richTextLabelOnScreenDurationMax - animationDelay;
-                    var halfDelay = _ = Mathf.RoundToInt(
-                        s: _ = remainingScreenDuration / 2f
+                    var remainingScreenDuration = NameplateLatestMessage.c_richTextLabelOnScreenDurationMax - animationDelay;
+                    var halfDelay = Mathf.RoundToInt(
+                        s: remainingScreenDuration / 2f
                     );
 
                     await Task.Delay(
-                        millisecondsDelay: _ = halfDelay
+                        millisecondsDelay: halfDelay
                     );
 
-                    _ = this.m_move = _ = true;
+                    this.m_move = true;
 
                     await Task.Delay(
-                        millisecondsDelay: _ = halfDelay
+                        millisecondsDelay: halfDelay
                     );
                 }
                 else
                 {
                     await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestMessage.c_richTextLabelOnScreenDurationMax
+                        millisecondsDelay: NameplateLatestMessage.c_richTextLabelOnScreenDurationMax
                     );
                 }
                 
                 await Task.Delay(
-                    millisecondsDelay: _ = NameplateLatestMessage.c_richTextLabelTitleDelayInMilliseconds
+                    millisecondsDelay: NameplateLatestMessage.c_richTextLabelTitleDelayInMilliseconds
                 );
                 
                 this.StartScrollToEnd();
                 this.SetImageIconState(
-                    imageIconAnimationState: _ = ImageIconAnimationState.Hiding
+                    imageIconAnimationState: ImageIconAnimationState.Hiding
                 );
 
                 await Task.Delay(
-                    millisecondsDelay: _ = NameplateLatestMessage.c_richTextLabelTitleDelayInMillisecondsCompletion
+                    millisecondsDelay: NameplateLatestMessage.c_richTextLabelTitleDelayInMillisecondsCompletion
                 );
 
                 this.DestroyTextLetters();
@@ -374,13 +382,13 @@ internal sealed partial class NameplateLatestMessage() :
             function:
             async () =>
             {
-                var duration = _ = this.m_random.RandiRange(
-                    from: _ = 1000,
-                    to: _ = 2000
+                var duration = this.m_random.RandiRange(
+                    from: 1000,
+                    to:   2000
                 );
 
                 await Task.Delay(
-                    millisecondsDelay: _ = duration
+                    millisecondsDelay: duration
                 );
                 this.PlayNotification();
             }
@@ -389,22 +397,31 @@ internal sealed partial class NameplateLatestMessage() :
     
     private void ResetToInitialPosition()
     {
-        ControlPivot.Position = m_initialPosition;
-        m_reset = false;
+        this.ControlPivot.Position = this.m_initialPosition;
+        this.m_reset               = false;
     }
     
     private void Reset()
     {
-        m_reset = true;
+        this.m_reset = true;
     }
     private void ScrollCenterToEnd(
-        int index,
+        int   index,
         float elapsed
     )
     {
-        var textLetter = m_textLetters[index];
-        var position = textLetter.RichTextLabel.Position;
-        position.X -= c_velocityScrollLetter * elapsed;
+        if (
+            this.m_textLetters.TryGetValue(
+                key:   index, 
+                value: out var textLetter
+            ) is false
+        )
+        {
+            return;
+        }
+        
+        var position =  textLetter.RichTextLabel.Position;
+        position.X   -= NameplateLatestMessage.c_velocityScrollLetter * elapsed;
         if (position.X <= textLetter.End)
         {
             position.X = textLetter.Start;
@@ -413,22 +430,31 @@ internal sealed partial class NameplateLatestMessage() :
         }
 
         textLetter.RichTextLabel.Position = position;
-        m_textLetters[index] = textLetter;
+        this.m_textLetters[key: index]    = textLetter;
     }
     
     private void ScrollStartToCenter(
-        int index,
+        int   index,
         float elapsed
     )
     {
-        var textLetter = m_textLetters[index];
+        if (
+            this.m_textLetters.TryGetValue(
+                key:   index, 
+                value: out var textLetter
+            ) is false
+        )
+        {
+            return;
+        }
+        
         if (textLetter.RichTextLabel.Visible is false)
         {
             textLetter.RichTextLabel.Visible = true;
         }
 
-        var position = textLetter.RichTextLabel.Position;
-        position.X -= c_velocityScrollLetter * elapsed;
+        var position =  textLetter.RichTextLabel.Position;
+        position.X   -= NameplateLatestMessage.c_velocityScrollLetter * elapsed;
         if (position.X <= textLetter.Center)
         {
             position.X = textLetter.Center;
@@ -436,89 +462,113 @@ internal sealed partial class NameplateLatestMessage() :
         }
 
         textLetter.RichTextLabel.Position = position;
-        m_textLetters[index] = textLetter;
+        this.m_textLetters[key: index] = textLetter;
     }
     
     private void SetImageIconState(
         ImageIconAnimationState imageIconAnimationState
     )
     {
-        m_imageIconAnimationState = imageIconAnimationState;
+        this.m_imageIconAnimationState = imageIconAnimationState;
     }
     
     private void ShowIcon(
         float delta
     )
     {
-        if (ColorRectIcon.Visible is false)
+        if (this.ColorRectIcon.Visible is false)
         {
-            ColorRectIcon.Visible = true;
+            this.ColorRectIcon.Visible = true;
         }
 
         const float startRotation = 0f;
-        const float endRotation = c_imageIconRotation;
 
-        m_imageIconElapsed += c_imageIconSpeed * delta;
-        ColorRectIcon.RotationDegrees = Mathf.Lerp(
-            from: startRotation,
-            to: endRotation,
-            weight: m_imageIconElapsed
+        this.m_imageIconElapsed            += NameplateLatestMessage.c_imageIconSpeed * delta;
+        this.ColorRectIcon.RotationDegrees =  Mathf.Lerp(
+            from:   startRotation,
+            to:     NameplateLatestMessage.c_imageIconRotation,
+            weight: this.m_imageIconElapsed
         );
-        ColorRectIcon.Scale = Vector2.Zero.Lerp(
-            to: Vector2.One,
-            weight: m_imageIconElapsed
+        this.ColorRectIcon.Scale = Vector2.Zero.Lerp(
+            to:     Vector2.One,
+            weight: this.m_imageIconElapsed
         );
 
-        if (m_imageIconElapsed >= 1f)
+        if (this.m_imageIconElapsed >= 1f)
         {
-            m_imageIconAnimationState = ImageIconAnimationState.Idle;
-            ColorRectIcon.RotationDegrees = endRotation;
-            ColorRectIcon.Scale = Vector2.One;
-            m_imageIconElapsed = 0f;
+            this.m_imageIconAnimationState     = ImageIconAnimationState.Idle;
+            this.ColorRectIcon.RotationDegrees = NameplateLatestMessage.c_imageIconRotation;
+            this.ColorRectIcon.Scale           = Vector2.One;
+            this.m_imageIconElapsed            = 0f;
         }
     }
     
     private void StartScrollToCenter()
     {
+        var cancellationToken = this.m_cancellationTokenSourceScroll.Token;
         Task.Run(
             function:
             async () =>
             {
-                _ = this.m_isRichTextLabelScrolling = _ = true;
+                this.m_isRichTextLabelScrolling = true;
                 
-                for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
+                for (var i = 0; i < this.m_textLetters.Count; i++)
                 {
-                    var textLetter                       = _ = this.m_textLetters[i];
-                    _ = textLetter.TextLetterScrollState = _ = TextLetterScrollState.ScrollStartToCenter;
-                    _ = this.m_textLetters[i]            = _ = textLetter;
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        return;
+                    }
+
+                    if (
+                        this.m_textLetters.TryGetValue(
+                            key:   i, 
+                            value: out var textLetter
+                        ) is true
+                    )
+                    {
+                        textLetter.TextLetterScrollState = TextLetterScrollState.ScrollStartToCenter;
+                        this.m_textLetters[key: i]       = textLetter;
+                    }
                     
                     await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestMessage.c_richTextLabelTitleDelayInMillisecondsScroll
+                        millisecondsDelay: NameplateLatestMessage.c_richTextLabelTitleDelayInMillisecondsScroll,
+                        cancellationToken
                     );
                 }
-            }
+            },
+            cancellationToken: cancellationToken
         );
     }
     
     private void StartScrollToEnd()
     {
+        var cancellationToken = this.m_cancellationTokenSourceScroll.Token;
         Task.Run(
             function:
             async () =>
             {
-                _ = this.m_isRichTextLabelScrolling = _ = true;
+                this.m_isRichTextLabelScrolling = true;
 
-                for (var i = _ = 0; _ = i < this.m_textLetters.Count; _ = i++)
+                for (var i = 0; i < this.m_textLetters.Count; i++)
                 {
-                    var textLetter                       = _ = this.m_textLetters[i];
-                    _ = textLetter.TextLetterScrollState = _ = TextLetterScrollState.ScrollCenterToEnd;
-                    _ = this.m_textLetters[i]            = _ = textLetter;
+                    if (
+                        this.m_textLetters.TryGetValue(
+                            key:   i, 
+                            value: out var textLetter
+                        ) is true
+                    )
+                    {
+                        textLetter.TextLetterScrollState = TextLetterScrollState.ScrollCenterToEnd;
+                        this.m_textLetters[key: i]       = textLetter;
+                    }
                     
                     await Task.Delay(
-                        millisecondsDelay: _ = NameplateLatestMessage.c_richTextLabelTitleDelayInMillisecondsScroll
+                        millisecondsDelay: NameplateLatestMessage.c_richTextLabelTitleDelayInMillisecondsScroll,
+                        cancellationToken: cancellationToken
                     );
                 }
-            }
+            },
+            cancellationToken: cancellationToken
         );
     }
 }

@@ -13,17 +13,17 @@ internal sealed partial class NameplateLatestTipper() :
 {
     protected override void RegisterForJoystickEvents()
     {
-        _ = ServiceJoystickWebSocketPayloadStreamEvents.Tipped           += this.HandleWebSocketPayloadStreamEventTipped;
-        _ = ServiceDatabaseTaskEvents.RetrievedListJoystickLatestTippers += this.HandleRetrievedJoystickLatestTippers;
+        ServiceJoystickWebSocketPayloadStreamEvents.Tipped           += this.HandleWebSocketPayloadStreamEventTipped;
+        ServiceDatabaseTaskEvents.RetrievedListJoystickLatestTippers += this.HandleRetrievedJoystickLatestTippers;
     }
     
     private void HandleRetrievedJoystickLatestTippers(
         ServiceDatabaseTaskRetrievedListJoystickLatestTippers retrievedListJoystickLatestTippers
     )
     {
-        var result = _ = retrievedListJoystickLatestTippers.Result;
+        var result = retrievedListJoystickLatestTippers.Result;
 
-        var target = _ = result.Count - 5;
+        var target = result.Count - 5;
         if (target < 0)
         {
             target = 0;
@@ -31,34 +31,39 @@ internal sealed partial class NameplateLatestTipper() :
         
         for (var i = result.Count - 1; i >= target; i--)
         {
-            var joystickLatestTipper = _ = result[i];
+            var joystickLatestTipper = result[i];
             this.m_names.Enqueue(
-                item: _ = joystickLatestTipper.JoystickLatest_Latest_Tipper
+                item: joystickLatestTipper.JoystickLatest_Latest_Tipper
             );
         }
         
-        this.PlayNotification();
+        this.CallDeferred(
+            method: $"{nameof(NameplateLatestTipper.Play)}"
+        );
     }
     
     private void HandleWebSocketPayloadStreamEventTipped(
         ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
     )
     {
-        var name = _ = messageMetadata.Who;
-        
-        ServiceDatabase.ExecuteTaskNonQuery(
-            serviceDatabaseTaskNonQueryType:  _ = ServiceDatabaseTaskNonQueryType.AddJoystickLatestTipper,
-            serviceDatabaseTaskSqlParameters: 
-            [
-                new ServiceDatabaseTaskNpgsqlParameter(
-                    parameterName: _ = $"{_ = nameof(ServiceDatabaseJoystickLatestTipper.JoystickLatest_Latest_Tipper)}",
-                    value:         _ = name
-                )
-            ]
-        );
+        var name = messageMetadata.Who;
+
+        if (this.SendDatabaseUpdate is true)
+        {
+            ServiceDatabase.ExecuteTaskNonQuery(
+                serviceDatabaseTaskNonQueryType:  ServiceDatabaseTaskNonQueryType.AddJoystickLatestTipper,
+                serviceDatabaseTaskSqlParameters: 
+                [
+                    new ServiceDatabaseTaskNpgsqlParameter(
+                        parameterName: $"{nameof(ServiceDatabaseJoystickLatestTipper.JoystickLatest_Latest_Tipper)}",
+                        value:         name
+                    )
+                ]
+            );
+        }
         
         this.m_pendingNames.Enqueue(
-            item: _ = name
+            item: name
         );
     }
 }

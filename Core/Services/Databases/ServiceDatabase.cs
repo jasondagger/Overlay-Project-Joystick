@@ -12,6 +12,7 @@ internal sealed class ServiceDatabase() :
 	Task IService.Setup()
 	{
 		ServiceDatabase.TestConnection();
+		ServiceDatabaseBankTaskHandler.Start();
 		return Task.CompletedTask;
 	}
 
@@ -45,14 +46,16 @@ internal sealed class ServiceDatabase() :
 	}
 
 	internal static void ExecuteTaskQuery(
-		ServiceDatabaseTaskQueryType serviceDatabaseTaskQueryType
+		ServiceDatabaseTaskQueryType             serviceDatabaseTaskQueryType,
+        List<ServiceDatabaseTaskNpgsqlParameter> serviceDatabaseTaskNpgsqlParameters = null
 	)
 	{
 		Task.Run(
 			function: async () =>
 			{
 				await ServiceDatabaseTaskQueries.ExecuteAsyncQuery(
-					serviceDatabaseTaskQueryType: serviceDatabaseTaskQueryType
+					serviceDatabaseTaskQueryType:        serviceDatabaseTaskQueryType,
+					serviceDatabaseTaskNpgsqlParameters: serviceDatabaseTaskNpgsqlParameters
 				);
 			}
 		);
@@ -67,7 +70,7 @@ internal sealed class ServiceDatabase() :
 				if (isConnected is false)
 				{
 					throw new Exception(
-						message: _ =
+						message:
 							$"{nameof(ServiceDatabase)}." +
 							$"{nameof(ServiceDatabase.TestConnection)}() - " +
 							$"EXCEPTION: {nameof(ServiceDatabase)} is not connected."

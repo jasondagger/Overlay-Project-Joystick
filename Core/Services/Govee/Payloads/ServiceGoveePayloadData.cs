@@ -1,3 +1,5 @@
+
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 
@@ -9,15 +11,20 @@ public sealed class ServiceGoveePayloadData()
     [JsonPropertyName(
         name: $"sku"
     )]
-    public string                              Sku          { get; set; } = _ = "H607C";
+    public string                             Sku        { get; set; } = "H607C";
     
     [JsonPropertyName(
         name: $"device"
     )]
-    public string                              Device       { get; set; } = _ = string.Empty;
+    public string                             Device     { get; set; } = string.Empty;
+
+    [JsonPropertyName(
+        name: "pagination"
+    )]
+    public ServiceGoveePayloadDataPagination? Pagination { get; set; } = null;
     
     [JsonPropertyName(
         name: $"capability"
     )]
-    public ServiceGoveePayloadDataCapability Capability { get; set; } = new();
+    public ServiceGoveePayloadDataCapability  Capability { get; set; } = new();
 }

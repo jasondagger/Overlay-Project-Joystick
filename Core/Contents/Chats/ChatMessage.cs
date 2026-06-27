@@ -2,7 +2,7 @@
 using Godot;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Https;
-using Overlay.Core.Services.PastelInterpolators;
+using Overlay.Core.Services.ColorInterpolators;
 using Overlay.Core.Tools;
 using SixLabors.ImageSharp;
 using System;
@@ -25,18 +25,18 @@ namespace Overlay.Core.Contents.Chats;
          double delta
 	 )
      {
-         switch (_ = this.m_generateState)
+         switch (this.m_generateState)
          {
              case GenerateStateType.Complete:
                  this.Generated?.Invoke(
-                     obj: _ = this
+                     obj: this
 				 );
-                 _ = this.m_generateState = _ = GenerateStateType.Active;
+                 this.m_generateState = GenerateStateType.Active;
                  break;
              
              case GenerateStateType.Active:
 	             this.HandleTextAnimation(
-		             delta: _ = (float)delta
+		             delta: (float)delta
 		         );
 	             break;
              
@@ -50,63 +50,126 @@ namespace Overlay.Core.Contents.Chats;
 	 internal Action<ChatMessage> Generated = null;
 	 
      internal void Generate(
-         string             username,
-         string             usernameColor,
-         string             message,
-         ChatMessageEmote[] chatMessageEmotes,
-         bool               isModerator,
-         bool               isStreamer,
-         bool               isSubscriber
+         string                            username,
+         bool                              hasCustomBadgeColor,
+         ServiceColorInterpolatorColorMode customBadgeColor,
+         bool                              hasCustomNameColor,
+         ServiceColorInterpolatorColorMode customNameColor,
+         string                            message,
+         ChatMessageEmote[]                chatMessageEmotes,
+         bool                              isModerator,
+         bool                              isStreamer,
+         bool                              isSubscriber,
+         bool                              isBot
      )
      {
-	     // TODO: REPLACE WITH sub with sub
-	     _ = this.m_isStreamer   = _ = isStreamer;
-	     _ = this.m_isSubscriber = _ = true;
+	     var badgeBot        = isBot                        ? $"[img=28x28]user://dynamic_Bot_{       (hasCustomBadgeColor ? $"{customBadgeColor}" : "Default")}.res[/img]" : string.Empty;
+	     var badgeModerator  = isModerator                  ? $"[img=28x28]user://dynamic_Moderator_{ (hasCustomBadgeColor ? $"{customBadgeColor}" : "Default")}.res[/img]" : string.Empty;
+	     var badgeSubscriber = isSubscriber && !isModerator ? $"[img=28x28]user://dynamic_Subscriber_{(hasCustomBadgeColor ? $"{customBadgeColor}" : "Default")}.res[/img]" : string.Empty;
+	     var badgeStreamer   = isStreamer                   ? $"[img=28x28]user://dynamic_Streamer_{  (hasCustomBadgeColor ? $"{customBadgeColor}" : "Default")}.res[/img]" : string.Empty;
+	     var badgeText       = badgeBot + badgeModerator + badgeSubscriber + badgeStreamer;
 	     
-         _ = this.m_text =
-             $"{_ = ChatMessage.c_labelFontSize}" +
-             $"{_ = ChatMessage.c_labelNameFont}" +
-             $"[color=#{(_ = this.m_isSubscriber is true || this.m_isStreamer is true ? ChatMessage.c_labelPastelInterpolatorColor : usernameColor)}]" +
-             $"{_ = username}" +
-             $"  " +
-             $"{_ = ChatMessage.c_labelMessageFont}" +
-	         $"{_ = ChatMessage.c_labelMessageColor}" +
-	         $"{_ = message}";
+	     this.m_hasCustomNameColor  = hasCustomNameColor;
+	     this.m_customNameColor     = customNameColor;
+	     this.m_username            = username;
+
+	     lock (this.m_textLock)
+	     { 
+			this.m_hasCustomBadgeColor = hasCustomBadgeColor;
+			this.m_customBadgeColor    = customBadgeColor;
+			this.m_badgeText           = badgeText;
+			this.m_text                = $"{badgeText}  " +
+		                                 $"{ChatMessage.c_labelFontSize}" +
+		                                 $"{ChatMessage.c_labelNameFont}" +
+		                                 $"[color=#{ChatMessage.c_labelInterpolatorColor}]" +
+		                                 $"{username}" +
+		                                 $"  " +
+		                                 $"{ChatMessage.c_labelMessageFont}" +
+		                                 $"{ChatMessage.c_labelMessageColor}" +
+		                                 $"{message}";
+	     }
          
          this.InsertImages(
-	         message:           _ = message,
-	         chatMessageEmotes: _ = chatMessageEmotes,
-	         chatMessageBadges: _ = string.Empty
+	         message:           message,
+	         chatMessageEmotes: chatMessageEmotes
 	    );
      }
 
  	internal int GetLabelHeightInPixels()
 	{
-		return _ = this.m_richTextLabel.GetContentHeight() + 5;
+		return this.m_richTextLabel.GetContentHeight() + 5;
+	}
+
+	internal bool HasUsername(
+		string username
+	)
+	{
+		return this.m_username == username;
 	}
 
 	internal void Reset()
     {
-        _ = this.m_richTextLabel.Text           = _ = string.Empty;
-        _ = this.m_generateState                = _ = GenerateStateType.Inactive;
-        _ = this.m_visibleState                 = _ = VisibleStateType.Visible;
-        _ = this.m_hasAnimatedChatMessageEmotes = _ = false;
-        _ = this.m_fadeElapsed                  = _ = 0f;
-        _ = this.m_isStreamer                   = _ = false;
-        _ = this.m_isSubscriber                 = _ = false;
-        _ = this.m_text                         = _ = string.Empty;
-        _ = this.m_chatMessageEmotesToLoad      = _ = 0u;
+        this.m_chatMessageEmotesToLoad      = 0u;
+        this.m_fadeElapsed                  = 0f;
+        this.m_generateState                = GenerateStateType.Inactive;
+        this.m_hasAnimatedChatMessageEmotes = false;
+        this.m_richTextLabel.Text           = string.Empty;
+        this.m_visibleState                 = VisibleStateType.Visible;
 
+        lock (this.m_textLock)
+        {
+	        this.m_badgeText = string.Empty;
+	        this.m_text      = string.Empty;
+        }
+        
         this.m_animatedChatMessageEmoteCurrentFrameCounts.Clear();
-        this.m_animatedChatMessageEmoteMaxFrameCounts.Clear();
         this.m_animatedChatMessageEmoteCurrentFrameRates.Clear();
+        this.m_animatedChatMessageEmoteMaxFrameCounts.Clear();
         this.m_animatedChatMessageEmoteMaxFrameRates.Clear();
         this.m_animatedChatMessageEmotes.Clear();
     }
 
 	internal void ShowLabel()
 	{
-		_ = this.m_richTextLabel.Visible = _ = true;
+		this.m_richTextLabel.Visible = true;
+	}
+
+	internal void UpdateBadgeColor(
+		bool                              hasCustomColor,
+		ServiceColorInterpolatorColorMode customColor
+	)
+	{
+		lock (this.m_textLock)
+		{
+			if (this.m_badgeText != string.Empty)
+			{
+				var currentColor = this.m_hasCustomBadgeColor ? $"{this.m_customBadgeColor}" : "Default";
+				var newColor     = hasCustomColor ? $"{customColor}" : "Default";
+				
+				var badgeText    = this.m_badgeText.Replace(
+					oldValue: currentColor,
+					newValue: newColor
+				);
+
+				this.m_text      = this.m_text.Replace(
+					oldValue: this.m_badgeText,
+					newValue: badgeText
+				);
+				this.m_badgeText = badgeText;
+			}
+			
+			this.m_hasCustomBadgeColor = hasCustomColor;
+			this.m_customBadgeColor    = customColor;
+		}
+	}
+
+	internal void UpdateNameColor(
+		bool                              hasCustomColor,
+		ServiceColorInterpolatorColorMode customColor
+	)
+	{
+		this.m_hasCustomNameColor = hasCustomColor;
+		this.m_customNameColor    = customColor;
 	}
 
     private enum GenerateStateType :
@@ -136,27 +199,22 @@ namespace Overlay.Core.Contents.Chats;
     private const int                                           c_gifFrameRateIndex0                         = 804;
     private const int                                           c_gifFrameRateIndex1                         = 805;
     private const float                                         c_defaultEmoteFramesPerSecondInMilliseconds  = 0.04167f;
-    private const string                                        c_labelPastelInterpolatorColor               = $"00000000";
+    private const string                                        c_labelInterpolatorColor                     = $"00000000";
     private const string                                        c_labelFontSize                              = $"[font_size=28]";
-    private const string                                        c_labelNameFont                              = $"[font=res://Resources/Fonts/Roboto-Black.ttf]";
-    private const string                                        c_labelMessageFont                           = $"[font=res://Resources/Fonts/Roboto-Bold.ttf]";
+    private const string                                        c_labelNameFont                              = $"[font=res://Resources/Fonts/Roboto-Black.tres]";
+    private const string                                        c_labelMessageFont                           = $"[font=res://Resources/Fonts/Roboto-Bold.tres]";
     private const string                                        c_chatMessageEmoteDirectoryAnimated          = $"user://Emotes/Animated";
     private const string                                        c_chatMessageEmoteDirectoryStatic            = $"user://Emotes/Static";
     private const string                                        c_labelMessageColor                          = $"[color=#F2F2F2FF]";
     private const uint                                          c_labelWidth                                 = 1100u;
-
-    private static readonly Dictionary<VisibleStateType, float> s_fadeDelays                                 = new()
-    {
-	    { _ = VisibleStateType.Visible, _ = 32f },
-	    { _ = VisibleStateType.Fade,    _ = 2f },
-    };
+	
     private static readonly Dictionary<string, string>          s_chatMessageEmoteBasics                     = new()
     {
-	    { _ = ":D", _ = ":grin:"  },
-	    { _ = ":)", _ = ":smile:" },
-	    { _ = ":*", _ = ":kiss:"  },
-	    { _ = ";)", _ = ":wink:"  },
-	    { _ = "<3", _ = ":heart:" },
+	    { ":D", ":grin:"  },
+	    { ":)", ":smile:" },
+	    { ":*", ":kiss:"  },
+	    { ";)", ":wink:"  },
+	    { "<3", ":heart:" },
     };
     private static readonly HashSet<string>                     s_chatMessageEmotesWithFileSyntax            =
     [
@@ -166,25 +224,34 @@ namespace Overlay.Core.Contents.Chats;
 	    ";)",
 	    "<3",
     ];
+    private static readonly Dictionary<VisibleStateType, float> s_fadeDelays                                 = new()
+    {
+	    { VisibleStateType.Visible, 32f },
+	    { VisibleStateType.Fade,    2f },
+    };
     
     private readonly Dictionary<string, int>                    m_animatedChatMessageEmoteCurrentFrameCounts = new();
-    private readonly Dictionary<string, int>                    m_animatedChatMessageEmoteMaxFrameCounts     = new();
     private readonly Dictionary<string, float>                  m_animatedChatMessageEmoteCurrentFrameRates  = new();
+    private readonly Dictionary<string, int>                    m_animatedChatMessageEmoteMaxFrameCounts     = new();
     private readonly Dictionary<string, float>                  m_animatedChatMessageEmoteMaxFrameRates      = new();
     private readonly HashSet<string>                            m_animatedChatMessageEmotes                  = [];
     private readonly object                                     m_textLock                                   = new();
 
+	private uint                                                m_chatMessageEmotesToLoad                    = 0u;
+	private string                                              m_badgeText                                  = string.Empty;
+	private ServiceColorInterpolatorColorMode                   m_customBadgeColor                           = ServiceColorInterpolatorColorMode.White;
+	private ServiceColorInterpolatorColorMode                   m_customNameColor                            = ServiceColorInterpolatorColorMode.White;
+    private float                                               m_fadeElapsed                                = 0f;
+	private GenerateStateType                                   m_generateState                              = GenerateStateType.Inactive;
+	private bool                                                m_hasAnimatedChatMessageEmotes               = false;
+	private bool                                                m_hasCustomNameColor                         = false;
+	private bool                                                m_hasCustomBadgeColor                        = false;
     private RichTextLabel                                       m_richTextLabel                              = new();
     private ServiceGodotHttp                                    m_serviceGodotHttp                           = null;
-    private ServicePastelInterpolator                           m_servicePastelInterpolator                  = null;
-	private GenerateStateType                                   m_generateState                              = _ = GenerateStateType.Inactive;
-	private VisibleStateType                                    m_visibleState                               = _ = VisibleStateType.Visible;
-	private bool                                                m_hasAnimatedChatMessageEmotes               = _ = false;
-	private bool                                                m_isStreamer                                 = _ = false;
-    private bool                                                m_isSubscriber                               = _ = false;
-    private float                                               m_fadeElapsed                                = _ = 0f;
-	private string                                              m_text                                       = _ = string.Empty;
-	private uint                                                m_chatMessageEmotesToLoad                    = _ = 0u;
+    private ServiceColorInterpolatorNormal                      m_serviceColorInterpolatorNormal             = null;
+	private string                                              m_text                                       = string.Empty;
+	private string                                              m_username                                   = string.Empty;
+	private VisibleStateType                                    m_visibleState                               = VisibleStateType.Visible;
 
 	private void GenerateStaticImageFromStaticChatMessageEmote(
 		byte[]                body,
@@ -194,67 +261,67 @@ namespace Overlay.Core.Contents.Chats;
 		StaticImageFormatType staticImageFormat
 	)
 	{
-		var userDirectoryPath = _ = $"{_ = ChatMessage.c_chatMessageEmoteDirectoryStatic}/{_ = chatMessageEmoteCodeLookUp}";
+		var userDirectoryPath = $"{ChatMessage.c_chatMessageEmoteDirectoryStatic}/{chatMessageEmoteCodeLookUp}";
 		if (
-			_ = Directory.Exists(
-				path: _ = userDirectoryPath
+			Directory.Exists(
+				path: userDirectoryPath
 			) is false
 		)
 		{
-			var fullPath = _ = ProjectSettings.GlobalizePath(
-				path: _ = userDirectoryPath
+			var fullPath = ProjectSettings.GlobalizePath(
+				path: userDirectoryPath
 			);
-			_ = Directory.CreateDirectory(
+			Directory.CreateDirectory(
 				path: fullPath
 			);
 		}
 		
 		var image = Godot.Image.CreateEmpty(
-			width:      _ = ChatMessage.c_chatMessageEmoteWidth,
-			height:     _ = ChatMessage.c_chatMessageEmoteHeight,
-			useMipmaps: _ = false,
-			format:     _ = Godot.Image.Format.Rgba8
+			width:      ChatMessage.c_chatMessageEmoteWidth,
+			height:     ChatMessage.c_chatMessageEmoteHeight,
+			useMipmaps: false,
+			format:     Godot.Image.Format.Rgba8
 		);
 
 		switch (staticImageFormat)
 		{
 			case StaticImageFormatType.Jpg:
-				_ = image.LoadJpgFromBuffer(
-					buffer: _ = body
+				image.LoadJpgFromBuffer(
+					buffer: body
 				);
 				break;
 			
 			case StaticImageFormatType.Png:
-				_ = image.LoadPngFromBuffer(
-					buffer: _ = body
+				image.LoadPngFromBuffer(
+					buffer: body
 				);
 				break;
 			
 			default:
 				ConsoleLogger.LogMessageError(
-					messageError: _ =
-						$"{_ = nameof(ChatMessage)}." +
-						$"{_ = nameof(ChatMessage.GenerateStaticImageFromStaticChatMessageEmote)}() - " +
-						$"EXCEPTION: Missing static image format type '{_ = staticImageFormat}'."
+					messageError:
+						$"{nameof(ChatMessage)}." +
+						$"{nameof(ChatMessage.GenerateStaticImageFromStaticChatMessageEmote)}() - " +
+						$"EXCEPTION: Missing static image format type '{staticImageFormat}'."
 				);
 				return;
 		}
 		
-		var imageTexture = _ = ImageTexture.CreateFromImage(
-			image: _ = image
+		var imageTexture = ImageTexture.CreateFromImage(
+			image: image
 		);
-		var emotePath = _ = $"{_ = chatMessageEmoteStaticPathGlobal}\\static_0.res";
-		_ = ResourceSaver.Save(
-			resource: _ = imageTexture,
-			path:     _ = emotePath
+		var emotePath = $"{chatMessageEmoteStaticPathGlobal}\\static_0.res";
+		ResourceSaver.Save(
+			resource: imageTexture,
+			path:     emotePath
 		);
 		this.ReplaceChatMessageCodeWithChatMessageImagePath(
-			chatMessageEmoteCode: _ = chatMessageEmoteCode,
-			chatMessageEmotePath: _ = emotePath
+			chatMessageEmoteCode: chatMessageEmoteCode,
+			chatMessageEmotePath: emotePath
 		);
 		
-		_ = this.m_chatMessageEmotesToLoad--;
-		if (_ = this.m_chatMessageEmotesToLoad is 0u)
+		this.m_chatMessageEmotesToLoad--;
+		if (this.m_chatMessageEmotesToLoad is 0u)
 		{
 			this.GenerateRichTextLabel();
 		}
@@ -267,181 +334,193 @@ namespace Overlay.Core.Contents.Chats;
 		string chatMessageEmoteAnimatedPathGlobal
 	)
 	{
-		var userDirectoryPath = _ = $"{_ = ChatMessage.c_chatMessageEmoteDirectoryAnimated}/{_ = chatMessageEmoteCodeLookUp}";
+		var userDirectoryPath = $"{ChatMessage.c_chatMessageEmoteDirectoryAnimated}/{chatMessageEmoteCodeLookUp}";
 		if (
-			_ = Directory.Exists(
-				path: _ = userDirectoryPath
+			Directory.Exists(
+				path: userDirectoryPath
 			) is false
 		)
 		{
-			var fullPath = _ = ProjectSettings.GlobalizePath(
-				path: _ = userDirectoryPath
+			var fullPath = ProjectSettings.GlobalizePath(
+				path: userDirectoryPath
 			);
-			_ = Directory.CreateDirectory(
+			Directory.CreateDirectory(
 				path: fullPath
 			);
 		}
 
-		var imageSixLabors = _ = SixLabors.ImageSharp.Image.Load(
-			buffer: _ = body
+		var imageSixLabors = SixLabors.ImageSharp.Image.Load(
+			buffer: body
 		);
-		var frames = _ = imageSixLabors.Frames;
+		var frames = imageSixLabors.Frames;
 		for (var i = 0; i < frames.Count; i++)
 		{
-			var pngFilePath = _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_{_ = i}.png";
-			var imageFrame  = _ = frames.CloneFrame(
-				index: _ = i
+			var pngFilePath = $"{chatMessageEmoteAnimatedPathGlobal}/animated_{i}.png";
+			var imageFrame  = frames.CloneFrame(
+				index: i
 			);
 			await imageFrame.SaveAsPngAsync(
-				path: _ = pngFilePath
+				path: pngFilePath
 			);
 
-			var bytes = _ = await File.ReadAllBytesAsync(
-				path: _ = pngFilePath
+			var bytes = await File.ReadAllBytesAsync(
+				path: pngFilePath
 			);
 			
 			File.Delete(
-				path: _ = pngFilePath	
+				path: pngFilePath	
 			);
 
-			var image = _ = Godot.Image.CreateEmpty(
-				width:      _ = ChatMessage.c_chatMessageEmoteWidth,
-				height:     _ = ChatMessage.c_chatMessageEmoteHeight,
-				useMipmaps: _ = false,
-				format:     _ = Godot.Image.Format.Rgba8
+			var image = Godot.Image.CreateEmpty(
+				width:      ChatMessage.c_chatMessageEmoteWidth,
+				height:     ChatMessage.c_chatMessageEmoteHeight,
+				useMipmaps: false,
+				format:     Godot.Image.Format.Rgba8
 			);
-			_ = image.LoadPngFromBuffer(
-				buffer: _ = bytes
+			image.LoadPngFromBuffer(
+				buffer: bytes
 			);
-			var imageTexture = _ = ImageTexture.CreateFromImage(
-				image: _ = image
+			var imageTexture = ImageTexture.CreateFromImage(
+				image: image
 			);
-			var emoteFile = _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_{_ = i}.res";
-			_ = ResourceSaver.Save(
-				resource: _ = imageTexture,
-				path:     _ = emoteFile
+			var emoteFile = $"{chatMessageEmoteAnimatedPathGlobal}/animated_{i}.res";
+			ResourceSaver.Save(
+				resource: imageTexture,
+				path:     emoteFile
 			);
 		}
 
-		var frameDelay = _ = BitConverter.ToInt16(
+		var frameDelay = BitConverter.ToInt16(
 			value:
 			[
-				body[_ = ChatMessage.c_gifFrameRateIndex0],
-				body[_ = ChatMessage.c_gifFrameRateIndex1]
+				body[ChatMessage.c_gifFrameRateIndex0],
+				body[ChatMessage.c_gifFrameRateIndex1]
 			],
-			startIndex: _ = 0
+			startIndex: 0
 		);
-		var normalizedFrameDelay = _ = 
+		var normalizedFrameDelay = 
 			frameDelay > 0.1f || frameDelay < .001f ?
 				ChatMessage.c_defaultEmoteFramesPerSecondInMilliseconds :
 				frameDelay / 100f;
-		var frameDelayText = _ = $"{_ = normalizedFrameDelay}";
-		var frameDelayFile = _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/frame_rate.txt";
+		var frameDelayText = $"{normalizedFrameDelay}";
+		var frameDelayFile = $"{chatMessageEmoteAnimatedPathGlobal}/frame_rate.txt";
 		await File.WriteAllTextAsync(
-			path:     _ = frameDelayFile,
-			contents: _ = frameDelayText
+			path:     frameDelayFile,
+			contents: frameDelayText
 		);
 		
-		var emotePath = _ = $"{_ = chatMessageEmoteAnimatedPathGlobal}/animated_0.res";
+		var emotePath = $"{chatMessageEmoteAnimatedPathGlobal}/animated_0.res";
 		this.ReplaceChatMessageCodeWithChatMessageImagePath(
-			chatMessageEmoteCode: _ = chatMessageEmoteCode,
-			chatMessageEmotePath: _ = emotePath
+			chatMessageEmoteCode: chatMessageEmoteCode,
+			chatMessageEmotePath: emotePath
 		);
 		this.m_animatedChatMessageEmotes.Add(
-			item: _ = chatMessageEmoteCodeLookUp
+			item: chatMessageEmoteCodeLookUp
 		);
 		this.m_animatedChatMessageEmoteCurrentFrameCounts.Add(
-			key:   _ = chatMessageEmoteCodeLookUp,
-			value: _ = 0
+			key:   chatMessageEmoteCodeLookUp,
+			value: 0
 		);
 		this.m_animatedChatMessageEmoteMaxFrameCounts.Add(
-			key:   _ = chatMessageEmoteCodeLookUp,
-			value: _ = frames.Count - 1
+			key:   chatMessageEmoteCodeLookUp,
+			value: frames.Count - 1
 		);
 		this.m_animatedChatMessageEmoteCurrentFrameRates.Add(
-			key:   _ = chatMessageEmoteCodeLookUp,
-			value: _ = 0f
+			key:   chatMessageEmoteCodeLookUp,
+			value: 0f
 		);
 		this.m_animatedChatMessageEmoteMaxFrameRates.Add(
-			key:   _ = chatMessageEmoteCodeLookUp,
-			value: _ = frameDelayText.ToFloat()
+			key:   chatMessageEmoteCodeLookUp,
+			value: frameDelayText.ToFloat()
 		);
 		
-		_ = this.m_hasAnimatedChatMessageEmotes = _ = true;
-		_ = this.m_chatMessageEmotesToLoad--;
-		if (_ = this.m_chatMessageEmotesToLoad is 0u)
+		this.m_hasAnimatedChatMessageEmotes = true;
+		this.m_chatMessageEmotesToLoad--;
+		if (this.m_chatMessageEmotesToLoad is 0u)
 		{
-			this.CallDeferred("GenerateRichTextLabel");
+			this.CallDeferred(
+				method: "GenerateRichTextLabel"
+			);
 		}
 	}
 	
     private void GenerateRichTextLabel()
 	{
+		this.m_richTextLabel.FitContent    = false;
         this.m_richTextLabel.SetSize(
-			size: _ = new Vector2(
-				x: _ = ChatMessage.c_labelWidth,
-				y: _ = 0f
+			size: new Vector2(
+				x: ChatMessage.c_labelWidth,
+				y: 10000f
 			)
 		);
-		_ = this.m_richTextLabel.BbcodeEnabled = _ = true;
-		_ = this.m_richTextLabel.FitContent    = _ = true;
-		_ = this.m_richTextLabel.Text          = _ = this.m_text;
-		_ = this.m_richTextLabel.Visible       = _ = false;
-		_ = this.m_generateState               = _ = GenerateStateType.Complete;
+		this.m_richTextLabel.BbcodeEnabled = true;
+		this.m_richTextLabel.Text          = this.m_text;
+		this.m_richTextLabel.ForceUpdateTransform();
+		
+		var exactHeight = this.m_richTextLabel.GetContentHeight();
+		this.m_richTextLabel.SetSize(
+			size: new Vector2(
+				x: ChatMessage.c_labelWidth,
+				y: exactHeight
+			)
+		);
+		this.m_richTextLabel.Visible       = false;
+		this.m_generateState               = GenerateStateType.Complete;
 	}
 
 	private void HandleTextAnimation(
 		float delta
 	)
 	{
-		if (_ = this.m_hasAnimatedChatMessageEmotes)
+		if (this.m_hasAnimatedChatMessageEmotes)
 		{
-			foreach (var animatedChatMessageEmote in _ = this.m_animatedChatMessageEmotes)
+			foreach (var animatedChatMessageEmote in this.m_animatedChatMessageEmotes)
 			{
-				_ = this.m_animatedChatMessageEmoteCurrentFrameRates[key: _ = animatedChatMessageEmote] += _ = delta;
+				this.m_animatedChatMessageEmoteCurrentFrameRates[key: animatedChatMessageEmote] += delta;
 
 				if (
-					_ = this.m_animatedChatMessageEmoteCurrentFrameRates[key: _ = animatedChatMessageEmote] <
-					this.m_animatedChatMessageEmoteMaxFrameRates[key: _ = animatedChatMessageEmote]
+					this.m_animatedChatMessageEmoteCurrentFrameRates[key: animatedChatMessageEmote] <
+					this.m_animatedChatMessageEmoteMaxFrameRates[key: animatedChatMessageEmote]
 				)
 				{
 					continue;
 				}
 				
-				var previousFrame = _ = this.m_animatedChatMessageEmoteCurrentFrameCounts[key: _ = animatedChatMessageEmote];
-				var currentFrame  = _ = previousFrame + 1;
-				if (_ = currentFrame > this.m_animatedChatMessageEmoteMaxFrameCounts[key: _ = animatedChatMessageEmote])
+				var previousFrame = this.m_animatedChatMessageEmoteCurrentFrameCounts[key: animatedChatMessageEmote];
+				var currentFrame  = previousFrame + 1;
+				if (currentFrame > this.m_animatedChatMessageEmoteMaxFrameCounts[key: animatedChatMessageEmote])
 				{
-					_ = currentFrame = _ = 0;
+					currentFrame = 0;
 				}
 
-				_ = this.m_text = _ = this.m_text.Replace(
-					oldValue: _ = $"{_ = animatedChatMessageEmote}/animated_{_ = previousFrame}.res",
-					newValue: _ = $"{_ = animatedChatMessageEmote}/animated_{_ = currentFrame}.res"
-				);
+				lock (this.m_textLock)
+				{
+					this.m_text = this.m_text.Replace(
+						oldValue: $"{animatedChatMessageEmote}/animated_{previousFrame}.res",
+						newValue: $"{animatedChatMessageEmote}/animated_{currentFrame}.res"
+					);
+				}
 
-				_ = this.m_animatedChatMessageEmoteCurrentFrameCounts[key: animatedChatMessageEmote] = _ = currentFrame;
-				_ = this.m_animatedChatMessageEmoteCurrentFrameRates[key: animatedChatMessageEmote]  = _ = 0f;
+				this.m_animatedChatMessageEmoteCurrentFrameCounts[key: animatedChatMessageEmote] = currentFrame;
+				this.m_animatedChatMessageEmoteCurrentFrameRates[key: animatedChatMessageEmote]  = 0f;
 			}
 		}
 		
-		if (
-			_ = this.m_isSubscriber is true || 
-			this.m_isStreamer is true
-		)
-		{
-			var color = _ = this.m_servicePastelInterpolator.GetColorAsHex(
-				rainbowColorIndexType: _ = ServicePastelInterpolator.RainbowColorIndexType.Color0    
+		var color = this.m_hasCustomNameColor ? 
+			this.m_serviceColorInterpolatorNormal.GetColorByModeAsHex(
+				colorMode:      this.m_customNameColor,
+				colorIndexType: IServiceColorInterpolatorDefinition.ColorIndexType.Color0    
+			) : 
+			this.m_serviceColorInterpolatorNormal.GetColorByCurrentModeAsHex(
+				colorIndexType: IServiceColorInterpolatorDefinition.ColorIndexType.Color0    
 			);
 
-			_ = this.m_richTextLabel.Text = _ = this.m_text.Replace(
-				oldValue: _ = ChatMessage.c_labelPastelInterpolatorColor,
-				newValue: _ = color
-			);
-		}
-		else if (_ = this.m_hasAnimatedChatMessageEmotes)
+		lock (this.m_textLock)
 		{
-			_ = this.m_richTextLabel.Text = _ = this.m_text;
+			this.m_richTextLabel.Text = this.m_text.Replace(
+				oldValue: ChatMessage.c_labelInterpolatorColor,
+				newValue: color
+			);
 		}
 	}
     
@@ -449,23 +528,23 @@ namespace Overlay.Core.Contents.Chats;
 		float delta
 	)
 	{
-		_ = this.m_fadeElapsed += _ = delta;
-		switch (_ = this.m_visibleState)
+		this.m_fadeElapsed += delta;
+		switch (this.m_visibleState)
 		{
 			case VisibleStateType.Visible:
-				if (_ = this.m_fadeElapsed >= ChatMessage.s_fadeDelays[key: _ = VisibleStateType.Visible])
+				if (this.m_fadeElapsed >= ChatMessage.s_fadeDelays[key: VisibleStateType.Visible])
 				{
-					_ = this.m_visibleState = VisibleStateType.Fade;
-					_ = this.m_fadeElapsed = 0f;
+					this.m_visibleState = VisibleStateType.Fade;
+					this.m_fadeElapsed = 0f;
 				}
 				break;
 			case VisibleStateType.Fade:
 				// todo: transparency
-				var height = _ = this.m_richTextLabel.GetContentHeight();
-				if (_ = this.m_fadeElapsed >= ChatMessage.s_fadeDelays[key: _ = VisibleStateType.Fade])
+				var height = this.m_richTextLabel.GetContentHeight();
+				if (this.m_fadeElapsed >= ChatMessage.s_fadeDelays[key: VisibleStateType.Fade])
 				{
 					this.Destroyed?.Invoke();
-					_ = this.m_generateState = _ = GenerateStateType.Inactive;
+					this.m_generateState = GenerateStateType.Inactive;
 				}
 				break;
 
@@ -479,114 +558,114 @@ namespace Overlay.Core.Contents.Chats;
 		ChatMessageEmote[] chatMessageEmotes
 	)
 	{
-		foreach (var chatMessageEmote in _ = chatMessageEmotes)
+		foreach (var chatMessageEmote in chatMessageEmotes)
 		{
-			var chatMessageEmoteCode = _ = chatMessageEmote.Code;
+			var chatMessageEmoteCode = chatMessageEmote.Code;
 			if (
-				_ = ChatMessage.s_chatMessageEmotesWithFileSyntax.Contains(
-					value: _ = chatMessageEmoteCode
+				ChatMessage.s_chatMessageEmotesWithFileSyntax.Contains(
+					value: chatMessageEmoteCode
 				) is false
 			)
 			{
 				continue;
 			}
 
-			var chatMessageEmoteCodeRename = _ = ChatMessage.s_chatMessageEmoteBasics[chatMessageEmoteCode];
-			_ = chatMessageEmote.Code      = _ = chatMessageEmoteCodeRename;
+			var chatMessageEmoteCodeRename = ChatMessage.s_chatMessageEmoteBasics[chatMessageEmoteCode];
+			chatMessageEmote.Code          = chatMessageEmoteCodeRename;
 			this.ReplaceChatMessageCodeWithChatMessageCodeRename(
-				chatMessageEmoteCode:       _ = chatMessageEmoteCode,
-				chatMessageEmoteCodeRename: _ = chatMessageEmoteCodeRename
+				chatMessageEmoteCode:       chatMessageEmoteCode,
+				chatMessageEmoteCodeRename: chatMessageEmoteCodeRename
 			);
 		}
-		foreach (var chatMessageEmote in _ = chatMessageEmotes)
+		foreach (var chatMessageEmote in chatMessageEmotes)
 		{
-			var chatMessageEmoteCode       = _ = chatMessageEmote.Code;
-			var chatMessageEmoteCodeLookUp = _ = chatMessageEmoteCode.Replace(
-				oldValue: _ = $":",
-				newValue: _ = string.Empty
+			var chatMessageEmoteCode       = chatMessageEmote.Code;
+			var chatMessageEmoteCodeLookUp = chatMessageEmoteCode.Replace(
+				oldValue: $":",
+				newValue: string.Empty
 			);
 
-			var chatMessageEmoteStaticPathLocal  = _ = $"{_ = ChatMessage.c_chatMessageEmoteDirectoryStatic}/{_ = chatMessageEmoteCodeLookUp}";
-			var chatMessageEmoteStaticPathGlobal = _ = ProjectSettings.GlobalizePath(
-				path: _ = chatMessageEmoteStaticPathLocal
+			var chatMessageEmoteStaticPathLocal  = $"{ChatMessage.c_chatMessageEmoteDirectoryStatic}/{chatMessageEmoteCodeLookUp}";
+			var chatMessageEmoteStaticPathGlobal = ProjectSettings.GlobalizePath(
+				path: chatMessageEmoteStaticPathLocal
 			);
 			if (
-				_ = Directory.Exists(
-					path: _ = chatMessageEmoteStaticPathGlobal
+				Directory.Exists(
+					path: chatMessageEmoteStaticPathGlobal
 				) is true
 			)
 			{
-				var chatMessageEmotePath = _ = $"{_ = chatMessageEmoteStaticPathLocal}/static_0.res";
+				var chatMessageEmotePath = $"{chatMessageEmoteStaticPathLocal}/static_0.res";
 				this.ReplaceChatMessageCodeWithChatMessageImagePath(
-					chatMessageEmoteCode: _ = chatMessageEmoteCode,
-					chatMessageEmotePath: _ = chatMessageEmotePath
+					chatMessageEmoteCode: chatMessageEmoteCode,
+					chatMessageEmotePath: chatMessageEmotePath
 				);
 				continue;
 			}
 
-			var chatMessageEmoteAnimatedPathLocal  = _ = $"{_ = ChatMessage.c_chatMessageEmoteDirectoryAnimated}/{_ = chatMessageEmoteCodeLookUp}";
-			var chatMessageEmoteAnimatedPathGlobal = _ = ProjectSettings.GlobalizePath(
-				path: _ = chatMessageEmoteAnimatedPathLocal
+			var chatMessageEmoteAnimatedPathLocal  = $"{ChatMessage.c_chatMessageEmoteDirectoryAnimated}/{chatMessageEmoteCodeLookUp}";
+			var chatMessageEmoteAnimatedPathGlobal = ProjectSettings.GlobalizePath(
+				path: chatMessageEmoteAnimatedPathLocal
 			);
 			if (
-				_ = Directory.Exists(
-					path: _ = chatMessageEmoteAnimatedPathGlobal
+				Directory.Exists(
+					path: chatMessageEmoteAnimatedPathGlobal
 				) is true
 			)
 			{
-				var chatMessageEmotePath = $"{_ = ChatMessage.c_chatMessageEmoteDirectoryAnimated}/{_ = chatMessageEmoteCodeLookUp}/animated_0.res";
+				var chatMessageEmotePath = $"{ChatMessage.c_chatMessageEmoteDirectoryAnimated}/{chatMessageEmoteCodeLookUp}/animated_0.res";
 				this.ReplaceChatMessageCodeWithChatMessageImagePath(
-					chatMessageEmoteCode: _ = chatMessageEmoteCode,
-					chatMessageEmotePath: _ = chatMessageEmotePath
+					chatMessageEmoteCode: chatMessageEmoteCode,
+					chatMessageEmotePath: chatMessageEmotePath
 				);
 
 				this.m_animatedChatMessageEmotes.Add(
-					item: _ = chatMessageEmoteCodeLookUp
+					item: chatMessageEmoteCodeLookUp
 				);
 				this.m_animatedChatMessageEmoteCurrentFrameCounts.Add(
-					key:   _ = chatMessageEmoteCodeLookUp,
-					value: _ = 0
+					key:   chatMessageEmoteCodeLookUp,
+					value: 0
 				);
 				this.m_animatedChatMessageEmoteCurrentFrameRates.Add(
-					key:   _ = chatMessageEmoteCodeLookUp,
-					value: _ = 0f
+					key:   chatMessageEmoteCodeLookUp,
+					value: 0f
 				);
 
-				var files = _ = Directory.GetFiles(
-					path: _ = chatMessageEmoteAnimatedPathGlobal
+				var files = Directory.GetFiles(
+					path: chatMessageEmoteAnimatedPathGlobal
 				);
-				var frameCount = _ = files.Length - 2;
+				var frameCount = files.Length - 2;
 				this.m_animatedChatMessageEmoteMaxFrameCounts.Add(
-					key:   _ = chatMessageEmoteCodeLookUp,
-					value: _ = frameCount
+					key:   chatMessageEmoteCodeLookUp,
+					value: frameCount
 				);
 
-				var file = _ = files.First(
+				var file = files.First(
 					predicate: file => file.EndsWith(
-						value: _ = "frame_rate.txt"
+						value: "frame_rate.txt"
 					)
 				);
-				var text = _ = File.ReadAllText(
-					path: _ = file
+				var text = File.ReadAllText(
+					path: file
 				);
 				this.m_animatedChatMessageEmoteMaxFrameRates.Add(
-					key:   _ = chatMessageEmoteCodeLookUp,
-					value: _ = text.ToFloat()
+					key:   chatMessageEmoteCodeLookUp,
+					value: text.ToFloat()
 				);
 
-				_ = this.m_hasAnimatedChatMessageEmotes = _ = true;
+				this.m_hasAnimatedChatMessageEmotes = true;
 				continue;
 			}
 			
-			_ = this.m_chatMessageEmotesToLoad++;
-			var uri = _ = new Uri(
-				uriString: _ = $"{_ = chatMessageEmote.Url}"
+			this.m_chatMessageEmotesToLoad++;
+			var uri = new Uri(
+				uriString: $"{chatMessageEmote.Url}"
 			);
 			this.m_serviceGodotHttp.SendHttpRequest(
-				url:                     _ = uri.OriginalString,
+				url:                     uri.OriginalString,
 				headers:                 [],
-				method:                  _ = HttpClient.Method.Get,
-				json:                    _ = string.Empty,
+				method:                  HttpClient.Method.Get,
+				json:                    string.Empty,
 				requestCompletedHandler:
 				(
 					long     result,
@@ -595,43 +674,43 @@ namespace Overlay.Core.Contents.Chats;
 					byte[]   body
 				) =>
 				{
-					if (_ = responseCode >= 300u)
+					if (responseCode >= 300u)
 					{
 						this.QueueFree();
 						return;
 					}
 
-					var contentTypeHeader = _ = headers[1];
+					var contentTypeHeader = headers[1];
 
 					if (
-						_ = contentTypeHeader.Contains(
-							value: _ = $"png"
+						contentTypeHeader.Contains(
+							value: $"png"
 						)
 					)
 					{
 						this.GenerateStaticImageFromStaticChatMessageEmote(
-							body:                             _ = body,
-							chatMessageEmoteCodeLookUp:       _ = chatMessageEmoteCodeLookUp,
-							chatMessageEmoteCode:             _ = chatMessageEmoteCode,
-							chatMessageEmoteStaticPathGlobal: _ = chatMessageEmoteStaticPathGlobal,
-							staticImageFormat:                _ = StaticImageFormatType.Png
+							body:                             body,
+							chatMessageEmoteCodeLookUp:       chatMessageEmoteCodeLookUp,
+							chatMessageEmoteCode:             chatMessageEmoteCode,
+							chatMessageEmoteStaticPathGlobal: chatMessageEmoteStaticPathGlobal,
+							staticImageFormat:                StaticImageFormatType.Png
 						);
 					}
 					else if (
 						contentTypeHeader.Contains(
-							value: _ = $"jpg"
+							value: $"jpg"
 						) ||
 						contentTypeHeader.Contains(
-							value: _ = $"jpeg"
+							value: $"jpeg"
 						)
 					)
 					{
 						this.GenerateStaticImageFromStaticChatMessageEmote(
-							body:                             _ = body,
-							chatMessageEmoteCodeLookUp:       _ = chatMessageEmoteCodeLookUp,
-							chatMessageEmoteCode:             _ = chatMessageEmoteCode,
-							chatMessageEmoteStaticPathGlobal: _ = chatMessageEmoteStaticPathGlobal,
-							staticImageFormat:                _ = StaticImageFormatType.Jpg
+							body:                             body,
+							chatMessageEmoteCodeLookUp:       chatMessageEmoteCodeLookUp,
+							chatMessageEmoteCode:             chatMessageEmoteCode,
+							chatMessageEmoteStaticPathGlobal: chatMessageEmoteStaticPathGlobal,
+							staticImageFormat:                StaticImageFormatType.Jpg
 						);
 					}
 					else
@@ -640,10 +719,10 @@ namespace Overlay.Core.Contents.Chats;
 							function: async () =>
 							{
 								await this.GenerateAnimatedImagesFromAnimatedChatMessageEmote(
-									body:                               _ = body,
-									chatMessageEmoteCodeLookUp:         _ = chatMessageEmoteCodeLookUp,
-									chatMessageEmoteCode:               _ = chatMessageEmoteCode,
-									chatMessageEmoteAnimatedPathGlobal: _ = chatMessageEmoteAnimatedPathGlobal
+									body:                               body,
+									chatMessageEmoteCodeLookUp:         chatMessageEmoteCodeLookUp,
+									chatMessageEmoteCode:               chatMessageEmoteCode,
+									chatMessageEmoteAnimatedPathGlobal: chatMessageEmoteAnimatedPathGlobal
 								);
 							}
 						);
@@ -655,30 +734,19 @@ namespace Overlay.Core.Contents.Chats;
 	
 	private void InsertImages(
 		string             message,
-		ChatMessageEmote[] chatMessageEmotes,
-		string             chatMessageBadges
+		ChatMessageEmote[] chatMessageEmotes
 	)
 	{
-		var hasBadges = _ = string.IsNullOrEmpty(
-			value: _ = chatMessageBadges
-		) is false;
-		if (_ = hasBadges is true)
-		{
-			//InsertBadges(
-			//	chatMessageBadges: chatMessageBadges
-			//;
-		}
-
-		var hasEmotes = _ = chatMessageEmotes is not null && chatMessageEmotes.Length is not 0;
-		if (_ = hasEmotes is true)
+		var hasEmotes = chatMessageEmotes is not null && chatMessageEmotes.Length is not 0;
+		if (hasEmotes is true)
 		{
 			this.InsertChatMessageEmotes(
-				message:            _ = message,
-				chatMessageEmotes:  _ = chatMessageEmotes
+				message:            message,
+				chatMessageEmotes:  chatMessageEmotes
 			);
 		}
 
-		if (_ = this.m_chatMessageEmotesToLoad is 0u)
+		if (this.m_chatMessageEmotesToLoad is 0u)
 		{
 			this.GenerateRichTextLabel();
 		}
@@ -689,11 +757,11 @@ namespace Overlay.Core.Contents.Chats;
 		string chatMessageEmoteCodeRename
 	)
 	{
-		lock (_ = this.m_textLock)
+		lock (this.m_textLock)
 		{
-			_ = this.m_text = _ = this.m_text.Replace(
-				oldValue: _ = chatMessageEmoteCode, 
-				newValue: _ = $"{_ = chatMessageEmoteCodeRename}"
+			this.m_text = this.m_text.Replace(
+				oldValue: chatMessageEmoteCode, 
+				newValue: $"{chatMessageEmoteCodeRename}"
 			);
 		}
 	}
@@ -703,23 +771,37 @@ namespace Overlay.Core.Contents.Chats;
 		string chatMessageEmotePath
 	)
 	{
-		lock (_ = this.m_textLock)
+		lock (this.m_textLock)
 		{
-			_ = this.m_text = _ = this.m_text.Replace(
-				oldValue: _ = chatMessageEmoteCode, 
-				newValue: _ = $"[img=32x32]{_ = chatMessageEmotePath}[/img]"
+			this.m_text = this.m_text.Replace(
+				oldValue: chatMessageEmoteCode, 
+				newValue: $"[img=32x32]{chatMessageEmotePath}[/img]"
 			);
 		}
 	}
     
     private void RetrieveResources()
     {
-	    _ = this.m_servicePastelInterpolator = _ = Services.Services.GetService<ServicePastelInterpolator>();
-	    var serviceGodots                    = _ = Services.Services.GetService<ServiceGodots>();
-	    _ = this.m_serviceGodotHttp          = _ = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
+	    var mainFont = GD.Load<FontFile>(
+		    path: "res://Resources/Fonts/Roboto-Bold.ttf"
+		);
+	    var emojiFont = GD.Load<FontFile>(
+		    path: "res://Resources/Fonts/NotoColorEmoji-Regular.ttf"
+		);
+
+	    mainFont.Fallbacks = [emojiFont];
+
+	    this.m_richTextLabel.AddThemeFontOverride(
+		    name: "normal_font", 
+		    font: mainFont
+		);
+	    
+	    this.m_serviceColorInterpolatorNormal = Services.Services.GetService<ServiceColorInterpolatorNormal>();
+	    var serviceGodots                     = Services.Services.GetService<ServiceGodots>();
+	    this.m_serviceGodotHttp               = serviceGodots.GetServiceGodot<ServiceGodotHttp>();
 	    
         this.AddChild(
-			node: _ = this.m_richTextLabel
+			node: this.m_richTextLabel
 		);
     }
 }

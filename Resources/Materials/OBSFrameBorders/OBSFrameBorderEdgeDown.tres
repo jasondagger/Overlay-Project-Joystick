@@ -12,9 +12,12 @@ seamless = true
 
 [resource]
 shader = ExtResource("1_llsyi")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/alt_color = Color(1, 0, 0, 1)
 shader_parameter/textureNoise = SubResource("NoiseTexture2D_v51mv")
 shader_parameter/radius = 0.425
 shader_parameter/effectControl = 0.215
-shader_parameter/burnSpeed = Vector2(0, -0.02)
 shader_parameter/shape = 1.0
+shader_parameter/tiling_factor = Vector2(1, 1)
+shader_parameter/noise_offset = Vector2(0, 0)
+shader_parameter/feather = 50.0

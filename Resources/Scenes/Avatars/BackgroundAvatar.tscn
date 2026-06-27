@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://c1mts7cgrc5a"]
+
+[ext_resource type="Shader" uid="uid://d0kud6ihjolfg" path="res://Resources/Shaders/BackgroundAvatar.gdshader" id="1_0bbur"]
+[ext_resource type="Script" uid="uid://b7vnoc7chwkb7" path="res://Core/Contents/Effects/Backgrounds/EffectBackgroundAvatar.cs" id="2_mrso1"]
+[ext_resource type="PackedScene" uid="uid://c2trsakuyscam" path="res://Resources/Scenes/Chats/ChatMessage.tscn" id="3_mrso1"]
+[ext_resource type="Shader" uid="uid://b48wjopki15ok" path="res://Resources/Shaders/Texture.gdshader" id="4_5i4hh"]
+[ext_resource type="Texture2D" uid="uid://bh086dfl3eao2" path="res://Resources/Textures/Icons/Icon_Arrow.png" id="5_8shqd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3x5dk"]
+shader = ExtResource("1_0bbur")
+shader_parameter/effect_slot_0 = 0
+shader_parameter/effect_slot_1 = 0
+shader_parameter/effect_slot_2 = 0
+shader_parameter/effect_slot_3 = 0
+shader_parameter/model = 50
+shader_parameter/color_base = Color(1, 0.5, 1, 1)
+shader_parameter/color_outline = Color(1, 0.5, 1, 1)
+shader_parameter/color_effect_slot_0 = Color(1, 1, 1, 1)
+shader_parameter/color_effect_slot_1 = Color(1, 1, 1, 1)
+shader_parameter/color_effect_slot_2 = Color(1, 1, 1, 1)
+shader_parameter/color_effect_slot_3 = Color(1, 1, 1, 1)
+shader_parameter/audio_time = 0.0
+shader_parameter/music_intensity = 0.0
+shader_parameter/uv_scale = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m323x"]
+shader = ExtResource("4_5i4hh")
+shader_parameter/color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+shader_parameter/textureImage = ExtResource("5_8shqd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uo60t"]
+shader = ExtResource("4_5i4hh")
+shader_parameter/color = Color(0.007843138, 0.007843138, 0.007843138, 1)
+shader_parameter/textureImage = ExtResource("5_8shqd")
+
+[node name="BackgroundAvatar" type="ColorRect" unique_id=1395846122 node_paths=PackedStringArray("NameplateName", "NameplateIcon", "NameplatePivot")]
+material = SubResource("ShaderMaterial_3x5dk")
+offset_right = 1024.0
+offset_bottom = 1024.0
+script = ExtResource("2_mrso1")
+NameplateName = NodePath("NameplatePivot/NameplateName")
+NameplateIcon = NodePath("NameplatePivot/NameplateIcon")
+NameplatePivot = NodePath("NameplatePivot")
+
+[node name="NameplatePivot" type="Control" parent="." unique_id=294190101]
+visible = false
+anchors_preset = 0
+offset_left = 512.0
+offset_top = 388.0
+offset_right = 512.0
+offset_bottom = 388.0
+
+[node name="NameplateName" parent="NameplatePivot" unique_id=422295207 instance=ExtResource("3_mrso1")]
+clip_contents = false
+layout_mode = 0
+offset_left = -240.0
+offset_top = -89.0
+offset_right = 240.0
+offset_bottom = -21.0
+pivot_offset = Vector2(240, 20)
+text = "[font=res://Resources/Fonts/Roboto-Black.ttf][outline_color=#f2f2f2FF][color=#00FFFFFF][outline_size=16][font_size=32]SmoothDagger
+[outline_size=8][font_size=16]<God Walking Amongst Mere Mortals>
+"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="NameplateIconOutline" type="ColorRect" parent="NameplatePivot" unique_id=336906975]
+material = SubResource("ShaderMaterial_m323x")
+layout_mode = 0
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+pivot_offset = Vector2(12, 12)
+color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+
+[node name="NameplateIcon" type="ColorRect" parent="NameplatePivot" unique_id=1902429982]
+material = SubResource("ShaderMaterial_uo60t")
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+pivot_offset = Vector2(8, 8)

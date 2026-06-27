@@ -1,5 +1,6 @@
-﻿using System;
+﻿
 using Overlay.Core.Services.Joysticks.Payloads.Metadatas;
+using System;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
 

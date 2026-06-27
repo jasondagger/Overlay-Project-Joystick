@@ -6,6 +6,6 @@ internal sealed class ChatMessageEmote(
     string url
 )
 {
-    internal string Code { get; set; } = _ = code;
-    internal string Url  { get; set; } = _ = url;
+    internal string Code { get; set; } = code;
+    internal string Url  { get; set; } = url;
 }

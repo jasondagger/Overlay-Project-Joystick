@@ -15,7 +15,20 @@
   <component name="ChangeListManager">
     <list default="true" id="f1a383b3-b2e5-43e6-a688-9e7d92e33533" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Overlay/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Contents/BackgroundAvatarsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/BackgroundAvatarsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/Nameplates/NameplateLatestMessage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Contents/SceneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/SceneController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuAvatarsLightsAndSounds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/StreamEvents/StreamEventsTipMenuAvatarsLightsAndSounds.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Contents/VoiceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Contents/VoiceController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandlerAchievements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceDatabaseHandlerAchievements.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandlerAchievements.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceDatabaseHandlerAchievements.cs.uid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandlers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/Payloads/ServiceJoystickWebSocketPayloadChatHandlers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Services/Joysticks/ServiceJoystick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/Joysticks/ServiceJoystick.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Services/OBS/ServiceOBS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Services/OBS/ServiceOBS.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Overlay.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Overlay.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Audios/SoundAlerts/HelloThere.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Audios/SoundAlerts/HelloThere.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Scenes/StreamStates/StreamStateDefault.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Scenes/StreamStates/StreamStateDefault.tscn" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +58,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5967259aff81a295fc2280e640ed76b14d29f2687882c55d5297aabd281af70/Task.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5e98452a017241e806c6b45c6579c72bc99c134682536c4ea3c288dac4f41/HttpRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6728f66657329080f0f419df519283a455cdca7d2617a05b18553b02da52fa/Nullable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6780d13016c376c4491c5618b257d84da7eacf747ed2719783e775546b79b/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/79a57baacc404fe78ae443385089b17c4d1e28824d807cf3b4c5173159a3/AudioEffectSpectrumAnalyzerInstance.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7b474024ec37d0c1352a9f27dcbd3d38a48604494a04e3c455ae6883f7b26/Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9a633232731c526a27a1a9e55a5fb506d49fafb4ca8f0cc9f8bd9a667f89279/Queue.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1cc58cc78a2d269eeb5ef89ead64de20ef815d24de2c8a762b3ef6702092/DefaultInterpolatedStringHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d9d8e0128e3a6e2dbfb409adeeb32e1963ab6d0/Godot.NativeInterop.NativeFuncs.generated.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Contents/BackgroundAvatarSelfController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundAvatarShaderSlot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundAvatarSize.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Contents/Effects/Backgrounds/EffectBackgroundConfetti.cs" root0="FORCE_HIGHLIGHTING" />
@@ -57,6 +72,7 @@
     <setting file="file://$PROJECT_DIR$/Core/Contents/GoveeLightController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Contents/GoveeLightControllerCeiling.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Contents/GoveeLightControllers.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Contents/Mappings/MappingColorNames.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Contents/VoiceController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Services/Achievements/ServiceAchievement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Services/ColorInterpolators/IServiceColorInterpolator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -90,6 +106,7 @@
     <setting file="file://$PROJECT_DIR$/Core/Services/TeamFortress2s/ServiceTeamFortress2LightSceneRandomizerr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Services/WorkOuts/ServiceWorkOut.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Properties/launchSettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///tmp/JetBrainsPerUserTemp-1000-1/SourceGeneratedDocuments/182C4FD5F8DE17DF485D75D2/Godot.SourceGenerators/Godot.SourceGenerators.ScriptMethodsGenerator/Overlay.Core.Contents.SceneController_ScriptMethods.generated.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -118,7 +135,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.build.godotPlugin&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -510,7 +527,15 @@
       <workItem from="1780113207062" duration="924000" />
       <workItem from="1780380514778" duration="666000" />
       <workItem from="1781929600426" duration="781000" />
-      <workItem from="1782535045839" duration="3242000" />
+      <workItem from="1782535045839" duration="3782000" />
+      <workItem from="1782539064235" duration="1300000" />
+      <workItem from="1782753545946" duration="4975000" />
+      <workItem from="1782841402218" duration="84000" />
+      <workItem from="1782841823692" duration="6616000" />
+      <workItem from="1783204788722" duration="2852000" />
+      <workItem from="1783297352508" duration="523000" />
+      <workItem from="1783394926423" duration="8896000" />
+      <workItem from="1783627649891" duration="1493000" />
     </task>
     <servers />
   </component>
@@ -551,19 +576,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskLogic.cs</url>
-          <line>80</line>
-          <properties documentPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskLogic.cs" containingFunctionPresentation="Method 'ExecuteQueryAsync'">
-            <startOffsets>
-              <option value="2852" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3136" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskLogic.cs</url>
           <line>35</line>
           <properties documentPath="$PROJECT_DIR$/Core/Services/Databases/Tasks/ServiceDatabaseTaskLogic.cs" containingFunctionPresentation="Method 'ExecuteNonQueryAsync'">
             <startOffsets>
@@ -587,19 +599,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Core/Services/Joysticks/ServiceJoystick.cs</url>
-          <line>142</line>
-          <properties documentPath="$PROJECT_DIR$/Core/Services/Joysticks/ServiceJoystick.cs" containingFunctionPresentation="Lambda expression inside Method 'ConnectWebSocket'">
-            <startOffsets>
-              <option value="4212" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4423" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cnxwer3ek0lf" path="res://Core/Contents/Effects/Rainbows/EffectRainbowExtender.cs" id="3_pkstr"]
 [ext_resource type="Shader" uid="uid://dcw54kutra1pe" path="res://Resources/Shaders/BackgroundGodRays.gdshader" id="4_4r38b"]
 [ext_resource type="Shader" uid="uid://drvgwjqxdolsi" path="res://Resources/Shaders/Color.gdshader" id="4_7ex8q"]
+[ext_resource type="Script" uid="uid://b5wjqb06j0tc6" path="res://Core/Contents/BackgroundAvatarSelfController.cs" id="4_8vg18"]
 [ext_resource type="Shader" uid="uid://d2uk3qwib3f7" path="res://Resources/Shaders/BackgroundSnow.gdshader" id="4_o72j2"]
 [ext_resource type="Shader" uid="uid://brjfr2to16lyk" path="res://Resources/Shaders/BackgroundKaleidoscope.gdshader" id="4_tjdmb"]
 [ext_resource type="Script" uid="uid://v86sw1r3mp7q" path="res://Core/Contents/Effects/Rainbows/EffectRainbowStripe.cs" id="5_4r38b"]
@@ -1591,6 +1592,9 @@ BackgroundAvatarPreview = NodePath("../../Background/Backgrounds/BackgroundAvata
 BackgroundAvatars = NodePath("../../Background/Backgrounds/BackgroundAvatars")
 BackgroundAvatarScene = ExtResource("3_3x5dk")
 
+[node name="BackgroundAvatarSelfController" type="Node" parent="RootControl/Controllers" unique_id=1094221939]
+script = ExtResource("4_8vg18")
+
 [node name="GoveeLightControllerCeiling" type="Node" parent="RootControl/Controllers" unique_id=373115940]
 script = ExtResource("2_l7qxh")
 
@@ -2583,6 +2587,7 @@ scale = Vector2(1, -1)
 script = ExtResource("19_jcb5f")
 
 [node name="LayoutDefault" type="Control" parent="RootControl" unique_id=264390359]
+visible = false
 anchors_preset = 0
 
 [node name="Interaction" type="Control" parent="RootControl/LayoutDefault" unique_id=383201011]
@@ -2890,7 +2895,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(480, 34)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestFollower/SubViewportContainer/SubViewport" unique_id=839376948]
 layout_mode = 3
@@ -2946,7 +2951,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(480, 34)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestSubscriber/SubViewportContainer/SubViewport" unique_id=1561220886]
 layout_mode = 3
@@ -3001,7 +3006,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(480, 34)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestTipper/SubViewportContainer/SubViewport" unique_id=928565632]
 layout_mode = 3
@@ -3056,7 +3061,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(480, 34)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLatest/NameplateLatestMessage/SubViewportContainer/SubViewport" unique_id=1346054229]
 layout_mode = 3
@@ -3094,7 +3099,7 @@ offset_bottom = 400.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(362, 400)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutDefault/Interaction/Notifier/NameplateLogo/SubViewportContainer/SubViewport" unique_id=2097521586]
 layout_mode = 3
@@ -3326,7 +3331,6 @@ text = "[color=#ffffff][font_size=48]
 [center]WEBCAM 0"
 
 [node name="LayoutAvatars" type="Control" parent="RootControl" unique_id=48544266]
-visible = false
 anchors_preset = 0
 
 [node name="Nameplate" type="Control" parent="RootControl/LayoutAvatars" unique_id=1426515716]
@@ -3557,7 +3561,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(480, 34)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateMessage/SubViewportContainer/SubViewport" unique_id=942330882]
 layout_mode = 3
@@ -3614,7 +3618,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(390, 34)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestFollower/SubViewportContainer/SubViewport" unique_id=1805011988]
 layout_mode = 3
@@ -3672,7 +3676,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(390, 34)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestSubscriber/SubViewportContainer/SubViewport" unique_id=18377081]
 layout_mode = 3
@@ -3729,7 +3733,7 @@ offset_bottom = 34.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(390, 34)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Pivot" type="Control" parent="RootControl/LayoutAvatars/Nameplate/NameplateLatestTipper/SubViewportContainer/SubViewport" unique_id=920347414]
 layout_mode = 3

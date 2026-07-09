@@ -431,7 +431,7 @@ internal sealed class ServiceOBS() :
 		{
 #if !DEBUG
 			this.ChangeScene(
-				sceneName: "Main"
+				sceneName: "Avatars"
 			);
 #endif
 		}

@@ -21,11 +21,19 @@ public sealed partial class BackgroundAvatarsController() :
 {
     public static BackgroundAvatarsController Instance { get; private set; }
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        
+        this.SetInstance();
+    }
+
     public override void _Ready()
     {
+        base._Ready();
+        
         BackgroundAvatarsController.SubscribeToEvents();
         this.RetrieveResources();
-        this.SetInstance();
         this.SetPreviewAvatar();
         //this.AddDummies();
     }
@@ -34,6 +42,10 @@ public sealed partial class BackgroundAvatarsController() :
         double delta
     )
     {
+        base._Process(
+            delta: delta    
+        );
+        
         lock (this.m_lock)
         {
             if (this.m_backgroundAvatars.Count is 0)
@@ -93,7 +105,7 @@ public sealed partial class BackgroundAvatarsController() :
                     return;
                 }
 
-                var isSubscriber    = this.m_serviceJoystick.IsSubscriber(
+                var isSubscriber = this.m_serviceJoystick.IsSubscriber(
                     username: username
                 );
                 if (isSubscriber is true)

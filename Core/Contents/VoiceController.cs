@@ -15,22 +15,26 @@ namespace Overlay.Core.Contents;
 public sealed partial class VoiceController() :
 	Node()
 {
-	public override void _Process(
-		double delta
-	)
+	public override void _ExitTree()
 	{
-		this.ProcessPeer();
+		base._ExitTree();
+
+		this.StopProcessingPeer();
 	}
 	
 	public override void _Ready()
 	{
+		base._Ready();
+		
 		this.BindPeer();
+		this.StartProcessingPeer();
 	}
 
-	private const int                                  c_port              = 4242;
-	private const string                               c_username          = $"SmoothDagger";
+	private const int                                  c_port                = 4242;
+	private const int                                  c_delayInMilliseconds = 16;
+	private const string                               c_username            = $"SmoothDagger";
 
-	private static readonly Dictionary<string, string> s_openTokens        = new()
+	private static readonly Dictionary<string, string> s_openTokens          = new()
 	{
 		{ "ask",  "ask" },
 		{ "ax",   "ask" },
@@ -51,7 +55,7 @@ public sealed partial class VoiceController() :
 		{ "we quest",   "request" },
 		{ "requesting", "request" },
 	};
-	private static readonly Dictionary<string, string> s_nameMap           = new()
+	private static readonly Dictionary<string, string> s_nameMap             = new()
 	{
 		{ "a dagger", "dagger" },
 		{ "agger",    "dagger" },
@@ -72,7 +76,7 @@ public sealed partial class VoiceController() :
 		{ "tiger",    "dagger" },
 	};
 	
-	private static readonly Dictionary<string, string> s_numberMap         = new()
+	private static readonly Dictionary<string, string> s_numberMap           = new()
 	{
 		{
 			$"zero",
@@ -91,7 +95,7 @@ public sealed partial class VoiceController() :
 			$"3"
 		}
 	};
-	private static readonly Dictionary<string, string> s_vocabularyPhrases = new()
+	private static readonly Dictionary<string, string> s_vocabularyPhrases   = new()
 	{ 
 		#region Commands
 		
@@ -2240,7 +2244,7 @@ public sealed partial class VoiceController() :
 	    
 	    #endregion
 	};
-	private static readonly Dictionary<string, string> s_vocabularyWords   = new()
+	private static readonly Dictionary<string, string> s_vocabularyWords     = new()
 	{ 
 		#region Commands
 		
@@ -3599,7 +3603,8 @@ public sealed partial class VoiceController() :
 		pattern: @"text='(.*?)'"
 	)]
 	private static partial Regex VoiceRecognitionRegex();
-	
+
+	private bool                   m_shutdown    = false;
 	private readonly PacketPeerUdp m_udpPeer     = new();
 	private string                 m_voiceBuffer = string.Empty;
 
@@ -3883,47 +3888,64 @@ public sealed partial class VoiceController() :
     	);
     }
 	
-	private void ProcessPeer()
+	private void StartProcessingPeer()
 	{
-		while (this.m_udpPeer.GetAvailablePacketCount() > 0)
-		{
-			var packet = this.m_udpPeer.GetPacket();
-			if (packet.Length > 0)
+		Task.Run(
+			function: async () =>
 			{
-				var payload = Encoding.UTF8.GetString(
-					bytes: packet
-				);
-				
-				var regex = VoiceController.VoiceRecognitionRegex();
-				var match = regex.Match(
-					input: payload
-				);
-				if (match.Success is true)
+				while (this.m_shutdown is false)
 				{
-					var message = match.Groups[1].Value;
-					if (
-						string.IsNullOrEmpty(
-							value: message
-						) is true
-					)
-					{
-						if (
-							string.IsNullOrWhiteSpace(
-								value: this.m_voiceBuffer
-							) is false
-						)
-						{
-							VoiceController.HandleVoiceMessage(
-								message: this.m_voiceBuffer
-							);
-							this.m_voiceBuffer = string.Empty;
-						}
-						continue;
-					}
+					await Task.Delay(
+						millisecondsDelay: VoiceController.c_delayInMilliseconds
+					);
 					
-					this.m_voiceBuffer = $"{this.m_voiceBuffer} {message}".Trim();
+					while (this.m_udpPeer.GetAvailablePacketCount() > 0)
+					{
+						var packet = this.m_udpPeer.GetPacket();
+						if (packet.Length > 0)
+						{
+							var payload = Encoding.UTF8.GetString(
+								bytes: packet
+							);
+				
+							var regex = VoiceController.VoiceRecognitionRegex();
+							var match = regex.Match(
+								input: payload
+							);
+							if (match.Success is true)
+							{
+								var message = match.Groups[1].Value;
+								if (
+									string.IsNullOrEmpty(
+										value: message
+									) is true
+								)
+								{
+									if (
+										string.IsNullOrWhiteSpace(
+											value: this.m_voiceBuffer
+										) is false
+									)
+									{
+										VoiceController.HandleVoiceMessage(
+											message: this.m_voiceBuffer
+										);
+										this.m_voiceBuffer = string.Empty;
+									}
+									continue;
+								}
+					
+								this.m_voiceBuffer = $"{this.m_voiceBuffer} {message}".Trim();
+							}
+						}
+					}
 				}
 			}
-		}
+		);
+	}
+
+	private void StopProcessingPeer()
+	{
+		this.m_shutdown = true;
 	}
 }

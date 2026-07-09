@@ -1,13 +1,13 @@
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using Overlay.Core.Services.Godots;
 using Overlay.Core.Services.Godots.Inputs;
 using Overlay.Core.Services.JoystickBots;
 using Overlay.Core.Services.OBS;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Overlay.Core.Contents;
 
@@ -160,7 +160,7 @@ public sealed partial class SceneController() :
 
     private AttentionMode           m_attentionMode                        = AttentionMode.Normal;
     private CancellationTokenSource m_cancellationTokenSource              = new();
-    private LayoutType              m_currentLayoutType                    = LayoutType.Main;
+    private LayoutType              m_currentLayoutType                    = LayoutType.Avatars;
     private float                   m_layoutMeTimeRemainingInSeconds       = 0f;
     private float                   m_layoutMeNormalTimeRemainingInSeconds = 0f;
     private readonly object         m_lockLayoutMeTime                     = new();
@@ -214,7 +214,7 @@ public sealed partial class SceneController() :
 
         var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: $"AFK"    
+            sceneName: nameof(LayoutType.Afk)    
         );
     }
     
@@ -229,7 +229,7 @@ public sealed partial class SceneController() :
 
         var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: $"Avatars"    
+            sceneName: nameof(LayoutType.Avatars)    
         );
     }
     
@@ -243,7 +243,7 @@ public sealed partial class SceneController() :
         
         var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: $"Code"    
+            sceneName: nameof(LayoutType.Code)
         );
     }
     
@@ -263,7 +263,7 @@ public sealed partial class SceneController() :
 
         var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: $"Main"    
+            sceneName: nameof(LayoutType.Main)
         );
     }
     
@@ -278,7 +278,7 @@ public sealed partial class SceneController() :
 
         var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: $"Me"
+            sceneName: nameof(LayoutType.Me)
         );
     }
     
@@ -303,7 +303,7 @@ public sealed partial class SceneController() :
 
         var serviceOBS = Services.Services.GetService<ServiceOBS>();
         serviceOBS.ChangeScene(
-            sceneName: $"Me"
+            sceneName: nameof(LayoutType.Me)
         );
     }
 

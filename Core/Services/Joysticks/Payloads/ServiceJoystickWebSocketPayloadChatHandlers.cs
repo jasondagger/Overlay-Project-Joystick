@@ -2,6 +2,7 @@
 using Godot;
 using Overlay.Core.Contents;
 using Overlay.Core.Contents.Effects.Backgrounds;
+using Overlay.Core.Contents.Mappings;
 using Overlay.Core.Contents.StreamEvents;
 using Overlay.Core.Services.Breaks;
 using Overlay.Core.Services.ColorInterpolators;
@@ -574,7 +575,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string colorName
     )
     {
-        var color = ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = MappingColorNames.GetColorByColorName(
             colorName: colorName
         );
         if (color is null)
@@ -596,7 +597,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string modelName
     )
     {
-        var model = ServiceJoystickWebSocketPayloadChatHandler.GetModelByModelName(
+        var model = MappingModelNames.GetModelByModelName(
             modelName: modelName
         );
         if (model is null)
@@ -618,7 +619,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string colorName
     )
     {
-        var color = ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = MappingColorNames.GetColorByColorName(
             colorName: colorName
         );
         if (color is null)
@@ -647,7 +648,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         );
         if (shaderValues.Length is 2) 
         {
-            var color  = ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+            var color  = MappingColorNames.GetColorByColorName(
                 colorName: shaderValues[1]
             );
             if (color.HasValue is false)
@@ -658,7 +659,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
                 return;
             }
             
-            var effect = ServiceJoystickWebSocketPayloadChatHandler.GetEffectByEffectName(
+            var effect = MappingEffectNames.GetEffectByEffectName(
                 effectName: shaderValues[0]
             );
             if (effect.HasValue is false)
@@ -689,7 +690,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var color = parameters is "default" ? ServiceColorInterpolatorColorMode.Transition : ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = parameters is "default" ? ServiceColorInterpolatorColorMode.Transition : MappingColorNames.GetColorByColorName(
             colorName: parameters
         );
         if (color is null)
@@ -1131,17 +1132,6 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
                 ServiceJoystickWebSocketPayloadChatHandler.s_isFocusing = true;
                 ServiceJoystickWebSocketPayloadChatHandler.SendDelayedBotMessage(
                     message: $"🧠 Focus mode started."
-                );
-
-                Task.Run(
-                    function: async () =>
-                    {
-                        await Task.Delay(
-                            millisecondsDelay: 200
-                        );
-
-                        ServiceStretch.DisplayStretchAndSwapLayoutToMe();
-                    }
                 );
                 break;
             
@@ -1634,10 +1624,10 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string lightPatternB
     )
     {
-        var lightPatternActionA = ServiceJoystickWebSocketPayloadChatHandler.GetLightPatternAction(
+        var lightPatternActionA = MappingLightPatterns.GetLightPatternAction(
             lightPattern: lightPatternA
         );
-        var lightPatternActionB = ServiceJoystickWebSocketPayloadChatHandler.GetLightPatternAction(
+        var lightPatternActionB = MappingLightPatterns.GetLightPatternAction(
             lightPattern: lightPatternB
         );
 
@@ -1664,7 +1654,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var color = parameters is "default" ? ServiceColorInterpolatorColorMode.Transition : ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = parameters is "default" ? ServiceColorInterpolatorColorMode.Transition : MappingColorNames.GetColorByColorName(
             colorName: parameters
         );
         if (color is null)
@@ -3447,7 +3437,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
         
-        var title = ServiceJoystickWebSocketPayloadChatHandler.GetTitleByTitleName(
+        var title = MappingTitleNames.GetTitleByTitleName(
             titleName: parameters
         );
         if (title is null)
@@ -3599,7 +3589,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         }
 
         
-        var color = ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = MappingColorNames.GetColorByColorName(
             colorName: parameters
         );
         if (color is null)
@@ -3648,7 +3638,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
         
-        var effect = ServiceJoystickWebSocketPayloadChatHandler.GetEffectByEffectName(
+        var effect = MappingEffectNames.GetEffectByEffectName(
             effectName: parameters
         );
         if (effect is null)
@@ -3748,7 +3738,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var color = ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = MappingColorNames.GetColorByColorName(
             colorName: parameters
         );
         if (color is null)
@@ -3771,7 +3761,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var effect = ServiceJoystickWebSocketPayloadChatHandler.GetEffectByEffectName(
+        var effect = MappingEffectNames.GetEffectByEffectName(
             effectName: parameters
         );
         if (effect is null)
@@ -3794,7 +3784,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var model = ServiceJoystickWebSocketPayloadChatHandler.GetModelByModelName(
+        var model = MappingModelNames.GetModelByModelName(
             modelName: parameters
         );
         if (model is null)
@@ -3840,7 +3830,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
             return;
         }
         
-        var model = ServiceJoystickWebSocketPayloadChatHandler.GetModelByModelName(
+        var model = MappingModelNames.GetModelByModelName(
             modelName: parameters
         );
         if (model is null)
@@ -3922,7 +3912,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var color = ServiceJoystickWebSocketPayloadChatHandler.GetColorByColorName(
+        var color = MappingColorNames.GetColorByColorName(
             colorName: parameters
         );
         if (color is null)
@@ -3968,7 +3958,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var effect = ServiceJoystickWebSocketPayloadChatHandler.GetEffectByEffectName(
+        var effect = MappingEffectNames.GetEffectByEffectName(
             effectName: parameters
         );
         if (effect is null)
@@ -4014,7 +4004,7 @@ internal static partial class ServiceJoystickWebSocketPayloadChatHandler
         string parameters
     )
     {
-        var model = ServiceJoystickWebSocketPayloadChatHandler.GetModelByModelName(
+        var model = MappingModelNames.GetModelByModelName(
             modelName: parameters
         );
         if (model is null)

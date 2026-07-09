@@ -13,9 +13,9 @@ namespace Overlay.Core.Contents.StreamEvents;
 internal static class StreamEventsTipMenuAvatarsLightsAndSounds
 {
     internal const string c_tipReward_PlaySoundEffect                                = "Play Sound Effect";
+    internal const string c_tipReward_SetOverlayThemeAndBackgroundLightsFor15Minutes = "Set Overlay Theme & Background Lights for 15 Minutes";
     internal const string c_tipReward_SpotifySongRequest                             = "Spotify Song Request";
     internal const string c_tipReward_SpotifySongSkip                                = "Spotify Song Skip";
-    internal const string c_tipReward_SetOverlayThemeAndBackgroundLightsFor15Minutes = "Set Overlay Theme & Background Lights for 15 Minutes";
     internal const string c_tipReward_UnlockAnAvatarColor                            = "Unlock an Avatar Color";
     internal const string c_tipReward_UnlockAnAvatarEffect                           = "Unlock an Avatar Effect";
     internal const string c_tipReward_UnlockAnAvatarModel                            = "Unlock an Avatar Model";
@@ -33,6 +33,12 @@ internal static class StreamEventsTipMenuAvatarsLightsAndSounds
                 );
                 break;
             
+            case StreamEventsTipMenuAvatarsLightsAndSounds.c_tipReward_SetOverlayThemeAndBackgroundLightsFor15Minutes:
+                StreamEventsTipMenuAvatarsLightsAndSounds.HandleSetOverlayThemeAndBackgroundLightsFor15Minutes(
+                    messageMetadata: messageMetadata
+                );
+                break;
+            
             case StreamEventsTipMenuAvatarsLightsAndSounds.c_tipReward_SpotifySongRequest:
                 StreamEventsTipMenuAvatarsLightsAndSounds.HandleSongRequest(
                     messageMetadata: messageMetadata
@@ -41,12 +47,6 @@ internal static class StreamEventsTipMenuAvatarsLightsAndSounds
             
             case StreamEventsTipMenuAvatarsLightsAndSounds.c_tipReward_SpotifySongSkip:
                 StreamEventsTipMenuAvatarsLightsAndSounds.HandleSongSkip();
-                break;
-            
-            case StreamEventsTipMenuAvatarsLightsAndSounds.c_tipReward_SetOverlayThemeAndBackgroundLightsFor15Minutes:
-                StreamEventsTipMenuAvatarsLightsAndSounds.HandleSetOverlayThemeAndBackgroundLightsFor15Minutes(
-                    messageMetadata: messageMetadata
-                );
                 break;
             
             case StreamEventsTipMenuAvatarsLightsAndSounds.c_tipReward_UnlockAnAvatarColor:
@@ -101,7 +101,38 @@ internal static class StreamEventsTipMenuAvatarsLightsAndSounds
                 
                 var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
                 serviceJoystickBot.SendChatMessageSilently(
-                    message:  $"🎵 @{username} - SFX are ready! Type !sfx with your choice in chat! Sound effects can be found in the bio if you need help!"
+                    message: $"🎵 @{username} - SFX are ready! Type !sfx with your choice in chat! Sound effects can be found in the bio if you need help!"
+                );
+            }
+        );
+        
+        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
+        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
+            
+        serviceGodotAudio.PlaySoundAlert(
+            soundAlertType: ServiceGodotAudio.SoundAlertType.Tip
+        );
+    }
+    
+    private static void HandleSetOverlayThemeAndBackgroundLightsFor15Minutes(
+        ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
+    )
+    {
+        var username = messageMetadata.Who;
+        ServiceJoystickWebSocketPayloadChatHandler.AddUserForLightRequests(
+            username: username
+        );
+
+        Task.Run(
+            function: async () =>
+            {
+                await Task.Delay(
+                    millisecondsDelay: 200
+                );
+                
+                var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
+                serviceJoystickBot.SendChatMessageSilently(
+                    message: $"💡 @{username} - Lights are ready! Type !lights with your combination of colors & scenes in chat! Light colors & scenes can be found in the bio if you need help!"
                 );
             }
         );
@@ -153,37 +184,6 @@ internal static class StreamEventsTipMenuAvatarsLightsAndSounds
         var serviceGodots     = Services.Services.GetService<ServiceGodots>();
         var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
         
-        serviceGodotAudio.PlaySoundAlert(
-            soundAlertType: ServiceGodotAudio.SoundAlertType.Tip
-        );
-    }
-    
-    private static void HandleSetOverlayThemeAndBackgroundLightsFor15Minutes(
-        ServiceJoystickWebSocketPayloadMessageMetadataTipped messageMetadata
-    )
-    {
-        var username = messageMetadata.Who;
-        ServiceJoystickWebSocketPayloadChatHandler.AddUserForLightRequests(
-            username: username
-        );
-
-        Task.Run(
-            function: async () =>
-            {
-                await Task.Delay(
-                    millisecondsDelay: 200
-                );
-                
-                var serviceJoystickBot = Services.Services.GetService<ServiceJoystickBot>();
-                serviceJoystickBot.SendChatMessageSilently(
-                    message:  $"💡 @{username} - Lights are ready! Type !lights with your combination of colors & scenes in chat! Light colors & scenes can be found in the bio if you need help!"
-                );
-            }
-        );
-        
-        var serviceGodots     = Services.Services.GetService<ServiceGodots>();
-        var serviceGodotAudio = serviceGodots.GetServiceGodot<ServiceGodotAudio>();
-            
         serviceGodotAudio.PlaySoundAlert(
             soundAlertType: ServiceGodotAudio.SoundAlertType.Tip
         );

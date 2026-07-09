@@ -67,10 +67,11 @@ internal sealed class ServiceJoystick() :
 	
 	private const string                                           c_joystickWebSocketAddress     = "wss://api.joystick.tv/cable";
 	private const string                                           c_joystickSubscribeMessage     = "{\n  \"command\": \"subscribe\",\n  \"identifier\": \"{\\\"channel\\\":\\\"GatewayChannel\\\"}\"\n}";
-	private const int                                              c_reconnectDelayInMilliseconds = 100;
+	private const int                                              c_reconnectDelayInMilliseconds = 2000;
 	
-	private ServiceJoystickToken                                   m_joystickToken                = null;
+	private CancellationTokenSource                                m_cancellationTokenSource      = new();
 	private ClientWebSocket                                        m_clientWebSocket              = null;
+	private ServiceJoystickToken                                   m_joystickToken                = null;
 	
 	private string                                                 m_joystickAuthorizationCode    = string.Empty;
 	private string                                                 m_joystickClientId             = string.Empty;
@@ -81,88 +82,6 @@ internal sealed class ServiceJoystick() :
 		value: -30
 	);
 	
-	private void ConnectWebSocket()
-	{
-		Task.Run(
-			function:
-			async () =>
-			{
-				try
-				{
-					var uri = new Uri(
-						uriString: $"{ServiceJoystick.c_joystickWebSocketAddress}?token={this.GetClientDataAsBase64String()}"
-					);
-
-					this.m_clientWebSocket = new ClientWebSocket();
-					this.m_clientWebSocket.Options.AddSubProtocol(
-						subProtocol: $"actioncable-v1-json"
-					);
-					await this.m_clientWebSocket.ConnectAsync(
-						uri:               uri,
-						cancellationToken: CancellationToken.None
-					);
-				
-					await this.SendWebSocketMessage(
-						message: ServiceJoystick.c_joystickSubscribeMessage
-					);
-
-#if DEBUG
-					ConsoleLogger.LogMessage(
-						message: $"{nameof(ServiceJoystick)}.{nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
-					);
-#endif
-					while (this.m_shutdownRequested is false)
-					{
-						var isWebSocketOpen = this.m_clientWebSocket.State is WebSocketState.Open;
-						if (isWebSocketOpen is false)
-						{
-							continue;
-						}
-					
-						var bytes  = new byte[16384u];
-						var result = await this.m_clientWebSocket.ReceiveAsync(
-							buffer:            bytes,
-							cancellationToken: CancellationToken.None
-						);
-						
-						var webSocketPayloadMessage = ServiceJoystick.ParseWebSocketPayload(
-							bytes:  bytes,
-							result: result
-						);
-						ServiceJoystick.HandleWebSocketPayloadMessage(
-							payloadMessage: webSocketPayloadMessage
-						);
-
-						await Task.Delay(
-							millisecondsDelay: 16
-						);
-					}
-				}
-				catch (Exception exception)
-				{
-					ConsoleLogger.LogMessageError(
-						messageError:
-							$"EXCEPTION: " +
-							$"{nameof(ServiceJoystick)}." +
-							$"{nameof(ServiceJoystick.ConnectWebSocket)}() - " +
-							$"{exception.Message}"
-					);
-					
-					_ = Task.Run(
-						function:
-						async () =>
-						{
-							await Task.Delay(
-								millisecondsDelay: ServiceJoystick.c_reconnectDelayInMilliseconds
-							);
-							
-							this.ConnectWebSocket();
-						}
-					);
-				}
-			}
-		);
-	}
 	
 	private static void ExecuteUpdateTipLimitForSubscriber(
 		string targetUser
@@ -189,32 +108,7 @@ internal sealed class ServiceJoystick() :
 			}
 		);
 	}
-
-	private string GetClientDataAsBase64String()
-	{
-		var clientData        = $"{this.m_joystickClientId}:{this.m_joystickClientSecret}";
-		var clientDataAsBytes = Encoding.UTF8.GetBytes(
-			s: clientData
-		);
-		return Convert.ToBase64String(
-			inArray: clientDataAsBytes
-		);
-	}
 	
-	private void HandleRetrievedJoystickData(
-		ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData
-	)
-	{
-		var result = retrievedJoystickData.Result;
-
-		this.m_joystickAuthorizationCode = result.JoystickData_Authorization_Code;
-		this.m_joystickClientId          = result.JoystickData_Client_Id;
-		this.m_joystickClientSecret      = result.JoystickData_Client_Secret;
-		
-		this.ConnectWebSocket();
-		this.RetrieveJoystickToken();
-	}
-
 	private static void HandleWebSocketPayloadChatMessage(
 		ServiceJoystickWebSocketPayloadMessage payloadMessage
 	)
@@ -306,6 +200,122 @@ internal sealed class ServiceJoystick() :
 		return payload.Message;
 	}
 
+	private async Task ConnectWebSocket()
+	{
+		await this.m_cancellationTokenSource.CancelAsync();
+		
+		this.m_cancellationTokenSource = new CancellationTokenSource();
+		var cancellationToken          = this.m_cancellationTokenSource.Token;
+
+		try
+		{
+			var uri = new Uri(
+				uriString: $"{ServiceJoystick.c_joystickWebSocketAddress}?token={this.GetClientDataAsBase64String()}"
+			);
+
+			this.m_clientWebSocket = new ClientWebSocket();
+			this.m_clientWebSocket.Options.AddSubProtocol(
+				subProtocol: $"actioncable-v1-json"
+			);
+			await this.m_clientWebSocket.ConnectAsync(
+				uri:               uri,
+				cancellationToken: cancellationToken
+			);
+
+			await this.SendWebSocketMessage(
+				message: ServiceJoystick.c_joystickSubscribeMessage
+			);
+
+    #if DEBUG
+			ConsoleLogger.LogMessage(
+				message:
+				$"{nameof(ServiceJoystick)}.{nameof(this.ConnectWebSocket)}() - Joystick web socket connect successful."
+			);
+    #endif
+    
+			var bytes = new byte[16384u];
+			while (cancellationToken.IsCancellationRequested is false)
+			{
+				var isWebSocketOpen = this.m_clientWebSocket.State is WebSocketState.Open;
+				if (isWebSocketOpen is false)
+				{
+					await Task.Yield();
+					continue;
+				}
+
+				var result = await this.m_clientWebSocket.ReceiveAsync(
+					buffer:            bytes,
+					cancellationToken: cancellationToken
+				);
+
+				if (result.MessageType is WebSocketMessageType.Close)
+				{
+					await this.m_clientWebSocket.CloseAsync(
+						closeStatus:       WebSocketCloseStatus.NormalClosure,
+						statusDescription: "Closing",
+						cancellationToken: cancellationToken
+					);
+					_ = this.ScheduleReconnect();
+					break;
+				}
+
+				var webSocketPayloadMessage = ServiceJoystick.ParseWebSocketPayload(
+					bytes:  bytes,
+					result: result
+				);
+				ServiceJoystick.HandleWebSocketPayloadMessage(
+					payloadMessage: webSocketPayloadMessage
+				);
+
+				await Task.Delay(
+					millisecondsDelay: 16,
+					cancellationToken: cancellationToken
+				);
+			}
+		}
+		catch (OperationCanceledException)
+		{
+			
+		}
+		catch (Exception exception)
+		{
+			ConsoleLogger.LogMessageError(
+				messageError:
+				$"EXCEPTION: " +
+				$"{nameof(ServiceJoystick)}." +
+				$"{nameof(ServiceJoystick.ConnectWebSocket)}() - " +
+				$"{exception.Message}"
+			);
+			
+			_ = this.ScheduleReconnect();
+		}
+	}
+	
+	private string GetClientDataAsBase64String()
+	{
+		var clientData        = $"{this.m_joystickClientId}:{this.m_joystickClientSecret}";
+		var clientDataAsBytes = Encoding.UTF8.GetBytes(
+			s: clientData
+		);
+		return Convert.ToBase64String(
+			inArray: clientDataAsBytes
+		);
+	}
+	
+	private void HandleRetrievedJoystickData(
+		ServiceDatabaseTaskRetrievedJoystickData retrievedJoystickData
+	)
+	{
+		var result = retrievedJoystickData.Result;
+
+		this.m_joystickAuthorizationCode = result.JoystickData_Authorization_Code;
+		this.m_joystickClientId          = result.JoystickData_Client_Id;
+		this.m_joystickClientSecret      = result.JoystickData_Client_Secret;
+		
+		_ = this.ConnectWebSocket();
+		this.RetrieveJoystickToken();
+	}
+
 	private void RegisterForRetrievedJoystickData()
 	{
 		ServiceDatabaseTaskEvents.RetrievedJoystickData += this.HandleRetrievedJoystickData;
@@ -351,10 +361,7 @@ internal sealed class ServiceJoystick() :
 						expiry >= this.m_subscriptionCutoffDate
 					)
 					{
-						this.m_subscribers.Add(
-							key:   item.Username,
-							value: item
-						);
+						this.m_subscribers[key: item.Username] = item;
 					}
 				}
 
@@ -426,6 +433,19 @@ internal sealed class ServiceJoystick() :
 		);
 	}
 	
+	private async Task ScheduleReconnect()
+	{
+		await Task.Delay(
+			millisecondsDelay: ServiceJoystick.c_reconnectDelayInMilliseconds,
+			cancellationToken: CancellationToken.None
+		);
+
+		if (this.m_shutdownRequested is false)
+		{
+			_ = this.ConnectWebSocket();
+		}
+	}
+	
 	private void SendRequestTest()
 	{
 		// https://support.joystick.tv/developer_support/#testing-your-bot
@@ -490,5 +510,7 @@ internal sealed class ServiceJoystick() :
 	private void Shutdown()
 	{
 		this.m_shutdownRequested = true;
+		this.m_cancellationTokenSource?.Cancel();
+		this.m_clientWebSocket?.Dispose();
 	}
 }

@@ -4,7 +4,7 @@ using Overlay.Core.Services.Databases.Tasks.Retrieves;
 
 namespace Overlay.Core.Services.Joysticks.Payloads;
 
-internal static class ServiceJoystickWebSocketPayloadChatHandlerAchievements
+internal static class ServiceDatabaseHandlerAchievements
 {
     public static void OnRetrievedAchievementUserCheckedBanks(
         ServiceDatabaseTaskRetrievedAchievementUser serviceDatabaseTaskRetrievedAchievementUser
